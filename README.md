@@ -6,7 +6,7 @@ This is currently under development. Please use the [SidebarDiagnostics fork](ht
 
 ### Download
 
-Go to the <a href="https://github.com/hetima/SolidStateSidebar/releases">releases tab</a>.
+Go to the <a href="https://github.com/hetima/SolidStateSidebar/releases">releases page</a>.
 
 
 ### Features
