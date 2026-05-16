@@ -6,7 +6,7 @@ This is currently under development. Please use the [SidebarDiagnostics fork](ht
 
 ### Download
 
-Coming soon...
+Go to the <a href="https://github.com/hetima/SolidStateSidebar/releases">releases tab</a>.
 
 
 ### Features
@@ -18,14 +18,13 @@ Coming soon...
 
 If you have the SidebarDiagnostics installed, you can migrate your settings; however, the configuration file may be deleted when uninstalling the previous version. Please back up the file at the following path before uninstalling.
 
-```
-C:\Users\YOURNAME\AppData\Local\SidebarDiagnostics\settings.json
-```
 Before uninstalling, it is recommended to disable "Run At Startup" to avoid potential issues.
 
-Start Solid State Sidebar once, exit the application, and then move it to the location below
-
 ```
+C:\Users\YOURNAME\AppData\Local\SidebarDiagnostics\settings.json
+    ↓ 
+    ↓ Move to new lcation
+    ↓ 
 C:\Users\YOURNAME\AppData\Local\SolidStateSidebar\settings.json
 ```
 

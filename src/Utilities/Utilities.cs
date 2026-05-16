@@ -123,6 +123,10 @@ namespace SSS.Utilities
 
 public static class Startup
 {
+    /// <summary>
+    /// スタートアップタスクが存在し、かつ現在実行中のexeパスと一致するかを確認する。
+    /// フルパスで大文字小文字を区別せず比較するため、異なるフォルダに再インストールした場合は期限切れと判定される。
+    /// </summary>
     public static bool StartupTaskExists()
     {
         using (TaskService taskService = new TaskService())
