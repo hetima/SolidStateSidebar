@@ -17,116 +17,159 @@
             <TextBlock Text="{x:Static res:Strings.SettingsMonitorsSubtitle1}" />
             <TextBlock Text="{x:Static res:Strings.SettingsMonitorsSubtitle2}" />
         </StackPanel>
-        <DataGrid ItemsSource="{Binding Path=MonitorConfig, Mode=OneWay}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" Style="{StaticResource MonitorGrid}">
-            <DataGrid.Columns>
-                <DataGridTemplateColumn Header="{x:Static res:Strings.SettingsMonitorsColumn1}" HeaderStyle="{StaticResource MonitorGridHeaderCenter}">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="{x:Type monitor:MonitorConfig}">
-                            <CheckBox IsChecked="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" VerticalAlignment="Center" ToolTip="{x:Static res:Strings.SettingsMonitorEnabledTooltip}" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="{x:Static res:Strings.SettingsMonitorsColumn2}" Width="*" HeaderStyle="{StaticResource MonitorGridHeader}">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate DataType="{x:Type monitor:MonitorConfig}">
-                            <Label Content="{Binding Path=Name}" VerticalAlignment="Center" />
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <Border Style="{StaticResource MonitorDetailsBorder}">
-                        <StackPanel Style="{StaticResource VerticalPanel}">
-                            <ListView ItemsSource="{Binding Path=HardwareOC, Mode=OneWay}" dd:DragDrop.IsDragSource="True" dd:DragDrop.IsDropTarget="True" ItemContainerStyle="{StaticResource MonitorHardwareItem}" Style="{StaticResource HardwareGrid}">
-                                <ListView.View>
-                                    <GridView AllowsColumnReorder="False">
-                                        <GridViewColumn Header="{x:Static res:Strings.SettingsHardwareColumn1}" HeaderContainerStyle="{StaticResource MonitorHardwareHeaderCenter}">
-                                            <GridViewColumn.CellTemplate>
-                                                <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
-                                                    <CheckBox IsChecked="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsHardwareEnabledTooltip}" Style="{StaticResource MonitorHardwareCheckbox}" />
-                                                </DataTemplate>
-                                            </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                        <GridViewColumn Header="{x:Static res:Strings.SettingsHardwareColumn2}" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="230">
-                                            <GridViewColumn.CellTemplate>
-                                                <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
-                                                    <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Style="{StaticResource MonitorHardwareText}" ToolTip="{x:Static res:Strings.SettingsHardwareNameTooltip}" />
-                                                </DataTemplate>
-                                            </GridViewColumn.CellTemplate>
-                                        </GridViewColumn>
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="128" MinWidth="100" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-                            <DockPanel LastChildFill="True" Margin="0,15,0,0">
-                                <Label DockPanel.Dock="Left" Content="{x:Static res:Strings.SettingsMetrics}" Margin="0,0,10,0" />
-                                <xctk:CheckComboBox ItemsSource="{Binding Path=Metrics, Mode=OneWay}" DisplayMemberPath="Name" SelectedMemberPath="Enabled" Delimiter=", " ToolTip="{x:Static res:Strings.SettingsMetricsTooltip}" />
+            <!-- Left: Monitor list with DragDrop -->
+            <Border Grid.Column="0" BorderBrush="#BDC3C7" BorderThickness="0" Padding="0,0,8,0">
+                <ListView x:Name="MonitorListView"
+                          ItemsSource="{Binding Path=MonitorConfig, Mode=OneWay}"
+                          SelectedItem="{Binding Path=SelectedMonitor, Mode=TwoWay}"
+                          dd:DragDrop.IsDragSource="True"
+                          dd:DragDrop.IsDropTarget="True"
+                          dd:DragDrop.DropHandler="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
+                          ItemContainerStyle="{StaticResource MonitorListViewItem}"
+                          Style="{StaticResource MonitorListView}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type monitor:MonitorConfig}">
+                            <DockPanel>
+                                <CheckBox DockPanel.Dock="Left"
+                                          IsChecked="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                          VerticalAlignment="Center"
+                                          Margin="0,0,8,0"
+                                          ToolTip="{x:Static res:Strings.SettingsMonitorEnabledTooltip}" />
+                                <TextBlock Text="{Binding Path=Name}" VerticalAlignment="Center" TextTrimming="CharacterEllipsis" />
                             </DockPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
 
-                            <ItemsControl ItemsSource="{Binding Path=Params}" Margin="10">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate DataType="{x:Type monitor:ConfigParam}">
-                                        <ContentControl>
-                                            <ContentControl.Style>
-                                                <Style TargetType="{x:Type ContentControl}">
-                                                    <Style.Triggers>
-                                                        <DataTrigger Binding="{Binding TypeString}" Value="System.Boolean">
-                                                            <Setter Property="Content">
-                                                                <Setter.Value>
-                                                                    <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
-                                                        <DataTrigger Binding="{Binding TypeString}" Value="System.Int32">
-                                                            <Setter Property="Content">
-                                                                <Setter.Value>
-                                                                    <StackPanel>
-                                                                        <Label Content="{Binding Path=Name, Mode=OneTime}" />
-                                                                        <TextBox Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
-                                                                    </StackPanel>
-                                                                </Setter.Value>
-                                                            </Setter>
-                                                        </DataTrigger>
-                                                    </Style.Triggers>
-                                                </Style>
-                                            </ContentControl.Style>
-                                            <ContentControl.Resources>
-                                                <Style TargetType="{x:Type CheckBox}">
-                                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                                    <Setter Property="Margin" Value="0,5" />
-                                                </Style>
-                                                
-                                                <Style TargetType="{x:Type StackPanel}">
-                                                    <Setter Property="Orientation" Value="Horizontal" />
-                                                    <Setter Property="Margin" Value="0,5" />
-                                                    <Style.Resources>
-                                                        <Style TargetType="{x:Type Label}">
-                                                            <Setter Property="VerticalAlignment" Value="Center" />
-                                                            <Setter Property="Margin" Value="0,0,10,0" />
-                                                            <Setter Property="Padding" Value="0" />
-                                                        </Style>
-                                                        <Style TargetType="{x:Type TextBox}">
-                                                            <Setter Property="VerticalAlignment" Value="Center" />
-                                                            <Setter Property="Width" Value="40" />
-                                                            <Setter Property="MaxLines" Value="1" />
-                                                        </Style>
-                                                    </Style.Resources>
-                                                </Style>
-                                            </ContentControl.Resources>
-                                        </ContentControl>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <StackPanel Style="{StaticResource VerticalPanel}" />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                            </ItemsControl>
-                        </StackPanel>
-                    </Border>
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
-        </DataGrid>
+            <!-- Right: Selected monitor details -->
+            <ContentControl Grid.Column="2" Content="{Binding Path=SelectedMonitor, Mode=OneWay}">
+                <ContentControl.Resources>
+                    <!-- Placeholder when no monitor is selected -->
+                    <DataTemplate x:Key="EmptyTemplate">
+                        <TextBlock Text="←" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="#95A5A6" FontSize="24" />
+                    </DataTemplate>
+                    <!-- Details template for selected MonitorConfig -->
+                    <DataTemplate DataType="{x:Type monitor:MonitorConfig}">
+                        <Border Style="{StaticResource MonitorDetailsBorder}">
+                            <StackPanel Style="{StaticResource VerticalPanel}">
+                                <ListView ItemsSource="{Binding Path=HardwareOC, Mode=OneWay}"
+                                          dd:DragDrop.IsDragSource="True"
+                                          dd:DragDrop.IsDropTarget="True"
+                                          ItemContainerStyle="{StaticResource MonitorHardwareItem}"
+                                          Style="{StaticResource HardwareGrid}">
+                                    <ListView.View>
+                                        <GridView AllowsColumnReorder="False">
+                                            <GridViewColumn Header="{x:Static res:Strings.SettingsHardwareColumn1}" HeaderContainerStyle="{StaticResource MonitorHardwareHeaderCenter}">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
+                                                        <CheckBox IsChecked="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsHardwareEnabledTooltip}" Style="{StaticResource MonitorHardwareCheckbox}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Header="{x:Static res:Strings.SettingsHardwareColumn2}" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="230">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
+                                                        <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Style="{StaticResource MonitorHardwareText}" ToolTip="{x:Static res:Strings.SettingsHardwareNameTooltip}" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                            <GridViewColumn Width="Auto">
+                                                <GridViewColumn.CellTemplate>
+                                                    <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
+                                                        <Button Content="&#x21BA;" Style="{StaticResource MonitorHardwareResetButton}" ToolTip="Reset name" Click="HardwareResetButton_Click" />
+                                                    </DataTemplate>
+                                                </GridViewColumn.CellTemplate>
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+
+                                <DockPanel LastChildFill="True" Margin="0,15,0,0">
+                                    <Label DockPanel.Dock="Left" Content="{x:Static res:Strings.SettingsMetrics}" Margin="0,0,10,0" />
+                                    <xctk:CheckComboBox ItemsSource="{Binding Path=Metrics, Mode=OneWay}" DisplayMemberPath="Name" SelectedMemberPath="Enabled" Delimiter=", " ToolTip="{x:Static res:Strings.SettingsMetricsTooltip}" />
+                                </DockPanel>
+
+                                <ItemsControl ItemsSource="{Binding Path=Params}" Margin="10">
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate DataType="{x:Type monitor:ConfigParam}">
+                                            <ContentControl>
+                                                <ContentControl.Style>
+                                                    <Style TargetType="{x:Type ContentControl}">
+                                                        <Style.Triggers>
+                                                            <DataTrigger Binding="{Binding TypeString}" Value="System.Boolean">
+                                                                <Setter Property="Content">
+                                                                    <Setter.Value>
+                                                                        <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding TypeString}" Value="System.Int32">
+                                                                <Setter Property="Content">
+                                                                    <Setter.Value>
+                                                                        <StackPanel>
+                                                                            <Label Content="{Binding Path=Name, Mode=OneTime}" />
+                                                                            <TextBox Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
+                                                                        </StackPanel>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                        </Style.Triggers>
+                                                    </Style>
+                                                </ContentControl.Style>
+                                                <ContentControl.Resources>
+                                                    <Style TargetType="{x:Type CheckBox}">
+                                                        <Setter Property="VerticalAlignment" Value="Center" />
+                                                        <Setter Property="Margin" Value="0,5" />
+                                                    </Style>
+                                                    <Style TargetType="{x:Type StackPanel}">
+                                                        <Setter Property="Orientation" Value="Horizontal" />
+                                                        <Setter Property="Margin" Value="0,5" />
+                                                        <Style.Resources>
+                                                            <Style TargetType="{x:Type Label}">
+                                                                <Setter Property="VerticalAlignment" Value="Center" />
+                                                                <Setter Property="Margin" Value="0,0,10,0" />
+                                                                <Setter Property="Padding" Value="0" />
+                                                            </Style>
+                                                            <Style TargetType="{x:Type TextBox}">
+                                                                <Setter Property="VerticalAlignment" Value="Center" />
+                                                                <Setter Property="Width" Value="40" />
+                                                                <Setter Property="MaxLines" Value="1" />
+                                                            </Style>
+                                                        </Style.Resources>
+                                                    </Style>
+                                                </ContentControl.Resources>
+                                            </ContentControl>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Style="{StaticResource VerticalPanel}" />
+                                        </ItemsPanelTemplate>
+                                    </ItemsControl.ItemsPanel>
+                                </ItemsControl>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ContentControl.Resources>
+
+                <ContentControl.Style>
+                    <Style TargetType="{x:Type ContentControl}">
+                        <Style.Triggers>
+                            <Trigger Property="HasContent" Value="False">
+                                <Setter Property="ContentTemplate" Value="{StaticResource EmptyTemplate}" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+        </Grid>
     </StackPanel>
 </UserControl>

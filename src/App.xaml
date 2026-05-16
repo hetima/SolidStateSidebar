@@ -353,6 +353,30 @@
                 </Style.Resources>
             </Style>
 
+            <Style x:Key="MonitorListView" TargetType="{x:Type ListView}">
+                <Setter Property="SelectionMode" Value="Single" />
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+
+            <Style x:Key="MonitorListViewItem" TargetType="{x:Type ListViewItem}">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                <Setter Property="Padding" Value="2,4" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="Background" Value="#E1E7E9" />
+                        <Setter Property="BorderBrush" Value="#BDC3C7" />
+                    </Trigger>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Background" Value="#F0F3F4" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+
             <Style x:Key="HardwareGrid" TargetType="{x:Type ListView}">
                 <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
             </Style>
@@ -410,6 +434,28 @@
                 <Setter Property="Foreground" Value="#000000" />
                 <Setter Property="BorderBrush" Value="Transparent" />
                 <Setter Property="BorderThickness" Value="0" />
+            </Style>
+
+            <Style x:Key="MonitorHardwareResetButton" TargetType="{x:Type Button}">
+                <Setter Property="Width" Value="22" />
+                <Setter Property="Height" Value="22" />
+                <Setter Property="Margin" Value="0,0,0,0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
+                <Setter Property="Foreground" Value="#95A5A6" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderBrush" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="Cursor" Value="Hand" />
+                <Setter Property="FontFamily" Value="Segoe UI Symbol" />
+                <Setter Property="FontSize" Value="18" />
+                <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter Property="Foreground" Value="#E74C3C" />
+                    </Trigger>
+                </Style.Triggers>
             </Style>
 
             <Style x:Key="MonitorParams" TargetType="{x:Type ItemsControl}">

@@ -940,7 +940,25 @@ namespace SSS.Models
                     }
                 }
 
+                SelectedMonitor = _monitorConfig.FirstOrDefault();
+
                 NotifyPropertyChanged("MonitorConfig");
+            }
+        }
+
+        private MonitorConfig _selectedMonitor { get; set; }
+
+        public MonitorConfig SelectedMonitor
+        {
+            get
+            {
+                return _selectedMonitor;
+            }
+            set
+            {
+                _selectedMonitor = value;
+
+                NotifyPropertyChanged("SelectedMonitor");
             }
         }
 
