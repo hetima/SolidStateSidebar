@@ -17,11 +17,11 @@ namespace SSS.Models
     {
         public SettingsModel(Sidebar sidebar)
         {
-            DockEdgeItems = new DockItem[2]
-            {
+            DockEdgeItems =
+            [
                 new DockItem() { Text = Strings.SettingsDockLeft, Value = DockEdge.Left },
                 new DockItem() { Text = Strings.SettingsDockRight, Value = DockEdge.Right }
-            };
+            ];
 
             DockEdge = Core.Settings.Instance.DockEdge;
 
@@ -56,11 +56,11 @@ namespace SSS.Models
             BGColor = Core.Settings.Instance.BGColor;
             BGOpacity = Core.Settings.Instance.BGOpacity;
 
-            TextAlignItems = new TextAlignItem[2]
-            {
+            TextAlignItems =
+            [
                 new TextAlignItem() { Text = Strings.SettingsTextAlignLeft, Value = TextAlign.Left },
                 new TextAlignItem() { Text = Strings.SettingsTextAlignRight, Value = TextAlign.Right }
-            };
+            ];
 
             TextAlign = Core.Settings.Instance.TextAlign;
 
@@ -86,13 +86,13 @@ namespace SSS.Models
             IconThemeItems = Core.Settings.IconThemeList;
             IconTheme = Core.Settings.Instance.IconTheme;
 
-            DateSettingItems = new DateSetting[4]
-            {
+            DateSettingItems =
+            [
                 DateSetting.Disabled,
                 DateSetting.Short,
                 DateSetting.Normal,
                 DateSetting.Long
-            };
+            ];
 
             DateSetting = Core.Settings.Instance.DateSetting;
             CollapseMenuBar = Core.Settings.Instance.CollapseMenuBar;
@@ -101,15 +101,15 @@ namespace SSS.Models
             ShowClock = Core.Settings.Instance.ShowClock;
             Clock24HR = Core.Settings.Instance.Clock24HR;
 
-            ObservableCollection<MonitorConfig> _config = new ObservableCollection<MonitorConfig>(Core.Settings.Instance.MonitorConfig.Select(c => c.Clone()).OrderByDescending(c => c.Order));
+            ObservableCollection<MonitorConfig> _config = new ObservableCollection<MonitorConfig>(Core.Settings.Instance.MonitorConfig!.Select(c => c.Clone()).OrderByDescending(c => c.Order));
 
-            if (sidebar.Ready)
+            if (sidebar != null && sidebar.Ready)
             {
                 foreach (MonitorConfig _record in _config)
                 {
                     _record.HardwareOC = new ObservableCollection<HardwareConfig>(
-                        from hw in sidebar.Model.MonitorManager.GetHardware(_record.Type)
-                        join config in _record.Hardware on hw.ID equals config.ID into merged
+                        from hw in sidebar.Model!.MonitorManager.GetHardware(_record.Type)
+                        join config in _record.Hardware! on hw.ID equals config.ID into merged
                         from newhw in merged.DefaultIfEmpty(hw).Select(newhw => { newhw.ActualName = hw.ActualName; if (string.IsNullOrEmpty(newhw.Name)) { newhw.Name = hw.ActualName; } return newhw; })
                         orderby newhw.Order descending, newhw.Name ascending
                         select newhw
@@ -176,7 +176,7 @@ namespace SSS.Models
 
             for (int i = 0; i < _config.Length; i++)
             {
-                HardwareConfig[] _hardware = _config[i].HardwareOC.ToArray();
+                HardwareConfig[] _hardware = _config[i].HardwareOC!.ToArray();
 
                 for (int v = 0; v < _hardware.Length; v++)
                 {
@@ -269,14 +269,14 @@ namespace SSS.Models
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
-        private void Child_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void Child_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             IsChanged = true;
         }
 
-        private void Child_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        private void Child_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
         {
             IsChanged = true;
         }
@@ -293,7 +293,7 @@ namespace SSS.Models
             {
                 _isChanged = value;
 
-                NotifyPropertyChanged("IsChanged");
+                NotifyPropertyChanged(nameof(IsChanged));
             }
         }
 
@@ -309,13 +309,13 @@ namespace SSS.Models
             {
                 _dockEdge = value;
 
-                NotifyPropertyChanged("DockEdge");
+                NotifyPropertyChanged(nameof(DockEdge));
             }
         }
 
-        private DockItem[] _dockEdgeItems { get; set; }
+        private DockItem[]? _dockEdgeItems { get; set; }
 
-        public DockItem[] DockEdgeItems
+        public DockItem[]? DockEdgeItems
         {
             get
             {
@@ -325,7 +325,7 @@ namespace SSS.Models
             {
                 _dockEdgeItems = value;
 
-                NotifyPropertyChanged("DockEdgeItems");
+                NotifyPropertyChanged(nameof(DockEdgeItems));
             }
         }
 
@@ -341,13 +341,13 @@ namespace SSS.Models
             {
                 _screenIndex = value;
 
-                NotifyPropertyChanged("ScreenIndex");
+                NotifyPropertyChanged(nameof(ScreenIndex));
             }
         }
 
-        private ScreenItem[] _screenItems { get; set; }
+        private ScreenItem[]? _screenItems { get; set; }
 
-        public ScreenItem[] ScreenItems
+        public ScreenItem[]? ScreenItems
         {
             get
             {
@@ -357,29 +357,29 @@ namespace SSS.Models
             {
                 _screenItems = value;
 
-                NotifyPropertyChanged("ScreenItems");
+                NotifyPropertyChanged(nameof(ScreenItems));
             }
         }
 
-        private string _culture { get; set; }
+        private string? _culture { get; set; }
 
         public string Culture
         {
             get
             {
-                return _culture;
+                return _culture!;
             }
             set
             {
                 _culture = value;
 
-                NotifyPropertyChanged("Culture");
+                NotifyPropertyChanged(nameof(Culture));
             }
         }
 
-        private CultureItem[] _cultureItems { get; set; }
+        private CultureItem[]? _cultureItems { get; set; }
 
-        public CultureItem[] CultureItems
+        public CultureItem[]? CultureItems
         {
             get
             {
@@ -389,7 +389,7 @@ namespace SSS.Models
             {
                 _cultureItems = value;
 
-                NotifyPropertyChanged("CultureItems");
+                NotifyPropertyChanged(nameof(CultureItems));
             }
         }
 
@@ -405,7 +405,7 @@ namespace SSS.Models
             {
                 _uiScale = value;
 
-                NotifyPropertyChanged("UIScale");
+                NotifyPropertyChanged(nameof(UIScale));
             }
         }
 
@@ -421,7 +421,7 @@ namespace SSS.Models
             {
                 _xOffset = value;
 
-                NotifyPropertyChanged("XOffset");
+                NotifyPropertyChanged(nameof(XOffset));
             }
         }
 
@@ -437,7 +437,7 @@ namespace SSS.Models
             {
                 _yOffset = value;
 
-                NotifyPropertyChanged("YOffset");
+                NotifyPropertyChanged(nameof(YOffset));
             }
         }
 
@@ -453,7 +453,7 @@ namespace SSS.Models
             {
                 _pollingInterval = value;
 
-                NotifyPropertyChanged("PollingInterval");
+                NotifyPropertyChanged(nameof(PollingInterval));
             }
         }
 
@@ -469,7 +469,7 @@ namespace SSS.Models
             {
                 _useAppBar = value;
 
-                NotifyPropertyChanged("UseAppBar");
+                NotifyPropertyChanged(nameof(UseAppBar));
             }
         }
 
@@ -485,7 +485,7 @@ namespace SSS.Models
             {
                 _alwaysTop = value;
 
-                NotifyPropertyChanged("AlwaysTop");
+                NotifyPropertyChanged(nameof(AlwaysTop));
             }
         }
 
@@ -501,7 +501,7 @@ namespace SSS.Models
             {
                 _toolbarMode = value;
 
-                NotifyPropertyChanged("ToolbarMode");
+                NotifyPropertyChanged(nameof(ToolbarMode));
             }
         }
 
@@ -517,7 +517,7 @@ namespace SSS.Models
             {
                 _clickThrough = value;
 
-                NotifyPropertyChanged("ClickThrough");
+                NotifyPropertyChanged(nameof(ClickThrough));
             }
         }
 
@@ -533,7 +533,7 @@ namespace SSS.Models
             {
                 _showTrayIcon = value;
 
-                NotifyPropertyChanged("ShowTrayIcon");
+                NotifyPropertyChanged(nameof(ShowTrayIcon));
             }
         }
 
@@ -549,7 +549,7 @@ namespace SSS.Models
             {
                 _runAtStartup = value;
 
-                NotifyPropertyChanged("RunAtStartup");
+                NotifyPropertyChanged(nameof(RunAtStartup));
             }
         }
 
@@ -565,7 +565,7 @@ namespace SSS.Models
             {
                 _sidebarWidth = value;
 
-                NotifyPropertyChanged("SidebarWidth");
+                NotifyPropertyChanged(nameof(SidebarWidth));
             }
         }
 
@@ -581,23 +581,23 @@ namespace SSS.Models
             {
                 _autoBGColor = value;
 
-                NotifyPropertyChanged("AutoBGColor");
+                NotifyPropertyChanged(nameof(AutoBGColor));
             }
         }
 
-        private string _bgColor { get; set; }
+        private string? _bgColor { get; set; }
 
         public string BGColor
         {
             get
             {
-                return _bgColor;
+                return _bgColor!;
             }
             set
             {
                 _bgColor = value;
 
-                NotifyPropertyChanged("BGColor");
+                NotifyPropertyChanged(nameof(BGColor));
             }
         }
 
@@ -613,7 +613,7 @@ namespace SSS.Models
             {
                 _bgOpacity = value;
 
-                NotifyPropertyChanged("BGOpacity");
+                NotifyPropertyChanged(nameof(BGOpacity));
             }
         }
 
@@ -629,118 +629,118 @@ namespace SSS.Models
             {
                 _textAlign = value;
 
-                NotifyPropertyChanged("TextAlign");
+                NotifyPropertyChanged(nameof(TextAlign));
             }
         }
 
-        private TextAlignItem[] _textAlignItems { get; set; }
+        private TextAlignItem[]? _textAlignItems { get; set; }
 
         public TextAlignItem[] TextAlignItems
         {
             get
             {
-                return _textAlignItems;
+                return _textAlignItems!;
             }
             set
             {
                 _textAlignItems = value;
 
-                NotifyPropertyChanged("TextAlignItems");
+                NotifyPropertyChanged(nameof(TextAlignItems));
             }
         }
 
-        private FontSetting _fontSetting { get; set; }
+        private FontSetting? _fontSetting { get; set; }
 
         public FontSetting FontSetting
         {
             get
             {
-                return _fontSetting;
+                return _fontSetting!;
             }
             set
             {
                 _fontSetting = value;
 
-                NotifyPropertyChanged("FontSize");
+                NotifyPropertyChanged(nameof(FontSetting));
             }
         }
 
-        private FontSetting[] _fontSettingItems { get;  set;}
+        private FontSetting[]? _fontSettingItems { get;  set;}
 
         public FontSetting[] FontSettingItems
         {
             get
             {
-                return _fontSettingItems;
+                return _fontSettingItems!;
             }
             set
             {
                 _fontSettingItems = value;
 
-                NotifyPropertyChanged("FontSizeItems");
+                NotifyPropertyChanged(nameof(FontSettingItems));
             }
         }
-        private string _fontName { get; set; }
+        private string? _fontName { get; set; }
 
         public string FontName
         {
             get
             {
-                return _fontName;
+                return _fontName!;
             }
             set
             {
                 _fontName = value;
 
-                NotifyPropertyChanged("FontName");
+                NotifyPropertyChanged(nameof(FontName));
             }
         }
 
-        private String[] _fontNameItems { get; set; }
+        private String[]? _fontNameItems { get; set; }
 
         public String[] FontNameItems
         {
             get
             {
-                return _fontNameItems;
+                return _fontNameItems!;
             }
             set
             {
                 _fontNameItems = value;
 
-                NotifyPropertyChanged("FontNameItems");
+                NotifyPropertyChanged(nameof(FontNameItems));
             }
         }
 
-        private string _fontColor { get; set; }
+        private string? _fontColor { get; set; }
 
         public string FontColor
         {
             get
             {
-                return _fontColor;
+                return _fontColor!;
             }
             set
             {
                 _fontColor = value;
 
-                NotifyPropertyChanged("FontColor");
+                NotifyPropertyChanged(nameof(FontColor));
             }
         }
 
-        private string _alertFontColor { get; set; }
+        private string? _alertFontColor { get; set; }
 
         public string AlertFontColor
         {
             get
             {
-                return _alertFontColor;
+                return _alertFontColor!;
             }
             set
             {
                 _alertFontColor = value;
 
-                NotifyPropertyChanged("AlertFontColor");
+                NotifyPropertyChanged(nameof(AlertFontColor));
             }
         }
 
@@ -756,39 +756,39 @@ namespace SSS.Models
             {
                 _alertBlink = value;
 
-                NotifyPropertyChanged("AlertBlink");
+                NotifyPropertyChanged(nameof(AlertBlink));
             }
         }
 
-        private DateSetting _dateSetting { get; set; }
+        private DateSetting? _dateSetting { get; set; }
 
         public DateSetting DateSetting
         {
             get
             {
-                return _dateSetting;
+                return _dateSetting!;
             }
             set
             {
                 _dateSetting = value;
 
-                NotifyPropertyChanged("DateSetting");
+                NotifyPropertyChanged(nameof(DateSetting));
             }
         }
 
-        private DateSetting[] _dateSettingItems { get; set; }
+        private DateSetting[]? _dateSettingItems { get; set; }
 
         public DateSetting[] DateSettingItems
         {
             get
             {
-                return _dateSettingItems;
+                return _dateSettingItems!;
             }
             set
             {
                 _dateSettingItems = value;
 
-                NotifyPropertyChanged("DateSettingItems");
+                NotifyPropertyChanged(nameof(DateSettingItems));
             }
         }
 
@@ -804,7 +804,7 @@ namespace SSS.Models
             {
                 _collapseMenuBar = value;
 
-                NotifyPropertyChanged("CollapseMenuBar");
+                NotifyPropertyChanged(nameof(CollapseMenuBar));
             }
         }
 
@@ -820,39 +820,39 @@ namespace SSS.Models
             {
                 _initiallyHidden = value;
 
-                NotifyPropertyChanged("InitiallyHidden");
+                NotifyPropertyChanged(nameof(InitiallyHidden));
             }
         }
 
-        private string[] _iconThemeItems { get; set; }
+        private string[]? _iconThemeItems { get; set; }
 
         public string[] IconThemeItems
         {
             get
             {
-                return _iconThemeItems;
+                return _iconThemeItems!;
             }
             set
             {
                 _iconThemeItems = value;
 
-                NotifyPropertyChanged("IconThemeItems");
+                NotifyPropertyChanged(nameof(IconThemeItems));
             }
         }
 
-        private string _iconTheme { get; set; } = "Default";
+        private string? _iconTheme { get; set; } = "Default";
 
         public string IconTheme
         {
             get
             {
-                return _iconTheme;
+                return _iconTheme!;
             }
             set
             {
                 _iconTheme = value;
 
-                NotifyPropertyChanged("IconTheme");
+                NotifyPropertyChanged(nameof(IconTheme));
             }
         }
 
@@ -868,7 +868,7 @@ namespace SSS.Models
             {
                 _showMachineName = value;
 
-                NotifyPropertyChanged("ShowMachineName");
+                NotifyPropertyChanged(nameof(ShowMachineName));
             }
         }
 
@@ -884,7 +884,7 @@ namespace SSS.Models
             {
                 _showClock = value;
 
-                NotifyPropertyChanged("ShowClock");
+                NotifyPropertyChanged(nameof(ShowClock));
             }
         }
 
@@ -900,17 +900,17 @@ namespace SSS.Models
             {
                 _clock24HR = value;
 
-                NotifyPropertyChanged("Clock24HR");
+                NotifyPropertyChanged(nameof(Clock24HR));
             }
         }
 
-        private ObservableCollection<MonitorConfig> _monitorConfig { get; set; }
+        private ObservableCollection<MonitorConfig>? _monitorConfig { get; set; }
 
         public ObservableCollection<MonitorConfig> MonitorConfig
         {
             get
             {
-                return _monitorConfig;
+                return _monitorConfig!;
             }
             set
             {
@@ -922,19 +922,19 @@ namespace SSS.Models
                 {
                     _config.PropertyChanged += Child_PropertyChanged;
 
-                    _config.HardwareOC.CollectionChanged += Child_CollectionChanged;
+                    _config.HardwareOC!.CollectionChanged += Child_CollectionChanged;
 
                     foreach (HardwareConfig _hardware in _config.HardwareOC)
                     {
                         _hardware.PropertyChanged += Child_PropertyChanged;
                     }
 
-                    foreach (MetricConfig _metric in _config.Metrics)
+                    foreach (MetricConfig _metric in _config.Metrics!)
                     {
                         _metric.PropertyChanged += Child_PropertyChanged;
                     }
 
-                    foreach (ConfigParam _param in _config.Params)
+                    foreach (ConfigParam _param in _config.Params!)
                     {
                         _param.PropertyChanged += Child_PropertyChanged;
                     }
@@ -942,13 +942,13 @@ namespace SSS.Models
 
                 SelectedMonitor = _monitorConfig.FirstOrDefault();
 
-                NotifyPropertyChanged("MonitorConfig");
+                NotifyPropertyChanged(nameof(MonitorConfig));
             }
         }
 
-        private MonitorConfig _selectedMonitor { get; set; }
+        private MonitorConfig? _selectedMonitor { get; set; }
 
-        public MonitorConfig SelectedMonitor
+        public MonitorConfig? SelectedMonitor
         {
             get
             {
@@ -958,13 +958,13 @@ namespace SSS.Models
             {
                 _selectedMonitor = value;
 
-                NotifyPropertyChanged("SelectedMonitor");
+                NotifyPropertyChanged(nameof(SelectedMonitor));
             }
         }
 
-        private Hotkey _toggleKey { get; set; }
+        private Hotkey? _toggleKey { get; set; }
 
-        public Hotkey ToggleKey
+        public Hotkey? ToggleKey
         {
             get
             {
@@ -974,13 +974,13 @@ namespace SSS.Models
             {
                 _toggleKey = value;
 
-                NotifyPropertyChanged("ToggleKey");
+                NotifyPropertyChanged(nameof(ToggleKey));
             }
         }
 
-        private Hotkey _showKey { get; set; }
+        private Hotkey? _showKey { get; set; }
 
-        public Hotkey ShowKey
+        public Hotkey? ShowKey
         {
             get
             {
@@ -990,13 +990,13 @@ namespace SSS.Models
             {
                 _showKey = value;
 
-                NotifyPropertyChanged("ShowKey");
+                NotifyPropertyChanged(nameof(ShowKey));
             }
         }
 
-        private Hotkey _hideKey { get; set; }
+        private Hotkey? _hideKey { get; set; }
 
-        public Hotkey HideKey
+        public Hotkey? HideKey
         {
             get
             {
@@ -1006,77 +1006,65 @@ namespace SSS.Models
             {
                 _hideKey = value;
 
-                NotifyPropertyChanged("HideKey");
+                NotifyPropertyChanged(nameof(HideKey));
             }
         }
 
-        private Hotkey _reloadKey { get; set; }
+        private Hotkey? _reloadKey { get; set; }
 
-        public Hotkey ReloadKey
+        public Hotkey? ReloadKey
         {
-            get
-            {
-                return _reloadKey;
-            }
+            get => _reloadKey;
             set
             {
                 _reloadKey = value;
 
-                NotifyPropertyChanged("ReloadKey");
+                NotifyPropertyChanged(nameof(ReloadKey));
             }
         }
 
-        private Hotkey _closeKey { get; set; }
+        private Hotkey? _closeKey { get; set; }
 
-        public Hotkey CloseKey
+        public Hotkey? CloseKey
         {
-            get
-            {
-                return _closeKey;
-            }
+            get => _closeKey;
             set
             {
                 _closeKey = value;
 
-                NotifyPropertyChanged("CloseKey");
+                NotifyPropertyChanged(nameof(CloseKey));
             }
         }
 
-        private Hotkey _cycleEdgeKey { get; set; }
+        private Hotkey? _cycleEdgeKey { get; set; }
 
-        public Hotkey CycleEdgeKey
+        public Hotkey? CycleEdgeKey
         {
-            get
-            {
-                return _cycleEdgeKey;
-            }
+            get => _cycleEdgeKey;
             set
             {
                 _cycleEdgeKey = value;
 
-                NotifyPropertyChanged("CycleEdgeKey");
+                NotifyPropertyChanged(nameof(CycleEdgeKey));
             }
         }
 
-        private Hotkey _cycleScreenKey { get; set; }
+        private Hotkey? _cycleScreenKey { get; set; } = null;
 
-        public Hotkey CycleScreenKey
+        public Hotkey? CycleScreenKey
         {
-            get
-            {
-                return _cycleScreenKey;
-            }
+            get => _cycleScreenKey;
             set
             {
                 _cycleScreenKey = value;
 
-                NotifyPropertyChanged("CycleScreenKey");
+                NotifyPropertyChanged(nameof(CycleScreenKey));
             }
         }
 
-        private Hotkey _reserveSpaceKey { get; set; }
+        private Hotkey? _reserveSpaceKey { get; set; }
 
-        public Hotkey ReserveSpaceKey
+        public Hotkey? ReserveSpaceKey
         {
             get
             {
@@ -1086,7 +1074,7 @@ namespace SSS.Models
             {
                 _reserveSpaceKey = value;
 
-                NotifyPropertyChanged("ReserveSpaceKey");
+                NotifyPropertyChanged(nameof(ReserveSpaceKey));
             }
         }
     }
@@ -1095,20 +1083,20 @@ namespace SSS.Models
     {
         public DockEdge Value { get; set; }
 
-        public string Text { get; set; }
+        public string? Text { get; set; }
     }
 
     public class ScreenItem
     {
         public int Index { get; set; }
 
-        public string Text { get; set; }
+        public string? Text { get; set; }
     }
 
     public class TextAlignItem
     {
         public TextAlign Value { get; set; }
 
-        public string Text { get; set; }
+        public string? Text { get; set; }
     }
 }

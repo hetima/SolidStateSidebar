@@ -41,7 +41,7 @@ namespace SSS.Utilities
             }
         }
 
-        private static string _assemblyName { get; set; } = null;
+        private static string? _assemblyName { get; set; } = null;
 
         public static string AssemblyName
         {
@@ -49,14 +49,14 @@ namespace SSS.Utilities
             {
                 if (_assemblyName == null)
                 {
-                    _assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+                    _assemblyName = Assembly.GetExecutingAssembly().GetName().Name!;
                 }
 
                 return _assemblyName;
             }
         }
 
-        private static string _exeName { get; set; } = null;
+        private static string? _exeName { get; set; } = null;
 
         public static string ExeName
         {
@@ -71,7 +71,7 @@ namespace SSS.Utilities
             }
         }
 
-        private static string _settingsFile { get; set; } = null;
+        private static string? _settingsFile { get; set; } = null;
 
         public static string SettingsFile
         {
@@ -91,8 +91,8 @@ namespace SSS.Utilities
         }
 
 
-        private static string _localAppDirPath { get; set; } = null;
-        private static string _localIconThemesPath { get; set; } = null;
+        private static string? _localAppDirPath { get; set; } = null;
+        private static string? _localIconThemesPath { get; set; } = null;
 
         public static string LocalAppDirPath
         {
@@ -136,9 +136,9 @@ public static class Startup
             if (task == null)
                 return false;
 
-            ExecAction action = task.Definition.Actions.OfType<ExecAction>().FirstOrDefault();
+            ExecAction? action = task.Definition.Actions.OfType<ExecAction>().FirstOrDefault();
 
-            string currentExe = Process.GetCurrentProcess().MainModule.FileName;
+            string currentExe = Process.GetCurrentProcess().MainModule!.FileName;
 
             // Check if it points to the correct exe (not a DLL or SYS)
             if (action == null || !string.Equals(action.Path, currentExe, StringComparison.OrdinalIgnoreCase))
@@ -148,7 +148,7 @@ public static class Startup
         }
     }
 
-    public static void EnableStartupTask(string exePath = null)
+    public static void EnableStartupTask(string? exePath = null)
     {
         if (StartupTaskExists())
         {
@@ -164,7 +164,7 @@ public static class Startup
             TaskDefinition def = taskService.NewTask();
             def.Triggers.Add(new LogonTrigger { Enabled = true });
 
-            string targetExe = exePath ?? Process.GetCurrentProcess().MainModule.FileName;
+            string targetExe = exePath ?? Process.GetCurrentProcess().MainModule!.FileName;
             def.Actions.Add(new ExecAction(targetExe));
 
             def.Principal.RunLevel = TaskRunLevel.Highest;
@@ -197,11 +197,11 @@ public static class Startup
     /// </summary>
     private static void CleanLegacyTasks(TaskService taskService)
     {
-        string[] legacyFileNames = new[]
-        {
+        string[] legacyFileNames =
+        [
             "SidebarDiagnostics.exe",
             "SolidStateSidebar.exe"
-        };
+        ];
 
         foreach (Task t in taskService.RootFolder.AllTasks)
         {
@@ -255,11 +255,11 @@ public static class Startup
         {
             get
             {
-                return new string[11] { "en", "da", "de", "fr", "ja", "nl", "zh", "it", "ru", "fi", "es" };
+                return ["en", "da", "de", "fr", "ja", "nl", "zh", "it", "ru", "fi", "es"];
             }
         }
 
-        public static CultureInfo Default { get; private set; }
+        public static CultureInfo? Default { get; private set; }
 
         public static CultureInfo CultureInfo
         {
@@ -267,7 +267,7 @@ public static class Startup
             {
                 string culture = Core.Settings.Instance.Culture;
                 if (string.Equals(culture, DEFAULT, StringComparison.Ordinal))
-                    return Default;
+                    return Default!;
 
                 CultureInfo ci = new CultureInfo(culture);
 
@@ -281,8 +281,8 @@ public static class Startup
 
     public class CultureItem
     {
-        public string Value { get; set; }
+        public string? Value { get; set; }
 
-        public string Text { get; set; }
+        public string? Text { get; set; }
     }
 }

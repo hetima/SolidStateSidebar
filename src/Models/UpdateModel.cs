@@ -12,7 +12,7 @@ namespace SSS.Models
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private double _progress { get; set; } = 0d;
 
@@ -26,8 +26,8 @@ namespace SSS.Models
             {
                 _progress = value;
 
-                NotifyPropertyChanged("Progress");
-                NotifyPropertyChanged("ProgressNormalized");
+                NotifyPropertyChanged(nameof(Progress));
+                NotifyPropertyChanged(nameof(ProgressNormalized));
             }
         }
 

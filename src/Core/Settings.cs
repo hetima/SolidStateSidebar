@@ -16,7 +16,7 @@ namespace SSS.Core
     {
         private Settings() { }
 
-        private static string[] _iconThemeList;
+        private static string[]? _iconThemeList;
 
         public static string[] IconThemeList
         {
@@ -42,6 +42,10 @@ namespace SSS.Core
                 // Extract embedded themes
                 foreach (var theme in IconThemeData.GetAvailableThemes())
                 {
+                    if (theme == null || theme.Name == null || theme.Icons == null)
+                    {
+                        continue;
+                    }
                     if (!result.Contains(theme.Name))
                     {
                         string themeDir = Path.Combine(iconThemesPath, theme.Name);
@@ -87,14 +91,12 @@ namespace SSS.Core
 
         private static Settings Load()
         {
-            Settings _return = null;
+            Settings? _return = null;
 
             if (File.Exists(Paths.SettingsFile))
             {
-                using (StreamReader _reader = File.OpenText(Paths.SettingsFile))
-                {
-                    _return = (Settings)new JsonSerializer().Deserialize(_reader, typeof(Settings));
-                }
+                using StreamReader _reader = File.OpenText(Paths.SettingsFile);
+                _return = (Settings)new JsonSerializer().Deserialize(_reader, typeof(Settings))!;
             }
 
             // Extract embedded icon themes
@@ -111,7 +113,7 @@ namespace SSS.Core
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private bool _initialSetup { get; set; } = true;
 
@@ -574,7 +576,7 @@ namespace SSS.Core
             }
         }
 
-        public string GetIconSvgPath(string iconName)
+        public string? GetIconSvgPath(string iconName)
         {
             string path = Path.Combine(Paths.LocalIconThemesPath, IconTheme, iconName + ".svg");
             return File.Exists(path) ? path : null;
@@ -648,10 +650,10 @@ namespace SSS.Core
             }
         }
 
-        private MonitorConfig[] _monitorConfig { get; set; } = null;
+        private MonitorConfig[]? _monitorConfig { get; set; } = null;
 
         [JsonProperty]
-        public MonitorConfig[] MonitorConfig
+        public MonitorConfig[]? MonitorConfig
         {
             get
             {
@@ -665,7 +667,7 @@ namespace SSS.Core
             }
         }
 
-        private Hotkey[] _hotkeys { get; set; } = new Hotkey[0];
+        private Hotkey[] _hotkeys { get; set; } = [];
 
         [JsonProperty]
         public Hotkey[] Hotkeys
@@ -682,7 +684,7 @@ namespace SSS.Core
             }
         }
 
-        private static Settings _instance { get; set; } = null;
+        private static Settings? _instance { get; set; } = null;
 
         public static Settings Instance
         {
@@ -714,9 +716,9 @@ namespace SSS.Core
             FontSize = fontSize;
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            FontSetting _that = obj as FontSetting;
+            FontSetting? _that = obj as FontSetting;
 
             if (_that == null)
             {
@@ -872,7 +874,7 @@ namespace SSS.Core
         }
 
         [JsonProperty]
-        public string Format { get; set; }
+        public string? Format { get; set; }
 
         public string Display
         {
@@ -887,9 +889,9 @@ namespace SSS.Core
             }
         }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
-            DateSetting _that = obj as DateSetting;
+            DateSetting? _that = obj as DateSetting;
 
             if (_that == null)
             {

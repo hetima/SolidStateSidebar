@@ -29,11 +29,11 @@ namespace SSS
 
         private async Task Save(bool finalize)
         {
-            Model.Save();
+            Model?.Save();
 
             await App.Current.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, (Action)(async () =>
             {
-                Sidebar _sidebar = App.Current.Sidebar;
+                Sidebar? _sidebar = App.Current.Sidebar;
 
                 if (_sidebar == null)
                 {
@@ -58,9 +58,9 @@ namespace SSS
 
         private void CloseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Model.IsChanged)
+            if (Model != null && Model.IsChanged)
             {
-                Sidebar _sidebar = App.Current.Sidebar;
+                Sidebar? _sidebar = App.Current.Sidebar;
 
                 if (_sidebar != null)
                 {
@@ -88,6 +88,6 @@ namespace SSS
             Hotkey.Enable();
         }
 
-        public SettingsModel Model { get; private set; }
+        public SettingsModel? Model { get; private set; }
     }
 }

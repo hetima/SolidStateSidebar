@@ -1,0 +1,7 @@
+# Suppress IDE1006 (Naming rule violations)
+dotnet_diagnostic.IDE1006.severity = none
+
+[*.cs]
+
+# IDE1006: 命名スタイル
+dotnet_diagnostic.IDE1006.severity = none

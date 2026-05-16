@@ -15,7 +15,7 @@ namespace SSS.Converters
 
             if (string.IsNullOrEmpty(_format))
             {
-                return value.ToString();
+                return value.ToString() ?? "";
             }
             else
             {
@@ -52,7 +52,7 @@ namespace SSS.Converters
                 new KeyConverter().ConvertToString(_hotkey.WinKey);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }
@@ -67,7 +67,7 @@ namespace SSS.Converters
             return string.Format("{0:0}%", _value);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }
@@ -95,7 +95,7 @@ namespace SSS.Converters
             return string.Format("{0}:", _value);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }
@@ -110,7 +110,7 @@ namespace SSS.Converters
             return new Thickness(0, 0, _value * 0.4d, 0);
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             return null;
         }

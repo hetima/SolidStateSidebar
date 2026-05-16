@@ -18,7 +18,7 @@ namespace SSS.Core
         private const string BYTESRECEIVEDPERSECOND = "Bytes Received/sec";
         private const string BYTESSENTPERSECOND = "Bytes Sent/sec";
 
-        public NetworkMonitor(string id, string name, string extIP, MetricConfig[] metrics, bool showName = true, bool roundAll = false, bool useBytes = false, double bandwidthInAlert = 0, double bandwidthOutAlert = 0) : base(id, name, showName)
+        public NetworkMonitor(string id, string name, string? extIP, MetricConfig[] metrics, bool showName = true, bool roundAll = false, bool useBytes = false, double bandwidthInAlert = 0, double bandwidthOutAlert = 0) : base(id, name, showName)
         {
             iConverter _converter;
 
@@ -31,11 +31,11 @@ namespace SSS.Core
                 _converter = BitsPerSecondConverter.Instance;
             }
 
-            List<iMetric> _metrics = new List<iMetric>();
+            List<iMetric> _metrics = [];
 
             if (metrics.IsEnabled(MetricKey.NetworkIP))
             {
-                string _ipAddress = GetAdapterIPAddress(name);
+                string? _ipAddress = GetAdapterIPAddress(name);
 
                 if (!string.IsNullOrEmpty(_ipAddress))
                 {
@@ -90,7 +90,7 @@ namespace SSS.Core
             int _bandwidthInAlert = parameters.GetValue<int>(ParamKey.BandwidthInAlert);
             int _bandwidthOutAlert = parameters.GetValue<int>(ParamKey.BandwidthOutAlert);
 
-            string _extIP = null;
+            string? _extIP = null;
 
             if (metrics.IsEnabled(MetricKey.NetworkExtIP))
             {
@@ -103,7 +103,7 @@ namespace SSS.Core
                 from n in merged.DefaultIfEmpty(hw).Select(n => { n.ActualName = hw.Name; return n; })
                 where n.Enabled
                 orderby n.Order descending, n.Name ascending
-                select new NetworkMonitor(n.ID, n.Name ?? n.ActualName, _extIP, metrics, _showName, _roundAll, _useBytes, _bandwidthInAlert, _bandwidthOutAlert)
+                select new NetworkMonitor(n.ID ?? hw.ID!, n.Name ?? n.ActualName!, _extIP, metrics, _showName, _roundAll, _useBytes, _bandwidthInAlert, _bandwidthOutAlert)
                 ).ToArray();
         }
 
@@ -117,7 +117,7 @@ namespace SSS.Core
             base.Update();
         }
 
-        private static string GetAdapterIPAddress(string name)
+        private static string? GetAdapterIPAddress(string name)
         {
             //Here we need to match the apdapter returned by the network interface to the
             //adapter represented by this instance of the class.

@@ -11,9 +11,9 @@ namespace SSS.Styling.IconTheme
 {
     public class IconThemeData
     {
-        static IconThemeData _default;
+        static IconThemeData? _default;
 
-        private static IconThemeData _loadDefault()
+        private static IconThemeData? _loadDefault()
         {
             if (_default != null)
             {
@@ -22,16 +22,16 @@ namespace SSS.Styling.IconTheme
             _default = Load("Default");
             return _default;
         }
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
-        public Dictionary<string, string> Icons { get; set; }
+        public Dictionary<string, string>? Icons { get; set; }
 
         private static readonly string _namespace = typeof(IconThemeData).Namespace + ".";
 
         /// <summary>
         /// Load an icon theme by name from embedded resources.
         /// </summary>
-        public static IconThemeData Load(string themeName)
+        public static IconThemeData? Load(string themeName)
         {
             if (_default != null && themeName == "Default")
             {
@@ -41,7 +41,7 @@ namespace SSS.Styling.IconTheme
             string resourceName = _namespace + themeName + ".json";
             Assembly assembly = typeof(IconThemeData).Assembly;
 
-            Stream stream = assembly.GetManifestResourceStream(resourceName);
+            Stream? stream = assembly.GetManifestResourceStream(resourceName);
             if (stream == null)
             {
                 resourceName = _namespace + "Default.json";
@@ -61,7 +61,7 @@ namespace SSS.Styling.IconTheme
         /// <summary>
         /// Try to load an icon theme by name. Returns null if not found.
         /// </summary>
-        public static IconThemeData TryLoad(string themeName)
+        public static IconThemeData? TryLoad(string themeName)
         {
             try
             {
@@ -86,7 +86,7 @@ namespace SSS.Styling.IconTheme
             Assembly assembly = typeof(IconThemeData).Assembly;
             foreach (var resourceName in themes)
             {
-                using Stream stream = assembly.GetManifestResourceStream(resourceName);
+                using Stream? stream = assembly.GetManifestResourceStream(resourceName);
                 if (stream == null)
                 {
                     throw new FileNotFoundException($"Icon theme resource '{resourceName}' not found.");
@@ -94,9 +94,10 @@ namespace SSS.Styling.IconTheme
 
                 using StreamReader reader = new StreamReader(stream);
                 var data = JsonConvert.DeserializeObject<IconThemeData>(reader.ReadToEnd());
-                result.Add(data);
-
-
+                if (data != null)
+                {
+                    result.Add(data);
+                }
             }
 
             return result;

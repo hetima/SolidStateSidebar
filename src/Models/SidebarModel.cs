@@ -75,7 +75,7 @@ namespace SSS.Models
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void InitMachineName()
         {
@@ -100,7 +100,7 @@ namespace SSS.Models
 
         private void InitMonitors()
         {
-            MonitorManager = new MonitorManager(Core.Settings.Instance.MonitorConfig);
+            MonitorManager = new MonitorManager(Core.Settings.Instance.MonitorConfig ?? []);
             MonitorManager.Update();
         }
 
@@ -111,8 +111,10 @@ namespace SSS.Models
                 return;
             }
 
-            _clockTimer = new DispatcherTimer();
-            _clockTimer.Interval = TimeSpan.FromSeconds(1);
+            _clockTimer = new DispatcherTimer
+            {
+                Interval = TimeSpan.FromSeconds(1)
+            };
             _clockTimer.Tick += new EventHandler(ClockTimer_Tick);
             _clockTimer.Start();
         }
@@ -144,53 +146,35 @@ namespace SSS.Models
 
         private void PauseClock()
         {
-            if (_clockTimer != null)
-            {
-                _clockTimer.Stop();
-            }
+            _clockTimer?.Stop();
         }
 
         private void PauseMonitors()
         {
-            if (_monitorTimer != null)
-            {
-                _monitorTimer.Stop();
-            }
+            _monitorTimer?.Stop();
         }
 
         private void ResumeClock()
         {
-            if (_clockTimer != null)
-            {
-                _clockTimer.Start();
-            }
+            _clockTimer?.Start();
         }
 
         private void ResumeMonitors()
         {
-            if (_monitorTimer != null)
-            {
-                _monitorTimer.Start();
-            }
+            _monitorTimer?.Start();
         }
 
         private void DisposeClock()
         {
-            if (_clockTimer != null)
-            {
-                _clockTimer.Stop();
-                _clockTimer = null;
-            }
+            _clockTimer?.Stop();
+            _clockTimer = null;
         }
 
         private void DisposeMonitors()
         {
-            if (_monitorTimer != null)
-            {
-                _monitorTimer.Stop();
-                _monitorTimer = null;
-            }
-            
+            _monitorTimer?.Stop();
+            _monitorTimer = null;
+
             if (MonitorManager != null)
             {
                 MonitorManager.Dispose();
@@ -198,12 +182,12 @@ namespace SSS.Models
             }
         }
 
-        private void ClockTimer_Tick(object sender, EventArgs e)
+        private void ClockTimer_Tick(object? sender, EventArgs e)
         {
             UpdateClock();
         }
 
-        private void MonitorTimer_Tick(object sender, EventArgs e)
+        private void MonitorTimer_Tick(object? sender, EventArgs e)
         {
             UpdateMonitors();
         }
@@ -220,7 +204,7 @@ namespace SSS.Models
             {
                 _ready = value;
 
-                NotifyPropertyChanged("Ready");
+                NotifyPropertyChanged(nameof(Ready));
             }
         }
 
@@ -236,23 +220,23 @@ namespace SSS.Models
             {
                 _showMachineName = value;
 
-                NotifyPropertyChanged("ShowMachineName");
+                NotifyPropertyChanged(nameof(ShowMachineName));
             }
         }
 
-        private string _machineName { get; set; }
+        private string? _machineName { get; set; }
 
         public string MachineName
         {
             get
             {
-                return _machineName;
+                return _machineName ?? string.Empty;
             }
             set
             {
                 _machineName = value;
 
-                NotifyPropertyChanged("MachineName");
+                NotifyPropertyChanged(nameof(MachineName));
             }
         }
 
@@ -268,14 +252,14 @@ namespace SSS.Models
             {
                 _showClock = value;
 
-                NotifyPropertyChanged("ShowClock");
+                NotifyPropertyChanged(nameof(ShowClock));
             }
         }
-        public ImageSource ClockSvg
+        public static ImageSource? ClockSvg
         {
             get
             {
-                string svgContentPath = Core.Settings.Instance.GetIconSvgPath("clock");
+                string? svgContentPath = Core.Settings.Instance.GetIconSvgPath("clock");
                 if (string.IsNullOrEmpty(svgContentPath)) return null;
 
                 var render = new SVGImage.SVG.SVGRender();
@@ -284,25 +268,23 @@ namespace SSS.Models
                 render.OverrideFillColor = clr;
                 DrawingGroup drawing = render.LoadDrawing(svgContentPath);
                 if (drawing == null) return null;
-                // var brush = new SolidColorBrush(clr);
-                // Styling.IconTheme.IconThemeData.ReplaceColor(drawing, brush);
                 return new DrawingImage(drawing);
             }
         }
 
-        private string _time { get; set; }
+        private string? _time { get; set; }
 
         public string Time
         {
             get
             {
-                return _time;
+                return _time ?? string.Empty;
             }
             set
             {
                 _time = value;
 
-                NotifyPropertyChanged("Time");
+                NotifyPropertyChanged(nameof(Time));
             }
         }
 
@@ -318,45 +300,45 @@ namespace SSS.Models
             {
                 _showDate = value;
 
-                NotifyPropertyChanged("ShowDate");
+                NotifyPropertyChanged(nameof(ShowDate));
             }
         }
 
-        private string _date { get; set; }
+        private string? _date { get; set; }
 
         public string Date
         {
             get
             {
-                return _date;
+                return _date ?? string.Empty;
             }
             set
             {
                 _date = value;
 
-                NotifyPropertyChanged("Date");
+                NotifyPropertyChanged(nameof(Date));
             }
         }
 
-        private MonitorManager _monitorManager { get; set; }
+        private MonitorManager? _monitorManager { get; set; }
 
         public MonitorManager MonitorManager
         {
             get
             {
-                return _monitorManager;
+                return _monitorManager!;
             }
             set
             {
                 _monitorManager = value;
 
-                NotifyPropertyChanged("MonitorManager");
+                NotifyPropertyChanged(nameof(MonitorManager));
             }
         }
 
-        private DispatcherTimer _clockTimer { get; set; }
+        private DispatcherTimer? _clockTimer { get; set; }
 
-        private DispatcherTimer _monitorTimer { get; set; }
+        private DispatcherTimer? _monitorTimer { get; set; }
 
         private bool _disposed { get; set; } = false;
     }

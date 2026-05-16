@@ -175,7 +175,10 @@ namespace SSS.Windows
 
             IsHooked = false;
 
-            NativeMethods.UnhookWinEvent(_hookIntPtr.Value);
+            if (_hookIntPtr != null)
+            {
+                NativeMethods.UnhookWinEvent(_hookIntPtr.Value);
+            }
 
             _delegate = null;
             _hookIntPtr = null;
@@ -200,9 +203,9 @@ namespace SSS.Windows
 
                 if (string.Equals(_class, WORKERW, StringComparison.Ordinal) /*|| string.Equals(_class, PROGMAN, StringComparison.Ordinal)*/ )
                 {
-                    _sidebar.SetTopMost(false);
+                    _sidebar?.SetTopMost(false);
                 }
-                else if (_sidebar.IsTopMost)
+                else if (_sidebar != null && _sidebar.IsTopMost)
                 {
                     _sidebar.SetBottom(false);
                 }
@@ -213,9 +216,9 @@ namespace SSS.Windows
 
         private static IntPtr? _hookIntPtr { get; set; }
 
-        private static WinEventDelegate _delegate { get; set; }
+        private static WinEventDelegate? _delegate { get; set; }
 
-        private static Sidebar _sidebar { get; set; }
+        private static Sidebar? _sidebar { get; set; }
 
         private static IntPtr? _sidebarHwnd { get; set; }
     }
@@ -312,10 +315,7 @@ namespace SSS.Windows
                     case WM_DEVICECHANGE_EVENT.DBT_DEVICEARRIVAL:
                     case WM_DEVICECHANGE_EVENT.DBT_DEVICEREMOVECOMPLETE:
 
-                        if (_cancelRestart != null)
-                        {
-                            _cancelRestart.Cancel();
-                        }
+                        _cancelRestart?.Cancel();
 
                         _cancelRestart = new CancellationTokenSource();
 
@@ -328,12 +328,7 @@ namespace SSS.Windows
 
                             App.Current.Dispatcher.BeginInvoke(DispatcherPriority.ApplicationIdle, (Action)(() =>
                             {
-                                Sidebar _sidebar = App.Current.Sidebar;
-
-                                if (_sidebar != null)
-                                {
-                                    _sidebar.ContentReload();
-                                }
+                                App.Current.Sidebar?.ContentReload();
                             }));
 
                             _cancelRestart = null;
@@ -349,7 +344,7 @@ namespace SSS.Windows
 
         public static bool IsHooked { get; private set; } = false;
 
-        private static CancellationTokenSource _cancelRestart { get; set; }
+        private static CancellationTokenSource? _cancelRestart { get; set; }
     }
 
     [JsonObject(MemberSerialization.OptIn)]
@@ -461,7 +456,7 @@ namespace SSS.Windows
 
             RegisteredKeys = null;
 
-            _sidebar.HwndSource.RemoveHook(KeyHook);
+            _sidebar?.HwndSource.RemoveHook(KeyHook);
             _sidebar = null;
         }
 
@@ -493,6 +488,11 @@ namespace SSS.Windows
 
         private static void Register(Hotkey hotkey)
         {
+            if (_sidebar == null)
+            {
+                return;
+            }
+
             uint _mods = MODIFIERS.MOD_NOREPEAT;
 
             if (hotkey.AltMod)
@@ -525,13 +525,18 @@ namespace SSS.Windows
 
         private static void Unregister(Hotkey hotkey)
         {
+            if (_sidebar == null)
+            {
+                return;
+            }
+
             NativeMethods.UnregisterHotKey(
                 new WindowInteropHelper(_sidebar).Handle,
                 hotkey.Index
                 );
         }
 
-        public static Hotkey[] RegisteredKeys { get; private set; }
+        public static Hotkey[]? RegisteredKeys { get; private set; }
 
         private static IntPtr KeyHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
         {
@@ -539,7 +544,7 @@ namespace SSS.Windows
             {
                 int _id = wParam.ToInt32();
 
-                Hotkey _hotkey = RegisteredKeys.FirstOrDefault(k => k.Index == _id);
+                Hotkey? _hotkey = RegisteredKeys?.FirstOrDefault(k => k.Index == _id);
 
                 if (_hotkey != null && _sidebar != null && _sidebar.Ready)
                 {
@@ -552,12 +557,12 @@ namespace SSS.Windows
                             }
                             else
                             {
-                                _sidebar.AppBarShow();
+                                _ = _sidebar.AppBarShow();
                             }
                             break;
 
                         case KeyAction.Show:
-                            _sidebar.AppBarShow();
+                            _ = _sidebar.AppBarShow();
                             break;
 
                         case KeyAction.Hide:
@@ -589,7 +594,7 @@ namespace SSS.Windows
 
                                 Core.Settings.Instance.Save();
 
-                                _sidebar.Reposition();
+                                _ = _sidebar.Reposition();
                             }
                             break;
 
@@ -609,7 +614,7 @@ namespace SSS.Windows
 
                                 Core.Settings.Instance.Save();
 
-                                _sidebar.Reposition();
+                                _ = _sidebar.Reposition();
                             }
                             break;
 
@@ -617,7 +622,7 @@ namespace SSS.Windows
                             Core.Settings.Instance.UseAppBar = !Core.Settings.Instance.UseAppBar;
                             Core.Settings.Instance.Save();
 
-                            _sidebar.Reposition();
+                            _ = _sidebar.Reposition();
                             break;
                     }
 
@@ -630,7 +635,7 @@ namespace SSS.Windows
 
         public static bool IsHooked { get; private set; } = false;
 
-        private static Sidebar _sidebar { get; set; }
+        private static Sidebar? _sidebar { get; set; }
 
         private static int _index { get; set; }
     }
@@ -987,7 +992,7 @@ namespace SSS.Windows
             //HwndSource.AddHook(WindowHook);
         }
 
-        private void UIScale_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void UIScale_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
             if (e.PropertyName == "UIScale")
             {
@@ -1213,7 +1218,9 @@ namespace SSS.Windows
         {
             if (msg == WM_WINDOWPOSCHANGING.MSG)
             {
+#pragma warning disable CS8605
                 WINDOWPOS _pos = (WINDOWPOS)Marshal.PtrToStructure(lParam, typeof(WINDOWPOS));
+#pragma warning restore CS8605
 
                 _pos.flags |= WM_WINDOWPOSCHANGING.SWP_NOMOVE;
 
@@ -1534,8 +1541,6 @@ namespace SSS.Windows
         private bool _wasTopMost { get; set; } = false;
 
         private int _callbackID { get; set; }
-
-        private CancellationTokenSource _cancelReposition { get; set; }
 
         private RECT _monitorWorkArea { get; set; }
     }

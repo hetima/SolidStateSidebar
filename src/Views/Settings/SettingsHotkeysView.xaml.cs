@@ -12,7 +12,7 @@ namespace SSS
     /// </summary>
     public partial class SettingsHotkeysView : UserControl
     {
-        private HotkeyBindingService _hotkeyService;
+        private HotkeyBindingService? _hotkeyService;
 
         public SettingsHotkeysView()
         {

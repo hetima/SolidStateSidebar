@@ -16,17 +16,17 @@ namespace SSS
             InitializeComponent();
         }
 
-        void IDropTarget.DragOver(IDropInfo dropInfo)
+        void IDropTarget.DragOver(IDropInfo? dropInfo)
         {
             DragDrop.DefaultDropHandler.DragOver(dropInfo);
         }
 
-        void IDropTarget.Drop(IDropInfo dropInfo)
+        void IDropTarget.Drop(IDropInfo? dropInfo)
         {
             DragDrop.DefaultDropHandler.Drop(dropInfo);
 
             // ドロップ後にドラッグした項目を選択状態にする
-            MonitorConfig target = dropInfo.Data switch
+            MonitorConfig? target = dropInfo?.Data switch
             {
                 MonitorConfig item => item,
                 IEnumerable<MonitorConfig> items => items.FirstOrDefault(),

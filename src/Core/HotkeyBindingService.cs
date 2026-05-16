@@ -10,23 +10,27 @@ namespace SSS.Core
 {
     public class HotkeyBindingService
     {
-        private Hotkey _hotkey;
-        private ToggleButton _keybinder;
-        private SettingsModel _model;
+        private Hotkey? _hotkey;
+        private ToggleButton? _keybinder;
+        private SettingsModel? _model;
         private Window _window;
 
-        public HotkeyBindingService(SettingsModel model, Window window)
+        public HotkeyBindingService(SettingsModel? model, Window window)
         {
             _model = model;
             _window = window;
+            _hotkey = null;
+            _keybinder = null;
         }
 
         public void BeginBind(Hotkey.KeyAction action, ToggleButton keybinder)
         {
             _keybinder = keybinder;
-            _hotkey = new Hotkey();
-            _hotkey.Action = action;
-            _hotkey.WinKey = Key.Escape;
+            _hotkey = new Hotkey
+            {
+                Action = action,
+                WinKey = Key.Escape
+            };
             _window.KeyDown += Window_KeyDown;
         }
 
@@ -34,7 +38,7 @@ namespace SSS.Core
         {
             _window.KeyDown -= Window_KeyDown;
 
-            Hotkey.KeyAction _action = _hotkey.Action;
+            Hotkey.KeyAction _action = _hotkey!.Action;
 
             if (_hotkey.WinKey == Key.Escape)
             {
@@ -44,42 +48,39 @@ namespace SSS.Core
             switch (_action)
             {
                 case Hotkey.KeyAction.Toggle:
-                    _model.ToggleKey = _hotkey;
+                    _model!.ToggleKey = _hotkey;
                     break;
 
                 case Hotkey.KeyAction.Show:
-                    _model.ShowKey = _hotkey;
+                    _model!.ShowKey = _hotkey;
                     break;
 
                 case Hotkey.KeyAction.Hide:
-                    _model.HideKey = _hotkey;
+                    _model!.HideKey = _hotkey;
                     break;
 
                 case Hotkey.KeyAction.Reload:
-                    _model.ReloadKey = _hotkey;
+                    _model!.ReloadKey = _hotkey;
                     break;
 
                 case Hotkey.KeyAction.Close:
-                    _model.CloseKey = _hotkey;
+                    _model!.CloseKey = _hotkey;
                     break;
 
                 case Hotkey.KeyAction.CycleEdge:
-                    _model.CycleEdgeKey = _hotkey;
+                    _model!.CycleEdgeKey = _hotkey;
                     break;
 
                 case Hotkey.KeyAction.CycleScreen:
-                    _model.CycleScreenKey = _hotkey;
+                    _model!.CycleScreenKey = _hotkey;
                     break;
 
                 case Hotkey.KeyAction.ReserveSpace:
-                    _model.ReserveSpaceKey = _hotkey;
+                    _model!.ReserveSpaceKey = _hotkey;
                     break;
             }
 
-            if (_keybinder != null)
-            {
-                _keybinder.IsChecked = false;
-            }
+            _keybinder?.IsChecked = false;
         }
 
         public void OnButtonLostFocus(object sender, RoutedEventArgs e)
@@ -89,7 +90,7 @@ namespace SSS.Core
                 EndBind();
             }
 
-            (sender as ToggleButton).IsChecked = false;
+            (sender as ToggleButton)!.IsChecked = false;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -103,25 +104,25 @@ namespace SSS.Core
 
             if ((e.KeyboardDevice.Modifiers & ModifierKeys.Control) == ModifierKeys.Control)
             {
-                _hotkey.CtrlMod = true;
+                _hotkey!.CtrlMod = true;
             }
 
             if ((e.KeyboardDevice.Modifiers & ModifierKeys.Shift) == ModifierKeys.Shift)
             {
-                _hotkey.ShiftMod = true;
+                _hotkey!.ShiftMod = true;
             }
 
             if ((e.KeyboardDevice.Modifiers & ModifierKeys.Windows) == ModifierKeys.Windows)
             {
-                _hotkey.WinMod = true;
+                _hotkey!.WinMod = true;
             }
 
             if ((e.KeyboardDevice.Modifiers & ModifierKeys.Alt) == ModifierKeys.Alt)
             {
-                _hotkey.AltMod = true;
+                _hotkey!.AltMod = true;
             }
 
-            _hotkey.WinKey = _key;
+            _hotkey!.WinKey = _key;
 
             EndBind();
 

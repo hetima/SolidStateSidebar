@@ -74,7 +74,7 @@ namespace SSS
 
             Ready = false;
 
-            Model.Reload();
+            Model?.Reload();
 
             Ready = true;
         }
@@ -83,14 +83,14 @@ namespace SSS
         {
             await base.AppBarShow();
 
-            Model.Resume();
+            Model?.Resume();
         }
 
         public override void AppBarHide()
         {
             base.AppBarHide();
 
-            Model.Pause();
+            Model?.Pause();
         }
 
         private async Task Initialize()
@@ -170,11 +170,8 @@ namespace SSS
         {
             await Task.Run(async () =>
             {
-                if (Model != null)
-                {
-                    Model.Dispose();
-                    Model = null;
-                }
+                Model?.Dispose();
+                Model = null;
 
                 await Dispatcher.BeginInvoke(DispatcherPriority.Normal, new ModelReadyHandler(ModelReady), new SidebarModel());
             });
@@ -242,12 +239,8 @@ namespace SSS
             Ready = false;
 
             DataContext = null;
-
-            if (Model != null)
-            {
-                Model.Dispose();
-                Model = null;
-            }
+            Model?.Dispose();
+            Model = null;
 
             ClearAppBar();
 
@@ -282,14 +275,11 @@ namespace SSS
             {
                 _ready = value;
 
-                if (Model != null)
-                {
-                    Model.Ready = value;
-                }
+                Model?.Ready = value;
             }
         }
 
-        public SidebarModel Model { get; private set; }
+        public SidebarModel? Model { get; private set; }
 
         private bool _openSettings { get; set; } = false;
 

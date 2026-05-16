@@ -41,13 +41,16 @@ namespace SSS
             CheckSettings();
 
             // VERSION
-            Version _version = Assembly.GetExecutingAssembly().GetName().Version;
-            string _vstring = _version.ToString(3);
+            Version? _version = Assembly.GetExecutingAssembly().GetName().Version;
+            string _vstring = _version?.ToString(3) ?? "0.0.0";
 
             // TRAY ICON
-            TrayIcon = (TaskbarIcon)FindResource("TrayIcon");
-            TrayIcon.ToolTipText = string.Format("{0} v{1}", Strings.AppName, _vstring);
-            TrayIcon.TrayContextMenuOpen += TrayIcon_TrayContextMenuOpen;
+            TrayIcon = FindResource("TrayIcon") as TaskbarIcon;
+            if (TrayIcon != null)
+            {
+                TrayIcon.ToolTipText = string.Format("{0} v{1}", Strings.AppName, _vstring);
+                TrayIcon.TrayContextMenuOpen += TrayIcon_TrayContextMenuOpen;
+            }
 
             // START APP
             if (Core.Settings.Instance.InitialSetup)
@@ -62,15 +65,15 @@ namespace SSS
 
         protected override void OnExit(ExitEventArgs e)
         {
-            TrayIcon.Dispose();
+            TrayIcon?.Dispose();
 
             base.OnExit(e);
         }
 
         public static void StartApp(bool openSettings)
         {
-            Version _version = Assembly.GetExecutingAssembly().GetName().Version;
-            string _vstring = _version.ToString(3);
+            Version? _version = Assembly.GetExecutingAssembly().GetName().Version;
+            string _vstring = _version?.ToString(3) ?? "0.0.0";
 
             new Sidebar(openSettings, Core.Settings.Instance.InitiallyHidden).Show();
 
@@ -79,12 +82,15 @@ namespace SSS
 
         public static void RefreshIcon()
         {
-            TrayIcon.Visibility = Core.Settings.Instance.ShowTrayIcon ? Visibility.Visible : Visibility.Collapsed;
+            if (TrayIcon != null)
+            {
+                TrayIcon.Visibility = Core.Settings.Instance.ShowTrayIcon ? Visibility.Visible : Visibility.Collapsed;
+            }
         }
 
         public void OpenSettings()
         {
-            Settings _settings = Windows.OfType<Settings>().FirstOrDefault();
+            Settings? _settings = Windows.OfType<Settings>().FirstOrDefault();
 
             if (_settings != null)
             {
@@ -93,14 +99,13 @@ namespace SSS
                 return;
             }
 
-            Sidebar _sidebar = Sidebar;
+            Sidebar? _sidebar = Sidebar;
 
             if (_sidebar == null)
             {
                 return;
             }
-
-            new Settings(_sidebar);
+            _ = new Settings(_sidebar);
         }
 
         private void CheckSettings()
@@ -115,10 +120,14 @@ namespace SSS
 
         private void TrayIcon_TrayContextMenuOpen(object sender, RoutedEventArgs e)
         {
+            var tray = TrayIcon;
+            var cm = tray?.ContextMenu;
+            if (cm == null) return;
+
             Monitor _primary = Monitor.GetMonitors().GetPrimary();
 
-            TrayIcon.ContextMenu.HorizontalOffset *= _primary.InverseScaleX;
-            TrayIcon.ContextMenu.VerticalOffset *= _primary.InverseScaleY;
+            cm.HorizontalOffset *= _primary.InverseScaleX;
+            cm.VerticalOffset *= _primary.InverseScaleY;
         }
 
         private void Settings_Click(object sender, EventArgs e)
@@ -128,7 +137,7 @@ namespace SSS
 
         private void Reload_Click(object sender, EventArgs e)
         {
-            Sidebar _sidebar = Sidebar;
+            Sidebar? _sidebar = Sidebar;
 
             if (_sidebar == null)
             {
@@ -140,34 +149,40 @@ namespace SSS
 
         private void Visibility_SubmenuOpened(object sender, EventArgs e)
         {
-            Sidebar _sidebar = Sidebar;
+            Sidebar? _sidebar = Sidebar;
 
             if (_sidebar == null)
             {
                 return;
             }
 
-            MenuItem _this = (MenuItem)sender;
+            if (!(sender is MenuItem _this))
+            {
+                return;
+            }
 
-            (_this.Items.GetItemAt(0) as MenuItem).IsChecked = _sidebar.Visibility == Visibility.Visible;
-            (_this.Items.GetItemAt(1) as MenuItem).IsChecked = _sidebar.Visibility == Visibility.Hidden;
+            var item0 = _this.Items.GetItemAt(0) as MenuItem;
+            if (item0 != null) item0.IsChecked = _sidebar.Visibility == Visibility.Visible;
+
+            var item1 = _this.Items.GetItemAt(1) as MenuItem;
+            if (item1 != null) item1.IsChecked = _sidebar.Visibility == Visibility.Hidden;
         }
         
         private void Show_Click(object sender, EventArgs e)
         {
-            Sidebar _sidebar = Sidebar;
+            Sidebar? _sidebar = Sidebar;
 
             if (_sidebar == null || _sidebar.Visibility == Visibility.Visible)
             {
                 return;
             }
 
-            _sidebar.AppBarShow();
+            _sidebar?.AppBarShow();
         }
 
         private void Hide_Click(object sender, EventArgs e)
         {
-            Sidebar _sidebar = Sidebar;
+            Sidebar? _sidebar = Sidebar;
 
             if (_sidebar == null || _sidebar.Visibility == Visibility.Hidden)
             {
@@ -190,12 +205,13 @@ namespace SSS
         
         private static void AppDomain_Error(object sender, UnhandledExceptionEventArgs e)
         {
-            Exception ex = (Exception)e.ExceptionObject;
+            Exception? ex = e.ExceptionObject as Exception;
+            string text = ex?.ToString() ?? e.ExceptionObject?.ToString() ?? "Unknown error";
 
-            System.Windows.MessageBox.Show(ex.ToString(), Strings.ErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
+            System.Windows.MessageBox.Show(text, Strings.ErrorTitle, MessageBoxButton.OK, MessageBoxImage.Error, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
         }
         
-        public Sidebar Sidebar
+        public Sidebar? Sidebar
         {
             get
             {
@@ -207,11 +223,11 @@ namespace SSS
         {
             get
             {
-                return (App)Application.Current;
+                return Application.Current as App ?? throw new InvalidOperationException("Application.Current is null");
             }
         }
 
-        public static TaskbarIcon TrayIcon { get; set; }
+        public static TaskbarIcon? TrayIcon { get; set; }
 
         internal static bool _reloading { get; set; } = false;
     }

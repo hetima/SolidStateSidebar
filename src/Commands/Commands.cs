@@ -7,9 +7,9 @@ namespace SSS.Commands
 {
     public class ActivateCommand : ICommand
     {
-        public void Execute(object parameter)
+        public void Execute(object? parameter)
         {
-            Sidebar _sidebar = App.Current.Sidebar;
+            Sidebar? _sidebar = App.Current.Sidebar;
 
             if (_sidebar == null)
             {
@@ -19,11 +19,13 @@ namespace SSS.Commands
             _sidebar.Activate();
         }
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute(object? parameter)
         {
             return true;
         }
 
-        public event EventHandler CanExecuteChanged;
+#pragma warning disable CS0067
+        public event EventHandler? CanExecuteChanged;
+#pragma warning restore CS0067
     }
 }

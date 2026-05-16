@@ -63,10 +63,7 @@ namespace SSS
 
         private void OffsetSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            if (_cancelReposition != null)
-            {
-                _cancelReposition.Cancel();
-            }
+            _cancelReposition?.Cancel();
 
             _cancelReposition = new CancellationTokenSource();
 
@@ -126,7 +123,7 @@ namespace SSS
 
         public Page CurrentPage { get; set; } = Page.Initial;
 
-        private CancellationTokenSource _cancelReposition { get; set; }
+        private CancellationTokenSource? _cancelReposition { get; set; }
 
         private bool _openSettings { get; set; } = false;
 

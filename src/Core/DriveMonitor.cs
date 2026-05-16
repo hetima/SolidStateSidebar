@@ -53,19 +53,19 @@ namespace SSS.Core
             if (_loadBarEnabled || _loadEnabled)
             {
                 LoadMetric = new BaseMetric(MetricKey.DriveLoad, DataType.Percent, null, roundAll, usedSpaceAlert);
-                _metrics.Add(LoadMetric);
+                _metrics.Add(LoadMetric!);
             }
 
             if (_usedEnabled)
             {
                 UsedMetric = new BaseMetric(MetricKey.DriveUsed, DataType.Gigabyte, null, roundAll);
-                _metrics.Add(UsedMetric);
+                _metrics.Add(UsedMetric!);
             }
 
             if (_freeEnabled)
             {
                 FreeMetric = new BaseMetric(MetricKey.DriveFree, DataType.Gigabyte, null, roundAll);
-                _metrics.Add(FreeMetric);
+                _metrics.Add(FreeMetric!);
             }
 
             if (_readEnabled)
@@ -87,17 +87,10 @@ namespace SSS.Core
             {
                 if (disposing)
                 {
-                    if (_counterFreeMB != null)
-                    {
-                        _counterFreeMB.Dispose();
-                        _counterFreeMB = null;
-                    }
-
-                    if (_counterFreePercent != null)
-                    {
-                        _counterFreePercent.Dispose();
-                        _counterFreePercent = null;
-                    }
+                    _counterFreeMB?.Dispose();
+                    _counterFreeMB = null;
+                    _counterFreePercent?.Dispose();
+                    _counterFreePercent = null;
                 }
 
                 _disposed = true;
@@ -138,7 +131,7 @@ namespace SSS.Core
                 from n in merged.DefaultIfEmpty(hw).Select(n => { n.ActualName = hw.Name; return n; })
                 where n.Enabled
                 orderby n.Order descending, n.Name ascending
-                select new DriveMonitor(n.ID, n.Name ?? n.ActualName, metrics, _roundAll, _usedSpaceAlert)
+                select new DriveMonitor(n.ID ?? hw.ID!, n.Name ?? n.ActualName!, metrics, _roundAll, _usedSpaceAlert)
                 ).ToArray();
         }
 
@@ -159,20 +152,11 @@ namespace SSS.Core
                 double _totalGB = _freeGB / (_freePercent / 100d);
                 double _usedGB = _totalGB - _freeGB;
 
-                if (LoadMetric != null)
-                {
-                    LoadMetric.Update(_usedPercent);
-                }
+                LoadMetric?.Update(_usedPercent);
 
-                if (UsedMetric != null)
-                {
-                    UsedMetric.Update(_usedGB);
-                }
+                UsedMetric?.Update(_usedGB);
 
-                if (FreeMetric != null)
-                {
-                    FreeMetric.Update(_freeGB);
-                }
+                FreeMetric?.Update(_freeGB);
             }
 
             base.Update();
@@ -190,13 +174,13 @@ namespace SSS.Core
             {
                 _status = value;
 
-                NotifyPropertyChanged("Status");
+                NotifyPropertyChanged(nameof(Status));
             }
         }
 
-        private iMetric _loadMetric { get; set; }
+        private iMetric? _loadMetric { get; set; }
 
-        public iMetric LoadMetric
+        public iMetric? LoadMetric
         {
             get
             {
@@ -206,13 +190,13 @@ namespace SSS.Core
             {
                 _loadMetric = value;
 
-                NotifyPropertyChanged("LoadMetric");
+                NotifyPropertyChanged(nameof(LoadMetric));
             }
         }
 
-        private iMetric _usedMetric { get; set; }
+        private iMetric? _usedMetric { get; set; }
 
-        public iMetric UsedMetric
+        public iMetric? UsedMetric
         {
             get
             {
@@ -222,13 +206,13 @@ namespace SSS.Core
             {
                 _usedMetric = value;
 
-                NotifyPropertyChanged("UsedMetric");
+                NotifyPropertyChanged(nameof(UsedMetric));
             }
         }
 
-        private iMetric _freeMetric { get; set; }
+        private iMetric? _freeMetric { get; set; }
 
-        public iMetric FreeMetric
+        public iMetric? FreeMetric
         {
             get
             {
@@ -238,11 +222,11 @@ namespace SSS.Core
             {
                 _freeMetric = value;
 
-                NotifyPropertyChanged("FreeMetric");
+                NotifyPropertyChanged(nameof(FreeMetric));
             }
         }
 
-        public iMetric[] DriveMetrics
+        public iMetric[]? DriveMetrics
         {
             get
             {
@@ -252,14 +236,14 @@ namespace SSS.Core
                 }
                 else
                 {
-                    return Metrics.Where(m => m.Key != MetricKey.DriveLoad).ToArray();
+                    return Metrics!.Where(m => m.Key != MetricKey.DriveLoad).ToArray();
                 }
             }
         }
 
-        private PerformanceCounter _counterFreeMB { get; set; }
+        private PerformanceCounter? _counterFreeMB { get; set; }
 
-        private PerformanceCounter _counterFreePercent { get; set; }
+        private PerformanceCounter? _counterFreePercent { get; set; }
 
         private bool _loadEnabled { get; set; }
 
