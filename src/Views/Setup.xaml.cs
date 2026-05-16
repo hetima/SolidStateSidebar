@@ -91,7 +91,7 @@ namespace SSS
 
         private void NumberBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if (new Regex("[^0-9.-]+").IsMatch(e.Text))
+            if (NonNumericRegex().IsMatch(e.Text))
             {
                 e.Handled = true;
             }
@@ -129,6 +129,9 @@ namespace SSS
         private CancellationTokenSource _cancelReposition { get; set; }
 
         private bool _openSettings { get; set; } = false;
+
+        [GeneratedRegex("[^0-9.-]+")]
+        private static partial Regex NonNumericRegex();
 
         public enum Page : byte
         {

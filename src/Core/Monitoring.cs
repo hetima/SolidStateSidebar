@@ -5,9 +5,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.IO;
-using System.Net.Http;
-using System.Net.NetworkInformation;
-using System.Net.Sockets;
+
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Threading;
@@ -497,10 +495,10 @@ namespace SSS.Core
             }
         }
 
-        private bool _disposed { get; set; } = false;
+        protected bool _disposed { get; set; } = false;
     }
 
-    public class OHMMonitor : BaseMonitor
+    public partial class OHMMonitor : BaseMonitor
     {
         public OHMMonitor(MonitorType type, string id, string name, IHardware hardware, IHardware board, MetricConfig[] metrics, ConfigParam[] parameters) : base(id, name, parameters.GetValue<bool>(ParamKey.HardwareNames))
         {
@@ -545,16 +543,8 @@ namespace SSS.Core
             }
         }
 
-        public new void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-
             if (!_disposed)
             {
                 if (disposing)
@@ -564,6 +554,8 @@ namespace SSS.Core
 
                 _disposed = true;
             }
+
+            base.Dispose(disposing);
         }
 
         ~OHMMonitor()
@@ -601,13 +593,11 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.CPUClock))
             {
-                Regex regex = new Regex(@"^.*(CPU|Core).*#(\d+)$");
-
                 var coreClocks = _hardware.Sensors
                     .Where(s => s.SensorType == SensorType.Clock)
                     .Select(s => new
                     {
-                        Match = regex.Match(s.Name),
+                        Match = CpuCoreClockRegex().Match(s.Name),
                         Sensor = s
                     })
                     .Where(s => s.Match.Success)
@@ -625,7 +615,7 @@ namespace SSS.Core
                     {
                         foreach (var coreClock in coreClocks)
                         {
-                            _sensorList.Add(new OHMMetric(coreClock.Sensor, MetricKey.CPUClock, DataType.MHz, string.Format("{0} {1}", Strings.CPUCoreClockLabel, coreClock.Index - 1), (useGHz ? false : true), 0, (useGHz ? MHzToGHz.Instance : null)));
+                            _sensorList.Add(new OHMMetric(coreClock.Sensor, MetricKey.CPUClock, DataType.MHz, string.Format("{0} {1}", Strings.CPUCoreClockLabel, coreClock.Index - 1), !useGHz, 0, (useGHz ? MHzToGHz.Instance : null)));
                         }
                     }
                     else
@@ -634,24 +624,17 @@ namespace SSS.Core
                             .Select(s => s.Sensor)
                             .FirstOrDefault();
 
-                        _sensorList.Add(new OHMMetric(firstClock, MetricKey.CPUClock, DataType.MHz, null, (useGHz ? false : true), 0, (useGHz ? MHzToGHz.Instance : null)));
+                        _sensorList.Add(new OHMMetric(firstClock, MetricKey.CPUClock, DataType.MHz, null, !useGHz, 0, (useGHz ? MHzToGHz.Instance : null)));
                     }
                 }
             }
 
             if (metrics.IsEnabled(MetricKey.CPUVoltage))
             {
-                ISensor _voltage = null;
-
-                if (board != null)
-                {
-                    _voltage = board.Sensors.Where(s => s.SensorType == SensorType.Voltage && s.Name.Contains("CPU")).FirstOrDefault();
-                }
-
-                if (_voltage == null)
-                {
-                    _voltage = _hardware.Sensors.Where(s => s.SensorType == SensorType.Voltage).FirstOrDefault();
-                }
+                ISensor? _voltage = FindSensorWithFallback(
+                    board?.Sensors, _hardware.Sensors,
+                    s => s.SensorType == SensorType.Voltage && s.Name.Contains("CPU"),
+                    s => s.SensorType == SensorType.Voltage);
 
                 if (_voltage != null)
                 {
@@ -661,21 +644,12 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.CPUTemp))
             {
-                ISensor _tempSensor = null;
-
-                _tempSensor = _hardware.Sensors.Where(s => s.SensorType == SensorType.Temperature && s.Name.Contains("CCDs Max (Tdie)")).FirstOrDefault(); // Check for AMD core chiplet dies (CCDs)
-
-                if (board != null && _tempSensor == null)
-                {
-                    _tempSensor = board.Sensors.Where(s => s.SensorType == SensorType.Temperature && s.Name.Contains("CPU")).FirstOrDefault();
-                }
-
-                if (_tempSensor == null)
-                {
-                    _tempSensor =
-                        _hardware.Sensors.Where(s => s.SensorType == SensorType.Temperature && (s.Name == "CPU Package" || s.Name.Contains("Tdie"))).FirstOrDefault() ??
-                        _hardware.Sensors.Where(s => s.SensorType == SensorType.Temperature).FirstOrDefault();
-                }
+                ISensor? _tempSensor = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Temperature && s.Name.Contains("CCDs Max (Tdie)")) // Check for AMD core chiplet dies (CCDs)
+                    ?? FindSensorWithFallback(
+                        board?.Sensors, _hardware.Sensors,
+                        s => s.SensorType == SensorType.Temperature && s.Name.Contains("CPU"),
+                        s => s.SensorType == SensorType.Temperature && (s.Name == "CPU Package" || s.Name.Contains("Tdie")))
+                    ?? FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Temperature);
 
                 if (_tempSensor != null)
                 {
@@ -685,17 +659,12 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.CPUFan))
             {
-                ISensor _fanSensor = null;
+                static bool IsFanOrControl(ISensor s) => s.SensorType == SensorType.Fan || s.SensorType == SensorType.Control;
 
-                if (board != null)
-                {
-                    _fanSensor = board.Sensors.Where(s => new SensorType[2] { SensorType.Fan, SensorType.Control }.Contains(s.SensorType) && s.Name.Contains("CPU")).FirstOrDefault();
-                }
-
-                if (_fanSensor == null)
-                {
-                    _fanSensor = _hardware.Sensors.Where(s => new SensorType[2] { SensorType.Fan, SensorType.Control }.Contains(s.SensorType)).FirstOrDefault();
-                }
+                ISensor? _fanSensor = FindSensorWithFallback(
+                    board?.Sensors, _hardware.Sensors,
+                    s => IsFanOrControl(s) && s.Name.Contains("CPU"),
+                    IsFanOrControl);
 
                 if (_fanSensor != null)
                 {
@@ -708,13 +677,13 @@ namespace SSS.Core
 
             if (_loadEnabled || _coreLoadEnabled)
             {
-                ISensor[] _loadSensors = _hardware.Sensors.Where(s => s.SensorType == SensorType.Load).ToArray();
+                ISensor[] _loadSensors = FindSensors(_hardware.Sensors, s => s.SensorType == SensorType.Load);
 
                 if (_loadSensors.Length > 0)
                 {
                     if (_loadEnabled)
                     {
-                        ISensor _totalCPU = _loadSensors.Where(s => s.Index == 0).FirstOrDefault();
+                        ISensor? _totalCPU = Array.Find(_loadSensors, s => s.Index == 0);
 
                         if (_totalCPU != null)
                         {
@@ -726,7 +695,7 @@ namespace SSS.Core
                     {
                         for (int i = 1; i <= _loadSensors.Max(s => s.Index); i++)
                         {
-                            ISensor _coreLoad = _loadSensors.Where(s => s.Index == i).FirstOrDefault();
+                            ISensor? _coreLoad = Array.Find(_loadSensors, s => s.Index == i);
 
                             if (_coreLoad != null)
                             {
@@ -746,7 +715,7 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.RAMClock))
             {
-                ISensor _ramClock = _hardware.Sensors.Where(s => s.SensorType == SensorType.Clock).FirstOrDefault();
+                ISensor? _ramClock = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Clock);
 
                 if (_ramClock != null)
                 {
@@ -756,17 +725,10 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.RAMVoltage))
             {
-                ISensor _voltage = null;
-
-                if (board != null)
-                {
-                    _voltage = board.Sensors.Where(s => s.SensorType == SensorType.Voltage && s.Name.Contains("RAM")).FirstOrDefault();
-                }
-
-                if (_voltage == null)
-                {
-                    _voltage = _hardware.Sensors.Where(s => s.SensorType == SensorType.Voltage).FirstOrDefault();
-                }
+                ISensor? _voltage = FindSensorWithFallback(
+                    board?.Sensors, _hardware.Sensors,
+                    s => s.SensorType == SensorType.Voltage && s.Name.Contains("RAM"),
+                    s => s.SensorType == SensorType.Voltage);
 
                 if (_voltage != null)
                 {
@@ -776,7 +738,7 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.RAMLoad))
             {
-                ISensor _loadSensor = _hardware.Sensors.Where(s => s.SensorType == SensorType.Load && s.Index == 0).FirstOrDefault();
+                ISensor? _loadSensor = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Load && s.Index == 0);
 
                 if (_loadSensor != null)
                 {
@@ -786,7 +748,7 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.RAMUsed))
             {
-                ISensor _usedSensor = _hardware.Sensors.Where(s => s.SensorType == SensorType.Data && s.Index == 0).FirstOrDefault();
+                ISensor? _usedSensor = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Data && s.Index == 0);
 
                 if (_usedSensor != null)
                 {
@@ -796,7 +758,7 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.RAMFree))
             {
-                ISensor _freeSensor = _hardware.Sensors.Where(s => s.SensorType == SensorType.Data && s.Index == 1).FirstOrDefault();
+                ISensor? _freeSensor = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Data && s.Index == 1);
 
                 if (_freeSensor != null)
                 {
@@ -813,28 +775,28 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.GPUCoreClock))
             {
-                ISensor _coreClock = _hardware.Sensors.Where(s => s.SensorType == SensorType.Clock && s.Name.Contains("Core")).FirstOrDefault();
+                ISensor? _coreClock = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Clock && s.Name.Contains("Core"));
 
                 if (_coreClock != null)
                 {
-                    _sensorList.Add(new OHMMetric(_coreClock, MetricKey.GPUCoreClock, DataType.MHz, null, (useGHz ? false : true), 0, (useGHz ? MHzToGHz.Instance : null)));
+                    _sensorList.Add(new OHMMetric(_coreClock, MetricKey.GPUCoreClock, DataType.MHz, null, !useGHz, 0, (useGHz ? MHzToGHz.Instance : null)));
                 }
             }
 
             if (metrics.IsEnabled(MetricKey.GPUVRAMClock))
             {
-                ISensor _vramClock = _hardware.Sensors.Where(s => s.SensorType == SensorType.Clock && s.Name.Contains("Memory")).FirstOrDefault();
+                ISensor? _vramClock = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Clock && s.Name.Contains("Memory"));
 
                 if (_vramClock != null)
                 {
-                    _sensorList.Add(new OHMMetric(_vramClock, MetricKey.GPUVRAMClock, DataType.MHz, null, (useGHz ? false : true), 0, (useGHz ? MHzToGHz.Instance : null)));
+                    _sensorList.Add(new OHMMetric(_vramClock, MetricKey.GPUVRAMClock, DataType.MHz, null, !useGHz, 0, (useGHz ? MHzToGHz.Instance : null)));
                 }
             }
 
             if (metrics.IsEnabled(MetricKey.GPUCoreLoad))
             {
-                ISensor _coreLoad = _hardware.Sensors.Where(s => s.SensorType == SensorType.Load && s.Name.Contains("Core")).FirstOrDefault() ??
-                    _hardware.Sensors.Where(s => s.SensorType == SensorType.Load && s.Index == 0).FirstOrDefault();
+                ISensor? _coreLoad = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Load && s.Name.Contains("Core")) ??
+                    FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Load && s.Index == 0);
 
                 if (_coreLoad != null)
                 {
@@ -844,8 +806,10 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.GPUVRAMLoad))
             {
-                ISensor _memoryUsed = _hardware.Sensors.Where(s => (s.SensorType == SensorType.Data || s.SensorType == SensorType.SmallData) && s.Name == "GPU Memory Used").FirstOrDefault();
-                ISensor _memoryTotal = _hardware.Sensors.Where(s => (s.SensorType == SensorType.Data || s.SensorType == SensorType.SmallData) && s.Name == "GPU Memory Total").FirstOrDefault();
+                static bool IsMemoryData(ISensor s) => (s.SensorType == SensorType.Data || s.SensorType == SensorType.SmallData);
+
+                ISensor? _memoryUsed = FindSensor(_hardware.Sensors, s => IsMemoryData(s) && s.Name == "GPU Memory Used");
+                ISensor? _memoryTotal = FindSensor(_hardware.Sensors, s => IsMemoryData(s) && s.Name == "GPU Memory Total");
 
                 if (_memoryUsed != null && _memoryTotal != null)
                 {
@@ -853,8 +817,8 @@ namespace SSS.Core
                 }
                 else
                 {
-                    ISensor _vramLoad = _hardware.Sensors.Where(s => s.SensorType == SensorType.Load && s.Name.Contains("Memory")).FirstOrDefault() ??
-                        _hardware.Sensors.Where(s => s.SensorType == SensorType.Load && s.Index == 1).FirstOrDefault();
+                    ISensor? _vramLoad = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Load && s.Name.Contains("Memory")) ??
+                        FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Load && s.Index == 1);
 
                     if (_vramLoad != null)
                     {
@@ -865,7 +829,7 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.GPUVoltage))
             {
-                ISensor _voltage = _hardware.Sensors.Where(s => s.SensorType == SensorType.Voltage && s.Index == 0).FirstOrDefault();
+                ISensor? _voltage = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Voltage && s.Index == 0);
 
                 if (_voltage != null)
                 {
@@ -875,7 +839,7 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.GPUTemp))
             {
-                ISensor _tempSensor = _hardware.Sensors.Where(s => s.SensorType == SensorType.Temperature && s.Index == 0).FirstOrDefault();
+                ISensor? _tempSensor = FindSensor(_hardware.Sensors, s => s.SensorType == SensorType.Temperature && s.Index == 0);
 
                 if (_tempSensor != null)
                 {
@@ -885,7 +849,7 @@ namespace SSS.Core
 
             if (metrics.IsEnabled(MetricKey.GPUFan))
             {
-                ISensor _fanSensor = _hardware.Sensors.Where(s => s.SensorType == SensorType.Control).OrderBy(s => s.Index).FirstOrDefault();
+                ISensor? _fanSensor = _hardware.Sensors.Where(s => s.SensorType == SensorType.Control).OrderBy(s => s.Index).FirstOrDefault();
 
                 if (_fanSensor != null)
                 {
@@ -898,473 +862,36 @@ namespace SSS.Core
 
         private IHardware _hardware { get; set; }
 
-        private bool _disposed { get; set; } = false;
-    }
+        [GeneratedRegex(@"^.*(CPU|Core).*#(\d+)$")]
+        private static partial Regex CpuCoreClockRegex();
 
-    public class DriveMonitor : BaseMonitor
-    {
-        private const string CATEGORYNAME = "LogicalDisk";
-
-        private const string FREEMB = "Free Megabytes";
-        private const string PERCENTFREE = "% Free Space";
-        private const string BYTESREADPERSECOND = "Disk Read Bytes/sec";
-        private const string BYTESWRITEPERSECOND = "Disk Write Bytes/sec";
-
-        public DriveMonitor(string id, string name, MetricConfig[] metrics, bool roundAll = false, double usedSpaceAlert = 0) : base(id, name, true)
+        private static ISensor? FindSensor(ISensor[] sensors, Func<ISensor, bool> predicate)
         {
-            _loadEnabled = metrics.IsEnabled(MetricKey.DriveLoad);
-
-            bool _loadBarEnabled = metrics.IsEnabled(MetricKey.DriveLoadBar);
-            bool _usedEnabled = metrics.IsEnabled(MetricKey.DriveUsed);
-            bool _freeEnabled = metrics.IsEnabled(MetricKey.DriveFree);
-            bool _readEnabled = metrics.IsEnabled(MetricKey.DriveRead);
-            bool _writeEnabled = metrics.IsEnabled(MetricKey.DriveWrite);
-
-            if (_loadBarEnabled)
-            {
-                if (metrics.Count(m => m.Enabled) == 1 && new Regex("^[A-Z]:$").IsMatch(name))
-                {
-                    Status = State.LoadBarInline;
-                }
-                else
-                {
-                    Status = State.LoadBarStacked;
-                }
-            }
-            else
-            {
-                Status = State.NoLoadBar;
-            }
-
-            if (_loadBarEnabled || _loadEnabled || _usedEnabled || _freeEnabled)
-            {
-                _counterFreeMB = new PerformanceCounter(CATEGORYNAME, FREEMB, id);
-                _counterFreePercent = new PerformanceCounter(CATEGORYNAME, PERCENTFREE, id);
-            }
-
-            List<iMetric> _metrics = new List<iMetric>();
-
-            if (_loadBarEnabled || _loadEnabled)
-            {
-                LoadMetric = new BaseMetric(MetricKey.DriveLoad, DataType.Percent, null, roundAll, usedSpaceAlert);
-                _metrics.Add(LoadMetric);
-            }
-
-            if (_usedEnabled)
-            {
-                UsedMetric = new BaseMetric(MetricKey.DriveUsed, DataType.Gigabyte, null, roundAll);
-                _metrics.Add(UsedMetric);
-            }
-
-            if (_freeEnabled)
-            {
-                FreeMetric = new BaseMetric(MetricKey.DriveFree, DataType.Gigabyte, null, roundAll);
-                _metrics.Add(FreeMetric);
-            }
-
-            if (_readEnabled)
-            {
-                _metrics.Add(new PCMetric(new PerformanceCounter(CATEGORYNAME, BYTESREADPERSECOND, id), MetricKey.DriveRead, DataType.kBps, null, roundAll, 0, BytesPerSecondConverter.Instance));
-            }
-
-            if (_writeEnabled)
-            {
-                _metrics.Add(new PCMetric(new PerformanceCounter(CATEGORYNAME, BYTESWRITEPERSECOND, id), MetricKey.DriveWrite, DataType.kBps, null, roundAll, 0, BytesPerSecondConverter.Instance));
-            }
-
-            Metrics = _metrics.ToArray();
+            return sensors.FirstOrDefault(predicate);
         }
 
-        public new void Dispose()
+        private static ISensor? FindSensorWithFallback(ISensor[]? fallback, ISensor[] primary, Func<ISensor, bool> fallbackPredicate, Func<ISensor, bool> primaryPredicate)
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            base.Dispose(disposing);
-
-            if (!_disposed)
+            if (fallback != null)
             {
-                if (disposing)
+                ISensor? sensor = fallback.FirstOrDefault(fallbackPredicate);
+
+                if (sensor != null)
                 {
-                    if (_loadMetric != null)
-                    {
-                        _loadMetric.Dispose();
-                        _loadMetric = null;
-                    }
-
-                    if (_usedMetric != null)
-                    {
-                        _usedMetric.Dispose();
-                        _usedMetric = null;
-                    }
-
-                    if (_freeMetric != null)
-                    {
-                        _freeMetric.Dispose();
-                        _freeMetric = null;
-                    }
-
-                    if (_counterFreeMB != null)
-                    {
-                        _counterFreeMB.Dispose();
-                        _counterFreeMB = null;
-                    }
-
-                    if (_counterFreePercent != null)
-                    {
-                        _counterFreePercent.Dispose();
-                        _counterFreePercent = null;
-                    }
-                }
-
-                _disposed = true;
-            }
-        }
-
-        ~DriveMonitor()
-        {
-            Dispose(false);
-        }
-
-        public static IEnumerable<HardwareConfig> GetHardware()
-        {
-            string[] _instances;
-
-            try
-            {
-                _instances = new PerformanceCounterCategory(CATEGORYNAME).GetInstanceNames();
-            }
-            catch (InvalidOperationException)
-            {
-                _instances = [];
-            }
-
-            Regex _regex = new Regex("^[A-Z]:$");
-
-            return _instances.Where(n => _regex.IsMatch(n)).OrderBy(d => d[0]).Select(h => new HardwareConfig() { ID = h, Name = h, ActualName = h });
-        }
-
-        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters)
-        {
-            bool _roundAll = parameters.GetValue<bool>(ParamKey.RoundAll);
-            int _usedSpaceAlert = parameters.GetValue<int>(ParamKey.UsedSpaceAlert);
-
-            return (
-                from hw in GetHardware()
-                join c in hardwareConfig on hw.ID equals c.ID into merged
-                from n in merged.DefaultIfEmpty(hw).Select(n => { n.ActualName = hw.Name; return n; })
-                where n.Enabled
-                orderby n.Order descending, n.Name ascending
-                select new DriveMonitor(n.ID, n.Name ?? n.ActualName, metrics, _roundAll, _usedSpaceAlert)
-                ).ToArray();
-        }
-
-        public override void Update()
-        {
-            if (!PerformanceCounterCategory.InstanceExists(ID, CATEGORYNAME))
-            {
-                return;
-            }
-
-            if (_counterFreeMB != null && _counterFreePercent != null)
-            {
-                double _freeGB = _counterFreeMB.NextValue() / 1024d;
-                double _freePercent = _counterFreePercent.NextValue();
-
-                double _usedPercent = 100d - _freePercent;
-
-                double _totalGB = _freeGB / (_freePercent / 100d);
-                double _usedGB = _totalGB - _freeGB;
-
-                if (LoadMetric != null)
-                {
-                    LoadMetric.Update(_usedPercent);
-                }
-
-                if (UsedMetric != null)
-                {
-                    UsedMetric.Update(_usedGB);
-                }
-
-                if (FreeMetric != null)
-                {
-                    FreeMetric.Update(_freeGB);
+                    return sensor;
                 }
             }
 
-            base.Update();
+            return primary.FirstOrDefault(primaryPredicate);
         }
 
-        private State _status { get; set; }
-
-        public State Status
+        private static ISensor[] FindSensors(ISensor[] sensors, Func<ISensor, bool> predicate)
         {
-            get
-            {
-                return _status;
-            }
-            private set
-            {
-                _status = value;
-
-                NotifyPropertyChanged("Status");
-            }
-        }
-
-        private iMetric _loadMetric { get; set; }
-
-        public iMetric LoadMetric
-        {
-            get
-            {
-                return _loadMetric;
-            }
-            private set
-            {
-                _loadMetric = value;
-
-                NotifyPropertyChanged("LoadMetric");
-            }
-        }
-
-        private iMetric _usedMetric { get; set; }
-
-        public iMetric UsedMetric
-        {
-            get
-            {
-                return _usedMetric;
-            }
-            private set
-            {
-                _usedMetric = value;
-
-                NotifyPropertyChanged("UsedMetric");
-            }
-        }
-
-        private iMetric _freeMetric { get; set; }
-
-        public iMetric FreeMetric
-        {
-            get
-            {
-                return _freeMetric;
-            }
-            private set
-            {
-                _freeMetric = value;
-
-                NotifyPropertyChanged("FreeMetric");
-            }
-        }
-
-        public iMetric[] DriveMetrics
-        {
-            get
-            {
-                if (_loadEnabled)
-                {
-                    return Metrics;
-                }
-                else
-                {
-                    return Metrics.Where(m => m.Key != MetricKey.DriveLoad).ToArray();
-                }
-            }
-        }
-
-        private PerformanceCounter _counterFreeMB { get; set; }
-
-        private PerformanceCounter _counterFreePercent { get; set; }
-
-        private bool _loadEnabled { get; set; }
-
-        private bool _disposed { get; set; } = false;
-
-        public enum State : byte
-        {
-            NoLoadBar,
-            LoadBarInline,
-            LoadBarStacked
+            return sensors.Where(predicate).ToArray();
         }
     }
 
-    public class NetworkMonitor : BaseMonitor
-    {
-        private const string CATEGORYNAME = "Network Interface";
 
-        private const string BYTESRECEIVEDPERSECOND = "Bytes Received/sec";
-        private const string BYTESSENTPERSECOND = "Bytes Sent/sec";
-
-        public NetworkMonitor(string id, string name, string extIP, MetricConfig[] metrics, bool showName = true, bool roundAll = false, bool useBytes = false, double bandwidthInAlert = 0, double bandwidthOutAlert = 0) : base(id, name, showName)
-        {
-            iConverter _converter;
-
-            if (useBytes)
-            {
-                _converter = BytesPerSecondConverter.Instance;
-            }
-            else
-            {
-                _converter = BitsPerSecondConverter.Instance;
-            }
-
-            List<iMetric> _metrics = new List<iMetric>();
-
-            if (metrics.IsEnabled(MetricKey.NetworkIP))
-            {
-                string _ipAddress = GetAdapterIPAddress(name);
-
-                if (!string.IsNullOrEmpty(_ipAddress))
-                {
-                    _metrics.Add(new IPMetric(_ipAddress, MetricKey.NetworkIP, DataType.IP));
-                }
-            }
-
-            if (!string.IsNullOrEmpty(extIP))
-            {
-                _metrics.Add(new IPMetric(extIP, MetricKey.NetworkExtIP, DataType.IP));
-            }
-
-            if (metrics.IsEnabled(MetricKey.NetworkIn))
-            {
-                _metrics.Add(new PCMetric(new PerformanceCounter(CATEGORYNAME, BYTESRECEIVEDPERSECOND, id), MetricKey.NetworkIn, DataType.kbps, null, roundAll, bandwidthInAlert, _converter));
-            }
-
-            if (metrics.IsEnabled(MetricKey.NetworkOut))
-            {
-                _metrics.Add(new PCMetric(new PerformanceCounter(CATEGORYNAME, BYTESSENTPERSECOND, id), MetricKey.NetworkOut, DataType.kbps, null, roundAll, bandwidthOutAlert, _converter));
-            }
-
-            Metrics = _metrics.ToArray();
-        }
-
-        ~NetworkMonitor()
-        {
-            Dispose(false);
-        }
-
-        public static IEnumerable<HardwareConfig> GetHardware()
-        {
-            string[] _instances;
-
-            try
-            {
-                _instances = new PerformanceCounterCategory(CATEGORYNAME).GetInstanceNames();
-            }
-            catch (InvalidOperationException)
-            {
-                _instances = [];
-            }
-
-            Regex _regex = new Regex(@"^isatap.*$");
-
-            return _instances.Where(i => !_regex.IsMatch(i)).OrderBy(h => h).Select(h => new HardwareConfig() { ID = h, Name = h, ActualName = h });
-        }
-
-        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters)
-        {
-            bool _showName = parameters.GetValue<bool>(ParamKey.HardwareNames);
-            bool _roundAll = parameters.GetValue<bool>(ParamKey.RoundAll);
-            bool _useBytes = parameters.GetValue<bool>(ParamKey.UseBytes);
-            int _bandwidthInAlert = parameters.GetValue<int>(ParamKey.BandwidthInAlert);
-            int _bandwidthOutAlert = parameters.GetValue<int>(ParamKey.BandwidthOutAlert);
-
-            string _extIP = null;
-
-            if (metrics.IsEnabled(MetricKey.NetworkExtIP))
-            {
-                _extIP = GetExternalIPAddressAsync().GetAwaiter().GetResult();
-            }
-
-            return (
-                from hw in GetHardware()
-                join c in hardwareConfig on hw.ID equals c.ID into merged
-                from n in merged.DefaultIfEmpty(hw).Select(n => { n.ActualName = hw.Name; return n; })
-                where n.Enabled
-                orderby n.Order descending, n.Name ascending
-                select new NetworkMonitor(n.ID, n.Name ?? n.ActualName, _extIP, metrics, _showName, _roundAll, _useBytes, _bandwidthInAlert, _bandwidthOutAlert)
-                ).ToArray();
-        }
-
-        public override void Update()
-        {
-            if (!PerformanceCounterCategory.InstanceExists(ID, CATEGORYNAME))
-            {
-                return;
-            }
-
-            base.Update();
-        }
-
-        private static string GetAdapterIPAddress(string name)
-        {
-            //Here we need to match the apdapter returned by the network interface to the
-            //adapter represented by this instance of the class.
-
-            string configuredName = Regex.Replace(name, @"[^\w\d\s]", "");
-
-            foreach (NetworkInterface netif in NetworkInterface.GetAllNetworkInterfaces())
-            {
-                //Strange pattern matching as the Performance Monitor routines which provide the ID and Names
-                //instantiating this class return different values for the devices than the NetworkInterface calls used here.
-                //For example Performance Monitor routines return Intel[R] where as NetworkInterface returns Intel(R) causing the
-                //strings not to match.  So to get around this, use Regex to strip off the special characters and just compare the string values.
-                //Also, in some cases the values for Description match the Performance Monitor calls, and 
-                //in others the Name is what matches.  It's a little weird, but this will pick up all 4 network adapters on 
-                //my test machine correctly.
-
-                string interfaceDesc = Regex.Replace(netif.Description, @"[^\w\d\s]", "");
-                string interfaceName = Regex.Replace(netif.Name, @"[^\w\d\s]", "");
-
-                if (interfaceDesc == configuredName || interfaceName == configuredName)
-                {
-                    IPInterfaceProperties properties = netif.GetIPProperties();
-
-                    foreach (IPAddressInformation unicast in properties.UnicastAddresses)
-                    {
-                        if (unicast.Address.AddressFamily == AddressFamily.InterNetwork)
-                        {
-                            return unicast.Address.ToString();
-                        }
-                    }
-                }
-            }
-
-            return null;
-        }
-
-        private static readonly HttpClient Http = new HttpClient
-        {
-            Timeout = TimeSpan.FromSeconds(5)
-        };
-
-        private static async Task<string> GetExternalIPAddressAsync()
-        {
-            try
-            {
-                using var req = new HttpRequestMessage(HttpMethod.Get, Constants.URLs.IPIFY);
-                var res = await Http.SendAsync(req, HttpCompletionOption.ResponseHeadersRead)
-                                    .ConfigureAwait(false);
-                res.EnsureSuccessStatusCode();
-
-                var ip = await res.Content.ReadAsStringAsync().ConfigureAwait(false);
-                return ip.Trim();
-            }
-            catch (HttpRequestException)
-            {
-                return "";
-            }
-            catch (TaskCanceledException) // timeout or cancellation
-            {
-                return "";
-            }
-        }
-    }
     public interface iMetric : INotifyPropertyChanged, IDisposable
     {
         MetricKey Key { get; }
@@ -1695,7 +1222,7 @@ namespace SSS.Core
 
         protected double _alertValue { get; set; }
 
-        private bool _disposed { get; set; } = false;
+        protected bool _disposed { get; set; } = false;
     }
 
     public class OHMMetric : BaseMetric
@@ -1705,16 +1232,8 @@ namespace SSS.Core
             _sensor = sensor;
         }
 
-        public new void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-
             if (!_disposed)
             {
                 if (disposing)
@@ -1724,6 +1243,8 @@ namespace SSS.Core
 
                 _disposed = true;
             }
+
+            base.Dispose(disposing);
         }
 
         ~OHMMetric()
@@ -1744,8 +1265,6 @@ namespace SSS.Core
         }
 
         private ISensor _sensor { get; set; }
-
-        private bool _disposed { get; set; } = false;
     }
 
     public class GPUVRAMMLoadMetric : BaseMetric
@@ -1756,16 +1275,8 @@ namespace SSS.Core
             _memoryTotalSensor = memoryTotalSensor;
         }
 
-        public new void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-
             if (!_disposed)
             {
                 if (disposing)
@@ -1776,6 +1287,8 @@ namespace SSS.Core
 
                 _disposed = true;
             }
+
+            base.Dispose(disposing);
         }
 
         ~GPUVRAMMLoadMetric()
@@ -1800,8 +1313,6 @@ namespace SSS.Core
         private ISensor _memoryUsedSensor { get; set; }
 
         private ISensor _memoryTotalSensor { get; set; }
-
-        private bool _disposed { get; set; } = false;
     }
 
     public class IPMetric : BaseMetric
@@ -1809,12 +1320,6 @@ namespace SSS.Core
         public IPMetric(string ipAddress, MetricKey key, DataType dataType, string label = null, bool round = false, double alertValue = 0, iConverter converter = null) : base(key, dataType, label, round, alertValue, converter)
         {
             Text = ipAddress;
-        }
-
-        public new void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         ~IPMetric()
@@ -1835,16 +1340,8 @@ namespace SSS.Core
             _counter = counter;
         }
 
-        public new void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         protected override void Dispose(bool disposing)
         {
-            base.Dispose(disposing);
-
             if (!_disposed)
             {
                 if (disposing)
@@ -1858,6 +1355,8 @@ namespace SSS.Core
 
                 _disposed = true;
             }
+
+            base.Dispose(disposing);
         }
 
         ~PCMetric()
@@ -1871,8 +1370,6 @@ namespace SSS.Core
         }
 
         private PerformanceCounter _counter { get; set; }
-
-        private bool _disposed { get; set; } = false;
     }
 
     [Serializable]

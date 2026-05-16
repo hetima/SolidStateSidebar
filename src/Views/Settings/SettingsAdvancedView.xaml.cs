@@ -16,7 +16,7 @@ namespace SSS
 
         private void NumberBox_PreviewTextInput(object sender, System.Windows.Input.TextCompositionEventArgs e)
         {
-            if (new Regex("[^0-9.-]+").IsMatch(e.Text))
+            if (NonNumericRegex().IsMatch(e.Text))
             {
                 e.Handled = true;
             }
@@ -41,5 +41,8 @@ namespace SSS
             YOffsetSlider.Value = 0d;
             ClickThroughCheckbox.IsChecked = false;
         }
+
+        [GeneratedRegex("[^0-9.-]+")]
+        private static partial Regex NonNumericRegex();
     }
 }
