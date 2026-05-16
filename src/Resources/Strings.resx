@@ -285,7 +285,7 @@
     <comment>Full name for drive write metric</comment>
   </data>
   <data name="DriveWriteLabel" xml:space="preserve">
-    <value>Write</value>
+    <value>Writ</value>
     <comment>Short label for drive write metric</comment>
   </data>
   <data name="GPUCoreClock" xml:space="preserve">
@@ -969,7 +969,7 @@
     <comment>Full name for the network IP address metric</comment>
   </data>
   <data name="NetworkIPLabel" xml:space="preserve">
-    <value>IP</value>
+    <value> IP</value>
     <comment>Short label for network IP address metric</comment>
   </data>
   <data name="SettingsInitiallyHidden" xml:space="preserve">
