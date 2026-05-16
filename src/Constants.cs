@@ -1,5 +1,5 @@
 ﻿
-namespace SidebarDiagnostics
+namespace SSS
 {
     public static class Constants
     {

@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace SidebarDiagnostics
+namespace SSS
 {
     /// <summary>
     /// Interaction logic for SettingsMonitorsView.xaml

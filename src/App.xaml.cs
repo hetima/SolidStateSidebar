@@ -9,14 +9,14 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using Hardcodet.Wpf.TaskbarNotification;
-using SidebarDiagnostics;
-using SidebarDiagnostics.Core;
-using SidebarDiagnostics.Utilities;
-using SidebarDiagnostics.Windows;
+using SSS;
+using SSS.Core;
+using SSS.Utilities;
+using SSS.Windows;
 using Xceed.Wpf.Toolkit;
 using System.Net.Http;
 
-namespace SidebarDiagnostics
+namespace SSS
 {
     /// <summary>
     /// Interaction logic for App.xaml
@@ -82,16 +82,6 @@ namespace SidebarDiagnostics
             TrayIcon.Visibility = Core.Settings.Instance.ShowTrayIcon ? Visibility.Visible : Visibility.Collapsed;
         }
 
-        public static void ShowPerformanceCounterError()
-        {
-            MessageBoxResult _result = System.Windows.MessageBox.Show(Strings.ErrorPerformanceCounter, Strings.ErrorTitle, MessageBoxButton.OKCancel, MessageBoxImage.Warning, MessageBoxResult.OK, MessageBoxOptions.DefaultDesktopOnly);
-
-            if (_result == MessageBoxResult.OK)
-            {
-                Process.Start(new ProcessStartInfo("https://github.com/ArcadeRenegade/SidebarDiagnostics/wiki") { UseShellExecute = true });
-            }
-        }
-
         public void OpenSettings()
         {
             Settings _settings = Windows.OfType<Settings>().FirstOrDefault();
@@ -115,7 +105,7 @@ namespace SidebarDiagnostics
 
         private void CheckSettings()
         {
-            if (Core.Settings.Instance.RunAtStartup && !Utilities.Startup.StartupTaskExists())
+            if (Core.Settings.Instance.RunAtStartup)
             {
                 Utilities.Startup.EnableStartupTask();
             }
@@ -189,7 +179,7 @@ namespace SidebarDiagnostics
 
         private void GitHub_Click(object sender, RoutedEventArgs e)
         {
-            Process.Start(new ProcessStartInfo("https://github.com/hetima/SidebarDiagnostics") { UseShellExecute = true });
+            Process.Start(new ProcessStartInfo("https://github.com/hetima/SolidStateSidebar") { UseShellExecute = true });
         }
 
 

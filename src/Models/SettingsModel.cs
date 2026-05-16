@@ -5,13 +5,13 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
-using SidebarDiagnostics.Utilities;
-using SidebarDiagnostics.Core;
-using SidebarDiagnostics.Windows;
+using SSS.Utilities;
+using SSS.Core;
+using SSS.Windows;
 using System.Windows.Media;
 using System.Drawing.Text;
 
-namespace SidebarDiagnostics.Models
+namespace SSS.Models
 {
     public class SettingsModel : INotifyPropertyChanged
     {

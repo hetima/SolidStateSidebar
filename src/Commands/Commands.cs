@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 
-namespace SidebarDiagnostics.Commands
+namespace SSS.Commands
 {
     public class ActivateCommand : ICommand
     {

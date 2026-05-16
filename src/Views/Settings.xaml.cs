@@ -6,11 +6,11 @@ using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
-using SidebarDiagnostics.Models;
-using SidebarDiagnostics.Windows;
-using SidebarDiagnostics.Style;
+using SSS.Models;
+using SSS.Windows;
+using SSS.Style;
 
-namespace SidebarDiagnostics
+namespace SSS
 {
     /// <summary>
     /// Interaction logic for Settings.xaml

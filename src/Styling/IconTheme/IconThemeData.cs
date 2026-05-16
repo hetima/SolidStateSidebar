@@ -7,7 +7,7 @@ using System.Windows.Media;
 using Newtonsoft.Json;
 
 
-namespace SidebarDiagnostics.Styling.IconTheme
+namespace SSS.Styling.IconTheme
 {
     public class IconThemeData
     {
@@ -26,7 +26,7 @@ namespace SidebarDiagnostics.Styling.IconTheme
 
         public Dictionary<string, string> Icons { get; set; }
 
-        private static readonly string _namespace = typeof(IconThemeData).Assembly.GetName().Name + ".Styling.IconTheme.";
+        private static readonly string _namespace = typeof(IconThemeData).Namespace + ".";
 
         /// <summary>
         /// Load an icon theme by name from embedded resources.

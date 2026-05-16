@@ -11,10 +11,10 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using System.Windows.Media;
-using SidebarDiagnostics.Style;
+using SSS.Style;
 using Newtonsoft.Json;
 
-namespace SidebarDiagnostics.Windows
+namespace SSS.Windows
 {
     public enum WinOS : byte
     {

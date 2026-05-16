@@ -2,14 +2,14 @@
 using System.IO;
 using System.ComponentModel;
 using Newtonsoft.Json;
-using SidebarDiagnostics.Utilities;
-using SidebarDiagnostics.Windows;
+using SSS.Utilities;
+using SSS.Windows;
 using System.Globalization;
 using System.Collections.Generic;
-using SidebarDiagnostics.Styling.IconTheme;
+using SSS.Styling.IconTheme;
 using System.Diagnostics;
 
-namespace SidebarDiagnostics.Core
+namespace SSS.Core
 {
     [JsonObject(MemberSerialization.OptIn)]
     public sealed class Settings : INotifyPropertyChanged

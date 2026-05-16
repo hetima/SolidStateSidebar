@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SidebarDiagnostics {
+namespace SSS {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace SidebarDiagnostics {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SidebarDiagnostics.src.Resources.Strings", typeof(Strings).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("SSS.src.Resources.Strings", typeof(Strings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,7 +61,7 @@ namespace SidebarDiagnostics {
         }
         
         /// <summary>
-        ///   Sidebar Diagnostics に類似しているローカライズされた文字列を検索します。
+        ///   Solid State Sidebar に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string AppName {
             get {

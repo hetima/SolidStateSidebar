@@ -15,10 +15,10 @@ using System.Windows.Media;
 using LibreHardwareMonitor.Hardware;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
-using SidebarDiagnostics.Styling.IconTheme;
+using SSS.Styling.IconTheme;
 using SVGImage.SVG;
 
-namespace SidebarDiagnostics.Core
+namespace SSS.Core
 {
     public class MonitorManager : INotifyPropertyChanged, IDisposable
     {
@@ -1039,9 +1039,7 @@ namespace SidebarDiagnostics.Core
             }
             catch (InvalidOperationException)
             {
-                _instances = new string[0];
-
-                App.ShowPerformanceCounterError();
+                _instances = [];
             }
 
             Regex _regex = new Regex("^[A-Z]:$");
@@ -1260,9 +1258,7 @@ namespace SidebarDiagnostics.Core
             }
             catch (InvalidOperationException)
             {
-                _instances = new string[0];
-
-                App.ShowPerformanceCounterError();
+                _instances = [];
             }
 
             Regex _regex = new Regex(@"^isatap.*$");

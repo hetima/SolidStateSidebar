@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace SidebarDiagnostics
+namespace SSS
 {
     /// <summary>
     /// Interaction logic for SettingsAdvancedView.xaml

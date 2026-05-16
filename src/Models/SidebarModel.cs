@@ -1,12 +1,12 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Threading;
-using SidebarDiagnostics.Core;
-using SidebarDiagnostics.Utilities;
+using SSS.Core;
+using SSS.Utilities;
 using System.Diagnostics;
 using System.Windows.Media;
 
-namespace SidebarDiagnostics.Models
+namespace SSS.Models
 {
     public class SidebarModel : INotifyPropertyChanged, IDisposable
     {

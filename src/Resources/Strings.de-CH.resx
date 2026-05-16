@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AppName" xml:space="preserve">
-    <value>Sidebar Diagnostics</value>
+    <value>Solid State Sidebar</value>
     <comment>Name of the app</comment>
   </data>
   <data name="ButtonApply" xml:space="preserve">
@@ -938,7 +938,7 @@
     <comment>Title of the update error popup</comment>
   </data>
   <data name="UpdateSuccessText" xml:space="preserve">
-    <value>Sie verwenden nun die neuste Version von Sidebar Diagnostics.</value>
+    <value>Sie verwenden nun die neuste Version von Solid State Sidebar.</value>
     <comment>Text of the update success popup</comment>
   </data>
   <data name="UpdateTitle" xml:space="preserve">

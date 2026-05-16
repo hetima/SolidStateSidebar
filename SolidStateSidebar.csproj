@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <RootNamespace>SSS</RootNamespace>
     <TargetFramework>net10.0-windows</TargetFramework>
     <OutputType>WinExe</OutputType>
     <RuntimeIdentifiers>win-x64</RuntimeIdentifiers>
@@ -17,14 +18,19 @@
     <ApplicationManifest>src/Resources/app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>SidebarDiagnostics.App</StartupObject>
+    <StartupObject>SSS.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>src/Resources/Sidebar.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>SidebarDiagnostics_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>SolidStateSidebar_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="IconTheme\conv.py" />
+    <None Remove="README.md" />
+    <None Remove="メモ.md" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DotNetProjects.SVGImage" Version="5.2.13" />
     <PackageReference Include="Extended.Wpf.Toolkit" Version="5.0.0" />
@@ -76,18 +82,18 @@
     <EmbeddedResource Update="src\Resources\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>SidebarDiagnostics</CustomToolNamespace>
+      <CustomToolNamespace>SSS</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="IconTheme\Default.json">
-      <LogicalName>SidebarDiagnostics.Styling.IconTheme.Default.json</LogicalName>
+      <LogicalName>SSS.Styling.IconTheme.Default.json</LogicalName>
     </EmbeddedResource>
       <EmbeddedResource Include="IconTheme\Legacy.json">
-      <LogicalName>SidebarDiagnostics.Styling.IconTheme.Legacy.json</LogicalName>
+      <LogicalName>SSS.Styling.IconTheme.Legacy.json</LogicalName>
     </EmbeddedResource>
       <EmbeddedResource Include="IconTheme\Phosphor Thin.json">
-      <LogicalName>SidebarDiagnostics.Styling.IconTheme.Phosphor Thin.json</LogicalName>
+      <LogicalName>SSS.Styling.IconTheme.Phosphor Thin.json</LogicalName>
     </EmbeddedResource>
     </ItemGroup>
 </Project>

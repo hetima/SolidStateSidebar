@@ -1,10 +1,10 @@
-<h1>Sidebar Diagnostics</h1>
+<h1>Solid State Sidebar</h1>
 
 A simple sidebar for Windows desktop that displays hardware diagnostic information.
 
 ### Download
 
-Go to the <a href="https://github.com/hetima/SidebarDiagnostics/releases">releases tab</a>.
+Go to the <a href="https://github.com/hetima/SolidStateSidebar/releases">releases tab</a>.
 
 ### New Features (This fork)
 - Customizable font family for the display

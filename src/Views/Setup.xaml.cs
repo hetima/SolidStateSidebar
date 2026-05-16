@@ -7,10 +7,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
-using SidebarDiagnostics.Windows;
-using SidebarDiagnostics.Style;
+using SSS.Windows;
+using SSS.Style;
 
-namespace SidebarDiagnostics
+namespace SSS
 {
     /// <summary>
     /// Interaction logic for Setup.xaml

@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using System.Windows.Controls;
 
-namespace SidebarDiagnostics
+namespace SSS
 {
     /// <summary>
     /// Interaction logic for SettingsCustomizeView.xaml

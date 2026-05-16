@@ -7,10 +7,10 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
 using Microsoft.Win32.TaskScheduler;
-using SidebarDiagnostics.Core;
+using SSS.Core;
 using System.Diagnostics;
 
-namespace SidebarDiagnostics.Utilities
+namespace SSS.Utilities
 {
     public static class Paths
     {
@@ -146,26 +146,29 @@ public static class Startup
 
     public static void EnableStartupTask(string exePath = null)
     {
+        if (StartupTaskExists())
+        {
+            return;
+        }
+        
         try
         {
-            using (TaskService taskService = new TaskService())
-            {
-                // Remove any legacy SidebarDiagnostics tasks that point to wrong files
-                CleanLegacyTasks(taskService);
+            using TaskService taskService = new TaskService();
+            // Remove any legacy tasks that point to wrong files
+            CleanLegacyTasks(taskService);
 
-                TaskDefinition def = taskService.NewTask();
-                def.Triggers.Add(new LogonTrigger { Enabled = true });
+            TaskDefinition def = taskService.NewTask();
+            def.Triggers.Add(new LogonTrigger { Enabled = true });
 
-                string targetExe = exePath ?? Process.GetCurrentProcess().MainModule.FileName;
-                def.Actions.Add(new ExecAction(targetExe));
+            string targetExe = exePath ?? Process.GetCurrentProcess().MainModule.FileName;
+            def.Actions.Add(new ExecAction(targetExe));
 
-                def.Principal.RunLevel = TaskRunLevel.Highest;
-                def.Settings.DisallowStartIfOnBatteries = false;
-                def.Settings.StopIfGoingOnBatteries = false;
-                def.Settings.ExecutionTimeLimit = TimeSpan.Zero;
+            def.Principal.RunLevel = TaskRunLevel.Highest;
+            def.Settings.DisallowStartIfOnBatteries = false;
+            def.Settings.StopIfGoingOnBatteries = false;
+            def.Settings.ExecutionTimeLimit = TimeSpan.Zero;
 
-                taskService.RootFolder.RegisterTaskDefinition(Constants.Generic.TASKNAME, def);
-            }
+            taskService.RootFolder.RegisterTaskDefinition(Constants.Generic.TASKNAME, def);
         }
         catch (Exception e)
         {
@@ -186,15 +189,14 @@ public static class Startup
     }
 
     /// <summary>
-    /// Deletes legacy SidebarDiagnostics tasks that point to DLL or SYS files.
+    /// Deletes legacy SolidStateSidebar tasks that point to DLL or SYS files.
     /// </summary>
     private static void CleanLegacyTasks(TaskService taskService)
     {
-        string[] legacyPaths = new[]
+        string[] legacyFileNames = new[]
         {
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SidebarDiagnostics", "SidebarDiagnostics.dll"),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SidebarDiagnostics", "SidebarDiagnostics.sys"),
-            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "SidebarDiagnostics", "SidebarDiagnostics.exe")
+            "SidebarDiagnostics.exe",
+            "SolidStateSidebar.exe"
         };
 
         foreach (Task t in taskService.RootFolder.AllTasks)
@@ -202,7 +204,7 @@ public static class Startup
             if (t.Name.Equals(Constants.Generic.TASKNAME, StringComparison.OrdinalIgnoreCase))
             {
                 var action = t.Definition.Actions.OfType<ExecAction>().FirstOrDefault();
-                if (action != null && legacyPaths.Any(lp => string.Equals(lp, action.Path, StringComparison.OrdinalIgnoreCase)))
+                if (action != null && legacyFileNames.Any(lfn => string.Equals(lfn, Path.GetFileName(action.Path), StringComparison.OrdinalIgnoreCase)))
                 {
                     try
                     {

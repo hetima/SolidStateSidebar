@@ -1,11 +1,11 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
-using SidebarDiagnostics.Core;
-using SidebarDiagnostics.Models;
-using SidebarDiagnostics.Windows;
+using SSS.Core;
+using SSS.Models;
+using SSS.Windows;
 
-namespace SidebarDiagnostics
+namespace SSS
 {
     /// <summary>
     /// Interaction logic for SettingsHotkeysView.xaml

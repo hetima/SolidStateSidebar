@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 
-namespace SidebarDiagnostics.Style
+namespace SSS.Style
 {
     public partial class FlatStyle : ResourceDictionary
     {

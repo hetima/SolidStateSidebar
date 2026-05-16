@@ -3,10 +3,10 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using SidebarDiagnostics.Models;
-using SidebarDiagnostics.Windows;
+using SSS.Models;
+using SSS.Windows;
 
-namespace SidebarDiagnostics.Core
+namespace SSS.Core
 {
     public class HotkeyBindingService
     {
