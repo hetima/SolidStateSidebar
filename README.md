@@ -2,7 +2,7 @@
 
 A simple sidebar for Windows desktop that displays hardware diagnostic information.
 
-This is currently under development. Please use the [SidebarDiagnostics fork](https://github.com/hetima/SidebarDiagnostics) until it is completed.
+This is currently under development.
 
 ### Download
 
@@ -57,11 +57,9 @@ GNU General Public License v3.0
 
 ### Info
 
-Written in C# .NET10 WPF.
+Written in C#, .NET10, WPF, built with Visual Studio 2026.
 
-You will need to run it as administrator.
-
-This doftware is based on [SidebarDiagnostics](https://github.com/ArcadeRenegade/SidebarDiagnostics)
+This software is based on [SidebarDiagnostics](https://github.com/ArcadeRenegade/SidebarDiagnostics)
 
 Data provided by [Libre Hardware Monitor]("https://github.com/LibreHardwareMonitor/LibreHardwareMonitor").
 
