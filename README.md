@@ -46,6 +46,8 @@ winget install Microsoft.DotNet.DesktopRuntime.10
 winget install namazso.PawnIO
 ```
 
+You can create your own icon themes. Just place a set of SVG files in the `C:\Users\<YOURNAME>\AppData\Local\SolidStateSidebar\IconThemes` folder. Please refer to the `Default` folder there for the file names.
+
 ### Supported OS
 
 - Windows 10?/11
