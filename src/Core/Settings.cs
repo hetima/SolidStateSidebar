@@ -4,10 +4,8 @@ using System.ComponentModel;
 using Newtonsoft.Json;
 using SSS.Utilities;
 using SSS.Windows;
-using System.Globalization;
 using System.Collections.Generic;
 using SSS.Styling.IconTheme;
-using System.Diagnostics;
 
 namespace SSS.Core
 {
