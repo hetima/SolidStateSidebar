@@ -27,10 +27,15 @@ namespace SSS
         {
             base.OnStartup(e);
 
+            // THEME
+#pragma warning disable WPF0001
+            ThemeMode = ThemeMode.Light;
+#pragma warning restore WPF0001
+
             // ERROR HANDLING
-            #if !DEBUG
+#if !DEBUG
             AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(AppDomain_Error);
-            #endif
+#endif
 
             // LANGUAGE
             Culture.SetDefault();

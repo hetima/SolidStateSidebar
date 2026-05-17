@@ -30,13 +30,10 @@
         <Label Grid.Column="0" Grid.Row="2" Content="{x:Static res:Strings.SettingsLanguage}" />
         <ComboBox VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=CultureItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Value" SelectedValue="{Binding Path=Culture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsLanguageTooltip}" />
 
-        <Label Grid.Column="0" Grid.Row="3" Content="{x:Static res:Strings.SettingsReserveSpace}" />
-        <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding Path=UseAppBar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsReserveSpaceTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="3" Content="{x:Static res:Strings.SettingsReserveSpace}" IsChecked="{Binding Path=UseAppBar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsReserveSpaceTooltip}" />
 
-        <Label Grid.Column="0" Grid.Row="4" Content="{x:Static res:Strings.SettingsAlwaysOnTop}" />
-        <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding Path=AlwaysTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlwaysOnTopTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="4" Content="{x:Static res:Strings.SettingsAlwaysOnTop}" IsChecked="{Binding Path=AlwaysTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlwaysOnTopTooltip}" />
 
-        <Label Grid.Column="0" Grid.Row="6" Content="{x:Static res:Strings.SettingsRunAtStartup}" />
-        <CheckBox Grid.Column="1" Grid.Row="6" IsChecked="{Binding Path=RunAtStartup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsRunAtStartupTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="6" Content="{x:Static res:Strings.SettingsRunAtStartup}" IsChecked="{Binding Path=RunAtStartup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsRunAtStartupTooltip}" />
     </Grid>
 </UserControl>

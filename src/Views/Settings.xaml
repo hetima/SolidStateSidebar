@@ -18,9 +18,10 @@
         Closed="Window_Closed"
         Title="{x:Static res:Strings.SettingsTitle}"
         Icon="../Resources/Settings.ico"
-        Width="600"
+        Width="640"
         SizeToContent="Height"
         ResizeMode="CanMinimize"
+        FontSize="14"
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <conv:IntToStringConverter x:Key="IntConverter" />

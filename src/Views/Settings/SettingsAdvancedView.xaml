@@ -46,19 +46,15 @@
             <Slider x:Name="PollingIntervalSlider" Value="{Binding Path=PollingInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="100" Maximum="5000" TickFrequency="100" LargeChange="1000" ToolTip="{x:Static res:Strings.SettingsPollingIntervalTooltip}" />
         </DockPanel>
 
-        <Label Grid.Column="0" Grid.Row="4" Content="{x:Static res:Strings.SettingsShowTrayIcon}" />
-        <CheckBox Grid.Column="1" Grid.Row="4" x:Name="ShowTrayIconCheckbox" Unchecked="ShowTrayIconCheckbox_Unchecked" IsChecked="{Binding Path=ShowTrayIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowTrayIconTooltip}" />
 
-        <Label Grid.Column="0" Grid.Row="5" Content="{x:Static res:Strings.SettingsToolbarMode}" />
-        <CheckBox Grid.Column="1" Grid.Row="5" IsChecked="{Binding Path=ToolbarMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsToolbarModeTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="4" x:Name="ShowTrayIconCheckbox" Unchecked="ShowTrayIconCheckbox_Unchecked" IsChecked="{Binding Path=ShowTrayIcon, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowTrayIconTooltip}"
+                Content="{x:Static res:Strings.SettingsShowTrayIcon}" />
 
-        <Label Grid.Column="0" Grid.Row="6" Content="{x:Static res:Strings.SettingsClickThrough}" />
-        <CheckBox Grid.Column="1" Grid.Row="6" x:Name="ClickThroughCheckbox" Checked="ClickThroughCheckbox_Checked" IsChecked="{Binding Path=ClickThrough, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsClickThroughTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="5" Content="{x:Static res:Strings.SettingsToolbarMode}" IsChecked="{Binding Path=ToolbarMode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsToolbarModeTooltip}" />
 
-        <Label Grid.Column="0" Grid.Row="7" Content="{x:Static res:Strings.SettingsInitiallyHidden}" />
-        <CheckBox Grid.Column="1" Grid.Row="7" IsChecked="{Binding Path=InitiallyHidden, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsInitiallyHiddenTooltip}" />
-        
-        <Label Grid.Column="0" Grid.Row="8" Content="{x:Static res:Strings.SettingsCollapseMenuBar}" />
-        <CheckBox Grid.Column="1" Grid.Row="8" IsChecked="{Binding Path=CollapseMenuBar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsCollapseMenuBarTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="6" x:Name="ClickThroughCheckbox" Content="{x:Static res:Strings.SettingsClickThrough}" Checked="ClickThroughCheckbox_Checked" IsChecked="{Binding Path=ClickThrough, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsClickThroughTooltip}" />
+
+        <CheckBox Grid.Column="1" Grid.Row="7" Content="{x:Static res:Strings.SettingsInitiallyHidden}" IsChecked="{Binding Path=InitiallyHidden, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsInitiallyHiddenTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="8" Content="{x:Static res:Strings.SettingsCollapseMenuBar}" IsChecked="{Binding Path=CollapseMenuBar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsCollapseMenuBarTooltip}" />
     </Grid>
 </UserControl>

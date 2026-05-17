@@ -18,6 +18,10 @@ namespace SSS
         {
             InitializeComponent();
 
+#if DEBUG
+            WindowControls.Margin = new Thickness(0, 32, 0, 0);
+#endif
+
             _openSettings = openSettings;
             _initiallyHidden = initiallyHidden;
         }
