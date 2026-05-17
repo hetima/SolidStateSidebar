@@ -8,9 +8,26 @@
              xmlns:monitor="clr-namespace:SSS.Core"
              xmlns:conv="clr-namespace:SSS.Converters"
              xmlns:res="clr-namespace:SSS"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d">
     <UserControl.Resources>
         <conv:IntToStringConverter x:Key="IntConverter" />
+        <conv:DateFormatConverter x:Key="DateFormatConverter" />
+
+        <!-- DateFormat ComboBox items -->
+        <x:Array x:Key="DateFormatItems" Type="sys:Int32">
+            <sys:Int32>0</sys:Int32>
+            <sys:Int32>1</sys:Int32>
+            <sys:Int32>2</sys:Int32>
+            <sys:Int32>3</sys:Int32>
+        </x:Array>
+
+        <!-- DateFormat display names (mapped via converter) -->
+        <conv:DateFormatDisplayConverter x:Key="DateFormatDisplayConverter" />
+
+        <DataTemplate x:Key="DateFormatItemTemplate">
+            <TextBlock Text="{Binding Converter={StaticResource DateFormatDisplayConverter}}" />
+        </DataTemplate>
     </UserControl.Resources>
     <StackPanel Style="{StaticResource VerticalPanel}">
         <StackPanel Style="{StaticResource SettingTitle}">
@@ -117,6 +134,20 @@
                                                                         <StackPanel>
                                                                             <Label Content="{Binding Path=Name, Mode=OneTime}" />
                                                                             <TextBox Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
+                                                                        </StackPanel>
+                                                                    </Setter.Value>
+                                                                </Setter>
+                                                            </DataTrigger>
+                                                            <DataTrigger Binding="{Binding Key}" Value="{x:Static monitor:ParamKey.DateFormat}">
+                                                                <Setter Property="Content">
+                                                                    <Setter.Value>
+                                                                        <StackPanel>
+                                                                            <Label Content="{Binding Path=Name, Mode=OneTime}" />
+                                                                            <ComboBox ItemsSource="{StaticResource DateFormatItems}"
+                                                                                      SelectedValue="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateFormatConverter}}"
+                                                                                      SelectedValuePath="."
+                                                                                      ItemTemplate="{StaticResource DateFormatItemTemplate}"
+                                                                                      ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
                                                                         </StackPanel>
                                                                     </Setter.Value>
                                                                 </Setter>

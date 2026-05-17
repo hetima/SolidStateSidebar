@@ -48,6 +48,9 @@ namespace SSS.Core
                 case MonitorType.Network:
                     return Strings.Network;
 
+                case MonitorType.Time:
+                    return Strings.Time;
+
                 default:
                     return "???";
             }
@@ -146,6 +149,12 @@ namespace SSS.Core
                 case MetricKey.DriveWrite:
                     return Strings.DriveWrite;
 
+                case MetricKey.Time:
+                    return Strings.Time;
+
+                case MetricKey.Date:
+                    return Strings.Date;
+
                 default:
                     return "Unknown";
             }
@@ -239,6 +248,12 @@ namespace SSS.Core
                 case MetricKey.DriveWrite:
                     return Strings.DriveWriteLabel;
 
+                case MetricKey.Time:
+                    return Strings.TimeLabel;
+
+                case MetricKey.Date:
+                    return Strings.DateLabel;
+
                 default:
                     return "Unknown";
             }
@@ -318,6 +333,9 @@ namespace SSS.Core
                     return " F";
 
                 case DataType.IP:
+                    return string.Empty;
+
+                case DataType.Dynamic:
                     return string.Empty;
 
                 default:

@@ -92,6 +92,9 @@ namespace SSS.Core
                 case MonitorType.Network:
                     return NetworkMonitor.GetHardware().ToArray();
 
+                case MonitorType.Time:
+                    return ClockMonitor.GetHardware().ToArray();
+
                 default:
                     throw new ArgumentException("Invalid MonitorType.");
             }
@@ -172,6 +175,13 @@ namespace SSS.Core
                         config.Params!
                         );
 
+                case MonitorType.Time:
+                    return TimePanel(
+                        config.Type,
+                        config.Metrics!,
+                        config.Params!
+                        );
+
                 default:
                     throw new ArgumentException("Invalid MonitorType.");
             }
@@ -180,6 +190,7 @@ namespace SSS.Core
         private MonitorPanel OHMPanel(MonitorType type, string? pathData, HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters, params HardwareType[] hardwareTypes)
         {
             return new MonitorPanel(
+                type,
                 type.GetDescription(),
                 pathData,
                 OHMMonitor.GetInstances(hardwareConfig, metrics, parameters, type, _board!, GetHardware(hardwareTypes).ToArray())
@@ -189,6 +200,7 @@ namespace SSS.Core
         private MonitorPanel DrivePanel(MonitorType type, HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters)
         {
             return new MonitorPanel(
+                type,
                 type.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("hd"),
                 DriveMonitor.GetInstances(hardwareConfig, metrics, parameters)
@@ -198,9 +210,20 @@ namespace SSS.Core
         private MonitorPanel NetworkPanel(MonitorType type, HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters)
         {
             return new MonitorPanel(
+                type,
                 type.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("net"),
                 NetworkMonitor.GetInstances(hardwareConfig, metrics, parameters)
+                );
+        }
+
+        private MonitorPanel TimePanel(MonitorType type, MetricConfig[] metrics, ConfigParam[] parameters)
+        {
+            return new MonitorPanel(
+                type,
+                type.GetDescription(),
+                Core.Settings.Instance.GetIconSvgPath("clock"),
+                ClockMonitor.GetInstances([], metrics, parameters)
                 );
         }
 

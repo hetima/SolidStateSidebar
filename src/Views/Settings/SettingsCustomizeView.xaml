@@ -220,12 +220,5 @@
         <ComboBox Grid.Column="1" Grid.Row="10" ItemsSource="{Binding Path=IconThemeItems, Mode=OneWay}" SelectedValue="{Binding Path=IconTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
         <CheckBox Grid.Column="1" Grid.Row="11" Content="{x:Static res:Strings.SettingsShowMachineName}" IsChecked="{Binding Path=ShowMachineName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowMachineNameTooltip}" />
-
-        <CheckBox Grid.Column="1" Grid.Row="12" Content="{x:Static res:Strings.SettingsShowClock}" IsChecked="{Binding Path=ShowClock, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowClockTooltip}" />
-
-        <CheckBox Grid.Column="1" Grid.Row="13" Content="{x:Static res:Strings.Settings24HourClock}" IsChecked="{Binding Path=Clock24HR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=ShowClock, Mode=OneWay}" ToolTip="{x:Static res:Strings.Settings24HourClockTooltip}" />
-
-        <Label Grid.Column="0" Grid.Row="14" Content="{x:Static res:Strings.SettingsDateFormat}" />
-        <ComboBox Grid.Column="1" Grid.Row="14" ItemsSource="{Binding Path=DateSettingItems}" DisplayMemberPath="Display" SelectedValue="{Binding Path=DateSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding Path=ShowClock, Mode=OneWay}" ToolTip="{x:Static res:Strings.SettingsDateFormatTooltip}" />
     </Grid>
 </UserControl>

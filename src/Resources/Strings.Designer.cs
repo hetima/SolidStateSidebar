@@ -349,6 +349,60 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Date に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Date {
+            get {
+                return ResourceManager.GetString("Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Clock date metric label に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DateLabel {
+            get {
+                return ResourceManager.GetString("DateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Date format disabled option に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DateDisabled {
+            get {
+                return ResourceManager.GetString("DateDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Date format long option に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DateLong {
+            get {
+                return ResourceManager.GetString("DateLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Date format normal option に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DateNormal {
+            get {
+                return ResourceManager.GetString("DateNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Date format short option に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DateShort {
+            get {
+                return ResourceManager.GetString("DateShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Free に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DriveFree {
@@ -2023,7 +2077,16 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   A fatal error occurred while trying to update. Auto update is now disabled. に類似しているローカライズされた文字列を検索します。
+        ///   Time metric label に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string TimeLabel {
+            get {
+                return ResourceManager.GetString("TimeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   UpdateErrorFatalText に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string UpdateErrorFatalText {
             get {

@@ -184,6 +184,18 @@
     <value>Time</value>
     <comment>Sidebar clock title</comment>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+    <comment>Clock date label</comment>
+  </data>
+  <data name="TimeLabel" xml:space="preserve">
+    <value>Time</value>
+    <comment>Clock time metric label</comment>
+  </data>
+  <data name="DateLabel" xml:space="preserve">
+    <value>Date</value>
+    <comment>Clock date metric label</comment>
+  </data>
   <data name="ButtonUpdate" xml:space="preserve">
     <value>Update</value>
     <comment>Text of the update button</comment>
@@ -575,6 +587,22 @@
   <data name="SettingsDateFormatTooltip" xml:space="preserve">
     <value>Format of the date below the clock.</value>
     <comment>Settings date format tooltip</comment>
+  </data>
+  <data name="DateDisabled" xml:space="preserve">
+    <value>Disabled</value>
+    <comment>Date format disabled option</comment>
+  </data>
+  <data name="DateShort" xml:space="preserve">
+    <value>Short (Month only)</value>
+    <comment>Date format short option</comment>
+  </data>
+  <data name="DateNormal" xml:space="preserve">
+    <value>Normal</value>
+    <comment>Date format normal option</comment>
+  </data>
+  <data name="DateLong" xml:space="preserve">
+    <value>Long</value>
+    <comment>Date format long option</comment>
   </data>
   <data name="SettingsDock" xml:space="preserve">
     <value>Dock</value>

@@ -340,6 +340,26 @@ namespace SSS.Core
                             ConfigParam.Defaults.BandwidthInAlert,
                             ConfigParam.Defaults.BandwidthOutAlert
                         ]
+                    },
+                    new MonitorConfig()
+                    {
+                        Type = MonitorType.Time,
+                        Enabled = true,
+                        Order = 6,
+                        Hardware =
+                        [
+                            new HardwareConfig() { ID = "clock", Name = Strings.Time, ActualName = Strings.Time }
+                        ],
+                        Metrics =
+                        [
+                            new MetricConfig(MetricKey.Time, true),
+                            new MetricConfig(MetricKey.Date, true)
+                        ],
+                        Params =
+                        [
+                            ConfigParam.Defaults.Clock24HR,
+                            ConfigParam.Defaults.DateFormat
+                        ]
                     }
                                 ];
             }

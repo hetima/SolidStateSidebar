@@ -92,6 +92,11 @@ namespace SSS.Converters
         {
             string _value = (string)value;
 
+            if (string.IsNullOrEmpty(_value))
+            {
+                return string.Empty;
+            }
+
             return string.Format("{0}:", _value);
         }
 
@@ -108,6 +113,59 @@ namespace SSS.Converters
             int _value = (int)value;
 
             return new Thickness(0, 0, _value * 0.4d, 0);
+        }
+
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
+    public class DateFormatConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return System.Convert.ToInt32(value);
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return System.Convert.ToInt32(value);
+        }
+    }
+
+    public class DateFormatDisplayConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            int intValue = System.Convert.ToInt32(value);
+
+            return intValue switch
+            {
+                0 => Strings.DateDisabled,
+                1 => Strings.DateShort,
+                2 => Strings.DateNormal,
+                3 => Strings.DateLong,
+                _ => intValue.ToString()
+            };
+        }
+
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
+    public class FontSizeAddConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            double baseSize = System.Convert.ToDouble(value);
+            if (double.TryParse(parameter?.ToString(), out double add))
+            {
+                return baseSize + add;
+            }
+            return value;
         }
 
         public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

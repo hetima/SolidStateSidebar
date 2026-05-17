@@ -621,57 +621,6 @@ namespace SSS.Core
             }
         }
 
-        private bool _showClock { get; set; } = true;
-
-        [JsonProperty]
-        public bool ShowClock
-        {
-            get
-            {
-                return _showClock;
-            }
-            set
-            {
-                _showClock = value;
-
-                NotifyPropertyChanged(nameof(ShowClock));
-            }
-        }
-
-        private bool _clock24HR { get; set; } = false;
-
-        [JsonProperty]
-        public bool Clock24HR
-        {
-            get
-            {
-                return _clock24HR;
-            }
-            set
-            {
-                _clock24HR = value;
-
-                NotifyPropertyChanged(nameof(Clock24HR));
-            }
-        }
-
-        private DateSetting _dateSetting { get; set; } = DateSetting.Short;
-
-        [JsonProperty]
-        public DateSetting DateSetting
-        {
-            get
-            {
-                return _dateSetting;
-            }
-            set
-            {
-                _dateSetting = value;
-
-                NotifyPropertyChanged(nameof(DateSetting));
-            }
-        }
-
         private MonitorConfig[]? _monitorConfig { get; set; } = null;
 
         [JsonProperty]

@@ -7,12 +7,28 @@ namespace SSS.Core
 {
     public class MonitorPanel : INotifyPropertyChanged, IDisposable
     {
-        public MonitorPanel(string title, string? iconData, params iMonitor[] monitors)
+        public MonitorPanel(MonitorType type, string title, string? iconData, params iMonitor[] monitors)
         {
+            Type = type;
             SvgContentPath = iconData;
             Title = title;
 
             Monitors = monitors;
+        }
+
+        private MonitorType _type { get; set; }
+
+        public MonitorType Type
+        {
+            get
+            {
+                return _type;
+            }
+            private set
+            {
+                _type = value;
+                NotifyPropertyChanged(nameof(Type));
+            }
         }
 
         public void Dispose()

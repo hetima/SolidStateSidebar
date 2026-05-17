@@ -9,7 +9,8 @@ namespace SSS.Core
         RAM,
         GPU,
         HD,
-        Network
+        Network,
+        Time
     }
 
     [Serializable]
@@ -46,7 +47,10 @@ namespace SSS.Core
         DriveUsed = 22,
         DriveFree = 23,
         DriveRead = 24,
-        DriveWrite = 25
+        DriveWrite = 25,
+
+        Time = 28,
+        Date = 29
     }
 
     [Serializable]
@@ -65,7 +69,9 @@ namespace SSS.Core
         RoundAll,
         DriveSpace,
         DriveIO,
-        UseGHz
+        UseGHz,
+        Clock24HR,
+        DateFormat
     }
 
     public enum DataType : byte

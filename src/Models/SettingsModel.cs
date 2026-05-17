@@ -73,20 +73,9 @@ namespace SSS.Models
             IconThemeItems = Core.Settings.IconThemeList;
             IconTheme = Core.Settings.Instance.IconTheme;
 
-            DateSettingItems =
-            [
-                DateSetting.Disabled,
-                DateSetting.Short,
-                DateSetting.Normal,
-                DateSetting.Long
-            ];
-
-            DateSetting = Core.Settings.Instance.DateSetting;
             CollapseMenuBar = Core.Settings.Instance.CollapseMenuBar;
             InitiallyHidden = Core.Settings.Instance.InitiallyHidden;
             ShowMachineName = Core.Settings.Instance.ShowMachineName;
-            ShowClock = Core.Settings.Instance.ShowClock;
-            Clock24HR = Core.Settings.Instance.Clock24HR;
 
             ObservableCollection<MonitorConfig> _config = new ObservableCollection<MonitorConfig>(Core.Settings.Instance.MonitorConfig!.Select(c => c.Clone()).OrderByDescending(c => c.Order));
 
@@ -152,12 +141,9 @@ namespace SSS.Models
             Core.Settings.Instance.AlertFontColor = AlertFontColor;
             Core.Settings.Instance.AlertBlink = AlertBlink;
             Core.Settings.Instance.IconTheme = IconTheme;
-            Core.Settings.Instance.DateSetting = DateSetting;
             Core.Settings.Instance.CollapseMenuBar = CollapseMenuBar;
             Core.Settings.Instance.InitiallyHidden = InitiallyHidden;
             Core.Settings.Instance.ShowMachineName = ShowMachineName;
-            Core.Settings.Instance.ShowClock = ShowClock;
-            Core.Settings.Instance.Clock24HR = Clock24HR;
 
             MonitorConfig[] _config = MonitorConfig.Select(c => c.Clone()).ToArray();
 
@@ -731,38 +717,6 @@ namespace SSS.Models
             }
         }
 
-        private DateSetting? _dateSetting { get; set; }
-
-        public DateSetting DateSetting
-        {
-            get
-            {
-                return _dateSetting!;
-            }
-            set
-            {
-                _dateSetting = value;
-
-                NotifyPropertyChanged(nameof(DateSetting));
-            }
-        }
-
-        private DateSetting[]? _dateSettingItems { get; set; }
-
-        public DateSetting[] DateSettingItems
-        {
-            get
-            {
-                return _dateSettingItems!;
-            }
-            set
-            {
-                _dateSettingItems = value;
-
-                NotifyPropertyChanged(nameof(DateSettingItems));
-            }
-        }
-
         private bool _collapseMenuBar { get; set; }
 
         public bool CollapseMenuBar
@@ -840,38 +794,6 @@ namespace SSS.Models
                 _showMachineName = value;
 
                 NotifyPropertyChanged(nameof(ShowMachineName));
-            }
-        }
-
-        private bool _showClock { get; set; }
-
-        public bool ShowClock
-        {
-            get
-            {
-                return _showClock;
-            }
-            set
-            {
-                _showClock = value;
-
-                NotifyPropertyChanged(nameof(ShowClock));
-            }
-        }
-
-        private bool _clock24HR { get; set; }
-
-        public bool Clock24HR
-        {
-            get
-            {
-                return _clock24HR;
-            }
-            set
-            {
-                _clock24HR = value;
-
-                NotifyPropertyChanged(nameof(Clock24HR));
             }
         }
 

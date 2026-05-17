@@ -40,6 +40,7 @@
             <conv:FontToSpaceConverter x:Key="FontToSpaceConverter" />
             <conv:BoolInverseConverter x:Key="BoolInverseConverter" />
             <conv:PercentConverter x:Key="PercentConverter" />
+            <conv:FontSizeAddConverter x:Key="FontSizeAddConverter" />
 
             <Style x:Key="SidebarWindow" TargetType="{x:Type win:AppBarWindow}">
                 <Setter Property="Title" Value="{x:Static res:Strings.Sidebar}" />

@@ -132,6 +132,12 @@ namespace SSS.Core
                     case ParamKey.UseGHz:
                         return Strings.SettingsUseGHz;
 
+                    case ParamKey.Clock24HR:
+                        return Strings.Settings24HourClock;
+
+                    case ParamKey.DateFormat:
+                        return Strings.SettingsDateFormat;
+
                     default:
                         return "Unknown";
                 }
@@ -185,6 +191,12 @@ namespace SSS.Core
 
                     case ParamKey.UseGHz:
                         return Strings.SettingsUseGHzTooltip;
+
+                    case ParamKey.Clock24HR:
+                        return Strings.Settings24HourClockTooltip;
+
+                    case ParamKey.DateFormat:
+                        return Strings.SettingsDateFormatTooltip;
 
                     default:
                         return "Unknown";
@@ -311,6 +323,22 @@ namespace SSS.Core
                 get
                 {
                     return new ConfigParam() { Key = ParamKey.UseGHz, Value = false };
+                }
+            }
+
+            public static ConfigParam Clock24HR
+            {
+                get
+                {
+                    return new ConfigParam() { Key = ParamKey.Clock24HR, Value = false };
+                }
+            }
+
+            public static ConfigParam DateFormat
+            {
+                get
+                {
+                    return new ConfigParam() { Key = ParamKey.DateFormat, Value = 2 };
                 }
             }
         }

@@ -164,6 +164,34 @@
     <value>時間</value>
     <comment>Sidebar clock title</comment>
   </data>
+  <data name="Date" xml:space="preserve">
+    <value>日付</value>
+    <comment>Clock date label</comment>
+  </data>
+  <data name="TimeLabel" xml:space="preserve">
+    <value>時間</value>
+    <comment>Clock time metric label</comment>
+  </data>
+  <data name="DateLabel" xml:space="preserve">
+    <value>日付</value>
+    <comment>Clock date metric label</comment>
+  </data>
+  <data name="DateDisabled" xml:space="preserve">
+    <value>無効</value>
+    <comment>Date format disabled option</comment>
+  </data>
+  <data name="DateShort" xml:space="preserve">
+    <value>短い (月のみ)</value>
+    <comment>Date format short option</comment>
+  </data>
+  <data name="DateNormal" xml:space="preserve">
+    <value>標準</value>
+    <comment>Date format normal option</comment>
+  </data>
+  <data name="DateLong" xml:space="preserve">
+    <value>長い</value>
+    <comment>Date format long option</comment>
+  </data>
   <data name="CPUVoltage" xml:space="preserve">
     <value>電圧</value>
     <comment>Full name for CPU voltage metric</comment>
