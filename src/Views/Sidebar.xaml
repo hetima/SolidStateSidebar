@@ -197,8 +197,8 @@
                                                                         <Setter Property="Content">
                                                                             <Setter.Value>
                                                                                 <StackPanel Orientation="Horizontal">
-                                                                                    <TextBlock Text="{Binding Path=Name, Mode=OneWay}" Width="{Binding Source={x:Static core:Settings.Instance}, Path=FontSetting.FontSize, Mode=OneWay}" Style="{StaticResource DataText}" />
-                                                                                    <ProgressBar DataContext="{Binding Path=LoadMetric}" Value="{Binding Path=Value, Mode=OneWay}" Margin="8,2,0,0" Width="{Binding Source={x:Static core:Settings.Instance}, Path=FontSetting.BarWidth, Mode=OneWay}" Style="{StaticResource DriveProgress}" />
+                                                                                    <TextBlock Text="{Binding Path=Name, Mode=OneWay}" Width="{Binding Source={x:Static core:Settings.Instance}, Path=FontSize, Mode=OneWay}" Style="{StaticResource DataText}" />
+                                                                                    <ProgressBar DataContext="{Binding Path=LoadMetric}" Value="{Binding Path=Value, Mode=OneWay}" Margin="8,2,0,0" Width="{Binding Source={x:Static core:Settings.Instance}, Path=BarWidth, Mode=OneWay}" Style="{StaticResource DriveProgress}" />
                                                                                 </StackPanel>
                                                                             </Setter.Value>
                                                                         </Setter>

@@ -471,22 +471,46 @@ namespace SSS.Core
             }
         }
 
-        private FontSetting _fontSetting { get; set; } = FontSetting.x14;
+        private int _fontSize { get; set; } = 14;
 
         [JsonProperty]
-        public FontSetting FontSetting
+        public int FontSize
         {
             get
             {
-                return _fontSetting;
+                return _fontSize;
             }
             set
             {
-                _fontSetting = value;
+                _fontSize = value;
 
-                NotifyPropertyChanged(nameof(FontSetting));
+                NotifyPropertyChanged(nameof(FontSize));
+                NotifyPropertyChanged(nameof(TitleFontSize));
+                NotifyPropertyChanged(nameof(SmallFontSize));
+                NotifyPropertyChanged(nameof(IconSize));
+                NotifyPropertyChanged(nameof(BarHeight));
+                NotifyPropertyChanged(nameof(BarWidth));
+                NotifyPropertyChanged(nameof(BarWidthWide));
             }
         }
+
+        [JsonIgnore]
+        public int TitleFontSize => FontSize + 2;
+
+        [JsonIgnore]
+        public int SmallFontSize => Math.Max(FontSize - 2, 6);
+
+        [JsonIgnore]
+        public int IconSize => FontSize + 10;
+
+        [JsonIgnore]
+        public int BarHeight => Math.Max(FontSize - 3, 4);
+
+        [JsonIgnore]
+        public int BarWidth => BarHeight * 6;
+
+        [JsonIgnore]
+        public int BarWidthWide => BarHeight * 8;
 
         private string _fontName { get; set; } = "Arial";
 
@@ -704,162 +728,7 @@ namespace SSS.Core
         Right
     }
 
-    [JsonObject(MemberSerialization.OptIn)]
-    public sealed class FontSetting
-    {
-        internal FontSetting() { }
 
-        private FontSetting(int fontSize)
-        {
-            FontSize = fontSize;
-        }
-
-        public override bool Equals(object? obj)
-        {
-            FontSetting? _that = obj as FontSetting;
-
-            if (_that == null)
-            {
-                return false;
-            }
-
-            return this.FontSize == _that.FontSize;
-        }
-
-        public override int GetHashCode()
-        {
-            return base.GetHashCode();
-        }
-
-        public static FontSetting x10
-        {
-            get
-            {
-                return new FontSetting(10);
-            }
-        }
-
-        public static FontSetting x12
-        {
-            get
-            {
-                return new FontSetting(12);
-            }
-        }
-
-        public static FontSetting x14
-        {
-            get
-            {
-                return new FontSetting(14);
-            }
-        }
-
-        public static FontSetting x16
-        {
-            get
-            {
-                return new FontSetting(16);
-            }
-        }
-
-        public static FontSetting x18
-        {
-            get
-            {
-                return new FontSetting(18);
-            }
-        }
-
-        public static FontSetting x20
-        {
-            get
-            {
-                return new FontSetting(20);
-            }
-        }
-        public static FontSetting x22
-        {
-            get
-            {
-                return new FontSetting(22);
-            }
-        }
-        public static FontSetting x24
-        {
-            get
-            {
-                return new FontSetting(24);
-            }
-        }
-        [JsonProperty]
-        public int FontSize { get; set; }
-
-        public int TitleFontSize
-        {
-            get
-            {
-                return FontSize + 2;
-            }
-        }
-
-        public int SmallFontSize
-        {
-            get
-            {
-                return FontSize - 2;
-            }
-        }
-
-        public int IconSize
-        {
-            get
-            {
-                switch (FontSize)
-                {
-                    case 10:
-                        return 18;
-
-                    case 12:
-                        return 22;
-
-                    case 14:
-                    default:
-                        return 24;
-
-                    case 16:
-                        return 28;
-
-                    case 18:
-                        return 32;
-                }
-            }
-        }
-
-        public int BarHeight
-        {
-            get
-            {
-                return FontSize - 3;
-            }
-        }
-
-        public int BarWidth
-        {
-            get
-            {
-                return BarHeight * 6;
-            }
-        }
-
-        public int BarWidthWide
-        {
-            get
-            {
-                return BarHeight * 8;
-            }
-        }
-    }
 
     [JsonObject(MemberSerialization.OptIn)]
     public sealed class DateSetting

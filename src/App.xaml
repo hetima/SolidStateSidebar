@@ -128,9 +128,9 @@
             <Style x:Key="AppIconImage"
                    TargetType="{x:Type Image}">
                 <Setter Property="Width"
-                        Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontSetting.IconSize, Mode=OneWay}"/>
+                        Value="{Binding Source={x:Static core:Settings.Instance}, Path=IconSize, Mode=OneWay}"/>
                 <Setter Property="Height"
-                        Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontSetting.IconSize, Mode=OneWay}"/>
+                        Value="{Binding Source={x:Static core:Settings.Instance}, Path=IconSize, Mode=OneWay}"/>
                 <Setter Property="Margin" Value="0,0,10,0"/>
                 <Setter Property="Stretch" Value="Uniform"/>
                 <Setter Property="VerticalAlignment" Value="Center"/>
@@ -141,7 +141,7 @@
                 <Setter Property="Margin" Value="0" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Foreground" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
-                <Setter Property="FontSize" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontSetting.TitleFontSize, Mode=OneWay}" />
+                <Setter Property="FontSize" Value="{Binding Source={x:Static core:Settings.Instance}, Path=TitleFontSize, Mode=OneWay}" />
                 <Setter Property="FontFamily" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontName, Mode=OneWay}" />
             </Style>
 
@@ -150,7 +150,7 @@
                 <Setter Property="Margin" Value="0" />
                 <Setter Property="VerticalAlignment" Value="Center" />
                 <Setter Property="Foreground" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
-                <Setter Property="FontSize" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontSetting.SmallFontSize, Mode=OneWay}" />
+                <Setter Property="FontSize" Value="{Binding Source={x:Static core:Settings.Instance}, Path=SmallFontSize, Mode=OneWay}" />
                 <Setter Property="FontFamily" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontName, Mode=OneWay}" />
                 <Setter Property="TextWrapping" Value="WrapWithOverflow" />
             </Style>
@@ -193,7 +193,7 @@
                 <Setter Property="Foreground" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="Margin" Value="0" />
-                <Setter Property="FontSize" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontSetting.FontSize, Mode=OneWay}" />
+                <Setter Property="FontSize" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontSize, Mode=OneWay}" />
                 <Setter Property="FontFamily" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontName, Mode=OneWay}" />
                 <Setter Property="TextWrapping" Value="WrapWithOverflow" />
             </Style>
@@ -208,7 +208,7 @@
             
             <Style x:Key="MetricLabel" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource DataText}">
                 <Setter Property="DockPanel.Dock" Value="Left" />
-                <Setter Property="Margin" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontSetting.FontSize, Mode=OneWay, Converter={StaticResource FontToSpaceConverter}}" />
+                <Setter Property="Margin" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontSize, Mode=OneWay, Converter={StaticResource FontToSpaceConverter}}" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding Path=IsAlert, Mode=OneWay}" Value="True">
                         <Setter Property="Foreground" Value="{Binding Path=AlertColor, Mode=OneWay}" />
@@ -230,8 +230,8 @@
                 <Setter Property="Minimum" Value="0" />
                 <Setter Property="Maximum" Value="100" />
                 <Setter Property="Margin" Value="0,4" />
-                <Setter Property="Width" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontSetting.BarWidthWide, Mode=OneWay}" />
-                <Setter Property="Height" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontSetting.BarHeight, Mode=OneWay}" />
+                <Setter Property="Width" Value="{Binding Source={x:Static core:Settings.Instance}, Path=BarWidthWide, Mode=OneWay}" />
+                <Setter Property="Height" Value="{Binding Source={x:Static core:Settings.Instance}, Path=BarHeight, Mode=OneWay}" />
                 <Setter Property="HorizontalAlignment" Value="Left" />
                 <Setter Property="Foreground" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
                 <Setter Property="Background" Value="Transparent" />

@@ -64,21 +64,8 @@ namespace SSS.Models
 
             TextAlign = Core.Settings.Instance.TextAlign;
 
-            FontSettingItems =
-            [
-                FontSetting.x10,
-                FontSetting.x12,
-                FontSetting.x14,
-                FontSetting.x16,
-                FontSetting.x18,
-                FontSetting.x20,
-                FontSetting.x22,
-                FontSetting.x24,
-            ];
-
+            FontSize = Core.Settings.Instance.FontSize;
             FontNameItems = Fonts.SystemFontFamilies.Select(i => i.Source).ToArray();
-
-            FontSetting = Core.Settings.Instance.FontSetting;
             FontName = Core.Settings.Instance.FontName;
             FontColor = Core.Settings.Instance.FontColor;
             AlertFontColor = Core.Settings.Instance.AlertFontColor;
@@ -159,7 +146,7 @@ namespace SSS.Models
             Core.Settings.Instance.BGColor = BGColor;
             Core.Settings.Instance.BGOpacity = BGOpacity;
             Core.Settings.Instance.TextAlign = TextAlign;
-            Core.Settings.Instance.FontSetting = FontSetting;
+            Core.Settings.Instance.FontSize = FontSize;
             Core.Settings.Instance.FontName = FontName;
             Core.Settings.Instance.FontColor = FontColor;
             Core.Settings.Instance.AlertFontColor = AlertFontColor;
@@ -649,35 +636,19 @@ namespace SSS.Models
             }
         }
 
-        private FontSetting? _fontSetting { get; set; }
+        private int _fontSize { get; set; }
 
-        public FontSetting FontSetting
+        public int FontSize
         {
             get
             {
-                return _fontSetting!;
+                return _fontSize;
             }
             set
             {
-                _fontSetting = value;
+                _fontSize = value;
 
-                NotifyPropertyChanged(nameof(FontSetting));
-            }
-        }
-
-        private FontSetting[]? _fontSettingItems { get;  set;}
-
-        public FontSetting[] FontSettingItems
-        {
-            get
-            {
-                return _fontSettingItems!;
-            }
-            set
-            {
-                _fontSettingItems = value;
-
-                NotifyPropertyChanged(nameof(FontSettingItems));
+                NotifyPropertyChanged(nameof(FontSize));
             }
         }
         private string? _fontName { get; set; }
