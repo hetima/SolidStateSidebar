@@ -1,4 +1,4 @@
-﻿<sty:FlatWindow
+﻿<Window
         x:Class="SSS.Setup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,7 +7,6 @@
         xmlns:local="clr-namespace:SSS"
         xmlns:core="clr-namespace:SSS.Core"
         xmlns:win="clr-namespace:SSS.Windows"
-        xmlns:sty="clr-namespace:SSS.Style"
         xmlns:res="clr-namespace:SSS"
         mc:Ignorable="d"
         Closed="Window_Closed"
@@ -15,13 +14,9 @@
         Icon="../Resources/Sidebar.ico"
         Height="400"
         Width="400"
-        ShowIcon="False"
-        ShowTitle="False"
-        ShowMinimize="False"
-        ShowMaximize="False"
         Topmost="True"
         WindowStartupLocation="CenterScreen"
-        Style="{StaticResource FlatWindowStyle}">
+        ResizeMode="NoResize">
     <Grid x:Name="SetupGrid">
         <DockPanel x:Name="Initial" IsEnabled="True" Style="{StaticResource SetupPage}">
             <StackPanel DockPanel.Dock="Top" Style="{StaticResource VerticalPanel}">
@@ -34,8 +29,8 @@
                 <TextBlock Text="{x:Static res:Strings.SetupSubtitle}" Style="{StaticResource SetupSubtitle}" />
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource WindowButtons}">
-                <Button Content="{x:Static res:Strings.ButtonYes}" Click="Yes_Click" Style="{StaticResource SuccessButton}" />
-                <Button Content="{x:Static res:Strings.ButtonNo}" Click="No_Click" Style="{StaticResource ErrorButton}" />
+                <Button Content="{x:Static res:Strings.ButtonYes}" Click="Yes_Click" />
+                <Button Content="{x:Static res:Strings.ButtonNo}" Click="No_Click" />
                 <Button Content="{x:Static res:Strings.ButtonSkip}" Click="Close_Click" />
             </StackPanel>
             <StackPanel Style="{StaticResource SetupContent}">
@@ -53,7 +48,7 @@
                 <TextBlock Text="{x:Static res:Strings.SetupCustomSubtitle}" Style="{StaticResource SetupSubtitle}" />
             </StackPanel>
             <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource WindowButtons}">
-                <Button Content="{x:Static res:Strings.ButtonDone}" Click="Yes_Click" Style="{StaticResource SuccessButton}" />
+                <Button Content="{x:Static res:Strings.ButtonDone}" Click="Yes_Click" />
                 <Button Content="{x:Static res:Strings.ButtonSkip}" Click="Close_Click" />
             </StackPanel>
             <Grid Style="{StaticResource SetupCustom}">
@@ -79,23 +74,31 @@
                 </DockPanel>
             </Grid>
         </DockPanel>
-        <DockPanel x:Name="Final" Style="{StaticResource SetupPage}">
-            <StackPanel DockPanel.Dock="Top" Style="{StaticResource VerticalPanel}">
+        <DockPanel x:Name="Final"
+                Style="{StaticResource SetupPage}">
+            <StackPanel DockPanel.Dock="Top"
+                    Style="{StaticResource VerticalPanel}">
                 <StackPanel Style="{StaticResource SetupProgress}">
-                    <Ellipse IsEnabled="False" />
-                    <Ellipse IsEnabled="False" />
-                    <Ellipse />
+                    <Ellipse IsEnabled="False"/>
+                    <Ellipse IsEnabled="False"/>
+                    <Ellipse/>
                 </StackPanel>
-                <Label Content="{x:Static res:Strings.SetupDoneTitle}" Style="{StaticResource SetupTitle}" />
-                <TextBlock Text="{x:Static res:Strings.SetupDoneSubtitle}" Style="{StaticResource SetupSubtitle}" />
+                <Label Content="{x:Static res:Strings.SetupDoneTitle}"
+                        Style="{StaticResource SetupTitle}"/>
+                <TextBlock Text="{x:Static res:Strings.SetupDoneSubtitle}"
+                        Style="{StaticResource SetupSubtitle}" />
             </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource WindowButtons}">
-                <Button Content="{x:Static res:Strings.ButtonSettings}" Click="Settings_Click" />
-                <Button Content="{x:Static res:Strings.ButtonClose}" Click="Close_Click" Style="{StaticResource NeutralButton}" />
+            <StackPanel DockPanel.Dock="Bottom"
+                    Style="{StaticResource WindowButtons}">
+                <Button Content="{x:Static res:Strings.ButtonSettings}"
+                        Click="Settings_Click"/>
+                <Button Content="{x:Static res:Strings.ButtonClose}"
+                        Click="Close_Click" />
             </StackPanel>
             <StackPanel Style="{StaticResource SetupContent}">
-                <TextBlock Text="{x:Static res:Strings.SetupDoneText}" Style="{StaticResource SetupText}" />
+                <TextBlock Text="{x:Static res:Strings.SetupDoneText}"
+                        Style="{StaticResource SetupText}" />
             </StackPanel>
         </DockPanel>
     </Grid>
-</sty:FlatWindow>
+</Window>

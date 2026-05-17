@@ -11,7 +11,6 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Threading;
 using System.Windows.Media;
-using SSS.Style;
 using Newtonsoft.Json;
 
 namespace SSS.Windows
@@ -920,7 +919,7 @@ namespace SSS.Windows
         }
     }
 
-    public partial class DPIAwareWindow : FlatWindow
+    public partial class DPIAwareWindow : Window
     {
         private static class WM_MESSAGES
         {

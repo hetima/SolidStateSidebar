@@ -8,14 +8,13 @@ using System.Windows.Input;
 using System.Windows.Threading;
 using SSS.Models;
 using SSS.Windows;
-using SSS.Style;
 
 namespace SSS
 {
     /// <summary>
     /// Interaction logic for Settings.xaml
     /// </summary>
-    public partial class Settings : FlatWindow
+    public partial class Settings : Window
     {
         public Settings(Sidebar sidebar)
         {

@@ -13,9 +13,9 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Styling/FlatStyle.xaml" />
+                <ResourceDictionary
+                    Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml"/>
             </ResourceDictionary.MergedDictionaries>
-
             <command:ActivateCommand x:Key="ShowCommand" />
 
             <tb:TaskbarIcon x:Key="TrayIcon" IconSource="Resources/Sidebar.ico" LeftClickCommand="{StaticResource ShowCommand}">
@@ -47,19 +47,12 @@
                 <Setter Property="Top" Value="0" />
                 <Setter Property="Width" Value="0" />
                 <Setter Property="Height" Value="0" />
-                <!--<Setter Property="Width" Value="{Binding Source={x:Static core:Settings.Instance}, Path=SidebarWidth, Mode=OneWay}" />-->
                 <!--<Setter Property="Height" Value="800" />-->
                 <Setter Property="AutoDPI" Value="False" />
                 <Setter Property="ShowInTaskbar" Value="False" />
                 <Setter Property="AllowsTransparency" Value="True" />
                 <Setter Property="ResizeMode" Value="NoResize" />
                 <Setter Property="ShowActivated" Value="False" />
-                <Setter Property="ShowTitleBar" Value="False" />
-                <Setter Property="ShowIcon" Value="False" />
-                <Setter Property="ShowTitle" Value="False" />
-                <Setter Property="ShowMinimize" Value="False" />
-                <Setter Property="ShowMaximize" Value="False" />
-                <Setter Property="ShowClose" Value="False" />
                 <Setter Property="WindowStyle" Value="None" />
                 <Setter Property="Background">
                     <Setter.Value>
@@ -537,7 +530,7 @@
             </Style>
 
             <Style x:Key="SetupText" TargetType="{x:Type TextBlock}" BasedOn="{StaticResource SetupSubtitle}">
-                <Setter Property="Margin" Value="0,10" />
+                <Setter Property="Margin" Value="20,10" />
             </Style>
 
             <Style x:Key="SetupContent" TargetType="{x:Type StackPanel}">
@@ -547,36 +540,6 @@
 
             <Style x:Key="SetupCustom" TargetType="{x:Type Grid}" BasedOn="{StaticResource SettingGrid}">
                 <Setter Property="Margin" Value="40,20" />
-            </Style>
-
-            <Style x:Key="UpdateTitle" TargetType="{x:Type Label}">
-                <Setter Property="Margin" Value="10" />
-                <Setter Property="Padding" Value="0" />
-                <Setter Property="Foreground" Value="#333" />
-                <Setter Property="FontSize" Value="14" />
-                <Setter Property="HorizontalAlignment" Value="Center" />
-            </Style>
-
-            <Style x:Key="UpdateProgress" TargetType="{x:Type ProgressBar}">
-                <Setter Property="Minimum" Value="0" />
-                <Setter Property="Maximum" Value="100" />
-                <Setter Property="Margin" Value="20,0,20,20" />
-                <Setter Property="Height" Value="25" />
-                <Setter Property="HorizontalAlignment" Value="Stretch" />
-                <Setter Property="Foreground" Value="#2ecc71" />
-                <Setter Property="Background" Value="Transparent" />
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="{x:Type ProgressBar}">
-                            <Border Name="PART_Track" CornerRadius="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding Foreground}" BorderThickness="1">
-                                <Grid>
-                                    <Border Name="PART_Indicator" CornerRadius="2,0,0,2" Background="{TemplateBinding Foreground}" BorderBrush="{TemplateBinding Background}" BorderThickness="0" Panel.ZIndex="0" HorizontalAlignment="Left" />
-                                    <Label Content="{TemplateBinding Value, Converter={StaticResource PercentConverter}}" Margin="0" Padding="0,0,0,1" FontSize="12" Foreground="#333333" Panel.ZIndex="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-                                </Grid>
-                            </Border>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
             </Style>
 
             <Style x:Key="ScrollBarTrackThumb" TargetType="{x:Type Thumb}">
@@ -665,6 +628,37 @@
                     <Style TargetType="{x:Type ScrollBar}" BasedOn="{StaticResource MinScrollBar}" />
                 </Style.Resources>
             </Style>
+
+
+
+            <Style x:Key="WindowButton" TargetType="{x:Type Button}"
+                    BasedOn="{StaticResource {x:Type Button}}">
+                <Setter Property="FontSize"
+                        Value="14"/>
+                <Setter Property="FontWeight"
+                        Value="500"/>
+                <Setter Property="Margin"
+                        Value="10,0,0,0"/>
+                <Setter Property="Padding"
+                        Value="20,8"/>
+            </Style>
+
+            <Style x:Key="WindowButtons"
+                   TargetType="{x:Type StackPanel}">
+                <Setter Property="HorizontalAlignment"
+                        Value="Right"/>
+                <Setter Property="VerticalAlignment"
+                        Value="Bottom"/>
+                <Setter Property="Orientation"
+                        Value="Horizontal"/>
+                <Setter Property="Margin"
+                        Value="20"/>
+                <Style.Resources>
+                    <Style TargetType="{x:Type Button}"
+                           BasedOn="{StaticResource WindowButton}"/>
+                </Style.Resources>
+            </Style>
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

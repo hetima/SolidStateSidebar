@@ -8,14 +8,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Threading;
 using SSS.Windows;
-using SSS.Style;
 
 namespace SSS
 {
     /// <summary>
     /// Interaction logic for Setup.xaml
     /// </summary>
-    public partial class Setup : FlatWindow
+    public partial class Setup : Window
     {
         public Setup()
         {
