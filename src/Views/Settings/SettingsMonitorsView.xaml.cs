@@ -37,13 +37,5 @@ namespace SSS
                 MonitorListView.SelectedItem = target;
             }
         }
-
-        private void HardwareResetButton_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            if (sender is System.Windows.Controls.Button { DataContext: HardwareConfig hw })
-            {
-                hw.Name = hw.ActualName;
-            }
-        }
     }
 }

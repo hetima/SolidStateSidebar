@@ -1,0 +1,39 @@
+using System.Windows;
+using System.Windows.Controls;
+
+namespace SSS.Converters
+{
+    public class MonitorConfigTemplateSelector : DataTemplateSelector
+    {
+        public DataTemplate? CpuTemplate { get; set; }
+
+        public DataTemplate? RamTemplate { get; set; }
+
+        public DataTemplate? GpuTemplate { get; set; }
+
+        public DataTemplate? HdTemplate { get; set; }
+
+        public DataTemplate? NetworkTemplate { get; set; }
+
+        public DataTemplate? TimeTemplate { get; set; }
+
+        public override DataTemplate? SelectTemplate(object item, DependencyObject container)
+        {
+            if (item is Core.MonitorConfig config)
+            {
+                return config.Type switch
+                {
+                    Core.MonitorType.CPU => CpuTemplate,
+                    Core.MonitorType.RAM => RamTemplate,
+                    Core.MonitorType.GPU => GpuTemplate,
+                    Core.MonitorType.HD => HdTemplate,
+                    Core.MonitorType.Network => NetworkTemplate,
+                    Core.MonitorType.Time => TimeTemplate,
+                    _ => null
+                };
+            }
+
+            return base.SelectTemplate(item, container);
+        }
+    }
+}
