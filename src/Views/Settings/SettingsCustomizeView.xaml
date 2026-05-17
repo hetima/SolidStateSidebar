@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:wpfDev="clr-namespace:WPFDevelopers.Controls"
              xmlns:conv="clr-namespace:SSS.Converters"
              xmlns:res="clr-namespace:SSS"
              mc:Ignorable="d">
@@ -42,7 +42,53 @@
         <CheckBox Grid.Column="1" Grid.Row="1" Content="{x:Static res:Strings.SettingsAutoBackground}" IsChecked="{Binding Path=AutoBGColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAutoBackgroundTooltip}" />
 
         <Label Grid.Column="0" Grid.Row="2" Content="{x:Static res:Strings.SettingsBackgroundColor}" />
-        <xctk:ColorPicker Grid.Column="1" Grid.Row="2" IsEnabled="{Binding Path=AutoBGColor, Mode=OneWay, Converter={StaticResource BoolInverseConverter}}" SelectedColor="{Binding Path=BGColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsBackgroundColorTooltip}" />
+        <Button Grid.Column="1"
+                Grid.Row="2"
+                x:Name="BGColorButton"
+                HorizontalAlignment="Left"
+                MinWidth="100"
+                ToolTip="{x:Static res:Strings.SettingsBackgroundColorTooltip}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Border Width="20" Height="20"
+                            CornerRadius="3" BorderBrush="Gray" BorderThickness="1">
+                        <Border.Background>
+                            <SolidColorBrush Color="{Binding Path=BGColor, Converter={StaticResource WD.StringToColorConverter}}"/>
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Text="{Binding Path=BGColor, Converter={StaticResource WD.ColorToStringConverter}}"
+                            VerticalAlignment="Center" Margin="6,0,0,0"/>
+                </StackPanel>
+            </Button.Content>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="BGColorPopup"
+                                    Storyboard.TargetProperty="IsOpen">
+                                <DiscreteBooleanKeyFrame KeyTime="0:0:0"
+                                        Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+        <Popup x:Name="BGColorPopup"
+                PlacementTarget="{Binding ElementName=BGColorButton}"
+                Placement="Bottom"
+                StaysOpen="False"
+                AllowsTransparency="True"
+                PopupAnimation="Fade"
+                Grid.Column="1"
+                Grid.Row="2">
+            <Border Background="{DynamicResource WD.BackgroundBrush}"
+                    BorderBrush="{DynamicResource WD.BaseBrush}"
+                    BorderThickness="1"
+                    CornerRadius="4">
+                <wpfDev:ColorPicker SelectedColor="{Binding Path=BGColor, Converter={StaticResource WD.StringToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Border>
+        </Popup>
 
         <Label Grid.Column="0" Grid.Row="3" Content="{x:Static res:Strings.SettingsBackgroundOpacity}" />
         <DockPanel Grid.Column="1" Grid.Row="3">
@@ -60,10 +106,110 @@
         <ComboBox Grid.Column="1" Grid.Row="6" ItemsSource="{Binding Path=FontSettingItems, Mode=OneWay}" DisplayMemberPath="FontSize" SelectedValue="{Binding Path=FontSetting, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsFontSizeTooltip}" />
 
         <Label Grid.Column="0" Grid.Row="7" Content="{x:Static res:Strings.SettingsFontColor}" />
-        <xctk:ColorPicker Grid.Column="1" Grid.Row="7" SelectedColor="{Binding Path=FontColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsFontColorTooltip}"/>
+        <Button Grid.Column="1"
+                Grid.Row="7"
+                x:Name="FontColorButton"
+                HorizontalAlignment="Left"
+                MinWidth="100"
+                ToolTip="{x:Static res:Strings.SettingsFontColorTooltip}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Border Width="20"
+                            Height="20"
+                            CornerRadius="3"
+                            BorderBrush="Gray"
+                            BorderThickness="1">
+                        <Border.Background>
+                            <SolidColorBrush Color="{Binding Path=FontColor, Converter={StaticResource WD.StringToColorConverter}}"/>
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Text="{Binding Path=FontColor, Converter={StaticResource WD.ColorToStringConverter}}"
+                               VerticalAlignment="Center"
+                            Margin="6,0,0,0"/>
+                </StackPanel>
+            </Button.Content>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="FontColorPopup"
+                                                            Storyboard.TargetProperty="IsOpen">
+                                <DiscreteBooleanKeyFrame KeyTime="0:0:0"
+                                                         Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+        <Popup x:Name="FontColorPopup"
+               PlacementTarget="{Binding ElementName=FontColorButton}"
+               Placement="Bottom"
+               StaysOpen="False"
+               AllowsTransparency="True"
+               PopupAnimation="Fade"
+               Grid.Column="1"
+               Grid.Row="7">
+            <Border Background="{DynamicResource WD.BackgroundBrush}"
+                    BorderBrush="{DynamicResource WD.BaseBrush}"
+                    BorderThickness="1"
+                    CornerRadius="4">
+                <wpfDev:ColorPicker SelectedColor="{Binding Path=FontColor, Converter={StaticResource WD.StringToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Border>
+        </Popup>
 
         <Label Grid.Column="0" Grid.Row="8" Content="{x:Static res:Strings.SettingsAlertFontColor}" />
-        <xctk:ColorPicker Grid.Column="1" Grid.Row="8" SelectedColor="{Binding Path=AlertFontColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlertFontColorTooltip}"/>
+        <Button Grid.Column="1"
+                Grid.Row="8"
+                x:Name="AlertFontColorButton"
+                HorizontalAlignment="Left"
+                MinWidth="100"
+                ToolTip="{x:Static res:Strings.SettingsAlertFontColorTooltip}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Border Width="20"
+                            Height="20"
+                            CornerRadius="3"
+                            BorderBrush="Gray"
+                            BorderThickness="1">
+                        <Border.Background>
+                            <SolidColorBrush Color="{Binding Path=AlertFontColor, Converter={StaticResource WD.StringToColorConverter}}"/>
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Text="{Binding Path=AlertFontColor, Converter={StaticResource WD.ColorToStringConverter}}"
+                               VerticalAlignment="Center"
+                               Margin="6,0,0,0"/>
+                </StackPanel>
+            </Button.Content>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="AlertFontColorPopup"
+                                                            Storyboard.TargetProperty="IsOpen">
+                                <DiscreteBooleanKeyFrame KeyTime="0:0:0"
+                                                         Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+        <Popup x:Name="AlertFontColorPopup"
+               PlacementTarget="{Binding ElementName=AlertFontColorButton}"
+               Placement="Bottom"
+               StaysOpen="False"
+               AllowsTransparency="True"
+               PopupAnimation="Fade"
+               Grid.Column="1"
+               Grid.Row="8">
+            <Border Background="{DynamicResource WD.BackgroundBrush}"
+                    BorderBrush="{DynamicResource WD.BaseBrush}"
+                    BorderThickness="1"
+                    CornerRadius="4">
+                <wpfDev:ColorPicker SelectedColor="{Binding Path=AlertFontColor, Converter={StaticResource WD.StringToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Border>
+        </Popup>
 
         <CheckBox Grid.Column="1" Grid.Row="9" Content="{x:Static res:Strings.SettingsAlertBlink}" IsChecked="{Binding Path=AlertBlink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlertBlinkTooltip}" />
 

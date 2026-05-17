@@ -1,0 +1,620 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="clr-namespace:WPFDevelopers.Controls"
+    xmlns:convert="clr-namespace:WPFDevelopers.Converts"
+    xmlns:helpers="clr-namespace:WPFDevelopers.Helpers"
+    xmlns:input="clr-namespace:System.Windows.Input;assembly=PresentationCore"
+    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+    xmlns:resx="clr-namespace:WPFDevelopers"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    po:Freeze="True">
+
+    <!-- ============================================================ -->
+    <!--  Font definitions (from Font.xaml)                           -->
+    <!-- ============================================================ -->
+    <sys:Double x:Key="WD.PrimaryFontSize">13</sys:Double>
+    <sys:Double x:Key="WD.MediumFontSize">14</sys:Double>
+    <sys:Double x:Key="WD.TitleFontSize">16</sys:Double>
+
+    <FontFamily x:Key="WD.FontFamily">
+        Segoe UI,
+        Roboto,
+        Helvetica Neue For Number,
+        Helvetica Neue,
+        sans-serif
+    </FontFamily>
+
+    <FontStretch x:Key="WD.FontStretch">Normal</FontStretch>
+    <FontStyle x:Key="WD.FontStyle">Normal</FontStyle>
+    <FontWeight x:Key="WD.FontWeight">Normal</FontWeight>
+
+    <!-- ============================================================ -->
+    <!--  Static colors (from Colors.xaml)                           -->
+    <!-- ============================================================ -->
+    <SolidColorBrush x:Key="WD.ButtonFocusVisualColor" po:Freeze="True" Color="#60000000" />
+
+    <Color x:Key="WD.ShadowDepthColor" po:Freeze="True">#AA000000</Color>
+
+    <Color x:Key="WD.PlaceholderTextColor" po:Freeze="True">#C0C4CC</Color>
+    <SolidColorBrush x:Key="WD.PlaceholderTextBrush" po:Freeze="True" Color="{StaticResource WD.PlaceholderTextColor}" />
+
+    <!--  PrimaryColor  -->
+    <Color x:Key="WD.PrimaryColor" po:Freeze="True">#409EFF</Color>
+    <SolidColorBrush x:Key="WD.PrimaryBrush" po:Freeze="True" Color="{StaticResource WD.PrimaryColor}" />
+
+    <Color x:Key="WD.PrimaryMouseOverColor" po:Freeze="True">#EBF4FF</Color>
+    <SolidColorBrush x:Key="WD.PrimaryMouseOverBrush" po:Freeze="True" Color="{DynamicResource WD.PrimaryMouseOverColor}" />
+
+    <!--  SuccessColor  -->
+    <Color x:Key="WD.SuccessColor" po:Freeze="True">#13CE67</Color>
+    <SolidColorBrush x:Key="WD.SuccessBrush" po:Freeze="True" Color="{StaticResource WD.SuccessColor}" />
+    <Color x:Key="WD.SuccessMouseOverColor" po:Freeze="True">#EFFCE9</Color>
+    <SolidColorBrush x:Key="WD.SuccessMouseOverBrush" po:Freeze="True" Color="{StaticResource WD.SuccessMouseOverColor}" />
+
+    <!--  WarningColor  -->
+    <Color x:Key="WD.WarningColor" po:Freeze="True">#E6A23C</Color>
+    <SolidColorBrush x:Key="WD.WarningBrush" po:Freeze="True" Color="{StaticResource WD.WarningColor}" />
+    <Color x:Key="WD.WarningMouseOverColor" po:Freeze="True">#FAF2E5</Color>
+    <SolidColorBrush x:Key="WD.WarningMouseOverBrush" po:Freeze="True" Color="{StaticResource WD.WarningMouseOverColor}" />
+
+    <!--  DangerColor  -->
+    <Color x:Key="WD.DangerColor" po:Freeze="True">#F56C6C</Color>
+    <SolidColorBrush x:Key="WD.DangerBrush" po:Freeze="True" Color="{StaticResource WD.DangerColor}" />
+    <Color x:Key="WD.DangerMouseOverColor" po:Freeze="True">#FCE5E5</Color>
+    <SolidColorBrush x:Key="WD.DangerMouseOverBrush" po:Freeze="True" Color="{StaticResource WD.DangerMouseOverColor}" />
+
+    <Color x:Key="WD.BlackColor" po:Freeze="True">#000000</Color>
+    <SolidColorBrush x:Key="WD.BlackBrush" po:Freeze="True" Color="{StaticResource WD.BlackColor}" />
+
+    <!-- ============================================================ -->
+    <!--  Theme (light) colors (from Light.Color.xaml)               -->
+    <!--  Switch to Dark.Color.xaml for dark theme                    -->
+    <!-- ============================================================ -->
+    <Color x:Key="WD.PrimaryTextColor" po:Freeze="True">#303133</Color>
+    <SolidColorBrush x:Key="WD.PrimaryTextBrush" po:Freeze="True" Color="{StaticResource WD.PrimaryTextColor}" />
+
+    <Color x:Key="WD.RegularTextColor" po:Freeze="True">#606266</Color>
+    <SolidColorBrush x:Key="WD.RegularTextBrush" po:Freeze="True" Color="{StaticResource WD.RegularTextColor}" />
+
+    <Color x:Key="WD.BackgroundColor" po:Freeze="True">#FFFFFF</Color>
+    <SolidColorBrush x:Key="WD.BackgroundBrush" po:Freeze="True" Color="{StaticResource WD.BackgroundColor}" />
+
+    <Color x:Key="WD.WindowBorderColor" po:Freeze="True">#409EFF</Color>
+    <SolidColorBrush x:Key="WD.WindowBorderBrush" po:Freeze="True" Color="{StaticResource WD.WindowBorderColor}" />
+
+    <SolidColorBrush x:Key="WD.WindowTextBrush" po:Freeze="True" Color="{StaticResource WD.BackgroundColor}" />
+
+    <Color x:Key="WD.BaseColor" po:Freeze="True">#DCDFE6</Color>
+    <SolidColorBrush x:Key="WD.BaseBrush" po:Freeze="True" Color="{StaticResource WD.BaseColor}" />
+
+    <Color x:Key="WD.BaseMoveColor" po:Freeze="True">#F5F7FA</Color>
+    <SolidColorBrush x:Key="WD.BaseMoveBrush" po:Freeze="True" Color="{StaticResource WD.BaseMoveColor}" />
+
+    <Color x:Key="WD.LighterColor" po:Freeze="True">#EBEEF5</Color>
+    <SolidColorBrush x:Key="WD.LighterBrush" po:Freeze="True" Color="{StaticResource WD.LighterColor}" />
+
+    <Color x:Key="WD.LightColor" po:Freeze="True">#E4E7ED</Color>
+    <SolidColorBrush x:Key="WD.LightBrush" po:Freeze="True" Color="{StaticResource WD.LightColor}" />
+
+    <Color x:Key="WD.ChartXAxisColor" po:Freeze="True">#E0E6F1</Color>
+    <SolidColorBrush x:Key="WD.ChartXAxisBrush" po:Freeze="True" Color="{StaticResource WD.ChartXAxisColor}" />
+
+    <Color x:Key="WD.ChartFillColor" po:Freeze="True">#6E7079</Color>
+    <SolidColorBrush x:Key="WD.ChartFillBrush" po:Freeze="True" Color="{StaticResource WD.ChartFillColor}" />
+
+    <!--  Fallback for WD.DefaultBorderBrush (used by RepeatButton)   -->
+    <SolidColorBrush x:Key="WD.DefaultBorderBrush" po:Freeze="True" Color="#C0C4CC" />
+
+    <!-- ============================================================ -->
+    <!--  ControlBasic shared resources (from ControlBasic.xaml)       -->
+    <!-- ============================================================ -->
+    <Style x:Key="WD.ControlBasicStyle" TargetType="Control">
+        <Setter Property="FontSize" Value="{StaticResource WD.PrimaryFontSize}" />
+        <Setter Property="FontFamily" Value="{StaticResource WD.FontFamily}" />
+        <Setter Property="FontStyle" Value="{StaticResource WD.FontStyle}" />
+        <Setter Property="FontWeight" Value="{StaticResource WD.FontWeight}" />
+        <Setter Property="FontStretch" Value="{StaticResource WD.FontStretch}" />
+        <Setter Property="TextElement.FontSize" Value="{StaticResource WD.PrimaryFontSize}" />
+        <Setter Property="TextElement.FontFamily" Value="{StaticResource WD.FontFamily}" />
+        <Setter Property="TextElement.FontStyle" Value="{StaticResource WD.FontStyle}" />
+        <Setter Property="TextElement.FontWeight" Value="{StaticResource WD.FontWeight}" />
+        <Setter Property="TextElement.FontStretch" Value="{StaticResource WD.FontStretch}" />
+        <Setter Property="TextElement.Foreground" Value="{DynamicResource WD.PrimaryTextBrush}" />
+        <Setter Property="TextBlock.FontSize" Value="{StaticResource WD.PrimaryFontSize}" />
+        <Setter Property="TextBlock.FontFamily" Value="{StaticResource WD.FontFamily}" />
+        <Setter Property="TextBlock.FontStyle" Value="{StaticResource WD.FontStyle}" />
+        <Setter Property="TextBlock.FontWeight" Value="{StaticResource WD.FontWeight}" />
+        <Setter Property="TextBlock.FontStretch" Value="{StaticResource WD.FontStretch}" />
+        <Setter Property="TextBlock.Foreground" Value="{DynamicResource WD.PrimaryTextBrush}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="{StaticResource WD.EnabledOpacity}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <sys:Double x:Key="WD.EnabledOpacity">0.7</sys:Double>
+    <sys:Double x:Key="WD.CornerRadius">4</sys:Double>
+    <sys:Double x:Key="WD.Height">32</sys:Double>
+    <sys:Double x:Key="WD.ThumbWidth">16</sys:Double>
+    <sys:Double x:Key="WD.ThumbCornerRadius">8</sys:Double>
+    <sys:Double x:Key="WD.RepeatButtonSize">6</sys:Double>
+    <sys:Double x:Key="WD.ColumnHeaderWidth">6</sys:Double>
+    <Thickness x:Key="WD.Padding">6</Thickness>
+
+    <DropShadowEffect
+        x:Key="WD.PrimaryShadowDepth"
+        BlurRadius="5"
+        Direction="270"
+        Opacity=".42"
+        RenderingBias="Performance"
+        ShadowDepth="1"
+        Color="{StaticResource WD.ShadowDepthColor}" />
+
+    <DropShadowEffect
+        x:Key="WD.PopupShadowDepth"
+        BlurRadius="12"
+        Opacity="0.1"
+        ShadowDepth="2"
+        Color="{StaticResource WD.BlackColor}" />
+
+    <!-- ============================================================ -->
+    <!--  Converter instances                                          -->
+    <!-- ============================================================ -->
+    <convert:HalfValueConverter x:Key="WD.HalfValueConverter" />
+    <convert:ColorToBrushConverter x:Key="WD.ColorToBrushConverter" />
+    <convert:ColorToStringConverter x:Key="WD.ColorToStringConverter" />
+    <convert:StringToColorConverter x:Key="WD.StringToColorConverter" />
+
+    <!--  Tooltip style  -->
+    <Style TargetType="ToolTip">
+        <Setter Property="Visibility" Value="Visible" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding Content, RelativeSource={RelativeSource Self}}" Value="{x:Null}">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Content, RelativeSource={RelativeSource Self}}" Value="">
+                <Setter Property="Visibility" Value="Collapsed" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- ============================================================ -->
+    <!--  Supporting styles (from Styles/)                             -->
+    <!-- ============================================================ -->
+
+    <!-- Button styles (from Styles.Buttons.xaml)  -->
+    <Style
+        x:Key="WD.BaseButton"
+        BasedOn="{StaticResource WD.ControlBasicStyle}"
+        TargetType="{x:Type ButtonBase}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="FrameworkElement.OverridesDefaultStyle" Value="True" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="{StaticResource WD.Padding}" />
+        <Setter Property="Cursor" Value="Hand" />
+    </Style>
+
+    <Style
+        x:Key="WD.NormalButton"
+        BasedOn="{StaticResource WD.BaseButton}"
+        TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource WD.RegularTextBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <controls:SmallPanel>
+                        <Border
+                            Name="PART_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding Path=(helpers:ElementHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}"
+                            Opacity=".4"
+                            SnapsToDevicePixels="True" />
+                        <ContentPresenter
+                            Name="PART_ContentPresenter"
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                    </controls:SmallPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="UIElement.IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="{DynamicResource WD.ButtonFocusVisualColor}" />
+                        </Trigger>
+                        
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--   RepeatButton style (from Styles.RepeatButton.xaml)   -->
+    <Style
+        x:Key="WD.DefaultRepeatButton"
+        BasedOn="{StaticResource WD.ControlBasicStyle}"
+        TargetType="{x:Type RepeatButton}">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Background" Value="{DynamicResource WD.BackgroundBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource WD.BaseBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource WD.RegularTextBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="{StaticResource WD.Padding}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <controls:SmallPanel>
+                        <Border
+                            Name="PART_Border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{Binding Path=(helpers:ElementHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}" />
+                        <ContentPresenter
+                            Margin="{TemplateBinding Padding}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            RecognizesAccessKey="True"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                    </controls:SmallPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource WD.DefaultBorderBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource WD.BaseBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource WD.PrimaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource WD.DefaultBorderBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource WD.BaseBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource WD.PrimaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource WD.DefaultBorderBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource WD.BaseBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource WD.PrimaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsMouseCaptured" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource WD.DefaultBorderBrush}" />
+                            <Setter Property="Background" Value="{DynamicResource WD.BaseBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource WD.PrimaryBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--   TextBox style (from Styles.TextBox.xaml)   -->
+    <Style
+        x:Key="WD.DefaultTextBox"
+        BasedOn="{StaticResource WD.ControlBasicStyle}"
+        TargetType="{x:Type TextBox}">
+        <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="{StaticResource WD.Padding}" />
+        <Setter Property="AllowDrop" Value="True" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource WD.BaseBrush}" />
+        <Setter Property="Background" Value="{DynamicResource WD.BackgroundBrush}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource WD.WindowBorderBrush}" />
+        <Setter Property="ContextMenu">
+            <Setter.Value>
+                <ContextMenu>
+                    <MenuItem Command="Copy" />
+                    <MenuItem Command="Paste" />
+                    <MenuItem Command="Cut" />
+                </ContextMenu>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border
+                        Name="PART_Border"
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{Binding Path=(helpers:ElementHelper.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
+                        <controls:SmallPanel>
+                            <TextBlock
+                                x:Name="PART_Watermark"
+                                Margin="{TemplateBinding Padding}"
+                                Padding="1,0"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                FontSize="{StaticResource WD.PrimaryFontSize}"
+                                Foreground="{DynamicResource WD.RegularTextBrush}"
+                                Text="{Binding Path=(helpers:ElementHelper.Watermark), RelativeSource={RelativeSource TemplatedParent}}"
+                                Visibility="Collapsed" />
+                            <ScrollViewer x:Name="PART_ContentHost" />
+                            <Button
+                                x:Name="PART_CloseButton"
+                                Width="20"
+                                Height="20"
+                                Margin="0,0,4,0"
+                                HorizontalAlignment="Right"
+                                helpers:ElementHelper.IsClear="{Binding Path=(helpers:ElementHelper.IsClear), RelativeSource={RelativeSource TemplatedParent}}"
+                                helpers:ElementHelper.IsRound="True"
+                                Style="{StaticResource WD.NormalButton}"
+                                Visibility="Collapsed">
+                            </Button>
+                        </controls:SmallPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Text" Value="">
+                            <Setter TargetName="PART_Watermark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="Text" Value="{x:Null}">
+                            <Setter TargetName="PART_Watermark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="BorderBrush" Value="{DynamicResource WD.PrimaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="helpers:ElementHelper.IsClear" Value="True">
+                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="helpers:ElementHelper.IsClear" Value="True" />
+                                <Condition Property="Text" Value="{x:Null}" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Collapsed" />
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="helpers:ElementHelper.IsClear" Value="True" />
+                                <Condition Property="Text" Value="" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="PART_CloseButton" Property="Visibility" Value="Collapsed" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  ColorPicker special resources                                -->
+    <!-- ============================================================ -->
+    <LinearGradientBrush x:Key="WD.ColorPickerRainbowBrush" po:Freeze="True">
+        <GradientStop Color="#FF0000" />
+        <GradientStop Offset="0.167" Color="#FF00FF" />
+        <GradientStop Offset="0.334" Color="#0000FF" />
+        <GradientStop Offset="0.501" Color="#00FFFF" />
+        <GradientStop Offset="0.668" Color="#00FF00" />
+        <GradientStop Offset="0.835" Color="#FFFF00" />
+        <GradientStop Offset="1" Color="#FF0000" />
+    </LinearGradientBrush>
+
+    <ControlTemplate x:Key="WD.ColorPickerSliderThumbTemplate" TargetType="Thumb">
+        <Border
+            Width="{TemplateBinding Width}"
+            Height="{TemplateBinding Height}"
+            Background="Transparent"
+            BorderBrush="White"
+            BorderThickness="3"
+            CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource WD.HalfValueConverter}}" />
+    </ControlTemplate>
+
+    <Style x:Key="WD.ColorPickerSliderRepeatButtonBaseStyle" TargetType="RepeatButton">
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Focusable" Value="false" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RepeatButton">
+                    <Rectangle
+                        Width="{TemplateBinding Width}"
+                        Height="{TemplateBinding Height}"
+                        Fill="{TemplateBinding Background}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="WD.ColorPickerSlider" TargetType="{x:Type Slider}">
+        <Setter Property="Background" Value="{StaticResource WD.ColorPickerRainbowBrush}" />
+        <Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
+        <Setter Property="Orientation" Value="Horizontal" />
+        <Setter Property="Height" Value="15" />
+        <Setter Property="Margin" Value="4,0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Slider}">
+                    <controls:SmallPanel>
+                        <Border
+                            MaxWidth="{TemplateBinding MaxWidth}"
+                            Margin="{TemplateBinding Margin}"
+                            Background="{TemplateBinding Background}"
+                            CornerRadius="2" />
+                        <Track x:Name="PART_Track" Orientation="{TemplateBinding Orientation}">
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton Command="{x:Static Slider.DecreaseLarge}" Style="{StaticResource WD.ColorPickerSliderRepeatButtonBaseStyle}" />
+                            </Track.DecreaseRepeatButton>
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton Command="{x:Static Slider.IncreaseLarge}" Style="{StaticResource WD.ColorPickerSliderRepeatButtonBaseStyle}" />
+                            </Track.IncreaseRepeatButton>
+                            <Track.Thumb>
+                                <Thumb
+                                    x:Name="Thumb"
+                                    Width="15"
+                                    Height="15"
+                                    Focusable="False"
+                                    OverridesDefaultStyle="True"
+                                    Template="{StaticResource WD.ColorPickerSliderThumbTemplate}">
+                                    <Thumb.Effect>
+                                        <DropShadowEffect Opacity=".6" ShadowDepth="0" />
+                                    </Thumb.Effect>
+                                </Thumb>
+                            </Track.Thumb>
+                        </Track>
+                    </controls:SmallPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <!-- ============================================================ -->
+    <!--  ColorPicker style (from Themes/ColorPicker.xaml)            -->
+    <!-- ============================================================ -->
+    <Style
+        x:Key="WD.ColorPicker"
+        BasedOn="{StaticResource WD.ControlBasicStyle}"
+        TargetType="{x:Type controls:ColorPicker}">
+        <Setter Property="Width" Value="260" />
+        <Setter Property="Height" Value="200" />
+        <Setter Property="Margin" Value="2" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource WD.BaseBrush}" />
+        <Setter Property="Background" Value="{DynamicResource WD.BackgroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type controls:ColorPicker}">
+                    <Border
+                        Margin="{TemplateBinding Margin}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Canvas
+                                x:Name="PART_Canvas"
+                                Margin="1,1,1,0"
+                                ClipToBounds="True">
+                                <Canvas.Background>
+                                    <DrawingBrush>
+                                        <DrawingBrush.Drawing>
+                                            <DrawingGroup>
+                                                <GeometryDrawing>
+                                                    <GeometryDrawing.Brush>
+                                                        <LinearGradientBrush EndPoint="1,0">
+                                                            <GradientStop Offset="0" Color="White" />
+                                                            <GradientStop Offset="1" Color="{Binding HueColor, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                        </LinearGradientBrush>
+                                                    </GeometryDrawing.Brush>
+                                                    <GeometryDrawing.Geometry>
+                                                        <RectangleGeometry Rect="0,0,5,5" />
+                                                    </GeometryDrawing.Geometry>
+                                                </GeometryDrawing>
+                                                <GeometryDrawing>
+                                                    <GeometryDrawing.Brush>
+                                                        <LinearGradientBrush EndPoint="0,1">
+                                                            <GradientStop Offset="0" Color="#00000000" />
+                                                            <GradientStop Offset="1" Color="{StaticResource WD.BlackColor}" />
+                                                        </LinearGradientBrush>
+                                                    </GeometryDrawing.Brush>
+                                                    <GeometryDrawing.Geometry>
+                                                        <RectangleGeometry Rect="0,0,5,5" />
+                                                    </GeometryDrawing.Geometry>
+                                                </GeometryDrawing>
+                                            </DrawingGroup>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Canvas.Background>
+                                <Thumb
+                                    x:Name="PART_Thumb"
+                                    Width="15"
+                                    Height="15"
+                                    Background="Transparent"
+                                    BorderBrush="White"
+                                    BorderThickness="3">
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="{x:Type Thumb}">
+                                            <controls:SmallPanel>
+                                                <Border
+                                                    Background="{TemplateBinding Background}"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    CornerRadius="{Binding ActualWidth, RelativeSource={RelativeSource Self}, Converter={StaticResource WD.HalfValueConverter}}"
+                                                    SnapsToDevicePixels="True">
+                                                    <Border.Effect>
+                                                        <DropShadowEffect Opacity=".6" ShadowDepth="0" />
+                                                    </Border.Effect>
+                                                </Border>
+                                            </controls:SmallPanel>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Canvas>
+                            <Grid Grid.Row="1" Margin="6,5,6,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Ellipse
+                                    Width="25"
+                                    Height="25"
+                                    Margin="0,0,4,0"
+                                    Fill="{TemplateBinding SelectedColor, Converter={StaticResource WD.ColorToBrushConverter}}">
+                                    <Ellipse.Effect>
+                                        <DropShadowEffect Opacity=".6" ShadowDepth="0" />
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                                <Slider
+                                    Name="PART_HueSlider"
+                                    Grid.Column="1"
+                                    Width="Auto"
+                                    IsMoveToPointEnabled="True"
+                                    LargeChange="0.01"
+                                    Maximum="1"
+                                    SmallChange="0.01"
+                                    Style="{StaticResource WD.ColorPickerSlider}"
+                                    Value="1" />
+                            </Grid>
+                            <Grid
+                                Grid.Row="2"
+                                Margin="4"
+                                VerticalAlignment="Center">
+                                <Grid.Resources>
+                                    <Style
+                                        x:Key="WD.TextBoxColorPicker"
+                                        BasedOn="{StaticResource WD.DefaultTextBox}"
+                                        TargetType="{x:Type TextBox}">
+                                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                                        <Setter Property="TextAlignment" Value="Center" />
+                                        <Setter Property="Width" Value="NaN" />
+                                    </Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                        <Setter Property="Foreground" Value="{DynamicResource WD.PrimaryTextBrush}" />
+                                        <Setter Property="FontSize" Value="10" />
+                                    </Style>
+                                </Grid.Resources>
+
+                                <StackPanel
+                                    Margin="12,0">
+                                    <TextBox
+                                        x:Name="PART_HexTextBox"
+                                        MaxLength="7"
+                                        Text="{Binding SelectedColor, Mode=TwoWay, UpdateSourceTrigger=Explicit, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource WD.ColorToStringConverter}}"
+                                        TextAlignment="Center" />
+                                    <TextBlock Text="HEX" />
+                                </StackPanel>
+                            </Grid>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style BasedOn="{StaticResource WD.ColorPicker}" TargetType="{x:Type controls:ColorPicker}" />
+
+</ResourceDictionary>

@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:wpfDev="clr-namespace:WPFDevelopers.Controls"
              xmlns:res="clr-namespace:SSS"
              mc:Ignorable="d">
     <Grid Style="{StaticResource SettingGrid}">
@@ -15,6 +16,7 @@
             <RowDefinition Height="38px"></RowDefinition>
             <RowDefinition Height="38px"></RowDefinition>
             <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
@@ -56,5 +58,7 @@
 
         <CheckBox Grid.Column="1" Grid.Row="7" Content="{x:Static res:Strings.SettingsInitiallyHidden}" IsChecked="{Binding Path=InitiallyHidden, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsInitiallyHiddenTooltip}" />
         <CheckBox Grid.Column="1" Grid.Row="8" Content="{x:Static res:Strings.SettingsCollapseMenuBar}" IsChecked="{Binding Path=CollapseMenuBar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsCollapseMenuBarTooltip}" />
+
+
     </Grid>
 </UserControl>
