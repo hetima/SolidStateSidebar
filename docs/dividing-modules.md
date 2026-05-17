@@ -77,12 +77,6 @@ Settings クラスの `MonitorConfig[]` 配列を、構造化された `Dictiona
 - `src/Core/HardwareConfig.cs` — `HardwareConfig` クラス（元 MonitorConfig.cs から分離）
 - `src/Core/MetricConfig.cs` — `MetricConfig` クラス（元 MonitorConfig.cs から分離）
 
-### 既知の問題
-
-- 設定「適用」後に設定ウィンドウの Hardware 一覧が消える（保存は正常、開き直せば表示される）
-  - 原因: `Save()` で `HardwareOC` の内容を `Hardware` 配列に正規化する際の WPF バインディング切れ
-  - 対応: 未定（後回し）
-
 ### 設計上のポイント
 
 - `HardwareConfig` / `MetricConfig` はすべてのモジュールで共有（クラス変更なし）

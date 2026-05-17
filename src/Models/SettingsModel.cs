@@ -171,10 +171,12 @@ namespace SSS.Models
 
                 if (_module.HardwareOC != null)
                 {
-                    HardwareConfig[] _hardware = _module.HardwareOC.ToArray();
+                    HardwareConfig[] _hardware = new HardwareConfig[_module.HardwareOC.Count];
 
                     for (int v = 0; v < _hardware.Length; v++)
                     {
+                        _hardware[v] = _module.HardwareOC[v].Clone();
+
                         _hardware[v].Order = Convert.ToByte(_hardware.Length - v);
 
                         if (string.IsNullOrEmpty(_hardware[v].Name) || string.Equals(_hardware[v].Name, _hardware[v].ActualName, StringComparison.Ordinal))
@@ -184,9 +186,6 @@ namespace SSS.Models
                     }
 
                     _module.Hardware = _hardware;
-                    
-                    // TODO: 設定を適用するタイミングで設定ウィンドウのHardware一覧が消える。開き直せば表示されるのでデータは問題ない。ここをコメントアウトしても動作は変わらず
-                    _module.HardwareOC = null;
                 }
 
                 _module.Order = Convert.ToByte(Modules.Count - i);
