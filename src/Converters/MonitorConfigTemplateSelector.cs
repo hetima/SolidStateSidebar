@@ -1,5 +1,11 @@
 using System.Windows;
 using System.Windows.Controls;
+using CpuData = SSS.Module.CpuMonitor.Data;
+using RamData = SSS.Module.RamMonitor.Data;
+using GpuData = SSS.Module.GpuMonitor.Data;
+using HdData = SSS.Module.HdMonitor.Data;
+using NetData = SSS.Module.NetworkMonitor.Data;
+using TimeData = SSS.Module.TimeMonitor.Data;
 
 namespace SSS.Converters
 {
@@ -19,21 +25,16 @@ namespace SSS.Converters
 
         public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
-            if (item is Core.MonitorConfig config)
+            return item switch
             {
-                return config.Type switch
-                {
-                    Core.MonitorType.CPU => CpuTemplate,
-                    Core.MonitorType.RAM => RamTemplate,
-                    Core.MonitorType.GPU => GpuTemplate,
-                    Core.MonitorType.HD => HdTemplate,
-                    Core.MonitorType.Network => NetworkTemplate,
-                    Core.MonitorType.Time => TimeTemplate,
-                    _ => null
-                };
-            }
-
-            return base.SelectTemplate(item, container);
+                CpuData => CpuTemplate,
+                RamData => RamTemplate,
+                GpuData => GpuTemplate,
+                HdData => HdTemplate,
+                NetData => NetworkTemplate,
+                TimeData => TimeTemplate,
+                _ => base.SelectTemplate(item, container)
+            };
         }
     }
 }

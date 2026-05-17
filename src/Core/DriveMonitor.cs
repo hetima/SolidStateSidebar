@@ -120,18 +120,15 @@ namespace SSS.Core
             return _instances.Where(n => MyRegex().IsMatch(n)).OrderBy(d => d[0]).Select(h => new HardwareConfig() { ID = h, Name = h, ActualName = h });
         }
 
-        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters)
+        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, bool roundAll, int usedSpaceAlert)
         {
-            bool _roundAll = parameters.GetValue<bool>(ParamKey.RoundAll);
-            int _usedSpaceAlert = parameters.GetValue<int>(ParamKey.UsedSpaceAlert);
-
             return (
                 from hw in GetHardware()
                 join c in hardwareConfig on hw.ID equals c.ID into merged
                 from n in merged.DefaultIfEmpty(hw).Select(n => { n.ActualName = hw.Name; return n; })
                 where n.Enabled
                 orderby n.Order descending, n.Name ascending
-                select new DriveMonitor(n.ID ?? hw.ID!, n.Name ?? n.ActualName!, metrics, _roundAll, _usedSpaceAlert)
+                select new DriveMonitor(n.ID ?? hw.ID!, n.Name ?? n.ActualName!, metrics, roundAll, usedSpaceAlert)
                 ).ToArray();
         }
 

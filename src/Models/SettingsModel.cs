@@ -77,15 +77,35 @@ namespace SSS.Models
             InitiallyHidden = Core.Settings.Instance.InitiallyHidden;
             ShowMachineName = Core.Settings.Instance.ShowMachineName;
 
-            ObservableCollection<MonitorConfig> _config = new ObservableCollection<MonitorConfig>(Core.Settings.Instance.MonitorConfig!.Select(c => c.Clone()).OrderByDescending(c => c.Order));
+            ObservableCollection<IModuleData> _modules = new ObservableCollection<IModuleData>(
+                from kvp in Core.Settings.Instance.Modules!
+                orderby kvp.Value.Order descending
+                select kvp.Value.Clone()
+                );
 
             if (sidebar != null && sidebar.Ready)
             {
-                foreach (MonitorConfig _record in _config)
+                MonitorType[] ohmTypes = [MonitorType.CPU, MonitorType.RAM, MonitorType.GPU];
+
+                foreach (IModuleData _module in _modules)
                 {
-                    _record.HardwareOC = new ObservableCollection<HardwareConfig>(
-                        from hw in sidebar.Model!.MonitorManager.GetHardware(_record.Type)
-                        join config in _record.Hardware! on hw.ID equals config.ID into merged
+                    MonitorType? _type = _module switch
+                    {
+                        SSS.Module.CpuMonitor.Data => MonitorType.CPU,
+                        SSS.Module.RamMonitor.Data => MonitorType.RAM,
+                        SSS.Module.GpuMonitor.Data => MonitorType.GPU,
+                        SSS.Module.HdMonitor.Data => MonitorType.HD,
+                        SSS.Module.NetworkMonitor.Data => MonitorType.Network,
+                        SSS.Module.TimeMonitor.Data => MonitorType.Time,
+                        _ => null
+                    };
+
+                    if (_type == null || _module.Hardware == null)
+                        continue;
+
+                    _module.HardwareOC = new ObservableCollection<HardwareConfig>(
+                        from hw in sidebar.Model!.MonitorManager.GetHardware(_type.Value)
+                        join config in _module.Hardware on hw.ID equals config.ID into merged
                         from newhw in merged.DefaultIfEmpty(hw).Select(newhw => { newhw.ActualName = hw.ActualName; if (string.IsNullOrEmpty(newhw.Name)) { newhw.Name = hw.ActualName; } return newhw; })
                         orderby newhw.Order descending, newhw.Name ascending
                         select newhw
@@ -93,7 +113,7 @@ namespace SSS.Models
                 }
             }
 
-            MonitorConfig = _config;
+            Modules = _modules;
 
             if (Core.Settings.Instance.Hotkeys != null)
             {
@@ -145,29 +165,47 @@ namespace SSS.Models
             Core.Settings.Instance.InitiallyHidden = InitiallyHidden;
             Core.Settings.Instance.ShowMachineName = ShowMachineName;
 
-            MonitorConfig[] _config = MonitorConfig.Select(c => c.Clone()).ToArray();
-
-            for (int i = 0; i < _config.Length; i++)
+            for (int i = 0; i < Modules.Count; i++)
             {
-                HardwareConfig[] _hardware = _config[i].HardwareOC!.ToArray();
+                IModuleData _module = Modules[i];
 
-                for (int v = 0; v < _hardware.Length; v++)
+                if (_module.HardwareOC != null)
                 {
-                    _hardware[v].Order = Convert.ToByte(_hardware.Length - v);
+                    HardwareConfig[] _hardware = _module.HardwareOC.ToArray();
 
-                    if (string.IsNullOrEmpty(_hardware[v].Name) || string.Equals(_hardware[v].Name, _hardware[v].ActualName, StringComparison.Ordinal))
+                    for (int v = 0; v < _hardware.Length; v++)
                     {
-                        _hardware[v].Name = null;
+                        _hardware[v].Order = Convert.ToByte(_hardware.Length - v);
+
+                        if (string.IsNullOrEmpty(_hardware[v].Name) || string.Equals(_hardware[v].Name, _hardware[v].ActualName, StringComparison.Ordinal))
+                        {
+                            _hardware[v].Name = null;
+                        }
                     }
+
+                    _module.Hardware = _hardware;
+                    
+                    // TODO: 設定を適用するタイミングで設定ウィンドウのHardware一覧が消える。開き直せば表示されるのでデータは問題ない。ここをコメントアウトしても動作は変わらず
+                    _module.HardwareOC = null;
                 }
 
-                _config[i].Hardware = _hardware;
-                _config[i].HardwareOC = null;
-
-                _config[i].Order = Convert.ToByte(_config.Length - i);
+                _module.Order = Convert.ToByte(Modules.Count - i);
             }
 
-            Core.Settings.Instance.MonitorConfig = _config;
+            Core.Settings.Instance.Modules = new Dictionary<string, IModuleData>(
+                Modules.Select(m => new KeyValuePair<string, IModuleData>(
+                    m switch
+                    {
+                        SSS.Module.CpuMonitor.Data => "CpuMonitor",
+                        SSS.Module.RamMonitor.Data => "RamMonitor",
+                        SSS.Module.GpuMonitor.Data => "GpuMonitor",
+                        SSS.Module.HdMonitor.Data => "HdMonitor",
+                        SSS.Module.NetworkMonitor.Data => "NetworkMonitor",
+                        SSS.Module.TimeMonitor.Data => "TimeMonitor",
+                        _ => throw new InvalidOperationException("Unknown module data type")
+                    }, m
+                ))
+                );
 
             List<Hotkey> _hotkeys = new List<Hotkey>();
 
@@ -797,61 +835,62 @@ namespace SSS.Models
             }
         }
 
-        private ObservableCollection<MonitorConfig>? _monitorConfig { get; set; }
+        private ObservableCollection<IModuleData>? _modules { get; set; }
 
-        public ObservableCollection<MonitorConfig> MonitorConfig
+        public ObservableCollection<IModuleData> Modules
         {
             get
             {
-                return _monitorConfig!;
+                return _modules!;
             }
             set
             {
-                _monitorConfig = value;
+                _modules = value;
 
-                _monitorConfig.CollectionChanged += Child_CollectionChanged;
+                _modules.CollectionChanged += Child_CollectionChanged;
 
-                foreach (MonitorConfig _config in _monitorConfig)
+                foreach (IModuleData _module in _modules)
                 {
-                    _config.PropertyChanged += Child_PropertyChanged;
+                    _module.PropertyChanged += Child_PropertyChanged;
 
-                    _config.HardwareOC!.CollectionChanged += Child_CollectionChanged;
-
-                    foreach (HardwareConfig _hardware in _config.HardwareOC)
+                    if (_module.HardwareOC != null)
                     {
-                        _hardware.PropertyChanged += Child_PropertyChanged;
+                        _module.HardwareOC.CollectionChanged += Child_CollectionChanged;
+
+                        foreach (HardwareConfig _hardware in _module.HardwareOC)
+                        {
+                            _hardware.PropertyChanged += Child_PropertyChanged;
+                        }
                     }
 
-                    foreach (MetricConfig _metric in _config.Metrics!)
+                    if (_module.Metrics != null)
                     {
-                        _metric.PropertyChanged += Child_PropertyChanged;
-                    }
-
-                    foreach (ConfigParam _param in _config.Params!)
-                    {
-                        _param.PropertyChanged += Child_PropertyChanged;
+                        foreach (MetricConfig _metric in _module.Metrics)
+                        {
+                            _metric.PropertyChanged += Child_PropertyChanged;
+                        }
                     }
                 }
 
-                SelectedMonitor = _monitorConfig.FirstOrDefault();
+                SelectedModule = _modules.FirstOrDefault();
 
-                NotifyPropertyChanged(nameof(MonitorConfig));
+                NotifyPropertyChanged(nameof(Modules));
             }
         }
 
-        private MonitorConfig? _selectedMonitor { get; set; }
+        private IModuleData? _selectedModule { get; set; }
 
-        public MonitorConfig? SelectedMonitor
+        public IModuleData? SelectedModule
         {
             get
             {
-                return _selectedMonitor;
+                return _selectedModule;
             }
             set
             {
-                _selectedMonitor = value;
+                _selectedModule = value;
 
-                NotifyPropertyChanged(nameof(SelectedMonitor));
+                NotifyPropertyChanged(nameof(SelectedModule));
             }
         }
 

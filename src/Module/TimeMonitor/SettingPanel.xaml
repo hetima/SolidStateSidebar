@@ -35,78 +35,17 @@
             </DockPanel>
 
             <!-- Params: Clock24HR (Boolean), DateFormat (ComboBox) -->
-            <ItemsControl ItemsSource="{Binding Path=Params}" Margin="10">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type monitor:ConfigParam}">
-                        <ContentControl>
-                            <ContentControl.Style>
-                                <Style TargetType="{x:Type ContentControl}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding TypeString}" Value="System.Boolean">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding TypeString}" Value="System.Int32">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <StackPanel>
-                                                        <Label Content="{Binding Path=Name, Mode=OneTime}" />
-                                                        <TextBox Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
-                                                    </StackPanel>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding Key}" Value="{x:Static monitor:ParamKey.DateFormat}">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <StackPanel>
-                                                        <Label Content="{Binding Path=Name, Mode=OneTime}" />
-                                                        <ComboBox ItemsSource="{StaticResource DateFormatItems}"
-                                                                  SelectedValue="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateFormatConverter}}"
-                                                                  SelectedValuePath="."
-                                                                  ItemTemplate="{StaticResource DateFormatItemTemplate}"
-                                                                  ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
-                                                    </StackPanel>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ContentControl.Style>
-                            <ContentControl.Resources>
-                                <Style TargetType="{x:Type CheckBox}">
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                    <Setter Property="Margin" Value="0,5" />
-                                </Style>
-                                <Style TargetType="{x:Type StackPanel}">
-                                    <Setter Property="Orientation" Value="Horizontal" />
-                                    <Setter Property="Margin" Value="0,5" />
-                                    <Style.Resources>
-                                        <Style TargetType="{x:Type Label}">
-                                            <Setter Property="VerticalAlignment" Value="Center" />
-                                            <Setter Property="Margin" Value="0,0,10,0" />
-                                            <Setter Property="Padding" Value="0" />
-                                        </Style>
-                                        <Style TargetType="{x:Type TextBox}">
-                                            <Setter Property="VerticalAlignment" Value="Center" />
-                                            <Setter Property="Width" Value="40" />
-                                            <Setter Property="MaxLines" Value="1" />
-                                        </Style>
-                                    </Style.Resources>
-                                </Style>
-                            </ContentControl.Resources>
-                        </ContentControl>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Style="{StaticResource VerticalPanel}" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+            <StackPanel Margin="10">
+                <CheckBox Content="{x:Static res:Strings.Settings24HourClock}" IsChecked="{Binding Path=Clock24HR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.Settings24HourClockTooltip}" />
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Label Content="{x:Static res:Strings.SettingsDateFormat}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
+                    <ComboBox ItemsSource="{StaticResource DateFormatItems}"
+                              SelectedValue="{Binding Path=DateFormat, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource DateFormatConverter}}"
+                              SelectedValuePath="."
+                              ItemTemplate="{StaticResource DateFormatItemTemplate}"
+                              ToolTip="{x:Static res:Strings.SettingsDateFormatTooltip}" />
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Border>
 </UserControl>

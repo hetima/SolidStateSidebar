@@ -138,6 +138,9 @@ namespace SSS.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
+            if (value == null || (value is string s && string.IsNullOrEmpty(s)))
+                return Strings.DateDisabled;
+
             int intValue = System.Convert.ToInt32(value);
 
             return intValue switch

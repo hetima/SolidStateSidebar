@@ -82,14 +82,8 @@ namespace SSS.Core
             return _instances.Where(i => !IsatapRegex().IsMatch(i)).OrderBy(h => h).Select(h => new HardwareConfig() { ID = h, Name = h, ActualName = h });
         }
 
-        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters)
+        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, bool showName, bool roundAll, bool useBytes, int bandwidthInAlert, int bandwidthOutAlert)
         {
-            bool _showName = parameters.GetValue<bool>(ParamKey.HardwareNames);
-            bool _roundAll = parameters.GetValue<bool>(ParamKey.RoundAll);
-            bool _useBytes = parameters.GetValue<bool>(ParamKey.UseBytes);
-            int _bandwidthInAlert = parameters.GetValue<int>(ParamKey.BandwidthInAlert);
-            int _bandwidthOutAlert = parameters.GetValue<int>(ParamKey.BandwidthOutAlert);
-
             string? _extIP = null;
 
             if (metrics.IsEnabled(MetricKey.NetworkExtIP))
@@ -103,7 +97,7 @@ namespace SSS.Core
                 from n in merged.DefaultIfEmpty(hw).Select(n => { n.ActualName = hw.Name; return n; })
                 where n.Enabled
                 orderby n.Order descending, n.Name ascending
-                select new NetworkMonitor(n.ID ?? hw.ID!, n.Name ?? n.ActualName!, _extIP, metrics, _showName, _roundAll, _useBytes, _bandwidthInAlert, _bandwidthOutAlert)
+                select new NetworkMonitor(n.ID ?? hw.ID!, n.Name ?? n.ActualName!, _extIP, metrics, showName, roundAll, useBytes, bandwidthInAlert, bandwidthOutAlert)
                 ).ToArray();
         }
 

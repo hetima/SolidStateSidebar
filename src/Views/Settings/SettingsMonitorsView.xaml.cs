@@ -26,10 +26,10 @@ namespace SSS
             DragDrop.DefaultDropHandler.Drop(dropInfo);
 
             // ドロップ後にドラッグした項目を選択状態にする
-            MonitorConfig? target = dropInfo?.Data switch
+            IModuleData? target = dropInfo?.Data switch
             {
-                MonitorConfig item => item,
-                IEnumerable<MonitorConfig> items => items.FirstOrDefault(),
+                IModuleData item => item,
+                IEnumerable<IModuleData> items => items.FirstOrDefault(),
                 _ => null
             };
             if (target != null)

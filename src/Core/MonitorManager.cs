@@ -3,13 +3,19 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using LibreHardwareMonitor.Hardware;
+using CpuData = SSS.Module.CpuMonitor.Data;
+using GpuData = SSS.Module.GpuMonitor.Data;
+using HdData = SSS.Module.HdMonitor.Data;
+using NetData = SSS.Module.NetworkMonitor.Data;
+using RamData = SSS.Module.RamMonitor.Data;
+using TimeData = SSS.Module.TimeMonitor.Data;
 
 namespace SSS.Core
 {
     public class MonitorManager : INotifyPropertyChanged, IDisposable
     {
 
-        public MonitorManager(MonitorConfig[] config)
+        public MonitorManager(Dictionary<string, IModuleData> modules)
         {
             _computer = new Computer()
             {
@@ -26,19 +32,31 @@ namespace SSS.Core
 
             UpdateBoard();
 
-
-            foreach (var c in config)
+            var ramData = modules["RamMonitor"];
+            // De-duplicate RAM hardware IDs
+            if (ramData.Hardware != null)
             {
-                if (c.Type == MonitorType.RAM && c.Hardware != null)
-                {
-                    c.Hardware = c.Hardware
-                        .GroupBy(h => h.ID)
-                        .Select(g => g.First())
-                        .ToArray();
-                }
+                ramData.Hardware = ramData.Hardware
+                    .GroupBy(h => h.ID)
+                    .Select(g => g.First())
+                    .ToArray();
             }
 
-            MonitorPanels = config.Where(c => c.Enabled).OrderByDescending(c => c.Order).Select(c => NewPanel(c)).ToArray();
+            MonitorPanels = modules
+                .Where(m => m.Value.Enabled)
+                .OrderByDescending(m => m.Value.Order)
+                .Select(m => m.Key switch
+                {
+                    "CpuMonitor" => CpuPanel(m.Value),
+                    "RamMonitor" => RamPanel(m.Value),
+                    "GpuMonitor" => GpuPanel(m.Value),
+                    "HdMonitor" => HdPanel(m.Value),
+                    "NetworkMonitor" => NetworkPanel(m.Value),
+                    "TimeMonitor" => TimePanel(m.Value),
+                    _ => null
+                })
+                .Where(p => p != null)
+                .ToArray()!;
         }
 
         public void Dispose()
@@ -125,105 +143,72 @@ namespace SSS.Core
             return _computer!.Hardware.Where(h => types.Contains(h.HardwareType));
         }
 
-        private MonitorPanel NewPanel(MonitorConfig config)
+        private MonitorPanel CpuPanel(IModuleData data)
         {
-            switch (config.Type)
-            {
-                case MonitorType.CPU:
-                    return OHMPanel(
-                        config.Type,
-                        Core.Settings.Instance.GetIconSvgPath("cpu"),
-                        config.Hardware!,
-                        config.Metrics!,
-                        config.Params!,
-                        config.Type.GetHardwareTypes()
-                        );
-
-                case MonitorType.RAM:
-                    return OHMPanel(
-                        config.Type,
-                        Core.Settings.Instance.GetIconSvgPath("ram"),
-                        config.Hardware!,
-                        config.Metrics!,
-                        config.Params!,
-                        config.Type.GetHardwareTypes()
-                        );
-
-                case MonitorType.GPU:
-                    return OHMPanel(
-                        config.Type,
-                        Core.Settings.Instance.GetIconSvgPath("gpu"),
-                        config.Hardware!,
-                        config.Metrics!,
-                        config.Params!,
-                        config.Type.GetHardwareTypes()
-                        );
-
-                case MonitorType.HD:
-                    return DrivePanel(
-                        config.Type,
-                        config.Hardware!,
-                        config.Metrics!,
-                        config.Params!
-                        );
-
-                case MonitorType.Network:
-                    return NetworkPanel(
-                        config.Type,
-                        config.Hardware!,
-                        config.Metrics!,
-                        config.Params!
-                        );
-
-                case MonitorType.Time:
-                    return TimePanel(
-                        config.Type,
-                        config.Metrics!,
-                        config.Params!
-                        );
-
-                default:
-                    throw new ArgumentException("Invalid MonitorType.");
-            }
-        }
-
-        private MonitorPanel OHMPanel(MonitorType type, string? pathData, HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters, params HardwareType[] hardwareTypes)
-        {
+            var d = (CpuData)data;
             return new MonitorPanel(
-                type,
-                type.GetDescription(),
-                pathData,
-                OHMMonitor.GetInstances(hardwareConfig, metrics, parameters, type, _board!, GetHardware(hardwareTypes).ToArray())
+                MonitorType.CPU,
+                MonitorType.CPU.GetDescription(),
+                Core.Settings.Instance.GetIconSvgPath("cpu"),
+                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!, MonitorType.CPU, _board!, GetHardware(MonitorType.CPU.GetHardwareTypes()).ToArray(),
+                    d.ShowHardwareNames, d.RoundAll, d.AllCoreClocks, d.UseGHz, d.UseFahrenheit, d.TempAlert)
                 );
         }
 
-        private MonitorPanel DrivePanel(MonitorType type, HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters)
+        private MonitorPanel RamPanel(IModuleData data)
         {
+            var d = (RamData)data;
             return new MonitorPanel(
-                type,
-                type.GetDescription(),
+                MonitorType.RAM,
+                MonitorType.RAM.GetDescription(),
+                Core.Settings.Instance.GetIconSvgPath("ram"),
+                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!, MonitorType.RAM, _board!, GetHardware(MonitorType.RAM.GetHardwareTypes()).ToArray(),
+                    false, d.RoundAll, false, false, false, 0)
+                );
+        }
+
+        private MonitorPanel GpuPanel(IModuleData data)
+        {
+            var d = (GpuData)data;
+            return new MonitorPanel(
+                MonitorType.GPU,
+                MonitorType.GPU.GetDescription(),
+                Core.Settings.Instance.GetIconSvgPath("gpu"),
+                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!, MonitorType.GPU, _board!, GetHardware(MonitorType.GPU.GetHardwareTypes()).ToArray(),
+                    d.ShowHardwareNames, d.RoundAll, false, d.UseGHz, d.UseFahrenheit, d.TempAlert)
+                );
+        }
+
+        private MonitorPanel HdPanel(IModuleData data)
+        {
+            var d = (HdData)data;
+            return new MonitorPanel(
+                MonitorType.HD,
+                MonitorType.HD.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("hd"),
-                DriveMonitor.GetInstances(hardwareConfig, metrics, parameters)
+                DriveMonitor.GetInstances(d.Hardware!, d.Metrics!, d.RoundAll, d.UsedSpaceAlert)
                 );
         }
 
-        private MonitorPanel NetworkPanel(MonitorType type, HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters)
+        private MonitorPanel NetworkPanel(IModuleData data)
         {
+            var d = (NetData)data;
             return new MonitorPanel(
-                type,
-                type.GetDescription(),
+                MonitorType.Network,
+                MonitorType.Network.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("net"),
-                NetworkMonitor.GetInstances(hardwareConfig, metrics, parameters)
+                NetworkMonitor.GetInstances(d.Hardware!, d.Metrics!, d.ShowHardwareNames, d.RoundAll, d.UseBytes, d.BandwidthInAlert, d.BandwidthOutAlert)
                 );
         }
 
-        private MonitorPanel TimePanel(MonitorType type, MetricConfig[] metrics, ConfigParam[] parameters)
+        private MonitorPanel TimePanel(IModuleData data)
         {
+            var d = (TimeData)data;
             return new MonitorPanel(
-                type,
-                type.GetDescription(),
+                MonitorType.Time,
+                MonitorType.Time.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("clock"),
-                ClockMonitor.GetInstances([], metrics, parameters)
+                ClockMonitor.GetInstances(d.Hardware!, d.Metrics!, d.Clock24HR, d.DateFormat)
                 );
         }
 

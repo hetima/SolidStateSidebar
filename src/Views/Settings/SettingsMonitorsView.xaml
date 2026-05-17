@@ -58,15 +58,15 @@
             <!-- Left: Monitor list with DragDrop -->
             <Border Grid.Column="0" BorderBrush="#BDC3C7" BorderThickness="0" Padding="0,0,8,0">
                 <ListView x:Name="MonitorListView"
-                          ItemsSource="{Binding Path=MonitorConfig, Mode=OneWay}"
-                          SelectedItem="{Binding Path=SelectedMonitor, Mode=TwoWay}"
+                          ItemsSource="{Binding Path=Modules, Mode=OneWay}"
+                          SelectedItem="{Binding Path=SelectedModule, Mode=TwoWay}"
                           dd:DragDrop.IsDragSource="True"
                           dd:DragDrop.IsDropTarget="True"
                           dd:DragDrop.DropHandler="{Binding RelativeSource={RelativeSource AncestorType=UserControl}}"
                           ItemContainerStyle="{StaticResource MonitorListViewItem}"
                           Style="{StaticResource MonitorListView}">
                     <ListView.ItemTemplate>
-                        <DataTemplate DataType="{x:Type monitor:MonitorConfig}">
+                        <DataTemplate DataType="{x:Type monitor:IModuleData}">
                             <DockPanel>
                                 <CheckBox DockPanel.Dock="Left"
                                           IsChecked="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -82,7 +82,7 @@
 
             <!-- Right: Selected monitor details -->
             <ContentControl Grid.Column="2"
-                            Content="{Binding Path=SelectedMonitor, Mode=OneWay}"
+                            Content="{Binding Path=SelectedModule, Mode=OneWay}"
                             ContentTemplateSelector="{StaticResource MonitorConfigTemplateSelector}">
                 <ContentControl.Style>
                     <Style TargetType="{x:Type ContentControl}">

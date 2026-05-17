@@ -120,7 +120,7 @@ namespace SSS
                 Utilities.Startup.EnableStartupTask();
             }
 
-            Core.Settings.Instance.MonitorConfig = MonitorConfig.CheckConfig(Core.Settings.Instance.MonitorConfig);
+            Core.Settings.Instance.Modules = Core.Settings.CheckModules(Core.Settings.Instance.Modules);
         }
 
         private void TrayIcon_TrayContextMenuOpen(object sender, RoutedEventArgs e)

@@ -62,23 +62,20 @@ namespace SSS.Core
 
     public class ClockMonitor : BaseMonitor
     {
-        public ClockMonitor(MetricConfig[] metrics, ConfigParam[] parameters) : base("clock", Strings.Time, false)
+        public ClockMonitor(MetricConfig[] metrics, bool clock24HR, int dateFormatValue) : base("clock", Strings.Time, false)
         {
-            bool _clock24HR = parameters.GetValue<bool>(ParamKey.Clock24HR);
-            int _dateFormatValue = parameters.GetValue<int>(ParamKey.DateFormat);
-
             List<iMetric> _metrics = [];
 
             if (metrics.IsEnabled(MetricKey.Date))
             {
-                string _format = GetDateFormat(_dateFormatValue);
+                string _format = GetDateFormat(dateFormatValue);
 
                 _metrics.Add(new ClockDateMetric(_format));
             }
 
             if (metrics.IsEnabled(MetricKey.Time))
             {
-                _metrics.Add(new ClockTimeMetric(_clock24HR));
+                _metrics.Add(new ClockTimeMetric(clock24HR));
             }
 
             Metrics = _metrics.ToArray();
@@ -94,11 +91,11 @@ namespace SSS.Core
             return [new HardwareConfig() { ID = "clock", Name = Strings.Time, ActualName = Strings.Time }];
         }
 
-        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters)
+        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, bool clock24HR, int dateFormatValue)
         {
             return
             [
-                new ClockMonitor(metrics, parameters)
+                new ClockMonitor(metrics, clock24HR, dateFormatValue)
             ];
         }
 

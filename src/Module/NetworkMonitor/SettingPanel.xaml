@@ -53,65 +53,20 @@
                 <xctk:CheckComboBox ItemsSource="{Binding Path=Metrics, Mode=OneWay}" DisplayMemberPath="Name" SelectedMemberPath="Enabled" Delimiter=", " ToolTip="{x:Static res:Strings.SettingsMetricsTooltip}" />
             </DockPanel>
 
-            <!-- Params: HardwareNames, RoundAll, UseBytes, BandwidthInAlert, BandwidthOutAlert -->
-            <ItemsControl ItemsSource="{Binding Path=Params}" Margin="10">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate DataType="{x:Type monitor:ConfigParam}">
-                        <ContentControl>
-                            <ContentControl.Style>
-                                <Style TargetType="{x:Type ContentControl}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding TypeString}" Value="System.Boolean">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <CheckBox Content="{Binding Path=Name}" IsChecked="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding TypeString}" Value="System.Int32">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <StackPanel>
-                                                        <Label Content="{Binding Path=Name, Mode=OneTime}" />
-                                                        <TextBox Text="{Binding Path=Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{Binding Path=Tooltip, Mode=OneTime}" />
-                                                    </StackPanel>
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ContentControl.Style>
-                            <ContentControl.Resources>
-                                <Style TargetType="{x:Type CheckBox}">
-                                    <Setter Property="VerticalAlignment" Value="Center" />
-                                    <Setter Property="Margin" Value="0,5" />
-                                </Style>
-                                <Style TargetType="{x:Type StackPanel}">
-                                    <Setter Property="Orientation" Value="Horizontal" />
-                                    <Setter Property="Margin" Value="0,5" />
-                                    <Style.Resources>
-                                        <Style TargetType="{x:Type Label}">
-                                            <Setter Property="VerticalAlignment" Value="Center" />
-                                            <Setter Property="Margin" Value="0,0,10,0" />
-                                            <Setter Property="Padding" Value="0" />
-                                        </Style>
-                                        <Style TargetType="{x:Type TextBox}">
-                                            <Setter Property="VerticalAlignment" Value="Center" />
-                                            <Setter Property="Width" Value="40" />
-                                            <Setter Property="MaxLines" Value="1" />
-                                        </Style>
-                                    </Style.Resources>
-                                </Style>
-                            </ContentControl.Resources>
-                        </ContentControl>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Style="{StaticResource VerticalPanel}" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-            </ItemsControl>
+            <!-- Params -->
+            <StackPanel Margin="10">
+                <CheckBox Content="{x:Static res:Strings.SettingsShowHardwareNames}" IsChecked="{Binding Path=ShowHardwareNames, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowHardwareNamesTooltip}" />
+                <CheckBox Content="{x:Static res:Strings.SettingsRoundAllDecimals}" IsChecked="{Binding Path=RoundAll, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsRoundAllDecimalsTooltip}" />
+                <CheckBox Content="{x:Static res:Strings.SettingsUseBytesPerSecond}" IsChecked="{Binding Path=UseBytes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsUseBytesPerSecondTooltip}" />
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Label Content="{x:Static res:Strings.SettingsBandwidthInAlert}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
+                    <TextBox Text="{Binding Path=BandwidthInAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{x:Static res:Strings.SettingsBandwidthInAlertTooltip}" VerticalAlignment="Center" Width="40" MaxLines="1" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,5">
+                    <Label Content="{x:Static res:Strings.SettingsBandwidthOutAlert}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
+                    <TextBox Text="{Binding Path=BandwidthOutAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{x:Static res:Strings.SettingsBandwidthOutAlertTooltip}" VerticalAlignment="Center" Width="40" MaxLines="1" />
+                </StackPanel>
+            </StackPanel>
         </StackPanel>
     </Border>
 </UserControl>

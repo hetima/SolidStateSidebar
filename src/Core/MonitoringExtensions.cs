@@ -56,11 +56,6 @@ namespace SSS.Core
             }
         }
 
-        public static T GetValue<T>(this ConfigParam[] parameters, ParamKey key)
-        {
-            return (T)parameters.Single(p => p.Key == key).Value!;
-        }
-
         public static string GetFullName(this MetricKey key)
         {
             switch (key)

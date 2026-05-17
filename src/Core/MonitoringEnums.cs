@@ -53,27 +53,6 @@ namespace SSS.Core
         Date = 29
     }
 
-    [Serializable]
-    public enum ParamKey : byte
-    {
-        HardwareNames,
-        UseFahrenheit,
-        AllCoreClocks,
-        CoreLoads,
-        TempAlert,
-        DriveDetails,
-        UsedSpaceAlert,
-        BandwidthInAlert,
-        BandwidthOutAlert,
-        UseBytes,
-        RoundAll,
-        DriveSpace,
-        DriveIO,
-        UseGHz,
-        Clock24HR,
-        DateFormat
-    }
-
     public enum DataType : byte
     {
         Dynamic,

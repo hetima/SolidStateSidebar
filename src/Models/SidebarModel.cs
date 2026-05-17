@@ -79,7 +79,7 @@ namespace SSS.Models
 
         private void InitMonitors()
         {
-            MonitorManager = new MonitorManager(Core.Settings.Instance.MonitorConfig ?? []);
+            MonitorManager = new MonitorManager(Core.Settings.Instance.Modules ?? ModuleDataConverter.GetDefaults());
             MonitorManager.Update();
         }
 

@@ -8,7 +8,7 @@ namespace SSS.Core
 {
     public partial class OHMMonitor : BaseMonitor
     {
-        public OHMMonitor(MonitorType type, string id, string name, IHardware hardware, IHardware board, MetricConfig[] metrics, ConfigParam[] parameters) : base(id, name, parameters.GetValue<bool>(ParamKey.HardwareNames))
+        public OHMMonitor(MonitorType type, string id, string name, IHardware hardware, IHardware board, MetricConfig[] metrics, bool showHardwareNames, bool roundAll, bool allCoreClocks, bool useGHz, bool useFahrenheit, int tempAlert) : base(id, name, showHardwareNames)
         {
             _hardware = hardware;
 
@@ -17,33 +17,15 @@ namespace SSS.Core
             switch (type)
             {
                 case MonitorType.CPU:
-                    InitCPU(
-                        board,
-                        metrics,
-                        parameters.GetValue<bool>(ParamKey.RoundAll),
-                        parameters.GetValue<bool>(ParamKey.AllCoreClocks),
-                        parameters.GetValue<bool>(ParamKey.UseGHz),
-                        parameters.GetValue<bool>(ParamKey.UseFahrenheit),
-                        parameters.GetValue<int>(ParamKey.TempAlert)
-                        );
+                    InitCPU(board, metrics, roundAll, allCoreClocks, useGHz, useFahrenheit, tempAlert);
                     break;
 
                 case MonitorType.RAM:
-                    InitRAM(
-                        board,
-                        metrics,
-                        parameters.GetValue<bool>(ParamKey.RoundAll)
-                        );
+                    InitRAM(board, metrics, roundAll);
                     break;
 
                 case MonitorType.GPU:
-                    InitGPU(
-                        metrics,
-                        parameters.GetValue<bool>(ParamKey.RoundAll),
-                        parameters.GetValue<bool>(ParamKey.UseGHz),
-                        parameters.GetValue<bool>(ParamKey.UseFahrenheit),
-                        parameters.GetValue<int>(ParamKey.TempAlert)
-                        );
+                    InitGPU(metrics, roundAll, useGHz, useFahrenheit, tempAlert);
                     break;
 
                 default:
@@ -71,7 +53,7 @@ namespace SSS.Core
             Dispose(false);
         }
 
-        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, ConfigParam[] parameters, MonitorType type, IHardware board, IHardware[] hardware)
+        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, MonitorType type, IHardware board, IHardware[] hardware, bool showHardwareNames, bool roundAll, bool allCoreClocks, bool useGHz, bool useFahrenheit, int tempAlert)
         {
             return (
                 from hw in hardware
@@ -79,7 +61,7 @@ namespace SSS.Core
                 from n in merged.DefaultIfEmpty(new HardwareConfig() { ID = hw.Identifier.ToString(), Name = hw.Name, ActualName = hw.Name }).Select(n => { if (n.ActualName != hw.Name) { n.Name = n.ActualName = hw.Name; } return n; })
                 where n.Enabled
                 orderby n.Order descending, n.Name ascending
-                select new OHMMonitor(type, n.ID!, n.Name ?? n.ActualName!, hw, board, metrics, parameters)
+                select new OHMMonitor(type, n.ID!, n.Name ?? n.ActualName!, hw, board, metrics, showHardwareNames, roundAll, allCoreClocks, useGHz, useFahrenheit, tempAlert)
                 ).ToArray();
         }
 

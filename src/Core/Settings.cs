@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.ComponentModel;
+using System.Linq;
 using Newtonsoft.Json;
 using SSS.Utilities;
 using SSS.Windows;
@@ -621,21 +622,65 @@ namespace SSS.Core
             }
         }
 
-        private MonitorConfig[]? _monitorConfig { get; set; } = null;
+        private Dictionary<string, IModuleData>? _modules { get; set; } = null;
 
-        [JsonProperty]
-        public MonitorConfig[]? MonitorConfig
+        [JsonProperty("Modules")]
+        [JsonConverter(typeof(ModuleDataConverter))]
+        public Dictionary<string, IModuleData>? Modules
         {
             get
             {
-                return _monitorConfig;
+                return _modules;
             }
             set
             {
-                _monitorConfig = value;
+                _modules = value;
 
-                NotifyPropertyChanged(nameof(MonitorConfig));
+                NotifyPropertyChanged(nameof(Modules));
             }
+        }
+
+        public static Dictionary<string, IModuleData> CheckModules(Dictionary<string, IModuleData>? modules)
+        {
+            Dictionary<string, IModuleData> defaults = ModuleDataConverter.GetDefaults();
+
+            if (modules == null)
+            {
+                return defaults;
+            }
+
+            foreach (var kvp in defaults)
+            {
+                if (!modules.TryGetValue(kvp.Key, out IModuleData? existing))
+                {
+                    modules[kvp.Key] = kvp.Value;
+                }
+                else
+                {
+                    IModuleData def = kvp.Value;
+
+                    if (existing.Hardware == null)
+                    {
+                        existing.Hardware = def.Hardware;
+                    }
+
+                    if (existing.Metrics == null)
+                    {
+                        existing.Metrics = def.Metrics;
+                    }
+                    else
+                    {
+                        existing.Metrics = (
+                            from d in def.Metrics
+                            join m in existing.Metrics on d.Key equals m.Key into merged
+                            from newm in merged.DefaultIfEmpty(d)
+                            select newm
+                            ).ToArray();
+                    }
+                }
+            }
+
+            return modules;
         }
 
         private Hotkey[] _hotkeys { get; set; } = [];
