@@ -9,6 +9,12 @@
         xmlns:res="clr-namespace:SSS"
         xmlns:win="clr-namespace:SSS.Windows"
         xmlns:converters="clr-namespace:SSS.Converters"
+        xmlns:cpuSection="clr-namespace:SSS.Module.CpuMonitor"
+        xmlns:ramSection="clr-namespace:SSS.Module.RamMonitor"
+        xmlns:gpuSection="clr-namespace:SSS.Module.GpuMonitor"
+        xmlns:hdSection="clr-namespace:SSS.Module.HdMonitor"
+        xmlns:netSection="clr-namespace:SSS.Module.NetworkMonitor"
+        xmlns:timeSection="clr-namespace:SSS.Module.TimeMonitor"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         StateChanged="Window_StateChanged"
@@ -84,162 +90,34 @@
                     <ItemsControl DataContext="{Binding Path=MonitorManager, Mode=OneWay}" ItemsSource="{Binding Path=MonitorPanels, Mode=OneWay}">
                         <ItemsControl.Resources>
                             <converters:MonitorPanelTemplateSelector x:Key="MonitorPanelTemplateSelector" />
-                            
-                            <DataTemplate x:Key="DefaultMonitorPanelTemplate">
-                                <StackPanel Style="{StaticResource GroupPanel}">
-                                    <StackPanel Style="{StaticResource MonitorTitle}">
-                                        <Image x:Name="svgImage2"
-                                                Source="{Binding Path=SvgImageSource, Mode=OneWay}"
-                                                Style="{StaticResource AppIconImage}" />
-                                        <Label Content="{Binding Path=Title, Mode=OneWay}" Style="{StaticResource AppTitle}" />
-                                    </StackPanel>
-                                    
-                                    <ItemsControl ItemsSource="{Binding Path=Monitors, Mode=OneWay}">
-                                        <ItemsControl.Resources>
-                                            <DataTemplate DataType="{x:Type core:BaseMonitor}">
-                                                <StackPanel Style="{StaticResource MonitorPanel}">
-                                                    <ContentControl>
-                                                        <ContentControl.Style>
-                                                            <Style TargetType="{x:Type ContentControl}">
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Path=ShowName, Mode=OneWay}" Value="True">
-                                                                        <Setter Property="Content">
-                                                                            <Setter.Value>
-                                                                                <TextBlock Text="{Binding Path=Name, Mode=OneWay}" Style="{StaticResource HardwareText}" />
-                                                                            </Setter.Value>
-                                                                        </Setter>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </ContentControl.Style>
-                                                    </ContentControl>
-                                                    
-                                                    <ItemsControl ItemsSource="{Binding Path=Metrics, Mode=OneWay}">
-                                                        <ItemsControl.ItemTemplate>
-                                                            <DataTemplate DataType="{x:Type core:iMetric}">
-                                                                <DockPanel Style="{StaticResource MetricPanel}">
-                                                                    <TextBlock Text="{Binding Path=Label, Mode=OneWay, Converter={StaticResource MetricLabelConverter}}" Style="{StaticResource MetricLabel}" />
-                                                                    <TextBlock Text="{Binding Path=Text, Mode=OneWay}" Style="{StaticResource MetricValue}" />
-                                                                </DockPanel>
-                                                            </DataTemplate>
-                                                        </ItemsControl.ItemTemplate>
-                                                        <ItemsControl.ItemsPanel>
-                                                            <ItemsPanelTemplate>
-                                                                <StackPanel Style="{StaticResource VerticalPanel}" />
-                                                            </ItemsPanelTemplate>
-                                                        </ItemsControl.ItemsPanel>
-                                                    </ItemsControl>
-                                                </StackPanel>
-                                            </DataTemplate>
 
-                                            <DataTemplate DataType="{x:Type core:DriveMonitor}">
-                                                <StackPanel Style="{StaticResource MonitorPanel}">
-                                                    <ContentControl>
-                                                        <ContentControl.Style>
-                                                            <Style TargetType="{x:Type ContentControl}">
-                                                                <Setter Property="Content">
-                                                                    <Setter.Value>
-                                                                        <TextBlock Text="{Binding Path=Name, Mode=OneWay}" Style="{StaticResource DataText}" />
-                                                                    </Setter.Value>
-                                                                </Setter>
-                                                                <Style.Triggers>
-                                                                    <DataTrigger Binding="{Binding Path=Status, Mode=OneWay}" Value="LoadBarStacked">
-                                                                        <Setter Property="Content">
-                                                                            <Setter.Value>
-                                                                                <StackPanel Style="{StaticResource VerticalPanel}">
-                                                                                    <TextBlock Text="{Binding Path=Name, Mode=OneWay}" Style="{StaticResource DataText}" />
-                                                                                    <ProgressBar DataContext="{Binding Path=LoadMetric}" Value="{Binding Path=Value, Mode=OneWay}" Style="{StaticResource DriveProgress}" />
-                                                                                </StackPanel>
-                                                                            </Setter.Value>
-                                                                        </Setter>
-                                                                    </DataTrigger>
-                                                                    
-                                                                    <DataTrigger Binding="{Binding Path=Status, Mode=OneWay}" Value="LoadBarInline">
-                                                                        <Setter Property="Content">
-                                                                            <Setter.Value>
-                                                                                <StackPanel Orientation="Horizontal">
-                                                                                    <TextBlock Text="{Binding Path=Name, Mode=OneWay}" Width="{Binding Source={x:Static core:Settings.Instance}, Path=FontSize, Mode=OneWay}" Style="{StaticResource DataText}" />
-                                                                                    <ProgressBar DataContext="{Binding Path=LoadMetric}" Value="{Binding Path=Value, Mode=OneWay}" Margin="8,2,0,0" Width="{Binding Source={x:Static core:Settings.Instance}, Path=BarWidth, Mode=OneWay}" Style="{StaticResource DriveProgress}" />
-                                                                                </StackPanel>
-                                                                            </Setter.Value>
-                                                                        </Setter>
-                                                                    </DataTrigger>
-                                                                </Style.Triggers>
-                                                            </Style>
-                                                        </ContentControl.Style>
-                                                    </ContentControl>
-
-                                                    <ItemsControl ItemsSource="{Binding Path=DriveMetrics, Mode=OneWay}">
-                                                        <ItemsControl.ItemTemplate>
-                                                            <DataTemplate DataType="{x:Type core:iMetric}">
-                                                                <DockPanel Style="{StaticResource MetricPanel}">
-                                                                    <TextBlock Text="{Binding Path=Label, Mode=OneWay, Converter={StaticResource MetricLabelConverter}}" Style="{StaticResource MetricLabel}" />
-                                                                    <TextBlock Text="{Binding Path=Text, Mode=OneWay}" Style="{StaticResource MetricValue}" />
-                                                                </DockPanel>
-                                                            </DataTemplate>
-                                                        </ItemsControl.ItemTemplate>
-                                                        <ItemsControl.ItemsPanel>
-                                                            <ItemsPanelTemplate>
-                                                                <StackPanel Style="{StaticResource VerticalPanel}" />
-                                                            </ItemsPanelTemplate>
-                                                        </ItemsControl.ItemsPanel>
-                                                    </ItemsControl>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ItemsControl.Resources>
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Style="{StaticResource VerticalPanel}" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                    </ItemsControl>
-                                </StackPanel>
+                            <DataTemplate x:Key="CpuSectionTemplate">
+                                <cpuSection:Section />
                             </DataTemplate>
-
-                            <DataTemplate x:Key="TimeMonitorPanelTemplate">
-                                <StackPanel Style="{StaticResource GroupPanel}">
-                                    <StackPanel Style="{StaticResource MonitorTitle}">
-                                        <Image x:Name="svgImage3"
-                                                Source="{Binding Path=SvgImageSource, Mode=OneWay}"
-                                                Style="{StaticResource AppIconImage}" />
-                                        <Label Content="{Binding Path=Title, Mode=OneWay}" Style="{StaticResource AppTitle}" />
-                                    </StackPanel>
-                                    
-                                    <ItemsControl ItemsSource="{Binding Path=Monitors, Mode=OneWay}">
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate DataType="{x:Type core:BaseMonitor}">
-                                                <StackPanel Style="{StaticResource MonitorPanel}">
-                                                    <ItemsControl ItemsSource="{Binding Path=Metrics, Mode=OneWay}">
-                                                        <ItemsControl.ItemTemplate>
-                                                            <DataTemplate DataType="{x:Type core:iMetric}">
-                                                                <DockPanel Style="{StaticResource MetricPanel}">
-                                                                    <TextBlock Text="{Binding Path=Label, Mode=OneWay, Converter={StaticResource MetricLabelConverter}}" Style="{StaticResource MetricLabel}" />
-                                                                    <TextBlock Text="{Binding Path=Text, Mode=OneWay}" Style="{StaticResource MetricValue}" />
-                                                                </DockPanel>
-                                                            </DataTemplate>
-                                                        </ItemsControl.ItemTemplate>
-                                                        <ItemsControl.ItemsPanel>
-                                                            <ItemsPanelTemplate>
-                                                                <StackPanel Style="{StaticResource VerticalPanel}" />
-                                                            </ItemsPanelTemplate>
-                                                        </ItemsControl.ItemsPanel>
-                                                    </ItemsControl>
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Style="{StaticResource VerticalPanel}" />
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                    </ItemsControl>
-                                </StackPanel>
+                            <DataTemplate x:Key="RamSectionTemplate">
+                                <ramSection:Section />
+                            </DataTemplate>
+                            <DataTemplate x:Key="GpuSectionTemplate">
+                                <gpuSection:Section />
+                            </DataTemplate>
+                            <DataTemplate x:Key="HdSectionTemplate">
+                                <hdSection:Section />
+                            </DataTemplate>
+                            <DataTemplate x:Key="NetworkSectionTemplate">
+                                <netSection:Section />
+                            </DataTemplate>
+                            <DataTemplate x:Key="TimeSectionTemplate">
+                                <timeSection:Section />
                             </DataTemplate>
                         </ItemsControl.Resources>
                         <ItemsControl.ItemTemplateSelector>
                             <converters:MonitorPanelTemplateSelector
-                                DefaultTemplate="{StaticResource DefaultMonitorPanelTemplate}"
-                                TimeTemplate="{StaticResource TimeMonitorPanelTemplate}" />
+                                CpuTemplate="{StaticResource CpuSectionTemplate}"
+                                RamTemplate="{StaticResource RamSectionTemplate}"
+                                GpuTemplate="{StaticResource GpuSectionTemplate}"
+                                HdTemplate="{StaticResource HdSectionTemplate}"
+                                NetworkTemplate="{StaticResource NetworkSectionTemplate}"
+                                TimeTemplate="{StaticResource TimeSectionTemplate}" />
                         </ItemsControl.ItemTemplateSelector>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

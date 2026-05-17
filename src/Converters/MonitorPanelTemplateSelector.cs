@@ -5,7 +5,15 @@ namespace SSS.Converters
 {
     public class MonitorPanelTemplateSelector : DataTemplateSelector
     {
-        public DataTemplate? DefaultTemplate { get; set; }
+        public DataTemplate? CpuTemplate { get; set; }
+
+        public DataTemplate? RamTemplate { get; set; }
+
+        public DataTemplate? GpuTemplate { get; set; }
+
+        public DataTemplate? HdTemplate { get; set; }
+
+        public DataTemplate? NetworkTemplate { get; set; }
 
         public DataTemplate? TimeTemplate { get; set; }
 
@@ -13,12 +21,16 @@ namespace SSS.Converters
         {
             if (item is Core.MonitorPanel panel)
             {
-                if (panel.Type == Core.MonitorType.Time && TimeTemplate != null)
+                return panel.Type switch
                 {
-                    return TimeTemplate;
-                }
-
-                return DefaultTemplate;
+                    Core.MonitorType.CPU => CpuTemplate,
+                    Core.MonitorType.RAM => RamTemplate,
+                    Core.MonitorType.GPU => GpuTemplate,
+                    Core.MonitorType.HD => HdTemplate,
+                    Core.MonitorType.Network => NetworkTemplate,
+                    Core.MonitorType.Time => TimeTemplate,
+                    _ => null
+                };
             }
 
             return base.SelectTemplate(item, container);

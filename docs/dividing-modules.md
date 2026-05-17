@@ -92,17 +92,40 @@ Settings クラスの `MonitorConfig[]` 配列を、構造化された `Dictiona
 
 ---
 
-## Phase 2: Sidebar セクション分割 (計画)
+## Phase 2: Sidebar セクション分割 (完了)
 
-サイドバーの各モジュールを個別の Section.xaml ファイルに分離する。
+サイドバーの各モジュールを個別の Section.xaml ファイルに分離した。
 
-### 概要
-現在 MonitorManager が C# コードで構築している MonitorPanel の内容を、XAML ベースの Section UserControl に移行する。
+### Phase 2-A: Section UserControl 作成
 
-### 想定される変更
-- `src/Module/{ModuleName}/Section.xaml` + `.xaml.cs` — 各モジュールのサイドバーセクションUI
-- `MonitorPanelTemplateSelector` の拡張または Section 用 DataTemplateSelector
-- MonitorManager の Section 構築ロジックの XAML 化
+- **6つの Section.xaml** (`src/Module/{ModuleName}/Section.xaml` + `.xaml.cs`)
+  - `SSS.Module.CpuMonitor.Section` — BaseMonitor DataType + ShowName Trigger
+  - `SSS.Module.RamMonitor.Section` — 同上
+  - `SSS.Module.GpuMonitor.Section` — 同上
+  - `SSS.Module.HdMonitor.Section` — DriveMonitor DataType + LoadBar（Stacked/Inline）表示ロジック
+  - `SSS.Module.NetworkMonitor.Section` — BaseMonitor DataType + ShowName Trigger
+  - `SSS.Module.TimeMonitor.Section` — BaseMonitor DataType（ShowName Trigger なし）
+  - 各 Section は `DataContext` に `MonitorPanel` を想定、`{Binding SvgImageSource}` / `{Binding Title}` / `{Binding Monitors}` でバインド
+
+### Phase 2-B: MonitorPanelTemplateSelector 拡張
+
+- **`src/Converters/MonitorPanelTemplateSelector.cs`**
+  - `DefaultTemplate` / `TimeTemplate` → `CpuTemplate` / `RamTemplate` / `GpuTemplate` / `HdTemplate` / `NetworkTemplate` / `TimeTemplate` に変更
+  - `MonitorPanel.Type` で switch 式で各テンプレートにルーティング
+
+### Phase 2-C: Sidebar.xaml 簡素化
+
+- **`src/Views/Sidebar.xaml`**
+  - ~200 行のインライン DataTemplate（DefaultMonitorPanelTemplate / TimeMonitorPanelTemplate）を削除
+  - 6つの Section 参照 DataTemplate に置換（`<cpuSection:Section />` 等）
+  - 各モジュールの xmlns エイリアスを追加（`cpuSection`, `ramSection`, `gpuSection`, `hdSection`, `netSection`, `timeSection`）
+  - `MonitorPanelTemplateSelector` へのテンプレート割り当てを6モジュール対応に更新
+
+### 設計上のポイント
+
+- `MonitorPanel` オブジェクトの生成ロジック（`MonitorManager` のファクトリメソッド）は変更なし
+- 各 Section.xaml 内で `DataType="{x:Type core:BaseMonitor}"` 等を使用し、WPF の暗黙的テンプレート解決を利用
+- `MetricLabelConverter` 等の App.xaml リソースは Section.xaml からも参照可能（アプリケーションリソースとして解決）
 
 ### 前提条件
 - Phase 1 完了済み
