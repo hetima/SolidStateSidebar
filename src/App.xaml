@@ -137,7 +137,7 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
 
-                <Style x:Key="AppTitle" TargetType="{x:Type Label}">
+            <Style x:Key="AppTitle" TargetType="{x:Type Label}">
                 <Setter Property="Padding" Value="0" />
                 <Setter Property="Margin" Value="0" />
                 <Setter Property="VerticalAlignment" Value="Center" />
@@ -657,6 +657,28 @@
                            BasedOn="{StaticResource WindowButton}"/>
                 </Style.Resources>
             </Style>
+
+            <Style x:Key="SettingInput" TargetType="{x:Type TextBox}" BasedOn="{StaticResource {x:Type FrameworkElement}}">
+                <Setter Property="Margin" Value="5,0,5,0"/>
+                <Setter Property="Height" Value="24"/>
+                <Setter Property="Padding" Value="0,0"/>
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="SettingSlider"
+                   TargetType="{x:Type Slider}"
+                   BasedOn="{StaticResource {x:Type Slider}}">
+                <Setter Property="Margin"
+                        Value="10,0,10,0"/>
+                <Setter Property="Padding"
+                        Value="0,0"/>
+                <Setter Property="TickPlacement"
+                        Value="None"/>
+                <Setter Property="IsSnapToTickEnabled"
+                        Value="True"/>
+                <Setter Property="VerticalContentAlignment"
+                        Value="Center"/>
+            </Style>
+
 
         </ResourceDictionary>
     </Application.Resources>

@@ -50,14 +50,10 @@ namespace SSS.Module.TimeMonitor
             set { _hardware = value; NotifyPropertyChanged(); }
         }
 
-        private MetricConfig[] _metrics = [];
+        // --- IModuleData (not used by TimeMonitor, empty for interface compliance) ---
 
-        [JsonProperty("metrics")]
-        public MetricConfig[] Metrics
-        {
-            get => _metrics;
-            set { _metrics = value; NotifyPropertyChanged(); }
-        }
+        [JsonIgnore]
+        public MetricConfig[] Metrics { get; set; } = [];
 
         // --- UI-only (not serialized) ---
 
@@ -68,6 +64,24 @@ namespace SSS.Module.TimeMonitor
         public ObservableCollection<HardwareConfig>? HardwareOC { get; set; }
 
         // --- TimeMonitor-specific params ---
+
+        private bool _showDate = true;
+
+        [JsonProperty("showDate")]
+        public bool ShowDate
+        {
+            get => _showDate;
+            set { _showDate = value; NotifyPropertyChanged(); }
+        }
+
+        private bool _showTime = true;
+
+        [JsonProperty("showTime")]
+        public bool ShowTime
+        {
+            get => _showTime;
+            set { _showTime = value; NotifyPropertyChanged(); }
+        }
 
         private bool _clock24HR = false;
 
@@ -87,6 +101,24 @@ namespace SSS.Module.TimeMonitor
             set { _dateFormat = value; NotifyPropertyChanged(); }
         }
 
+        private int _dateFontSize = 14;
+
+        [JsonProperty("dateFontSize")]
+        public int DateFontSize
+        {
+            get => _dateFontSize;
+            set { _dateFontSize = value; NotifyPropertyChanged(); }
+        }
+
+        private int _timeFontSize = 12;
+
+        [JsonProperty("timeFontSize")]
+        public int TimeFontSize
+        {
+            get => _timeFontSize;
+            set { _timeFontSize = value; NotifyPropertyChanged(); }
+        }
+
         // --- Defaults & Clone ---
 
         public static Data Default => new Data
@@ -97,20 +129,19 @@ namespace SSS.Module.TimeMonitor
             [
                 new HardwareConfig() { ID = "clock", Name = Strings.Time, ActualName = Strings.Time }
             ],
-            Metrics =
-            [
-                new MetricConfig(MetricKey.Time, true),
-                new MetricConfig(MetricKey.Date, true)
-            ],
+            ShowDate = true,
+            ShowTime = true,
             Clock24HR = false,
-            DateFormat = 2
+            DateFormat = 2,
+            DateFontSize = 14,
+            TimeFontSize = 12
         };
 
         public Data Clone()
         {
             Data clone = (Data)MemberwiseClone();
             clone.Hardware = clone.Hardware.Select(h => h.Clone()).ToArray();
-            clone.Metrics = clone.Metrics.Select(m => m.Clone()).ToArray();
+            clone.Metrics = [];
             clone.HardwareOC = null;
             return clone;
         }

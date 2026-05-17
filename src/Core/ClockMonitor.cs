@@ -9,10 +9,25 @@ namespace SSS.Core
     public class ClockTimeMetric : BaseMetric
     {
         private readonly bool _clock24HR;
+        private int _fontSize;
 
-        public ClockTimeMetric(bool clock24HR) : base(MetricKey.Time, DataType.Dynamic, "")
+        public ClockTimeMetric(bool clock24HR, int fontSize) : base(MetricKey.Time, DataType.Dynamic, "")
         {
             _clock24HR = clock24HR;
+            _fontSize = fontSize;
+        }
+
+        public int FontSize
+        {
+            get => _fontSize;
+            set
+            {
+                if (_fontSize != value)
+                {
+                    _fontSize = value;
+                    NotifyPropertyChanged(nameof(FontSize));
+                }
+            }
         }
 
         ~ClockTimeMetric()
@@ -36,10 +51,25 @@ namespace SSS.Core
     public class ClockDateMetric : BaseMetric
     {
         private readonly string _format;
+        private int _fontSize;
 
-        public ClockDateMetric(string format) : base(MetricKey.Date, DataType.Dynamic, "")
+        public ClockDateMetric(string format, int fontSize) : base(MetricKey.Date, DataType.Dynamic, "")
         {
             _format = format;
+            _fontSize = fontSize;
+        }
+
+        public int FontSize
+        {
+            get => _fontSize;
+            set
+            {
+                if (_fontSize != value)
+                {
+                    _fontSize = value;
+                    NotifyPropertyChanged(nameof(FontSize));
+                }
+            }
         }
 
         ~ClockDateMetric()
@@ -62,20 +92,20 @@ namespace SSS.Core
 
     public class ClockMonitor : BaseMonitor
     {
-        public ClockMonitor(MetricConfig[] metrics, bool clock24HR, int dateFormatValue) : base("clock", Strings.Time, false)
+        public ClockMonitor(bool showDate, bool showTime, bool clock24HR, int dateFormatValue, int dateFontSize, int timeFontSize) : base("clock", Strings.Time, false)
         {
             List<iMetric> _metrics = [];
 
-            if (metrics.IsEnabled(MetricKey.Date))
+            if (showDate)
             {
                 string _format = GetDateFormat(dateFormatValue);
 
-                _metrics.Add(new ClockDateMetric(_format));
+                _metrics.Add(new ClockDateMetric(_format, dateFontSize));
             }
 
-            if (metrics.IsEnabled(MetricKey.Time))
+            if (showTime)
             {
-                _metrics.Add(new ClockTimeMetric(clock24HR));
+                _metrics.Add(new ClockTimeMetric(clock24HR, timeFontSize));
             }
 
             Metrics = _metrics.ToArray();
@@ -91,11 +121,11 @@ namespace SSS.Core
             return [new HardwareConfig() { ID = "clock", Name = Strings.Time, ActualName = Strings.Time }];
         }
 
-        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, MetricConfig[] metrics, bool clock24HR, int dateFormatValue)
+        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, bool showDate, bool showTime, bool clock24HR, int dateFormatValue, int dateFontSize, int timeFontSize)
         {
             return
             [
-                new ClockMonitor(metrics, clock24HR, dateFormatValue)
+                new ClockMonitor(showDate, showTime, clock24HR, dateFormatValue, dateFontSize, timeFontSize)
             ];
         }
 

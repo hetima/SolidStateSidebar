@@ -208,7 +208,7 @@ namespace SSS.Core
                 MonitorType.Time,
                 MonitorType.Time.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("clock"),
-                ClockMonitor.GetInstances(d.Hardware!, d.Metrics!, d.Clock24HR, d.DateFormat)
+                ClockMonitor.GetInstances(d.Hardware!, d.ShowDate, d.ShowTime, d.Clock24HR, d.DateFormat, d.DateFontSize, d.TimeFontSize)
                 );
         }
 
