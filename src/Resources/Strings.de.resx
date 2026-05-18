@@ -444,6 +444,14 @@
     <value>Den horizontalen Rand der Seitenleiste anpassen</value>
     <comment>Settings sidebar margin tooltip</comment>
   </data>
+  <data name="ShowDayOfWeek" xml:space="preserve">
+    <value>Wochentag anzeigen</value>
+    <comment>Show day of week label</comment>
+  </data>
+  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
+    <value>Den Wochentag (z. B. Mo, Di) nach dem Datum anzeigen.</value>
+    <comment>Show day of week tooltip</comment>
+  </data>
   <data name="SettingsHeaderStyleDefault" xml:space="preserve">
     <value>Standard</value>
     <comment>Section header style default option</comment>

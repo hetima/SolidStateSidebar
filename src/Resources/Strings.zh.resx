@@ -565,6 +565,14 @@
     <value>时钟下方的日期格式。</value>
     <comment>Settings date format tooltip</comment>
   </data>
+  <data name="ShowDayOfWeek" xml:space="preserve">
+    <value>显示星期</value>
+    <comment>Show day of week label</comment>
+  </data>
+  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
+    <value>在日期后显示星期（如周一、周二）。</value>
+    <comment>Show day of week tooltip</comment>
+  </data>
   <data name="SettingsDock" xml:space="preserve">
     <value>停靠</value>
     <comment>Dock settings label</comment>

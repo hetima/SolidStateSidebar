@@ -101,6 +101,15 @@ namespace SSS.Module.TimeMonitor
             set { _dateFormat = value; NotifyPropertyChanged(); }
         }
 
+        private bool _showDayOfWeek = false;
+
+        [JsonProperty("showDayOfWeek")]
+        public bool ShowDayOfWeek
+        {
+            get => _showDayOfWeek;
+            set { _showDayOfWeek = value; NotifyPropertyChanged(); }
+        }
+
         private int _dateFontSize = 14;
 
         [JsonProperty("dateFontSize")]

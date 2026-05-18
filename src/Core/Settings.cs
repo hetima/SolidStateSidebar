@@ -774,7 +774,7 @@ namespace SSS.Core
             return base.GetHashCode();
         }
 
-        public static readonly DateSetting Disabled = new DateSetting("Disabled");
+        public static readonly DateSetting Disabled = new DateSetting("");
         public static readonly DateSetting Short = new DateSetting("M");
         public static readonly DateSetting Normal = new DateSetting("d");
         public static readonly DateSetting Long = new DateSetting("D");

@@ -557,6 +557,14 @@
     <value>Format des Datumstextes unter der Uhr.</value>
     <comment>Settings date format tooltip</comment>
   </data>
+  <data name="ShowDayOfWeek" xml:space="preserve">
+    <value>Wochentag anzeigen</value>
+    <comment>Show day of week label</comment>
+  </data>
+  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
+    <value>Den Wochentag (z. B. Mo, Di) nach dem Datum anzeigen.</value>
+    <comment>Show day of week tooltip</comment>
+  </data>
   <data name="SettingsDock" xml:space="preserve">
     <value>Anfügen</value>
     <comment>Dock settings label</comment>

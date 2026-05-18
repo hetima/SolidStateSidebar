@@ -67,7 +67,7 @@
                             Minimum="10"
                             Maximum="40"
                             TickFrequency="1"
-                            LargeChange="5"
+                            LargeChange="1"
                             ToolTip="{x:Static res:Strings.SettingsDateFontSizeTooltip}"/>
                 </DockPanel>
                 <StackPanel Orientation="Horizontal"
@@ -82,6 +82,7 @@
                               ItemTemplate="{StaticResource DateFormatItemTemplate}"
                               ToolTip="{x:Static res:Strings.SettingsDateFormatTooltip}"/>
                 </StackPanel>
+                <CheckBox Content="{x:Static res:Strings.ShowDayOfWeek}" IsChecked="{Binding Path=ShowDayOfWeek, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.ShowDayOfWeekTooltip}" />
             </StackPanel>
             <CheckBox Content="{x:Static res:Strings.SettingsShowTime}" IsChecked="{Binding Path=ShowTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowTimeTooltip}" />
 
@@ -100,7 +101,7 @@
                             Minimum="10"
                             Maximum="40"
                             TickFrequency="1"
-                            LargeChange="5"
+                            LargeChange="1"
                             ToolTip="{x:Static res:Strings.SettingsTimeFontSizeTooltip}"/>
                 </DockPanel>
                 <CheckBox Content="{x:Static res:Strings.Settings24HourClock}"

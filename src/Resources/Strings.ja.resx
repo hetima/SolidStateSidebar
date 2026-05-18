@@ -523,12 +523,20 @@
   <data name="SettingsDateFormatTooltip" xml:space="preserve">
     <value>日付のフォーマット</value>
   </data>
+  <data name="ShowDayOfWeek" xml:space="preserve">
+    <value>曜日を表示</value>
+    <comment>Show day of week label</comment>
+  </data>
+  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
+    <value>日付の後に曜日（月、火など）を表示します。</value>
+    <comment>Show day of week tooltip</comment>
+  </data>
   <data name="DateDisabled" xml:space="preserve">
     <value>無効</value>
     <comment>Date format disabled option</comment>
   </data>
   <data name="DateShort" xml:space="preserve">
-    <value>短い (月のみ)</value>
+    <value>短い</value>
     <comment>Date format short option</comment>
   </data>
   <data name="DateNormal" xml:space="preserve">

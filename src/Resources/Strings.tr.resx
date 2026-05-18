@@ -565,6 +565,14 @@
     <value>Saatin altındaki tarihin biçimi.</value>
     <comment>Settings date format tooltip</comment>
   </data>
+  <data name="ShowDayOfWeek" xml:space="preserve">
+    <value>Haftanın gününü göster</value>
+    <comment>Show day of week label</comment>
+  </data>
+  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
+    <value>Tarihin yanına haftanın gününü (ör. Pzt, Sal) göster.</value>
+    <comment>Show day of week tooltip</comment>
+  </data>
   <data name="SettingsDock" xml:space="preserve">
     <value>Yuva</value>
     <comment>Dock settings label</comment>

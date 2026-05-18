@@ -444,6 +444,14 @@
     <value>De horizontale marge van de zijbalkinhoud aanpassen</value>
     <comment>Settings sidebar margin tooltip</comment>
   </data>
+  <data name="ShowDayOfWeek" xml:space="preserve">
+    <value>Dag van de week weergeven</value>
+    <comment>Show day of week label</comment>
+  </data>
+  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
+    <value>Toon de dag van de week (bijv. Ma, Di) na de datum.</value>
+    <comment>Show day of week tooltip</comment>
+  </data>
   <data name="SettingsHeaderStyleDefault" xml:space="preserve">
     <value>Standaard</value>
     <comment>Section header style default option</comment>

@@ -444,6 +444,14 @@
     <value>Juster den vandrette margen for sidelinjens indhold</value>
     <comment>Settings sidebar margin tooltip</comment>
   </data>
+  <data name="ShowDayOfWeek" xml:space="preserve">
+    <value>Vis ugedag</value>
+    <comment>Show day of week label</comment>
+  </data>
+  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
+    <value>Vis ugedagen (f.eks. Man, Tir) efter datoen.</value>
+    <comment>Show day of week tooltip</comment>
+  </data>
   <data name="SettingsHeaderStyleDefault" xml:space="preserve">
     <value>Standard</value>
     <comment>Section header style default option</comment>

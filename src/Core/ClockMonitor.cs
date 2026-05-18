@@ -51,12 +51,14 @@ namespace SSS.Core
     public class ClockDateMetric : BaseMetric
     {
         private readonly string _format;
+        private readonly bool _showDayOfWeek;
         private int _fontSize;
 
-        public ClockDateMetric(string format, int fontSize) : base(MetricKey.Date, DataType.Dynamic, "")
+        public ClockDateMetric(string format, int fontSize, bool showDayOfWeek) : base(MetricKey.Date, DataType.Dynamic, "")
         {
             _format = format;
             _fontSize = fontSize;
+            _showDayOfWeek = showDayOfWeek;
         }
 
         public int FontSize
@@ -85,14 +87,21 @@ namespace SSS.Core
         public override void Update()
         {
             DateTime _now = DateTime.Now;
+            string _nowTwxt = string.IsNullOrEmpty(_format) ? "" : _now.ToString(_format, Culture.Default);
 
-            Text = _now.ToString(_format, Culture.Default);
+            if (_showDayOfWeek)
+            {
+                Text = $"{_nowTwxt} ({_now.ToString("ddd", Culture.Default)})";
+            }else{
+                Text = _nowTwxt;
+            }
+
         }
     }
 
     public class ClockMonitor : BaseMonitor
     {
-        public ClockMonitor(bool showDate, bool showTime, bool clock24HR, int dateFormatValue, int dateFontSize, int timeFontSize) : base("clock", Strings.Time, false)
+        public ClockMonitor(bool showDate, bool showTime, bool clock24HR, int dateFormatValue, bool showDayOfWeek, int dateFontSize, int timeFontSize) : base("clock", Strings.Time, false)
         {
             List<iMetric> _metrics = [];
 
@@ -100,7 +109,7 @@ namespace SSS.Core
             {
                 string _format = GetDateFormat(dateFormatValue);
 
-                _metrics.Add(new ClockDateMetric(_format, dateFontSize));
+                _metrics.Add(new ClockDateMetric(_format, dateFontSize, showDayOfWeek));
             }
 
             if (showTime)
@@ -121,11 +130,11 @@ namespace SSS.Core
             return [new HardwareConfig() { ID = "clock", Name = Strings.Time, ActualName = Strings.Time }];
         }
 
-        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, bool showDate, bool showTime, bool clock24HR, int dateFormatValue, int dateFontSize, int timeFontSize)
+        public static iMonitor[] GetInstances(HardwareConfig[] hardwareConfig, bool showDate, bool showTime, bool clock24HR, int dateFormatValue, bool showDayOfWeek, int dateFontSize, int timeFontSize)
         {
             return
             [
-                new ClockMonitor(showDate, showTime, clock24HR, dateFormatValue, dateFontSize, timeFontSize)
+                new ClockMonitor(showDate, showTime, clock24HR, dateFormatValue, showDayOfWeek, dateFontSize, timeFontSize)
             ];
         }
 
@@ -133,6 +142,7 @@ namespace SSS.Core
         {
             return value switch
             {
+                0 => DateSetting.Disabled.Format!,
                 1 => DateSetting.Short.Format!,
                 2 => DateSetting.Normal.Format!,
                 3 => DateSetting.Long.Format!,

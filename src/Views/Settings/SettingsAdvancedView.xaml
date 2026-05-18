@@ -27,25 +27,25 @@
         <Label Grid.Column="0" Grid.Row="0" Content="{x:Static res:Strings.SettingsUIScale}" />
         <DockPanel Grid.Column="1" Grid.Row="0">
             <TextBox Text="{Binding ElementName=UIScaleSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
-            <Slider x:Name="UIScaleSlider" Value="{Binding Path=UIScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0.5" Maximum="3.0" TickFrequency="0.1" LargeChange="0.5" ToolTip="{x:Static res:Strings.SettingsUIScaleTooltip}" />
+            <Slider x:Name="UIScaleSlider" Value="{Binding Path=UIScale, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0.5" Maximum="3.0" TickFrequency="0.1" LargeChange="0.1" ToolTip="{x:Static res:Strings.SettingsUIScaleTooltip}" />
         </DockPanel>
 
         <Label Grid.Column="0" Grid.Row="1" Content="{x:Static res:Strings.SettingsHorizontalOffset}" />
         <DockPanel Grid.Column="1" Grid.Row="1">
             <TextBox Text="{Binding ElementName=XOffsetSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
-            <Slider x:Name="XOffsetSlider" Value="{Binding Path=XOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="-2000" Maximum="2000" TickFrequency="1" LargeChange="1000" ValueChanged="OffsetSlider_ValueChanged" ToolTip="{x:Static res:Strings.SettingsHorizontalOffsetTooltip}" />
+            <Slider x:Name="XOffsetSlider" Value="{Binding Path=XOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="-2000" Maximum="2000" TickFrequency="1" LargeChange="100" ValueChanged="OffsetSlider_ValueChanged" ToolTip="{x:Static res:Strings.SettingsHorizontalOffsetTooltip}" />
         </DockPanel>
 
         <Label Grid.Column="0" Grid.Row="2" Content="{x:Static res:Strings.SettingsVerticalOffset}" />
         <DockPanel Grid.Column="1" Grid.Row="2">
             <TextBox Text="{Binding ElementName=YOffsetSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
-            <Slider x:Name="YOffsetSlider" Value="{Binding Path=YOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="-2000" Maximum="2000" TickFrequency="1" LargeChange="1000" ValueChanged="OffsetSlider_ValueChanged" ToolTip="{x:Static res:Strings.SettingsVerticalOffsetTooltip}" />
+            <Slider x:Name="YOffsetSlider" Value="{Binding Path=YOffset, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="-2000" Maximum="2000" TickFrequency="1" LargeChange="100" ValueChanged="OffsetSlider_ValueChanged" ToolTip="{x:Static res:Strings.SettingsVerticalOffsetTooltip}" />
         </DockPanel>
 
         <Label Grid.Column="0" Grid.Row="3" Content="{x:Static res:Strings.SettingsPollingInterval}" />
         <DockPanel Grid.Column="1" Grid.Row="3">
             <TextBox Text="{Binding ElementName=PollingIntervalSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
-            <Slider x:Name="PollingIntervalSlider" Value="{Binding Path=PollingInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="100" Maximum="5000" TickFrequency="100" LargeChange="1000" ToolTip="{x:Static res:Strings.SettingsPollingIntervalTooltip}" />
+            <Slider x:Name="PollingIntervalSlider" Value="{Binding Path=PollingInterval, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="100" Maximum="5000" TickFrequency="100" LargeChange="100" ToolTip="{x:Static res:Strings.SettingsPollingIntervalTooltip}" />
         </DockPanel>
 
 

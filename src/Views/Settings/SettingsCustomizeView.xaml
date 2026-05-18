@@ -33,7 +33,7 @@
         <Label Grid.Column="0" Grid.Row="0" Content="{x:Static res:Strings.SettingsSidebarWidth}" />
         <DockPanel Grid.Column="1" Grid.Row="0">
             <TextBox Text="{Binding ElementName=SidebarWidthSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
-            <Slider x:Name="SidebarWidthSlider" Value="{Binding Path=SidebarWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="100" Maximum="300" TickFrequency="5" LargeChange="100" ToolTip="{x:Static res:Strings.SettingsSidebarWidthTooltip}" />
+            <Slider x:Name="SidebarWidthSlider" Value="{Binding Path=SidebarWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="100" Maximum="300" TickFrequency="5" LargeChange="5" ToolTip="{x:Static res:Strings.SettingsSidebarWidthTooltip}" />
         </DockPanel>
 
         <Label Grid.Column="0"
@@ -48,7 +48,7 @@
                     Minimum="0"
                     Maximum="40"
                     TickFrequency="1"
-                    LargeChange="4"
+                    LargeChange="1"
                     ToolTip="{x:Static res:Strings.SettingsSidebarMarginTooltip}"/>
         </DockPanel>
 
@@ -104,7 +104,7 @@
         <Label Grid.Column="0" Grid.Row="3" Content="{x:Static res:Strings.SettingsBackgroundOpacity}" />
         <DockPanel Grid.Column="1" Grid.Row="3">
             <TextBox Text="{Binding ElementName=BGOpacitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
-            <Slider x:Name="BGOpacitySlider" Value="{Binding Path=BGOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0.01" Maximum="1.0" LargeChange="0.1" TickFrequency="0.01" ToolTip="{x:Static res:Strings.SettingsBackgroundOpacityTooltip}" />
+            <Slider x:Name="BGOpacitySlider" Value="{Binding Path=BGOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0.01" Maximum="1.0" LargeChange="0.05" TickFrequency="0.01" ToolTip="{x:Static res:Strings.SettingsBackgroundOpacityTooltip}" />
         </DockPanel>
 
         <Label Grid.Column="0" Grid.Row="4" Content="{x:Static res:Strings.SettingsTextAlign}" />
@@ -116,7 +116,7 @@
         <Label Grid.Column="0" Grid.Row="6" Content="{x:Static res:Strings.SettingsFontSize}" />
         <DockPanel Grid.Column="1" Grid.Row="6">
             <TextBox Text="{Binding ElementName=FontSizeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
-            <Slider x:Name="FontSizeSlider" Value="{Binding Path=FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="10" Maximum="40" LargeChange="2" TickFrequency="1" IsSnapToTickEnabled="True" ToolTip="{x:Static res:Strings.SettingsFontSizeTooltip}" />
+            <Slider x:Name="FontSizeSlider" Value="{Binding Path=FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="10" Maximum="40" LargeChange="1" TickFrequency="1" IsSnapToTickEnabled="True" ToolTip="{x:Static res:Strings.SettingsFontSizeTooltip}" />
         </DockPanel>
 
         <Label Grid.Column="0" Grid.Row="7" Content="{x:Static res:Strings.SettingsFontColor}" />

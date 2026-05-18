@@ -64,26 +64,17 @@
     <Resource Include="src/Resources/Sidebar.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="src\Resources\Strings.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Strings.resx</DependentUpon>
-    </Compile>
     <Compile Update="src\Resources\Settings.Designer.cs">
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Update="src\Resources\Strings.Designer.cs">
-      <Generator></Generator>
-      <CustomToolNamespace></CustomToolNamespace>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="src\Resources\Strings.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
+      <!-- MSBuildにビルド時の自動生成を命令 -->
+      <Generator>MSBuild:Compile</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>SSS</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

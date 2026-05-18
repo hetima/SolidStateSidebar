@@ -412,7 +412,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Short (Month only) に類似しているローカライズされた文字列を検索します。
+        ///   Short に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DateShort {
             get {
@@ -2217,6 +2217,24 @@ namespace SSS {
         public static string SetupTitle {
             get {
                 return ResourceManager.GetString("SetupTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Show Day of Week に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShowDayOfWeek {
+            get {
+                return ResourceManager.GetString("ShowDayOfWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Display the day of the week (e.g. Mon, Tue) after the date. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ShowDayOfWeekTooltip {
+            get {
+                return ResourceManager.GetString("ShowDayOfWeekTooltip", resourceCulture);
             }
         }
         
