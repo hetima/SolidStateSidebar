@@ -928,4 +928,12 @@
     <value>表示方法</value>
     <comment>Visibility taskbar menu item</comment>
   </data>
+  <data name="SettingsSidebarMargin" xml:space="preserve">
+    <value>サイドバー余白</value>
+    <comment>Settings sidebar margin label</comment>
+  </data>
+  <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
+    <value>サイドバーコンテンツの水平余白を調整します</value>
+    <comment>Settings sidebar margin tooltip</comment>
+  </data>
 </root>

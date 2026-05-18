@@ -38,17 +38,17 @@
 
         <Label Grid.Column="0"
                 Grid.Row="1"
-                Content="{x:Static res:Strings.SettingsSidebarWidth}"/>
+                Content="{x:Static res:Strings.SettingsSidebarMargin}"/>
         <DockPanel Grid.Column="1"
                 Grid.Row="1">
             <TextBox Text="{Binding ElementName=SidebarMarginSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
                     PreviewTextInput="NumberBox_PreviewTextInput"/>
             <Slider x:Name="SidebarMarginSlider"
                     Value="{Binding Path=SidebarMargin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                    Minimum="-4"
+                    Minimum="0"
                     Maximum="40"
-                    TickFrequency="5"
-                    LargeChange="100"
+                    TickFrequency="1"
+                    LargeChange="4"
                     ToolTip="{x:Static res:Strings.SettingsSidebarMarginTooltip}"/>
         </DockPanel>
 

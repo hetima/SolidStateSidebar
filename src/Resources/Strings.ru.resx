@@ -1021,4 +1021,12 @@
     <value>Настройка размера шрифта для отображения времени</value>
     <comment>Settings time font size tooltip</comment>
   </data>
+  <data name="SettingsSidebarMargin" xml:space="preserve">
+    <value>Отступ боковой панели</value>
+    <comment>Settings sidebar margin label</comment>
+  </data>
+  <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
+    <value>Настройка горизонтального отступа содержимого боковой панели</value>
+    <comment>Settings sidebar margin tooltip</comment>
+  </data>
 </root>

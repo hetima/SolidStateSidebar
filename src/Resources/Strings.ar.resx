@@ -1024,4 +1024,12 @@
   <data name="GitHub" xml:space="preserve">
     <value>GitHub</value>
   </data>
+  <data name="SettingsSidebarMargin" xml:space="preserve">
+    <value>هامش الشريط الجانبي</value>
+    <comment>Settings sidebar margin label</comment>
+  </data>
+  <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
+    <value>ضبط الهامش الأفقي لمحتوى الشريط الجانبي</value>
+    <comment>Settings sidebar margin tooltip</comment>
+  </data>
 </root>

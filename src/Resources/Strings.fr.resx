@@ -1009,4 +1009,12 @@
     <value>Ajuster la taille de police de l'affichage de l'heure</value>
     <comment>Settings time font size tooltip</comment>
   </data>
+  <data name="SettingsSidebarMargin" xml:space="preserve">
+    <value>Marge de la barre latérale</value>
+    <comment>Settings sidebar margin label</comment>
+  </data>
+  <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
+    <value>Ajuster la marge horizontale du contenu de la barre latérale</value>
+    <comment>Settings sidebar margin tooltip</comment>
+  </data>
 </root>

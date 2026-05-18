@@ -176,4 +176,25 @@ namespace SSS.Converters
             return null;
         }
     }
+
+    public class IntToThicknessConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is int i)
+            {
+                return new Thickness(i, 0, i, 0);
+            }
+            if (value is double d)
+            {
+                return new Thickness(d, 0, d, 0);
+            }
+            return new Thickness(0);
+        }
+
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
 }

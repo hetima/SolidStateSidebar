@@ -1021,4 +1021,12 @@
     <value>Regola la dimensione del font per la visualizzazione dell'ora</value>
     <comment>Settings time font size tooltip</comment>
   </data>
+  <data name="SettingsSidebarMargin" xml:space="preserve">
+    <value>Margine della barra laterale</value>
+    <comment>Settings sidebar margin label</comment>
+  </data>
+  <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
+    <value>Regola il margine orizzontale del contenuto della barra laterale</value>
+    <comment>Settings sidebar margin tooltip</comment>
+  </data>
 </root>

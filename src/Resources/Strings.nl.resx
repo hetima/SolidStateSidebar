@@ -436,4 +436,12 @@
     <value>Zichtbaarheid</value>
     <comment>Visibility taskbar menu item</comment>
   </data>
+  <data name="SettingsSidebarMargin" xml:space="preserve">
+    <value>Zijbalkmarge</value>
+    <comment>Settings sidebar margin label</comment>
+  </data>
+  <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
+    <value>De horizontale marge van de zijbalkinhoud aanpassen</value>
+    <comment>Settings sidebar margin tooltip</comment>
+  </data>
 </root>

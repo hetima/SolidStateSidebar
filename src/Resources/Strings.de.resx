@@ -436,4 +436,12 @@
     <value>Sichtbarkeit</value>
     <comment>Visibility taskbar menu item</comment>
   </data>
+  <data name="SettingsSidebarMargin" xml:space="preserve">
+    <value>Seitenleistenrand</value>
+    <comment>Settings sidebar margin label</comment>
+  </data>
+  <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
+    <value>Den horizontalen Rand der Seitenleiste anpassen</value>
+    <comment>Settings sidebar margin tooltip</comment>
+  </data>
 </root>

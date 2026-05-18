@@ -1861,6 +1861,24 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Sidebar Margin に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsSidebarMargin {
+            get {
+                return ResourceManager.GetString("SettingsSidebarMargin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Adjust the horizontal margin of the sidebar content に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsSidebarMarginTooltip {
+            get {
+                return ResourceManager.GetString("SettingsSidebarMarginTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sidebar Width に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsSidebarWidth {

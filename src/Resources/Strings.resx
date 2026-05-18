@@ -1088,4 +1088,12 @@
   <data name="Update" xml:space="preserve">
     <value>Update</value>
   </data>
+  <data name="SettingsSidebarMargin" xml:space="preserve">
+    <value>Sidebar Margin</value>
+    <comment>Settings sidebar margin label</comment>
+  </data>
+  <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
+    <value>Adjust the horizontal margin of the sidebar content</value>
+    <comment>Settings sidebar margin tooltip</comment>
+  </data>
 </root>

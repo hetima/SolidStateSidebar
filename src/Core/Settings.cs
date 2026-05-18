@@ -387,7 +387,7 @@ namespace SSS.Core
             }
         }
 
-        private int _sidebarMargin { get; set; } = 4;
+        private int _sidebarMargin { get; set; } = 15;
 
         [JsonProperty]
         public int SidebarMargin

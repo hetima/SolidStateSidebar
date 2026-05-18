@@ -436,4 +436,12 @@
     <value>Synlighed</value>
     <comment>Visibility taskbar menu item</comment>
   </data>
+  <data name="SettingsSidebarMargin" xml:space="preserve">
+    <value>Sidelinjemargen</value>
+    <comment>Settings sidebar margin label</comment>
+  </data>
+  <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
+    <value>Juster den vandrette margen for sidelinjens indhold</value>
+    <comment>Settings sidebar margin tooltip</comment>
+  </data>
 </root>
