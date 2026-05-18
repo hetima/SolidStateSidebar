@@ -71,7 +71,12 @@
                 <CheckBox Content="{x:Static res:Strings.SettingsRoundAllDecimals}" IsChecked="{Binding Path=RoundAll, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsRoundAllDecimalsTooltip}" />
                 <StackPanel Orientation="Horizontal" Margin="0,5">
                     <Label Content="{x:Static res:Strings.SettingsUsedSpaceAlert}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
-                    <TextBox Text="{Binding Path=UsedSpaceAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{x:Static res:Strings.SettingsUsedSpaceAlertTooltip}" VerticalAlignment="Center" Width="40" MaxLines="1" />
+                    <TextBox Text="{Binding Path=UsedSpaceAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}"
+                            ToolTip="{x:Static res:Strings.SettingsUsedSpaceAlertTooltip}"
+                            VerticalAlignment="Center"
+                            Width="40"
+                            MaxLines="1"
+                            Style="{StaticResource SettingInput}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

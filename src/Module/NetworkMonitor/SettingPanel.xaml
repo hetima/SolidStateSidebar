@@ -72,12 +72,29 @@
                 <CheckBox Content="{x:Static res:Strings.SettingsRoundAllDecimals}" IsChecked="{Binding Path=RoundAll, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsRoundAllDecimalsTooltip}" />
                 <CheckBox Content="{x:Static res:Strings.SettingsUseBytesPerSecond}" IsChecked="{Binding Path=UseBytes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsUseBytesPerSecondTooltip}" />
                 <StackPanel Orientation="Horizontal" Margin="0,5">
-                    <Label Content="{x:Static res:Strings.SettingsBandwidthInAlert}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
-                    <TextBox Text="{Binding Path=BandwidthInAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{x:Static res:Strings.SettingsBandwidthInAlertTooltip}" VerticalAlignment="Center" Width="40" MaxLines="1" />
+                    <Label Content="{x:Static res:Strings.SettingsBandwidthInAlert}"
+                            VerticalAlignment="Center"
+                            Margin="0,0,10,0"
+                            Padding="0"/>
+                    <TextBox Text="{Binding Path=BandwidthInAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}"
+                            ToolTip="{x:Static res:Strings.SettingsBandwidthInAlertTooltip}"
+                            VerticalAlignment="Center"
+                            Width="40"
+                            MaxLines="1"
+                             Style="{StaticResource SettingInput}"/>
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,5">
-                    <Label Content="{x:Static res:Strings.SettingsBandwidthOutAlert}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
-                    <TextBox Text="{Binding Path=BandwidthOutAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{x:Static res:Strings.SettingsBandwidthOutAlertTooltip}" VerticalAlignment="Center" Width="40" MaxLines="1" />
+                <StackPanel Orientation="Horizontal"
+                        Margin="0,5">
+                    <Label Content="{x:Static res:Strings.SettingsBandwidthOutAlert}"
+                            VerticalAlignment="Center"
+                            Margin="0,0,10,0"
+                            Padding="0"/>
+                    <TextBox Text="{Binding Path=BandwidthOutAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}"
+                            ToolTip="{x:Static res:Strings.SettingsBandwidthOutAlertTooltip}"
+                            VerticalAlignment="Center"
+                            Width="40"
+                            MaxLines="1"
+                             Style="{StaticResource SettingInput}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

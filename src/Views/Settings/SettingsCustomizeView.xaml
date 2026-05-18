@@ -27,9 +27,6 @@
             <RowDefinition Height="38px"></RowDefinition>
             <RowDefinition Height="38px"></RowDefinition>
             <RowDefinition Height="38px"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="38px"></RowDefinition>
         </Grid.RowDefinitions>
 

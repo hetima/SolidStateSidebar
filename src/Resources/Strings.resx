@@ -533,7 +533,7 @@
     <comment>Settings background opacity tooltip</comment>
   </data>
   <data name="SettingsBandwidthInAlert" xml:space="preserve">
-    <value>Bandwidth In Alert</value>
+    <value>Bandwidth In Alert:</value>
     <comment>Settings bandwidth in alert label</comment>
   </data>
   <data name="SettingsBandwidthInAlertTooltip" xml:space="preserve">
@@ -541,7 +541,7 @@
     <comment>Settings bandwidth in alert tooltip</comment>
   </data>
   <data name="SettingsBandwidthOutAlert" xml:space="preserve">
-    <value>Bandwidth Out Alert</value>
+    <value>Bandwidth Out Alert:</value>
     <comment>Settings bandwidth out alert label</comment>
   </data>
   <data name="SettingsBandwidthOutAlertTooltip" xml:space="preserve">
@@ -853,7 +853,7 @@
     <comment>Settings sidebar width tooltip</comment>
   </data>
   <data name="SettingsTemperatureAlert" xml:space="preserve">
-    <value>Temperature Alert</value>
+    <value>Temperature Alert:</value>
     <comment>Settings temperature alert label</comment>
   </data>
   <data name="SettingsTemperatureAlertTooltip" xml:space="preserve">
@@ -881,7 +881,7 @@
     <comment>Settings use bytes per second tooltip</comment>
   </data>
   <data name="SettingsUsedSpaceAlert" xml:space="preserve">
-    <value>Used Space Alert</value>
+    <value>Used Space Alert:</value>
     <comment>Settings used space alert label</comment>
   </data>
   <data name="SettingsUsedSpaceAlertTooltip" xml:space="preserve">

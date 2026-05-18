@@ -74,7 +74,12 @@
                 <CheckBox Content="{x:Static res:Strings.SettingsUseFahrenheit}" IsChecked="{Binding Path=UseFahrenheit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsUseFahrenheitTooltip}" />
                 <StackPanel Orientation="Horizontal" Margin="0,5">
                     <Label Content="{x:Static res:Strings.SettingsTemperatureAlert}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
-                    <TextBox Text="{Binding Path=TempAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}" ToolTip="{x:Static res:Strings.SettingsTemperatureAlertTooltip}" VerticalAlignment="Center" Width="40" MaxLines="1" />
+                    <TextBox Text="{Binding Path=TempAlert, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource IntConverter}}"
+                            ToolTip="{x:Static res:Strings.SettingsTemperatureAlertTooltip}"
+                            VerticalAlignment="Center"
+                            Width="40"
+                            MaxLines="1"
+                            Style="{StaticResource SettingInput}"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>

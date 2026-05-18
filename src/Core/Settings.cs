@@ -499,11 +499,13 @@ namespace SSS.Core
         public int TitleFontSize => FontSize + 2;
 
         [JsonIgnore]
-        public int SmallFontSize => Math.Max(FontSize - 2, 6);
+        public int SmallFontSize => Math.Max(FontSize - 2, 8);
 
         [JsonIgnore]
         public int IconSize => FontSize + 10;
 
+        [JsonIgnore]
+        public int SmallIconSize => FontSize + 2;
         [JsonIgnore]
         public int BarHeight => Math.Max(FontSize - 3, 4);
 
