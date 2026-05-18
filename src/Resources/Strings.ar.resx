@@ -993,6 +993,14 @@
     <value>إظهار إسم الحاسوب.</value>
     <comment>Settings show machine name tooltip</comment>
   </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>عدم التفاف النص</value>
+    <comment>Settings metrics no wrap label</comment>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>يمنع النص من الانتقال إلى السطر التالي.</value>
+    <comment>Settings metrics no wrap tooltip</comment>
+  </data>
   <data name="SettingsHeaderStyle" xml:space="preserve">
     <value>نمط العنوان</value>
     <comment>Settings header style label</comment>

@@ -252,5 +252,7 @@ namespace SSS.Core
             LoadBarInline,
             LoadBarStacked
         }
+
+        
     }
 }

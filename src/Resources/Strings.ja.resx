@@ -868,6 +868,12 @@
   <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
     <value>PCの名前を表示します</value>
   </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>テキストを折り返さない</value>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>テキストが次の行に折り返されるのを防ぎます。</value>
+  </data>
   <data name="SettingsHeaderStyle" xml:space="preserve">
     <value>ヘッダースタイル</value>
     <comment>Settings header style label</comment>

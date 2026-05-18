@@ -464,4 +464,20 @@
     <value>Geen</value>
     <comment>Section header style none option</comment>
   </data>
+  <data name="SettingsShowMachineName" xml:space="preserve">
+    <value>PC-naam weergeven</value>
+    <comment>Settings show machine name label</comment>
+  </data>
+  <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
+    <value>Toont de naam van de computer.</value>
+    <comment>Settings show machine name tooltip</comment>
+  </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>Tekst niet afbreken</value>
+    <comment>Settings metrics no wrap label</comment>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>Voorkomt dat tekst naar de volgende regel gaat.</value>
+    <comment>Settings metrics no wrap tooltip</comment>
+  </data>
 </root>

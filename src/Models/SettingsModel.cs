@@ -76,6 +76,7 @@ namespace SSS.Models
             CollapseMenuBar = Core.Settings.Instance.CollapseMenuBar;
             InitiallyHidden = Core.Settings.Instance.InitiallyHidden;
             ShowMachineName = Core.Settings.Instance.ShowMachineName;
+            MetricsNoWrap = Core.Settings.Instance.MetricsNoWrap;
 
             ObservableCollection<IModuleData> _modules = new ObservableCollection<IModuleData>(
                 from kvp in Core.Settings.Instance.Modules!
@@ -164,6 +165,7 @@ namespace SSS.Models
             Core.Settings.Instance.CollapseMenuBar = CollapseMenuBar;
             Core.Settings.Instance.InitiallyHidden = InitiallyHidden;
             Core.Settings.Instance.ShowMachineName = ShowMachineName;
+            Core.Settings.Instance.MetricsNoWrap = MetricsNoWrap;
 
             for (int i = 0; i < Modules.Count; i++)
             {
@@ -830,6 +832,22 @@ namespace SSS.Models
                 _showMachineName = value;
 
                 NotifyPropertyChanged(nameof(ShowMachineName));
+            }
+        }
+
+        private bool _metricsNoWrap { get; set; } = false;
+
+        public bool MetricsNoWrap
+        {
+            get
+            {
+                return _metricsNoWrap;
+            }
+            set
+            {
+                _metricsNoWrap = value;
+
+                NotifyPropertyChanged(nameof(MetricsNoWrap));
             }
         }
 

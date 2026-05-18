@@ -1852,6 +1852,24 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Don't Wrap Text に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsMetricsNoWrap {
+            get {
+                return ResourceManager.GetString("SettingsMetricsNoWrap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Prevents text from wrapping to the next line. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsMetricsNoWrapTooltip {
+            get {
+                return ResourceManager.GetString("SettingsMetricsNoWrapTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Show Time に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsShowTime {

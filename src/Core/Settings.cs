@@ -584,6 +584,23 @@ namespace SSS.Core
             }
         }
 
+        private bool _metricsNoWrap { get; set; } = false;
+
+        [JsonProperty]
+        public bool MetricsNoWrap
+        {
+            get
+            {
+                return _metricsNoWrap;
+            }
+            set
+            {
+                _metricsNoWrap = value;
+
+                NotifyPropertyChanged(nameof(MetricsNoWrap));
+            }
+        }
+
         private string _iconTheme { get; set; } = "Default";
 
         [JsonProperty]

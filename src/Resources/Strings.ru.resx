@@ -993,6 +993,14 @@
     <value>Показывает имя компьютера.</value>
     <comment>Settings show machine name tooltip</comment>
   </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>Не переносить текст</value>
+    <comment>Settings metrics no wrap label</comment>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>Запрещает перенос текста на следующую строку.</value>
+    <comment>Settings metrics no wrap tooltip</comment>
+  </data>
   <data name="SettingsHeaderStyle" xml:space="preserve">
     <value>Стиль заголовка</value>
     <comment>Settings header style label</comment>

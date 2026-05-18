@@ -993,6 +993,14 @@
     <value>Näyttää tietokoneen nimen.</value>
     <comment>Settings show machine name tooltip</comment>
   </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>Älä rivity tekstiä</value>
+    <comment>Settings metrics no wrap label</comment>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>Estää tekstin siirtymisen seuraavalle riville.</value>
+    <comment>Settings metrics no wrap tooltip</comment>
+  </data>
   <data name="SettingsHeaderStyle" xml:space="preserve">
     <value>Otsikkotyyli</value>
     <comment>Settings header style label</comment>

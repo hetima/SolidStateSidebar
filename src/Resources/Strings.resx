@@ -1041,6 +1041,14 @@
     <value>Shows the name of the computer.</value>
     <comment>Settings show machine name tooltip</comment>
   </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>Don't Wrap Text</value>
+    <comment>Settings metrics no wrap label</comment>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>Prevents text from wrapping to the next line.</value>
+    <comment>Settings metrics no wrap tooltip</comment>
+  </data>
   <data name="SettingsHeaderStyle" xml:space="preserve">
     <value>Header Style</value>
     <comment>Settings header style label</comment>

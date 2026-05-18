@@ -464,4 +464,20 @@
     <value>Keine</value>
     <comment>Section header style none option</comment>
   </data>
+  <data name="SettingsShowMachineName" xml:space="preserve">
+    <value>PC-Namen anzeigen</value>
+    <comment>Settings show machine name label</comment>
+  </data>
+  <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
+    <value>Zeigt den Namen des Computers an.</value>
+    <comment>Settings show machine name tooltip</comment>
+  </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>Text nicht umbrechen</value>
+    <comment>Settings metrics no wrap label</comment>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>Verhindert, dass Text in die nächste Zeile umbrochen wird.</value>
+    <comment>Settings metrics no wrap tooltip</comment>
+  </data>
 </root>

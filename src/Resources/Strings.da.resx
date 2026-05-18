@@ -464,4 +464,20 @@
     <value>Ingen</value>
     <comment>Section header style none option</comment>
   </data>
+  <data name="SettingsShowMachineName" xml:space="preserve">
+    <value>Vis PC-navn</value>
+    <comment>Settings show machine name label</comment>
+  </data>
+  <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
+    <value>Viser computerens navn.</value>
+    <comment>Settings show machine name tooltip</comment>
+  </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>Undlad at bryde tekst</value>
+    <comment>Settings metrics no wrap label</comment>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>Forhindrer tekst i at gå til næste linje.</value>
+    <comment>Settings metrics no wrap tooltip</comment>
+  </data>
 </root>

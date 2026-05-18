@@ -28,6 +28,7 @@
             <RowDefinition Height="38px"></RowDefinition>
             <RowDefinition Height="38px"></RowDefinition>
             <RowDefinition Height="38px"></RowDefinition>
+            <RowDefinition Height="38px"></RowDefinition>
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" Content="{x:Static res:Strings.SettingsSidebarWidth}" />
@@ -110,18 +111,20 @@
         <Label Grid.Column="0" Grid.Row="4" Content="{x:Static res:Strings.SettingsTextAlign}" />
         <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Path=TextAlignItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Value" SelectedValue="{Binding Path=TextAlign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsTextAlignTooltip}" />
 
-        <Label Grid.Column="0" Grid.Row="5" Content="{x:Static res:Strings.SettingsFontName}" />
-        <ComboBox Grid.Column="1" Grid.Row="5" ItemsSource="{Binding Path=FontNameItems, Mode=OneWay}" SelectedValue="{Binding Path=FontName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsFontNameTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="5" Content="{x:Static res:Strings.SettingsMetricsNoWrap}" IsChecked="{Binding Path=MetricsNoWrap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsMetricsNoWrapTooltip}" />
+
+        <Label Grid.Column="0" Grid.Row="6" Content="{x:Static res:Strings.SettingsFontName}" />
+        <ComboBox Grid.Column="1" Grid.Row="6" ItemsSource="{Binding Path=FontNameItems, Mode=OneWay}" SelectedValue="{Binding Path=FontName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsFontNameTooltip}" />
         
-        <Label Grid.Column="0" Grid.Row="6" Content="{x:Static res:Strings.SettingsFontSize}" />
-        <DockPanel Grid.Column="1" Grid.Row="6">
+        <Label Grid.Column="0" Grid.Row="7" Content="{x:Static res:Strings.SettingsFontSize}" />
+        <DockPanel Grid.Column="1" Grid.Row="7">
             <TextBox Text="{Binding ElementName=FontSizeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
             <Slider x:Name="FontSizeSlider" Value="{Binding Path=FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="10" Maximum="40" LargeChange="1" TickFrequency="1" IsSnapToTickEnabled="True" ToolTip="{x:Static res:Strings.SettingsFontSizeTooltip}" />
         </DockPanel>
 
-        <Label Grid.Column="0" Grid.Row="7" Content="{x:Static res:Strings.SettingsFontColor}" />
+        <Label Grid.Column="0" Grid.Row="8" Content="{x:Static res:Strings.SettingsFontColor}" />
         <Button Grid.Column="1"
-                Grid.Row="7"
+                Grid.Row="8"
                 x:Name="FontColorButton"
                 HorizontalAlignment="Left"
                 MinWidth="100"
@@ -163,7 +166,7 @@
                AllowsTransparency="True"
                PopupAnimation="Fade"
                Grid.Column="1"
-               Grid.Row="7">
+               Grid.Row="8">
             <Border Background="{DynamicResource WD.BackgroundBrush}"
                     BorderBrush="{DynamicResource WD.BaseBrush}"
                     BorderThickness="1"
@@ -172,9 +175,9 @@
             </Border>
         </Popup>
 
-        <Label Grid.Column="0" Grid.Row="8" Content="{x:Static res:Strings.SettingsAlertFontColor}" />
+        <Label Grid.Column="0" Grid.Row="9" Content="{x:Static res:Strings.SettingsAlertFontColor}" />
         <Button Grid.Column="1"
-                Grid.Row="8"
+                Grid.Row="9"
                 x:Name="AlertFontColorButton"
                 HorizontalAlignment="Left"
                 MinWidth="100"
@@ -216,7 +219,7 @@
                AllowsTransparency="True"
                PopupAnimation="Fade"
                Grid.Column="1"
-               Grid.Row="8">
+               Grid.Row="9">
             <Border Background="{DynamicResource WD.BackgroundBrush}"
                     BorderBrush="{DynamicResource WD.BaseBrush}"
                     BorderThickness="1"
@@ -225,11 +228,13 @@
             </Border>
         </Popup>
 
-        <CheckBox Grid.Column="1" Grid.Row="9" Content="{x:Static res:Strings.SettingsAlertBlink}" IsChecked="{Binding Path=AlertBlink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlertBlinkTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="10" Content="{x:Static res:Strings.SettingsAlertBlink}" IsChecked="{Binding Path=AlertBlink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlertBlinkTooltip}" />
 
-        <Label Grid.Column="0" Grid.Row="10" Content="{x:Static res:Strings.SettingsIconTheme}" />
-        <ComboBox Grid.Column="1" Grid.Row="10" ItemsSource="{Binding Path=IconThemeItems, Mode=OneWay}" SelectedValue="{Binding Path=IconTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        <Label Grid.Column="0" Grid.Row="11" Content="{x:Static res:Strings.SettingsIconTheme}" />
+        <ComboBox Grid.Column="1" Grid.Row="11" ItemsSource="{Binding Path=IconThemeItems, Mode=OneWay}" SelectedValue="{Binding Path=IconTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
-        <CheckBox Grid.Column="1" Grid.Row="11" Content="{x:Static res:Strings.SettingsShowMachineName}" IsChecked="{Binding Path=ShowMachineName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowMachineNameTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="12" Content="{x:Static res:Strings.SettingsShowMachineName}" IsChecked="{Binding Path=ShowMachineName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowMachineNameTooltip}" />
+        
+        
     </Grid>
 </UserControl>

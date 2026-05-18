@@ -981,6 +981,14 @@
     <value>Affiche le nom du PC.</value>
     <comment>Settings show machine name tooltip</comment>
   </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>Ne pas retourner le texte</value>
+    <comment>Settings metrics no wrap label</comment>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>Empêche le texte de passer à la ligne suivante.</value>
+    <comment>Settings metrics no wrap tooltip</comment>
+  </data>
   <data name="SettingsHeaderStyle" xml:space="preserve">
     <value>Style d'en-tête</value>
     <comment>Settings header style label</comment>
