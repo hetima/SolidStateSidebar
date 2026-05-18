@@ -2,7 +2,7 @@ using System.Windows;
 using System.Windows.Controls;
 using SSS.Core;
 
-namespace SSS
+namespace SSS.Views.Components
 {
     public partial class MetricsSettingPopup : UserControl
     {

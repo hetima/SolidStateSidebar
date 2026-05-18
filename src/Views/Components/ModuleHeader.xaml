@@ -1,4 +1,4 @@
-<UserControl x:Class="SSS.Styling.ModuleHeader"
+<UserControl x:Class="SSS.Views.Components.ModuleHeader"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:core="clr-namespace:SSS.Core"

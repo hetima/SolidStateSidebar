@@ -8,7 +8,7 @@
              xmlns:conv="clr-namespace:SSS.Converters"
              xmlns:res="clr-namespace:SSS"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:styling="clr-namespace:SSS.Styling"
+             xmlns:components="clr-namespace:SSS.Views.Components"
              mc:Ignorable="d">
     <UserControl.Resources>
         <conv:IntToStringConverter x:Key="IntConverter" />
@@ -29,7 +29,7 @@
             </StackPanel>
 
             <!-- Hardware List -->
-            <styling:HardwareListView />
+            <components:HardwareListView />
 
             <!-- Metrics -->
             <DockPanel LastChildFill="True" Margin="0,15,0,0">

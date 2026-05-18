@@ -1,41 +1,22 @@
-<UserControl x:Class="SSS.Module.NetworkMonitor.Section"
+<UserControl x:Class="SSS.Module.TimeMonitor.Section"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:core="clr-namespace:SSS.Core"
-             xmlns:styling="clr-namespace:SSS.Styling"
+             xmlns:components="clr-namespace:SSS.Views.Components"
              mc:Ignorable="d">
     <StackPanel Style="{StaticResource GroupPanel}">
-        <styling:ModuleHeader />
+        <components:ModuleHeader />
 
         <ItemsControl ItemsSource="{Binding Path=Monitors, Mode=OneWay}">
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type core:BaseMonitor}">
                     <StackPanel Style="{StaticResource MonitorPanel}">
-                        <ContentControl>
-                            <ContentControl.Style>
-                                <Style TargetType="{x:Type ContentControl}">
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Path=ShowName, Mode=OneWay}" Value="True">
-                                            <Setter Property="Content">
-                                                <Setter.Value>
-                                                    <TextBlock Text="{Binding Path=Name, Mode=OneWay}" Style="{StaticResource HardwareText}" />
-                                                </Setter.Value>
-                                            </Setter>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </ContentControl.Style>
-                        </ContentControl>
-
                         <ItemsControl ItemsSource="{Binding Path=Metrics, Mode=OneWay}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate DataType="{x:Type core:iMetric}">
-                                    <DockPanel Style="{StaticResource MetricPanel}">
-                                        <TextBlock Text="{Binding Path=Label, Mode=OneWay, Converter={StaticResource MetricLabelConverter}}" Style="{StaticResource MetricLabel}" />
-                                        <TextBlock Text="{Binding Path=Text, Mode=OneWay}" Style="{StaticResource MetricValue}" />
-                                    </DockPanel>
+                                    <TextBlock Text="{Binding Path=Text, Mode=OneWay}" Style="{StaticResource MetricValue}" FontSize="{Binding Path=FontSize, Mode=OneWay}" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                             <ItemsControl.ItemsPanel>

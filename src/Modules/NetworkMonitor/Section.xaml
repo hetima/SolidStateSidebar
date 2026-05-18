@@ -1,13 +1,13 @@
-<UserControl x:Class="SSS.Module.CpuMonitor.Section"
+<UserControl x:Class="SSS.Module.NetworkMonitor.Section"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:core="clr-namespace:SSS.Core"
-             xmlns:styling="clr-namespace:SSS.Styling"
+             xmlns:components="clr-namespace:SSS.Views.Components"
              mc:Ignorable="d">
     <StackPanel Style="{StaticResource GroupPanel}">
-        <styling:ModuleHeader />
+        <components:ModuleHeader />
 
         <ItemsControl ItemsSource="{Binding Path=Monitors, Mode=OneWay}">
             <ItemsControl.Resources>

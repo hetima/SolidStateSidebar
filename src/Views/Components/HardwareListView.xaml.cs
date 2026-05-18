@@ -1,6 +1,6 @@
 using System.Windows.Controls;
 
-namespace SSS.Styling
+namespace SSS.Views.Components
 {
     public partial class HardwareListView : UserControl
     {
