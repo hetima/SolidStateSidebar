@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using LibreHardwareMonitor.Hardware;
 
@@ -6,7 +7,7 @@ namespace SSS.Core
 {
     public static class Extensions
     {
-        public static bool IsEnabled(this MetricConfig[] metrics, MetricKey key)
+        public static bool IsEnabled(this IEnumerable<MetricConfig> metrics, MetricKey key)
         {
             return metrics.Any(m => m.Key == key && m.Enabled);
         }

@@ -163,7 +163,7 @@ namespace SSS.Core
                 MonitorType.CPU,
                 MonitorType.CPU.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("cpu"),
-                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!, MonitorType.CPU, _board!, GetHardware(MonitorType.CPU.GetHardwareTypes()).ToArray(),
+                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), MonitorType.CPU, _board!, GetHardware(MonitorType.CPU.GetHardwareTypes()).ToArray(),
                     d.ShowHardwareNames, d.RoundAll, d.AllCoreClocks, d.UseGHz, d.UseFahrenheit, d.TempAlert)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
@@ -177,7 +177,7 @@ namespace SSS.Core
                 MonitorType.RAM,
                 MonitorType.RAM.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("ram"),
-                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!, MonitorType.RAM, _board!, GetHardware(MonitorType.RAM.GetHardwareTypes()).ToArray(),
+                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), MonitorType.RAM, _board!, GetHardware(MonitorType.RAM.GetHardwareTypes()).ToArray(),
                     false, d.RoundAll, false, false, false, 0)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
@@ -191,7 +191,7 @@ namespace SSS.Core
                 MonitorType.GPU,
                 MonitorType.GPU.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("gpu"),
-                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!, MonitorType.GPU, _board!, GetHardware(MonitorType.GPU.GetHardwareTypes()).ToArray(),
+                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), MonitorType.GPU, _board!, GetHardware(MonitorType.GPU.GetHardwareTypes()).ToArray(),
                     d.ShowHardwareNames, d.RoundAll, false, d.UseGHz, d.UseFahrenheit, d.TempAlert)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
@@ -205,7 +205,7 @@ namespace SSS.Core
                 MonitorType.HD,
                 MonitorType.HD.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("hd"),
-                DriveMonitor.GetInstances(d.Hardware!, d.Metrics!, d.RoundAll, d.UsedSpaceAlert)
+                DriveMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), d.RoundAll, d.UsedSpaceAlert)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;
@@ -218,7 +218,7 @@ namespace SSS.Core
                 MonitorType.Network,
                 MonitorType.Network.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("net"),
-                NetworkMonitor.GetInstances(d.Hardware!, d.Metrics!, d.ShowHardwareNames, d.RoundAll, d.UseBytes, d.BandwidthInAlert, d.BandwidthOutAlert)
+                NetworkMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), d.ShowHardwareNames, d.RoundAll, d.UseBytes, d.BandwidthInAlert, d.BandwidthOutAlert)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;

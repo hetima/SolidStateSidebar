@@ -12,21 +12,22 @@
               Style="{StaticResource HardwareGrid}">
         <ListView.View>
             <GridView AllowsColumnReorder="False">
-                <GridViewColumn Header="{x:Static res:Strings.SettingsHardwareColumn1}" HeaderContainerStyle="{StaticResource MonitorHardwareHeaderCenter}">
+                <GridViewColumn Header=" " HeaderContainerStyle="{StaticResource MonitorHardwareHeaderCenter}" Width="40">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
                             <CheckBox IsChecked="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsHardwareEnabledTooltip}" Style="{StaticResource MonitorHardwareCheckbox}" />
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-                <GridViewColumn Header="{x:Static res:Strings.SettingsHardwareColumn2}" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="230">
+                <GridViewColumn Header="{x:Static res:Strings.SettingsHardwareColumn2}" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="320">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
                             <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Style="{StaticResource MonitorHardwareText}" ToolTip="{x:Static res:Strings.SettingsHardwareNameTooltip}" />
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-                <GridViewColumn Width="Auto">
+                <GridViewColumn Header=" "
+                        HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="40">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
                             <Button Content="&#x21BA;" Style="{StaticResource MonitorHardwareResetButton}" ToolTip="Reset name" Click="HardwareResetButton_Click" />

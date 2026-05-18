@@ -47,10 +47,10 @@ namespace SSS.Module.NetworkMonitor
             set { _hardware = value; NotifyPropertyChanged(); }
         }
 
-        private MetricConfig[] _metrics = [];
+        private ObservableCollection<MetricConfig> _metrics = [];
 
         [JsonProperty("metrics")]
-        public MetricConfig[] Metrics
+        public ObservableCollection<MetricConfig> Metrics
         {
             get => _metrics;
             set { _metrics = value; NotifyPropertyChanged(); }
@@ -127,13 +127,13 @@ namespace SSS.Module.NetworkMonitor
             Enabled = true,
             Order = 1,
             Hardware = [],
-            Metrics =
+            Metrics = new ObservableCollection<MetricConfig>(
             [
                 new MetricConfig(MetricKey.NetworkIP, true),
                 new MetricConfig(MetricKey.NetworkExtIP, false),
                 new MetricConfig(MetricKey.NetworkIn, true),
                 new MetricConfig(MetricKey.NetworkOut, true)
-            ],
+            ]),
             ShowHardwareNames = true,
             RoundAll = false,
             UseBytes = false,
@@ -145,7 +145,7 @@ namespace SSS.Module.NetworkMonitor
         {
             Data clone = (Data)MemberwiseClone();
             clone.Hardware = clone.Hardware.Select(h => h.Clone()).ToArray();
-            clone.Metrics = clone.Metrics.Select(m => m.Clone()).ToArray();
+            clone.Metrics = new ObservableCollection<MetricConfig>(clone.Metrics.Select(m => m.Clone()));
             clone.HardwareOC = null;
             return clone;
         }

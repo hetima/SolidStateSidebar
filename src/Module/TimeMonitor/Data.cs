@@ -53,7 +53,7 @@ namespace SSS.Module.TimeMonitor
         // --- IModuleData (not used by TimeMonitor, empty for interface compliance) ---
 
         [JsonIgnore]
-        public MetricConfig[] Metrics { get; set; } = [];
+        public ObservableCollection<MetricConfig> Metrics { get; set; } = [];
 
         // --- UI-only (not serialized) ---
 

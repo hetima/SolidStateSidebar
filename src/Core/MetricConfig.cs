@@ -81,5 +81,47 @@ namespace SSS.Core
                 return Key.GetFullName();
             }
         }
+
+        public string ActualLabel
+        {
+            get
+            {
+                return Key.GetLabel();
+            }
+        }
+
+        private string? _label { get; set; }
+
+        [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
+        public string? Label
+        {
+            get
+            {
+                return _label;
+            }
+            set
+            {
+                _label = value;
+
+                NotifyPropertyChanged(nameof(Label));
+            }
+        }
+
+        private byte _order { get; set; }
+
+        [JsonProperty]
+        public byte Order
+        {
+            get
+            {
+                return _order;
+            }
+            set
+            {
+                _order = value;
+
+                NotifyPropertyChanged(nameof(Order));
+            }
+        }
     }
 }

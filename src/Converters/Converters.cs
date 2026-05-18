@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
+using SSS.Core;
 using SSS.Windows;
 
 namespace SSS.Converters
@@ -98,6 +101,41 @@ namespace SSS.Converters
             }
 
             return string.Format("{0}:", _value);
+        }
+
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
+    public class MetricLabelDisplayConverter : IMultiValueConverter
+    {
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values.Length >= 2 && values[1] is string actualLabel)
+            {
+                string? label = values[0] as string;
+                return label ?? actualLabel ?? string.Empty;
+            }
+            return string.Empty;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            return [value ?? string.Empty];
+        }
+    }
+
+    public class EnabledMetricsConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is IEnumerable<MetricConfig> metrics)
+            {
+                return string.Join(", ", metrics.Where(m => m.Enabled).Select(m => m.Name));
+            }
+            return string.Empty;
         }
 
         public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

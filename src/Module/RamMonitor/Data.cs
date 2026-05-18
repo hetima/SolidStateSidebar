@@ -47,10 +47,10 @@ namespace SSS.Module.RamMonitor
             set { _hardware = value; NotifyPropertyChanged(); }
         }
 
-        private MetricConfig[] _metrics = [];
+        private ObservableCollection<MetricConfig> _metrics = [];
 
         [JsonProperty("metrics")]
-        public MetricConfig[] Metrics
+        public ObservableCollection<MetricConfig> Metrics
         {
             get => _metrics;
             set { _metrics = value; NotifyPropertyChanged(); }
@@ -91,14 +91,14 @@ namespace SSS.Module.RamMonitor
             Enabled = true,
             Order = 4,
             Hardware = [],
-            Metrics =
+            Metrics = new ObservableCollection<MetricConfig>(
             [
                 new MetricConfig(MetricKey.RAMClock, true),
                 new MetricConfig(MetricKey.RAMVoltage, true),
                 new MetricConfig(MetricKey.RAMLoad, true),
                 new MetricConfig(MetricKey.RAMUsed, true),
                 new MetricConfig(MetricKey.RAMFree, true)
-            ],
+            ]),
             RoundAll = false
         };
 
@@ -106,7 +106,7 @@ namespace SSS.Module.RamMonitor
         {
             Data clone = (Data)MemberwiseClone();
             clone.Hardware = clone.Hardware.Select(h => h.Clone()).ToArray();
-            clone.Metrics = clone.Metrics.Select(m => m.Clone()).ToArray();
+            clone.Metrics = new ObservableCollection<MetricConfig>(clone.Metrics.Select(m => m.Clone()));
             clone.HardwareOC = null;
             return clone;
         }

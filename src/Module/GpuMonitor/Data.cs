@@ -47,10 +47,10 @@ namespace SSS.Module.GpuMonitor
             set { _hardware = value; NotifyPropertyChanged(); }
         }
 
-        private MetricConfig[] _metrics = [];
+        private ObservableCollection<MetricConfig> _metrics = [];
 
         [JsonProperty("metrics")]
-        public MetricConfig[] Metrics
+        public ObservableCollection<MetricConfig> Metrics
         {
             get => _metrics;
             set { _metrics = value; NotifyPropertyChanged(); }
@@ -127,7 +127,7 @@ namespace SSS.Module.GpuMonitor
             Enabled = true,
             Order = 3,
             Hardware = [],
-            Metrics =
+            Metrics = new ObservableCollection<MetricConfig>(
             [
                 new MetricConfig(MetricKey.GPUCoreClock, true),
                 new MetricConfig(MetricKey.GPUVRAMClock, true),
@@ -136,7 +136,7 @@ namespace SSS.Module.GpuMonitor
                 new MetricConfig(MetricKey.GPUVoltage, true),
                 new MetricConfig(MetricKey.GPUTemp, true),
                 new MetricConfig(MetricKey.GPUFan, true)
-            ],
+            ]),
             ShowHardwareNames = true,
             RoundAll = false,
             UseGHz = false,
@@ -148,7 +148,7 @@ namespace SSS.Module.GpuMonitor
         {
             Data clone = (Data)MemberwiseClone();
             clone.Hardware = clone.Hardware.Select(h => h.Clone()).ToArray();
-            clone.Metrics = clone.Metrics.Select(m => m.Clone()).ToArray();
+            clone.Metrics = new ObservableCollection<MetricConfig>(clone.Metrics.Select(m => m.Clone()));
             clone.HardwareOC = null;
             return clone;
         }

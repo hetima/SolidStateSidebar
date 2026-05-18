@@ -47,10 +47,10 @@ namespace SSS.Module.CpuMonitor
             set { _hardware = value; NotifyPropertyChanged(); }
         }
 
-        private MetricConfig[] _metrics = [];
+        private ObservableCollection<MetricConfig> _metrics = [];
 
         [JsonProperty("metrics")]
-        public MetricConfig[] Metrics
+        public ObservableCollection<MetricConfig> Metrics
         {
             get => _metrics;
             set { _metrics = value; NotifyPropertyChanged(); }
@@ -136,7 +136,7 @@ namespace SSS.Module.CpuMonitor
             Enabled = true,
             Order = 5,
             Hardware = [],
-            Metrics =
+            Metrics = new ObservableCollection<MetricConfig>(
             [
                 new MetricConfig(MetricKey.CPUClock, true),
                 new MetricConfig(MetricKey.CPUTemp, true),
@@ -144,7 +144,7 @@ namespace SSS.Module.CpuMonitor
                 new MetricConfig(MetricKey.CPUFan, true),
                 new MetricConfig(MetricKey.CPULoad, true),
                 new MetricConfig(MetricKey.CPUCoreLoad, true)
-            ],
+            ]),
             ShowHardwareNames = true,
             RoundAll = false,
             AllCoreClocks = false,
@@ -157,7 +157,7 @@ namespace SSS.Module.CpuMonitor
         {
             Data clone = (Data)MemberwiseClone();
             clone.Hardware = clone.Hardware.Select(h => h.Clone()).ToArray();
-            clone.Metrics = clone.Metrics.Select(m => m.Clone()).ToArray();
+            clone.Metrics = new ObservableCollection<MetricConfig>(clone.Metrics.Select(m => m.Clone()));
             clone.HardwareOC = null;
             return clone;
         }

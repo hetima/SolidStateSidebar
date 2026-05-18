@@ -114,6 +114,21 @@ namespace SSS.Models
                 }
             }
 
+            foreach (IModuleData _module in _modules)
+            {
+                if (_module.Metrics != null)
+                {
+                    var _sorted = _module.Metrics.OrderByDescending(m => m.Order).ThenBy(m => m.Name).ToArray();
+
+                    _module.Metrics.Clear();
+
+                    foreach (var m in _sorted)
+                    {
+                        _module.Metrics.Add(m);
+                    }
+                }
+            }
+
             Modules = _modules;
 
             if (Core.Settings.Instance.Hotkeys != null)
@@ -188,6 +203,14 @@ namespace SSS.Models
                     }
 
                     _module.Hardware = _hardware;
+                }
+
+                if (_module.Metrics != null)
+                {
+                    for (int j = 0; j < _module.Metrics.Count; j++)
+                    {
+                        _module.Metrics[j].Order = Convert.ToByte(_module.Metrics.Count - j);
+                    }
                 }
 
                 _module.Order = Convert.ToByte(Modules.Count - i);

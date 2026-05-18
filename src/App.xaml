@@ -367,6 +367,9 @@
 
             <Style x:Key="HardwareGrid" TargetType="{x:Type ListView}">
                 <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
+                <Setter Property="BorderBrush" Value="#BDC3C7" />
+                <Setter Property="BorderThickness" Value="1" />
+                <Setter Property="Padding" Value="0" />
             </Style>
 
             <Style x:Key="MonitorGridHeader" TargetType="{x:Type DataGridColumnHeader}">
@@ -674,6 +677,21 @@
                 <Setter Property="VerticalContentAlignment"
                         Value="Center"/>
             </Style>
+            <Style x:Key="MetrixButton"
+                    TargetType="{x:Type Button}"
+                    BasedOn="{StaticResource {x:Type FrameworkElement}}">
+                <Setter Property="Foreground"
+                        Value="#f0f0f0"/>
+                <Setter Property="Margin"
+                        Value="5,0,5,0"/>
+                <Setter Property="Height"
+                        Value="24"/>
+                <Setter Property="Padding"
+                        Value="0,0"/>
+                <Setter Property="VerticalContentAlignment"
+                        Value="Center"/>
+            </Style>
+            
 
         </ResourceDictionary>
     </Application.Resources>

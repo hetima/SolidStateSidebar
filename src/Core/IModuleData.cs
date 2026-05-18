@@ -9,7 +9,7 @@ namespace SSS.Core
         bool Enabled { get; set; }
         byte Order { get; set; }
         HardwareConfig[] Hardware { get; set; }
-        MetricConfig[] Metrics { get; set; }
+        ObservableCollection<MetricConfig> Metrics { get; set; }
         ObservableCollection<HardwareConfig>? HardwareOC { get; set; }
         IModuleData Clone();
     }

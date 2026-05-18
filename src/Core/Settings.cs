@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.ComponentModel;
 using System.Linq;
 using Newtonsoft.Json;
 using SSS.Utilities;
 using SSS.Windows;
-using System.Collections.Generic;
 using SSS.Styling.IconTheme;
 
 namespace SSS.Core
@@ -689,12 +690,12 @@ namespace SSS.Core
                     }
                     else
                     {
-                        existing.Metrics = (
+                        existing.Metrics = new ObservableCollection<MetricConfig>(
                             from d in def.Metrics
                             join m in existing.Metrics on d.Key equals m.Key into merged
                             from newm in merged.DefaultIfEmpty(d)
                             select newm
-                            ).ToArray();
+                            );
                     }
                 }
             }

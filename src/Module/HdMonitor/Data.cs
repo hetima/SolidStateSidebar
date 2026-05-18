@@ -47,10 +47,10 @@ namespace SSS.Module.HdMonitor
             set { _hardware = value; NotifyPropertyChanged(); }
         }
 
-        private MetricConfig[] _metrics = [];
+        private ObservableCollection<MetricConfig> _metrics = [];
 
         [JsonProperty("metrics")]
-        public MetricConfig[] Metrics
+        public ObservableCollection<MetricConfig> Metrics
         {
             get => _metrics;
             set { _metrics = value; NotifyPropertyChanged(); }
@@ -100,7 +100,7 @@ namespace SSS.Module.HdMonitor
             Enabled = true,
             Order = 2,
             Hardware = [],
-            Metrics =
+            Metrics = new ObservableCollection<MetricConfig>(
             [
                 new MetricConfig(MetricKey.DriveLoadBar, true),
                 new MetricConfig(MetricKey.DriveLoad, true),
@@ -108,7 +108,7 @@ namespace SSS.Module.HdMonitor
                 new MetricConfig(MetricKey.DriveFree, true),
                 new MetricConfig(MetricKey.DriveRead, true),
                 new MetricConfig(MetricKey.DriveWrite, true)
-            ],
+            ]),
             RoundAll = false,
             UsedSpaceAlert = 0
         };
@@ -117,7 +117,7 @@ namespace SSS.Module.HdMonitor
         {
             Data clone = (Data)MemberwiseClone();
             clone.Hardware = clone.Hardware.Select(h => h.Clone()).ToArray();
-            clone.Metrics = clone.Metrics.Select(m => m.Clone()).ToArray();
+            clone.Metrics = new ObservableCollection<MetricConfig>(clone.Metrics.Select(m => m.Clone()));
             clone.HardwareOC = null;
             return clone;
         }
