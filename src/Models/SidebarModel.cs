@@ -89,6 +89,11 @@ namespace SSS.Models
             _monitorTimer.Interval = TimeSpan.FromMilliseconds(Core.Settings.Instance.PollingInterval);
             _monitorTimer.Tick += new EventHandler(MonitorTimer_Tick);
             _monitorTimer.Start();
+
+            _clockTimer = new DispatcherTimer();
+            _clockTimer.Interval = TimeSpan.FromMilliseconds(120);
+            _clockTimer.Tick += new EventHandler(ClockTimer_Tick);
+            _clockTimer.Start();
         }
 
         private void UpdateMonitors()
@@ -99,17 +104,22 @@ namespace SSS.Models
         private void PauseMonitors()
         {
             _monitorTimer?.Stop();
+            _clockTimer?.Stop();
         }
 
         private void ResumeMonitors()
         {
             _monitorTimer?.Start();
+            _clockTimer?.Start();
         }
 
         private void DisposeMonitors()
         {
             _monitorTimer?.Stop();
             _monitorTimer = null;
+
+            _clockTimer?.Stop();
+            _clockTimer = null;
 
             if (MonitorManager != null)
             {
@@ -121,6 +131,11 @@ namespace SSS.Models
         private void MonitorTimer_Tick(object? sender, EventArgs e)
         {
             UpdateMonitors();
+        }
+
+        private void ClockTimer_Tick(object? sender, EventArgs e)
+        {
+            MonitorManager?.UpdateTime();
         }
 
         private bool _ready { get; set; } = false;
@@ -188,6 +203,8 @@ namespace SSS.Models
         }
 
         private DispatcherTimer? _monitorTimer { get; set; }
+
+        private DispatcherTimer? _clockTimer { get; set; }
 
         private bool _disposed { get; set; } = false;
     }

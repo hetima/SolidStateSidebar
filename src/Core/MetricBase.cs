@@ -143,6 +143,8 @@ namespace SSS.Core
             get => _key;
             protected set
             {
+                if (_key == value) return;
+
                 _key = value;
 
                 NotifyPropertyChanged(nameof(Key));
@@ -169,6 +171,8 @@ namespace SSS.Core
             get => _label ?? string.Empty;
             protected set
             {
+                if (_label == value) return;
+
                 _label = value;
 
                 NotifyPropertyChanged(nameof(Label));
@@ -182,6 +186,8 @@ namespace SSS.Core
             get => _value;
             protected set
             {
+                if (_value == value) return;
+
                 _value = value;
 
                 NotifyPropertyChanged(nameof(Value));
@@ -208,6 +214,8 @@ namespace SSS.Core
             get => _nValue;
             set
             {
+                if (_nValue == value) return;
+
                 _nValue = value;
 
                 NotifyPropertyChanged(nameof(nValue));
@@ -221,6 +229,8 @@ namespace SSS.Core
             get => _nAppend ?? string.Empty;
             set
             {
+                if (_nAppend == value) return;
+
                 _nAppend = value;
 
                 NotifyPropertyChanged(nameof(nAppend));
@@ -234,6 +244,8 @@ namespace SSS.Core
             get => _text;
             protected set
             {
+                if (_text == value) return;
+
                 _text = value;
 
                 NotifyPropertyChanged(nameof(Text));

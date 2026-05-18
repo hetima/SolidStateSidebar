@@ -128,6 +128,19 @@ namespace SSS.Core
             }
         }
 
+        public void UpdateTime()
+        {
+            if (MonitorPanels == null) return;
+
+            foreach (MonitorPanel _panel in MonitorPanels.Where(p => p.Type == MonitorType.Time))
+            {
+                foreach (iMonitor _monitor in _panel.Monitors)
+                {
+                    _monitor.Update();
+                }
+            }
+        }
+
         public void NotifyPropertyChanged(string propertyName)
         {
             if (PropertyChanged != null)

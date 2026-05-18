@@ -170,7 +170,6 @@ namespace SSS.Core
             private set
             {
                 _status = value;
-
                 NotifyPropertyChanged(nameof(Status));
             }
         }
@@ -185,8 +184,8 @@ namespace SSS.Core
             }
             private set
             {
+                if (_loadMetric == value) return;
                 _loadMetric = value;
-
                 NotifyPropertyChanged(nameof(LoadMetric));
             }
         }
@@ -201,8 +200,8 @@ namespace SSS.Core
             }
             private set
             {
+                if (_usedMetric == value) return;
                 _usedMetric = value;
-
                 NotifyPropertyChanged(nameof(UsedMetric));
             }
         }
@@ -217,8 +216,8 @@ namespace SSS.Core
             }
             private set
             {
+                if (_freeMetric == value) return;
                 _freeMetric = value;
-
                 NotifyPropertyChanged(nameof(FreeMetric));
             }
         }
