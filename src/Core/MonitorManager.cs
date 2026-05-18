@@ -159,70 +159,82 @@ namespace SSS.Core
         private MonitorPanel CpuPanel(IModuleData data)
         {
             var d = (CpuData)data;
-            return new MonitorPanel(
+            var panel = new MonitorPanel(
                 MonitorType.CPU,
                 MonitorType.CPU.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("cpu"),
                 OHMMonitor.GetInstances(d.Hardware!, d.Metrics!, MonitorType.CPU, _board!, GetHardware(MonitorType.CPU.GetHardwareTypes()).ToArray(),
                     d.ShowHardwareNames, d.RoundAll, d.AllCoreClocks, d.UseGHz, d.UseFahrenheit, d.TempAlert)
                 );
+            panel.SectionHeaderStyle = d.SectionHeaderStyle;
+            return panel;
         }
 
         private MonitorPanel RamPanel(IModuleData data)
         {
             var d = (RamData)data;
-            return new MonitorPanel(
+            var panel = new MonitorPanel(
                 MonitorType.RAM,
                 MonitorType.RAM.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("ram"),
                 OHMMonitor.GetInstances(d.Hardware!, d.Metrics!, MonitorType.RAM, _board!, GetHardware(MonitorType.RAM.GetHardwareTypes()).ToArray(),
                     false, d.RoundAll, false, false, false, 0)
                 );
+            panel.SectionHeaderStyle = d.SectionHeaderStyle;
+            return panel;
         }
 
         private MonitorPanel GpuPanel(IModuleData data)
         {
             var d = (GpuData)data;
-            return new MonitorPanel(
+            var panel = new MonitorPanel(
                 MonitorType.GPU,
                 MonitorType.GPU.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("gpu"),
                 OHMMonitor.GetInstances(d.Hardware!, d.Metrics!, MonitorType.GPU, _board!, GetHardware(MonitorType.GPU.GetHardwareTypes()).ToArray(),
                     d.ShowHardwareNames, d.RoundAll, false, d.UseGHz, d.UseFahrenheit, d.TempAlert)
                 );
+            panel.SectionHeaderStyle = d.SectionHeaderStyle;
+            return panel;
         }
 
         private MonitorPanel HdPanel(IModuleData data)
         {
             var d = (HdData)data;
-            return new MonitorPanel(
+            var panel = new MonitorPanel(
                 MonitorType.HD,
                 MonitorType.HD.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("hd"),
                 DriveMonitor.GetInstances(d.Hardware!, d.Metrics!, d.RoundAll, d.UsedSpaceAlert)
                 );
+            panel.SectionHeaderStyle = d.SectionHeaderStyle;
+            return panel;
         }
 
         private MonitorPanel NetworkPanel(IModuleData data)
         {
             var d = (NetData)data;
-            return new MonitorPanel(
+            var panel = new MonitorPanel(
                 MonitorType.Network,
                 MonitorType.Network.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("net"),
                 NetworkMonitor.GetInstances(d.Hardware!, d.Metrics!, d.ShowHardwareNames, d.RoundAll, d.UseBytes, d.BandwidthInAlert, d.BandwidthOutAlert)
                 );
+            panel.SectionHeaderStyle = d.SectionHeaderStyle;
+            return panel;
         }
 
         private MonitorPanel TimePanel(IModuleData data)
         {
             var d = (TimeData)data;
-            return new MonitorPanel(
+            var panel = new MonitorPanel(
                 MonitorType.Time,
                 MonitorType.Time.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("clock"),
                 ClockMonitor.GetInstances(d.Hardware!, d.ShowDate, d.ShowTime, d.Clock24HR, d.DateFormat, d.DateFontSize, d.TimeFontSize)
                 );
+            panel.SectionHeaderStyle = d.SectionHeaderStyle;
+            return panel;
         }
 
         private void UpdateBoard()

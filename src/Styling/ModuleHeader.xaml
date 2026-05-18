@@ -1,0 +1,44 @@
+<UserControl x:Class="SSS.Styling.ModuleHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:core="clr-namespace:SSS.Core"
+             xmlns:conv="clr-namespace:SSS.Converters">
+    <UserControl.Resources>
+        <conv:FontSizeAddConverter x:Key="FontSizeAddConverter" />
+    </UserControl.Resources>
+    <StackPanel>
+        <StackPanel.Style>
+            <Style TargetType="StackPanel" BasedOn="{StaticResource MonitorTitle}">
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Path=SectionHeaderStyle, Mode=OneWay}" Value="None">
+                        <Setter Property="Visibility" Value="Hidden" />
+                        <Setter Property="Height" Value="{Binding Source={x:Static core:Settings.Instance}, Path=SmallFontSize, Mode=OneWay}" />
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </StackPanel.Style>
+        <Image Source="{Binding Path=SvgImageSource, Mode=OneWay}">
+            <Image.Style>
+                <Style TargetType="Image" BasedOn="{StaticResource AppIconImage}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=SectionHeaderStyle, Mode=OneWay}" Value="Small">
+                            <Setter Property="Width" Value="{Binding Source={x:Static core:Settings.Instance}, Path=SmallFontSize, Mode=OneWay, Converter={StaticResource FontSizeAddConverter}, ConverterParameter=10}" />
+                            <Setter Property="Height" Value="{Binding Source={x:Static core:Settings.Instance}, Path=SmallFontSize, Mode=OneWay, Converter={StaticResource FontSizeAddConverter}, ConverterParameter=10}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+        </Image>
+        <Label Content="{Binding Path=Title, Mode=OneWay}">
+            <Label.Style>
+                <Style TargetType="Label" BasedOn="{StaticResource AppTitle}">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Path=SectionHeaderStyle, Mode=OneWay}" Value="Small">
+                            <Setter Property="FontSize" Value="{Binding Source={x:Static core:Settings.Instance}, Path=SmallFontSize, Mode=OneWay}" />
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Label.Style>
+        </Label>
+    </StackPanel>
+</UserControl>

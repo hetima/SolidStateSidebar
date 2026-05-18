@@ -136,5 +136,20 @@ namespace SSS.Core
         }
 
         private bool _disposed { get; set; } = false;
+
+        private SectionHeaderStyle _sectionHeaderStyle { get; set; } = SectionHeaderStyle.Default;
+
+        public SectionHeaderStyle SectionHeaderStyle
+        {
+            get
+            {
+                return _sectionHeaderStyle;
+            }
+            set
+            {
+                _sectionHeaderStyle = value;
+                NotifyPropertyChanged(nameof(SectionHeaderStyle));
+            }
+        }
     }
 }

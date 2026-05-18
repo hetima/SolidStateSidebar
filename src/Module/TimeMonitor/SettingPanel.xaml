@@ -24,9 +24,24 @@
         <DataTemplate x:Key="DateFormatItemTemplate">
             <TextBlock Text="{Binding Converter={StaticResource DateFormatDisplayConverter}}" />
         </DataTemplate>
+
+        <!-- SectionHeaderStyle ComboBox items -->
+        <x:Array x:Key="SectionHeaderStyleItems" Type="monitor:SectionHeaderStyle">
+            <monitor:SectionHeaderStyle>Default</monitor:SectionHeaderStyle>
+            <monitor:SectionHeaderStyle>Small</monitor:SectionHeaderStyle>
+            <monitor:SectionHeaderStyle>None</monitor:SectionHeaderStyle>
+        </x:Array>
     </UserControl.Resources>
     <Border Style="{StaticResource MonitorDetailsBorder}">
         <StackPanel Style="{StaticResource VerticalPanel}">
+            <!-- Header Style -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="Header Style" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
+                <ComboBox ItemsSource="{StaticResource SectionHeaderStyleItems}"
+                          SelectedValue="{Binding Path=SectionHeaderStyle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedValuePath="." />
+            </StackPanel>
+
             <!-- Show Date / Show Time -->
             <CheckBox Content="Show Date" IsChecked="{Binding Path=ShowDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <StackPanel Margin="30,10,10,10">

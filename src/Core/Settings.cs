@@ -722,7 +722,12 @@ namespace SSS.Core
         Right
     }
 
-
+    public enum SectionHeaderStyle : byte
+    {
+        Default,
+        Small,
+        None
+    }
 
     [JsonObject(MemberSerialization.OptIn)]
     public sealed class DateSetting

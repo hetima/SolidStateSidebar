@@ -111,6 +111,15 @@ namespace SSS.Module.GpuMonitor
             set { _tempAlert = value; NotifyPropertyChanged(); }
         }
 
+        private SectionHeaderStyle _sectionHeaderStyle = SectionHeaderStyle.Default;
+
+        [JsonProperty("sectionHeaderStyle")]
+        public SectionHeaderStyle SectionHeaderStyle
+        {
+            get => _sectionHeaderStyle;
+            set { _sectionHeaderStyle = value; NotifyPropertyChanged(); }
+        }
+
         // --- Defaults & Clone ---
 
         public static Data Default => new Data

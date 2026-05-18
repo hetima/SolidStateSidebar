@@ -11,9 +11,22 @@
              mc:Ignorable="d">
     <UserControl.Resources>
         <conv:IntToStringConverter x:Key="IntConverter" />
+        <x:Array x:Key="SectionHeaderStyleItems" Type="monitor:SectionHeaderStyle">
+            <monitor:SectionHeaderStyle>Default</monitor:SectionHeaderStyle>
+            <monitor:SectionHeaderStyle>Small</monitor:SectionHeaderStyle>
+            <monitor:SectionHeaderStyle>None</monitor:SectionHeaderStyle>
+        </x:Array>
     </UserControl.Resources>
     <Border Style="{StaticResource MonitorDetailsBorder}">
         <StackPanel Style="{StaticResource VerticalPanel}">
+            <!-- Header Style -->
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="Header Style" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
+                <ComboBox ItemsSource="{StaticResource SectionHeaderStyleItems}"
+                          SelectedValue="{Binding Path=SectionHeaderStyle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedValuePath="." />
+            </StackPanel>
+
             <!-- Hardware List -->
             <ListView ItemsSource="{Binding Path=HardwareOC, Mode=OneWay}"
                       dd:DragDrop.IsDragSource="True"

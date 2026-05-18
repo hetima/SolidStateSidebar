@@ -4,13 +4,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:core="clr-namespace:SSS.Core"
+             xmlns:styling="clr-namespace:SSS.Styling"
              mc:Ignorable="d">
     <StackPanel Style="{StaticResource GroupPanel}">
-        <StackPanel Style="{StaticResource MonitorTitle}">
-            <Image Source="{Binding Path=SvgImageSource, Mode=OneWay}"
-                   Style="{StaticResource AppIconImage}" />
-            <Label Content="{Binding Path=Title, Mode=OneWay}" Style="{StaticResource AppTitle}" />
-        </StackPanel>
+        <styling:ModuleHeader />
 
         <ItemsControl ItemsSource="{Binding Path=Monitors, Mode=OneWay}">
             <ItemsControl.Resources>
