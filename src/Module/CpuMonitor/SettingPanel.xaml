@@ -8,6 +8,7 @@
              xmlns:conv="clr-namespace:SSS.Converters"
              xmlns:res="clr-namespace:SSS"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:styling="clr-namespace:SSS.Styling"
              mc:Ignorable="d">
     <UserControl.Resources>
         <conv:IntToStringConverter x:Key="IntConverter" />
@@ -28,37 +29,7 @@
             </StackPanel>
 
             <!-- Hardware List -->
-            <ListView ItemsSource="{Binding Path=HardwareOC, Mode=OneWay}"
-                      dd:DragDrop.IsDragSource="True"
-                      dd:DragDrop.IsDropTarget="True"
-                      ItemContainerStyle="{StaticResource MonitorHardwareItem}"
-                      Style="{StaticResource HardwareGrid}">
-                <ListView.View>
-                    <GridView AllowsColumnReorder="False">
-                        <GridViewColumn Header="{x:Static res:Strings.SettingsHardwareColumn1}" HeaderContainerStyle="{StaticResource MonitorHardwareHeaderCenter}">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
-                                    <CheckBox IsChecked="{Binding Path=Enabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsHardwareEnabledTooltip}" Style="{StaticResource MonitorHardwareCheckbox}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="{x:Static res:Strings.SettingsHardwareColumn2}" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="230">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
-                                    <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Style="{StaticResource MonitorHardwareText}" ToolTip="{x:Static res:Strings.SettingsHardwareNameTooltip}" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Width="Auto">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
-                                    <Button Content="&#x21BA;" Style="{StaticResource MonitorHardwareResetButton}" ToolTip="Reset name" Click="HardwareResetButton_Click" />
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                    </GridView>
-                </ListView.View>
-            </ListView>
+            <styling:HardwareListView />
 
             <!-- Metrics -->
             <DockPanel LastChildFill="True" Margin="0,15,0,0">
