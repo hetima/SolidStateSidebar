@@ -387,6 +387,23 @@ namespace SSS.Core
             }
         }
 
+        private int _sidebarMargin { get; set; } = 4;
+
+        [JsonProperty]
+        public int SidebarMargin
+        {
+            get
+            {
+                return _sidebarMargin;
+            }
+            set
+            {
+                _sidebarMargin = value;
+
+                NotifyPropertyChanged(nameof(SidebarMargin));
+            }
+        }
+
         private int _sidebarWidth { get; set; } = 180;
 
         [JsonProperty]
@@ -404,24 +421,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _autoBGColor { get; set; } = false;
-
-        [JsonProperty]
-        public bool AutoBGColor
-        {
-            get
-            {
-                return _autoBGColor;
-            }
-            set
-            {
-                _autoBGColor = value;
-
-                NotifyPropertyChanged(nameof(AutoBGColor));
-            }
-        }
-
-        private string _bgColor { get; set; } = "#000000";
+        private string _bgColor { get; set; } = "#1F1F1F";
 
         [JsonProperty]
         public string BGColor

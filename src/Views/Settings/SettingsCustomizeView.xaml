@@ -36,7 +36,21 @@
             <Slider x:Name="SidebarWidthSlider" Value="{Binding Path=SidebarWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="100" Maximum="300" TickFrequency="5" LargeChange="100" ToolTip="{x:Static res:Strings.SettingsSidebarWidthTooltip}" />
         </DockPanel>
 
-        <CheckBox Grid.Column="1" Grid.Row="1" Content="{x:Static res:Strings.SettingsAutoBackground}" IsChecked="{Binding Path=AutoBGColor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAutoBackgroundTooltip}" />
+        <Label Grid.Column="0"
+                Grid.Row="1"
+                Content="{x:Static res:Strings.SettingsSidebarWidth}"/>
+        <DockPanel Grid.Column="1"
+                Grid.Row="1">
+            <TextBox Text="{Binding ElementName=SidebarMarginSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                    PreviewTextInput="NumberBox_PreviewTextInput"/>
+            <Slider x:Name="SidebarMarginSlider"
+                    Value="{Binding Path=SidebarMargin, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Minimum="-4"
+                    Maximum="40"
+                    TickFrequency="5"
+                    LargeChange="100"
+                    ToolTip="{x:Static res:Strings.SettingsSidebarMarginTooltip}"/>
+        </DockPanel>
 
         <Label Grid.Column="0" Grid.Row="2" Content="{x:Static res:Strings.SettingsBackgroundColor}" />
         <Button Grid.Column="1"

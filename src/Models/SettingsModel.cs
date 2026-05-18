@@ -52,6 +52,7 @@ namespace SSS.Models
             ShowTrayIcon = Core.Settings.Instance.ShowTrayIcon;
             RunAtStartup = Core.Settings.Instance.RunAtStartup;
             SidebarWidth = Core.Settings.Instance.SidebarWidth;
+            SidebarMargin = Core.Settings.Instance.SidebarMargin;
             BGColor = Core.Settings.Instance.BGColor;
             BGOpacity = Core.Settings.Instance.BGOpacity;
 
@@ -150,6 +151,7 @@ namespace SSS.Models
             Core.Settings.Instance.ShowTrayIcon = ShowTrayIcon;
             Core.Settings.Instance.RunAtStartup = RunAtStartup;
             Core.Settings.Instance.SidebarWidth = SidebarWidth;
+            Core.Settings.Instance.SidebarMargin = SidebarMargin;
             Core.Settings.Instance.BGColor = BGColor;
             Core.Settings.Instance.BGOpacity = BGOpacity;
             Core.Settings.Instance.TextAlign = TextAlign;
@@ -560,7 +562,21 @@ namespace SSS.Models
                 NotifyPropertyChanged(nameof(RunAtStartup));
             }
         }
+        private int _sidebarMargin { get; set; }
 
+        public int SidebarMargin
+        {
+            get
+            {
+                return _sidebarMargin;
+            }
+            set
+            {
+                _sidebarMargin = value;
+
+                NotifyPropertyChanged(nameof(SidebarMargin));
+            }
+        }
         private int _sidebarWidth { get; set; }
 
         public int SidebarWidth
