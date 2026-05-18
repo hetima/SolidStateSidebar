@@ -36,18 +36,18 @@
         <StackPanel Style="{StaticResource VerticalPanel}">
             <!-- Header Style -->
             <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
-                <Label Content="Header Style" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
+                <Label Content="{x:Static res:Strings.SettingsHeaderStyle}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
                 <ComboBox ItemsSource="{StaticResource SectionHeaderStyleItems}"
                           SelectedValue="{Binding Path=SectionHeaderStyle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                           SelectedValuePath="." />
             </StackPanel>
 
             <!-- Show Date / Show Time -->
-            <CheckBox Content="Show Date" IsChecked="{Binding Path=ShowDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{x:Static res:Strings.SettingsShowDate}" IsChecked="{Binding Path=ShowDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowDateTooltip}" />
             <StackPanel Margin="30,10,10,10">
-                <Label Content="Date Font Size"
+                <Label Content="{x:Static res:Strings.SettingsDateFontSize}"
                         Margin="0,5,0,0"
-                        ToolTip="Adjust the font size for the date display (10-40)"/>
+                        ToolTip="{x:Static res:Strings.SettingsDateFontSizeTooltip}"/>
                 <DockPanel Margin="0,0,0,5">
                     <TextBox Text="{Binding ElementName=DateFontSizeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
                              PreviewTextInput="NumberBox_PreviewTextInput"
@@ -61,7 +61,7 @@
                             Maximum="40"
                             TickFrequency="1"
                             LargeChange="5"
-                            ToolTip="Adjust the font size for the date display (10-40)"/>
+                            ToolTip="{x:Static res:Strings.SettingsDateFontSizeTooltip}"/>
                 </DockPanel>
                 <StackPanel Orientation="Horizontal"
                         Margin="0,5">
@@ -76,11 +76,11 @@
                               ToolTip="{x:Static res:Strings.SettingsDateFormatTooltip}"/>
                 </StackPanel>
             </StackPanel>
-            <CheckBox Content="Show Time" IsChecked="{Binding Path=ShowTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <CheckBox Content="{x:Static res:Strings.SettingsShowTime}" IsChecked="{Binding Path=ShowTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowTimeTooltip}" />
 
             <StackPanel Margin="30,10,10,10">
   
-                <Label Content="Time Font Size" Margin="0,5,0,0" ToolTip="Adjust the font size for the time display (10-40)" />
+                <Label Content="{x:Static res:Strings.SettingsTimeFontSize}" Margin="0,5,0,0" ToolTip="{x:Static res:Strings.SettingsTimeFontSizeTooltip}" />
                 <DockPanel Margin="0,0,0,5">
                     <TextBox Text="{Binding ElementName=TimeFontSizeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
                              PreviewTextInput="NumberBox_PreviewTextInput"
@@ -94,7 +94,7 @@
                             Maximum="40"
                             TickFrequency="1"
                             LargeChange="5"
-                            ToolTip="Adjust the font size for the time display (10-40)"/>
+                            ToolTip="{x:Static res:Strings.SettingsTimeFontSizeTooltip}"/>
                 </DockPanel>
                 <CheckBox Content="{x:Static res:Strings.Settings24HourClock}"
                         IsChecked="{Binding Path=Clock24HR, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

@@ -9,6 +9,7 @@
     that is mostly human readable. The generation and parsing of the 
     various data types are done through the TypeConverter classes 
     associated with the data types.
+    
     Example:
     
     ... ado.net/XML headers & schema ...
@@ -128,13 +129,17 @@
     <value>Close</value>
     <comment>Text of the close button</comment>
   </data>
+  <data name="ButtonRevert" xml:space="preserve">
+    <value>Revert</value>
+    <comment>Text of the revert button</comment>
+  </data>
+  <data name="ButtonQuit" xml:space="preserve">
+    <value>Quit</value>
+    <comment>Text of the quit button</comment>
+  </data>
   <data name="CPU" xml:space="preserve">
     <value>CPU</value>
     <comment>CPU monitor title</comment>
-  </data>
-  <data name="ButtonDonate" xml:space="preserve">
-    <value>Donate</value>
-    <comment>Text of the donate button</comment>
   </data>
   <data name="Drives" xml:space="preserve">
     <value>Drives</value>
@@ -216,7 +221,7 @@
     <value>Load</value>
     <comment>Full name for CPU load metric</comment>
   </data>
-<data name="CPUClockLabel" xml:space="preserve">
+  <data name="CPUClockLabel" xml:space="preserve">
     <value>Clok</value>
     <comment>Short label for CPU clock metric</comment>
   </data>
@@ -441,14 +446,14 @@
     <comment>Text of the yes button</comment>
   </data>
   <data name="ErrorPerformanceCounter" xml:space="preserve">
-    <value>Your Performance Counter cache is corrupted. Click OK to visit the wiki and fix this error.</value>
+    <value>Your Performance Counter cache is corrupted</value>
     <comment>Text of the performance counter error</comment>
   </data>
   <data name="ErrorTitle" xml:space="preserve">
     <value>Sidebar Error</value>
     <comment>Title of the error popup</comment>
   </data>
-<data name="LanguageChangedText" xml:space="preserve">
+  <data name="LanguageChangedText" xml:space="preserve">
     <value>Please restart the app.</value>
     <comment>Text of the language changed popup</comment>
   </data>
@@ -499,14 +504,6 @@
   <data name="SettingsAlwaysOnTopTooltip" xml:space="preserve">
     <value>Makes the sidebar always on top of other windows.</value>
     <comment>Settings always on top tooltip</comment>
-  </data>
-  <data name="SettingsAutoBackground" xml:space="preserve">
-    <value>Auto Background Color</value>
-    <comment>Settings auto background label</comment>
-  </data>
-  <data name="SettingsAutoBackgroundTooltip" xml:space="preserve">
-    <value>Sets the background color to your Windows color settings.</value>
-    <comment>Settings auto background tooltip</comment>
   </data>
   <data name="SettingsAutoUpdate" xml:space="preserve">
     <value>Auto Update</value>
@@ -737,7 +734,7 @@
     <comment>Settings metrics tooltip</comment>
   </data>
   <data name="SettingsMonitorEnabledTooltip" xml:space="preserve">
-    <value>Enables this monitor.</value>
+    <value>Enables this module.</value>
     <comment>Settings monitor enabled checkbox tooltip</comment>
   </data>
   <data name="SettingsMonitorsColumn1" xml:space="preserve">
@@ -745,7 +742,7 @@
     <comment>Settings monitors data grid enabled column header</comment>
   </data>
   <data name="SettingsMonitorsColumn2" xml:space="preserve">
-    <value>Monitor</value>
+    <value>Modules</value>
     <comment>Settings monitors data grid monitor column header</comment>
   </data>
   <data name="SettingsMonitorsSubtitle1" xml:space="preserve">
@@ -869,7 +866,7 @@
     <comment>Settings UI scale label</comment>
   </data>
   <data name="SettingsUIScaleTooltip" xml:space="preserve">
-    <value>Scale of all windows and UI components.</value>
+    <value>Scale of Sidebar UI components.</value>
     <comment>Settings UI scale tooltip</comment>
   </data>
   <data name="SettingsUseBytesPerSecond" xml:space="preserve">
@@ -1035,5 +1032,60 @@
   <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
     <value>Shows the name of the computer.</value>
     <comment>Settings show machine name tooltip</comment>
+  </data>
+  <data name="SettingsHeaderStyle" xml:space="preserve">
+    <value>Header Style</value>
+    <comment>Settings header style label</comment>
+  </data>
+  <data name="SettingsShowDate" xml:space="preserve">
+    <value>Show Date</value>
+    <comment>Settings show date label</comment>
+  </data>
+  <data name="SettingsShowDateTooltip" xml:space="preserve">
+    <value>Show the date in the time module</value>
+    <comment>Settings show date tooltip</comment>
+  </data>
+  <data name="SettingsDateFontSize" xml:space="preserve">
+    <value>Date Font Size</value>
+    <comment>Settings date font size label</comment>
+  </data>
+  <data name="SettingsDateFontSizeTooltip" xml:space="preserve">
+    <value>Adjust the font size for the date display</value>
+    <comment>Settings date font size tooltip</comment>
+  </data>
+  <data name="SettingsShowTime" xml:space="preserve">
+    <value>Show Time</value>
+    <comment>Settings show time label</comment>
+  </data>
+  <data name="SettingsShowTimeTooltip" xml:space="preserve">
+    <value>Show the time in the time module</value>
+    <comment>Settings show time tooltip</comment>
+  </data>
+  <data name="SettingsTimeFontSize" xml:space="preserve">
+    <value>Time Font Size</value>
+    <comment>Settings time font size label</comment>
+  </data>
+  <data name="SettingsTimeFontSizeTooltip" xml:space="preserve">
+    <value>Adjust the font size for the time display</value>
+    <comment>Settings time font size tooltip</comment>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="GitHub" xml:space="preserve">
+    <value>GitHub</value>
+    <comment>GitHub</comment>
+  </data>
+  <data name="Hide" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="Reload" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
   </data>
 </root>

@@ -121,45 +121,45 @@
     <value>Solid State Sidebar</value>
     <comment>Name of the app</comment>
   </data>
-  <data name="ButtonApply" xml:space="preserve">
-    <value>Applica</value>
-    <comment>Text of the apply button</comment>
-  </data>
-  <data name="ButtonCancel" xml:space="preserve">
-    <value>Annulla</value>
-    <comment>Text of the cancel button</comment>
+  <data name="CPUClock" xml:space="preserve">
+    <value>Clock</value>
+    <comment>Full name for CPU clock metric</comment>
   </data>
   <data name="ButtonClose" xml:space="preserve">
     <value>Chiudi</value>
     <comment>Text of the close button</comment>
   </data>
-  <data name="ButtonDonate" xml:space="preserve">
-    <value>Donazione</value>
-    <comment>Text of the donate button</comment>
+  <data name="CPU" xml:space="preserve">
+    <value>CPU</value>
+    <comment>CPU monitor title</comment>
   </data>
-  <data name="ButtonDone" xml:space="preserve">
-    <value>Fatto</value>
-    <comment>Text of the done button</comment>
+  <data name="Drives" xml:space="preserve">
+    <value>Unità</value>
+    <comment>Drives monitor title</comment>
   </data>
-  <data name="ButtonGitHub" xml:space="preserve">
-    <value>GitHub</value>
-    <comment>Text of the GitHub button</comment>
+  <data name="CPUFan" xml:space="preserve">
+    <value>Ventola</value>
+    <comment>Full name for CPU fan metric</comment>
   </data>
-<data name="ButtonHide" xml:space="preserve">
+  <data name="GPU" xml:space="preserve">
+    <value>GPU</value>
+    <comment>GPU monitor title</comment>
+  </data>
+  <data name="ButtonHide" xml:space="preserve">
     <value>Nascondi</value>
     <comment>Text of the hide button</comment>
   </data>
-  <data name="ButtonNo" xml:space="preserve">
-    <value>No</value>
-    <comment>Text of the no button</comment>
+  <data name="Network" xml:space="preserve">
+    <value>Rete</value>
+    <comment>Network monitor title</comment>
+  </data>
+  <data name="RAM" xml:space="preserve">
+    <value>RAM</value>
+    <comment>RAM monitor title</comment>
   </data>
   <data name="ButtonReload" xml:space="preserve">
     <value>Ricarica</value>
     <comment>Text of the reload button</comment>
-  </data>
-  <data name="ButtonSave" xml:space="preserve">
-    <value>Salva</value>
-    <comment>Text of the save button</comment>
   </data>
   <data name="ButtonSettings" xml:space="preserve">
     <value>Impostazioni</value>
@@ -169,9 +169,17 @@
     <value>Mostra</value>
     <comment>Text of the show button</comment>
   </data>
-  <data name="ButtonSkip" xml:space="preserve">
-    <value>Salta</value>
-    <comment>Text of the skip button</comment>
+  <data name="Sidebar" xml:space="preserve">
+    <value>Sidebar</value>
+    <comment>Title of the sidebar window</comment>
+  </data>
+  <data name="CPUTemp" xml:space="preserve">
+    <value>Temperatura</value>
+    <comment>Full name for CPU temp metric</comment>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Ora</value>
+    <comment>Sidebar clock title</comment>
   </data>
   <data name="ButtonUpdate" xml:space="preserve">
     <value>Aggiorna</value>
@@ -181,17 +189,17 @@
     <value>Visibilità</value>
     <comment>Text of the visibility button</comment>
   </data>
-  <data name="ButtonYes" xml:space="preserve">
-    <value>Sì</value>
-    <comment>Text of the yes button</comment>
+  <data name="CPUVoltage" xml:space="preserve">
+    <value>Voltaggio</value>
+    <comment>Full name for CPU voltage metric</comment>
   </data>
-  <data name="CPU" xml:space="preserve">
-    <value>CPU</value>
-    <comment>CPU monitor title</comment>
+  <data name="ButtonGitHub" xml:space="preserve">
+    <value>GitHub</value>
+    <comment>Text of the GitHub button</comment>
   </data>
-  <data name="CPUClock" xml:space="preserve">
-    <value>Clock</value>
-    <comment>Full name for CPU clock metric</comment>
+  <data name="CPULoad" xml:space="preserve">
+    <value>Utilizzo</value>
+    <comment>Full name for CPU load metric</comment>
   </data>
   <data name="CPUClockLabel" xml:space="preserve">
     <value>Clock</value>
@@ -213,33 +221,17 @@
     <value>Core</value>
     <comment>Short label for CPU core load metric</comment>
   </data>
-  <data name="CPUFan" xml:space="preserve">
-    <value>Ventola</value>
-    <comment>Full name for CPU fan metric</comment>
-  </data>
   <data name="CPUFanLabel" xml:space="preserve">
     <value>Ventola</value>
     <comment>Short label for CPU fan metric</comment>
-  </data>
-  <data name="CPULoad" xml:space="preserve">
-    <value>Utilizzo</value>
-    <comment>Full name for CPU load metric</comment>
   </data>
   <data name="CPULoadLabel" xml:space="preserve">
     <value>Utilizzo</value>
     <comment>Short label for CPU load metric</comment>
   </data>
-  <data name="CPUTemp" xml:space="preserve">
-    <value>Temperatura</value>
-    <comment>Full name for CPU temp metric</comment>
-  </data>
   <data name="CPUTempLabel" xml:space="preserve">
     <value>Temperatura</value>
     <comment>Short label for CPU temp metric</comment>
-  </data>
-  <data name="CPUVoltage" xml:space="preserve">
-    <value>Voltaggio</value>
-    <comment>Full name for CPU voltage metric</comment>
   </data>
   <data name="CPUVoltageLabel" xml:space="preserve">
     <value>Voltaggio</value>
@@ -277,10 +269,6 @@
     <value>Lettura</value>
     <comment>Short label for drive read metric</comment>
   </data>
-  <data name="Drives" xml:space="preserve">
-    <value>Unità</value>
-    <comment>Drives monitor title</comment>
-  </data>
   <data name="DriveUsed" xml:space="preserve">
     <value>In Uso</value>
     <comment>Full name for drive used metric</comment>
@@ -296,18 +284,6 @@
   <data name="DriveWriteLabel" xml:space="preserve">
     <value>Scrittura</value>
     <comment>Short label for drive write metric</comment>
-  </data>
-  <data name="ErrorPerformanceCounter" xml:space="preserve">
-    <value>La cache del contatore delle prestazioni è danneggiata. Fai clic su OK per visitare il wiki e correggere questo errore.</value>
-    <comment>Text of the performance counter error</comment>
-  </data>
-  <data name="ErrorTitle" xml:space="preserve">
-    <value>Errore barra laterale</value>
-    <comment>Title of the error popup</comment>
-  </data>
-  <data name="GPU" xml:space="preserve">
-    <value>GPU</value>
-    <comment>GPU monitor title</comment>
   </data>
   <data name="GPUCoreClock" xml:space="preserve">
     <value>GPU Clock</value>
@@ -365,26 +341,6 @@
     <value>Uso VRAM</value>
     <comment>Short label for GPU VRAM load metric</comment>
   </data>
-<data name="LanguageChangedText" xml:space="preserve">
-    <value>Riavvia l'app.</value>
-    <comment>Text of the language changed popup</comment>
-  </data>
-  <data name="LanguageChangedTitle" xml:space="preserve">
-    <value>Lingua modificata</value>
-    <comment>Title of the language changed popup</comment>
-  </data>
-  <data name="Network" xml:space="preserve">
-    <value>Rete</value>
-    <comment>Network monitor title</comment>
-  </data>
-  <data name="NetworkExtIP" xml:space="preserve">
-    <value>IP Pubblico</value>
-    <comment>Full name for the network ext IP address metric</comment>
-  </data>
-  <data name="NetworkExtIPLabel" xml:space="preserve">
-    <value>IP Pubblico</value>
-    <comment>Short label for network ext IP address metric</comment>
-  </data>
   <data name="NetworkIn" xml:space="preserve">
     <value>Banda di Download</value>
     <comment>Full name for network in metric</comment>
@@ -393,14 +349,6 @@
     <value>Download</value>
     <comment>Short label for network in metric</comment>
   </data>
-  <data name="NetworkIP" xml:space="preserve">
-    <value>Indirizzo IP</value>
-    <comment>Full name for the network IP address metric</comment>
-  </data>
-  <data name="NetworkIPLabel" xml:space="preserve">
-    <value>IP Privato</value>
-    <comment>Short label for network IP address metric</comment>
-  </data>
   <data name="NetworkOut" xml:space="preserve">
     <value>Banda di Upload</value>
     <comment>Full name for network out metric</comment>
@@ -408,10 +356,6 @@
   <data name="NetworkOutLabel" xml:space="preserve">
     <value>Upload</value>
     <comment>Short label for network out metric</comment>
-  </data>
-  <data name="RAM" xml:space="preserve">
-    <value>RAM</value>
-    <comment>RAM monitor title</comment>
   </data>
   <data name="RAMClock" xml:space="preserve">
     <value>Clock</value>
@@ -453,6 +397,50 @@
     <value>Voltaggio</value>
     <comment>Short label for RAM voltage metric</comment>
   </data>
+  <data name="ButtonApply" xml:space="preserve">
+    <value>Applica</value>
+    <comment>Text of the apply button</comment>
+  </data>
+  <data name="ButtonCancel" xml:space="preserve">
+    <value>Annulla</value>
+    <comment>Text of the cancel button</comment>
+  </data>
+  <data name="ButtonDone" xml:space="preserve">
+    <value>Fatto</value>
+    <comment>Text of the done button</comment>
+  </data>
+  <data name="ButtonNo" xml:space="preserve">
+    <value>No</value>
+    <comment>Text of the no button</comment>
+  </data>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>Salva</value>
+    <comment>Text of the save button</comment>
+  </data>
+  <data name="ButtonSkip" xml:space="preserve">
+    <value>Salta</value>
+    <comment>Text of the skip button</comment>
+  </data>
+  <data name="ButtonYes" xml:space="preserve">
+    <value>Sì</value>
+    <comment>Text of the yes button</comment>
+  </data>
+  <data name="ErrorPerformanceCounter" xml:space="preserve">
+    <value>La cache del contatore delle prestazioni è danneggiata. Fai clic su OK per visitare il wiki e correggere questo errore.</value>
+    <comment>Text of the performance counter error</comment>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Errore barra laterale</value>
+    <comment>Title of the error popup</comment>
+  </data>
+  <data name="LanguageChangedText" xml:space="preserve">
+    <value>Riavvia l'app.</value>
+    <comment>Text of the language changed popup</comment>
+  </data>
+  <data name="LanguageChangedTitle" xml:space="preserve">
+    <value>Lingua modificata</value>
+    <comment>Title of the language changed popup</comment>
+  </data>
   <data name="Settings24HourClock" xml:space="preserve">
     <value>Orologio 24 ore</value>
     <comment>Settings 24 hour clock label</comment>
@@ -464,14 +452,6 @@
   <data name="SettingsAdvancedTab" xml:space="preserve">
     <value>Avanzate</value>
     <comment>Title of the settings advanced tab</comment>
-  </data>
-  <data name="SettingsAlertBlink" xml:space="preserve">
-    <value>Avviso lampeggiante</value>
-    <comment>Settings alert blink label</comment>
-  </data>
-  <data name="SettingsAlertBlinkTooltip" xml:space="preserve">
-    <value>Fa lampeggiare il testo di avviso.</value>
-    <comment>Settings alert blink tooltip</comment>
   </data>
   <data name="SettingsAlertFontColor" xml:space="preserve">
     <value>Colore carattere avviso</value>
@@ -489,6 +469,14 @@
     <value>Mostra le velocità di clock di tutti i core, non solo il primo.</value>
     <comment>Settings all core clocks tooltip</comment>
   </data>
+  <data name="SettingsToolbarMode" xml:space="preserve">
+    <value>Modalità barra degli strumenti</value>
+    <comment>Settings toolbar mode label</comment>
+  </data>
+  <data name="SettingsToolbarModeTooltip" xml:space="preserve">
+    <value>Nasconde la barra laterale in alt-tab e la fa persistere tra i desktop virtuali.</value>
+    <comment>Settings toolbar mode tooltip</comment>
+  </data>
   <data name="SettingsAlwaysOnTop" xml:space="preserve">
     <value>Sempre in primo piano</value>
     <comment>Settings always on top label</comment>
@@ -496,14 +484,6 @@
   <data name="SettingsAlwaysOnTopTooltip" xml:space="preserve">
     <value>Rende la barra laterale sempre sopra le altre finestre.</value>
     <comment>Settings always on top tooltip</comment>
-  </data>
-  <data name="SettingsAutoBackground" xml:space="preserve">
-    <value>Colore di sfondo automatico</value>
-    <comment>Settings auto background label</comment>
-  </data>
-  <data name="SettingsAutoBackgroundTooltip" xml:space="preserve">
-    <value>Imposta il colore di sfondo sulle impostazioni del colore di Windows.</value>
-    <comment>Settings auto background tooltip</comment>
   </data>
   <data name="SettingsAutoUpdate" xml:space="preserve">
     <value>Aggiornamento automatico</value>
@@ -677,10 +657,6 @@
     <value>Ricarica</value>
     <comment>Settings hotkey reload label</comment>
   </data>
-  <data name="SettingsHotkeyReserveSpace" xml:space="preserve">
-    <value>Riserva spazio</value>
-    <comment>Settings hotkey reserve space</comment>
-  </data>
   <data name="SettingsHotkeyShow" xml:space="preserve">
     <value>Mostra</value>
     <comment>Settings hotkey show label</comment>
@@ -692,14 +668,6 @@
   <data name="SettingsHotkeyToggle" xml:space="preserve">
     <value>Toggle</value>
     <comment>Settings hotkey toggle label</comment>
-  </data>
-  <data name="SettingsInitiallyHidden" xml:space="preserve">
-    <value>Nascondi all'avvio</value>
-    <comment>Settings initially hidden label</comment>
-  </data>
-  <data name="SettingsInitiallyHiddenTooltip" xml:space="preserve">
-    <value>Rende nascosta la barra laterale all'avvio.</value>
-    <comment>Settings initially hidden tooltip</comment>
   </data>
   <data name="SettingsLanguage" xml:space="preserve">
     <value>Lingua</value>
@@ -821,14 +789,6 @@
     <value>Mostra il nome dell'hardware.</value>
     <comment>Settings show hardware names tooltip</comment>
   </data>
-  <data name="SettingsShowMachineName" xml:space="preserve">
-    <value>Mostra nome del PC</value>
-    <comment>Settings show machine name label</comment>
-  </data>
-  <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
-    <value>Mostra il nome del computer.</value>
-    <comment>Settings show machine name tooltip</comment>
-  </data>
   <data name="SettingsShowTrayIcon" xml:space="preserve">
     <value>Mostra icona</value>
     <comment>Settings show tray icon label</comment>
@@ -853,33 +813,9 @@
     <value>La soglia di temperatura alla quale si verificano gli avvisi. Usa 0 per disabilitare.</value>
     <comment>Settings temperature alert tooltip</comment>
   </data>
-  <data name="SettingsTextAlign" xml:space="preserve">
-    <value>Allinea testo</value>
-    <comment>Settings text align label</comment>
-  </data>
-  <data name="SettingsTextAlignLeft" xml:space="preserve">
-    <value>Sinistra</value>
-    <comment>Settings text align left value</comment>
-  </data>
-  <data name="SettingsTextAlignRight" xml:space="preserve">
-    <value>Destra</value>
-    <comment>Settings text align right value</comment>
-  </data>
-  <data name="SettingsTextAlignTooltip" xml:space="preserve">
-    <value>Allineamento del testo metrico.</value>
-    <comment>Settings text align tooltip</comment>
-  </data>
   <data name="SettingsTitle" xml:space="preserve">
     <value>Impostazioni della barra laterale</value>
     <comment>Title of the settings window</comment>
-  </data>
-  <data name="SettingsToolbarMode" xml:space="preserve">
-    <value>Modalità barra degli strumenti</value>
-    <comment>Settings toolbar mode label</comment>
-  </data>
-  <data name="SettingsToolbarModeTooltip" xml:space="preserve">
-    <value>Nasconde la barra laterale in alt-tab e la fa persistere tra i desktop virtuali.</value>
-    <comment>Settings toolbar mode tooltip</comment>
   </data>
   <data name="SettingsUIScale" xml:space="preserve">
     <value>Scala dell'interfaccia utente</value>
@@ -929,14 +865,6 @@
     <value>Spazio verticale della barra laterale.</value>
     <comment>Vertical Offset settings tooltip</comment>
   </data>
-  <data name="SettingsVirtualDesktop" xml:space="preserve">
-    <value>Desktop virtuale</value>
-    <comment>Settings virtual desktop label</comment>
-  </data>
-  <data name="SettingsVirtualDesktopTooltip" xml:space="preserve">
-    <value>Abilita il supporto per desktop virtuali.</value>
-    <comment>Settings virtual desktop tooltip</comment>
-  </data>
   <data name="SetupCustomSubtitle" xml:space="preserve">
     <value>Usa i cursori e le caselle di testo per spostare la barra laterale nella posizione corretta.</value>
     <comment>Subtitle of the custom setup page</comment>
@@ -969,14 +897,6 @@
     <value>Configurazione iniziale</value>
     <comment>Title of the initial setup page</comment>
   </data>
-  <data name="Sidebar" xml:space="preserve">
-    <value>Sidebar</value>
-    <comment>Title of the sidebar window</comment>
-  </data>
-  <data name="Time" xml:space="preserve">
-    <value>Ora</value>
-    <comment>Sidebar clock title</comment>
-  </data>
   <data name="UpdateErrorFatalText" xml:space="preserve">
     <value>Si è verificato un errore irreversibile durante il tentativo di aggiornamento. L'aggiornamento automatico è ora disabilitato.</value>
     <comment>Fatal text of the update error popup</comment>
@@ -996,5 +916,109 @@
   <data name="UpdateTitle" xml:space="preserve">
     <value>Aggiornamento in corso</value>
     <comment>Title of the update window</comment>
+  </data>
+  <data name="SettingsTextAlign" xml:space="preserve">
+    <value>Allinea testo</value>
+    <comment>Settings text align label</comment>
+  </data>
+  <data name="SettingsTextAlignLeft" xml:space="preserve">
+    <value>Sinistra</value>
+    <comment>Settings text align left value</comment>
+  </data>
+  <data name="SettingsTextAlignRight" xml:space="preserve">
+    <value>Destra</value>
+    <comment>Settings text align right value</comment>
+  </data>
+  <data name="SettingsTextAlignTooltip" xml:space="preserve">
+    <value>Allineamento del testo metrico.</value>
+    <comment>Settings text align tooltip</comment>
+  </data>
+  <data name="SettingsAlertBlink" xml:space="preserve">
+    <value>Avviso lampeggiante</value>
+    <comment>Settings alert blink label</comment>
+  </data>
+  <data name="SettingsAlertBlinkTooltip" xml:space="preserve">
+    <value>Fa lampeggiare il testo di avviso.</value>
+    <comment>Settings alert blink tooltip</comment>
+  </data>
+  <data name="NetworkIP" xml:space="preserve">
+    <value>Indirizzo IP</value>
+    <comment>Full name for the network IP address metric</comment>
+  </data>
+  <data name="NetworkIPLabel" xml:space="preserve">
+    <value>IP Privato</value>
+    <comment>Short label for network IP address metric</comment>
+  </data>
+  <data name="SettingsInitiallyHidden" xml:space="preserve">
+    <value>Nascondi all'avvio</value>
+    <comment>Settings initially hidden label</comment>
+  </data>
+  <data name="SettingsInitiallyHiddenTooltip" xml:space="preserve">
+    <value>Rende nascosta la barra laterale all'avvio.</value>
+    <comment>Settings initially hidden tooltip</comment>
+  </data>
+  <data name="SettingsVirtualDesktop" xml:space="preserve">
+    <value>Desktop virtuale</value>
+    <comment>Settings virtual desktop label</comment>
+  </data>
+  <data name="SettingsVirtualDesktopTooltip" xml:space="preserve">
+    <value>Abilita il supporto per desktop virtuali.</value>
+    <comment>Settings virtual desktop tooltip</comment>
+  </data>
+  <data name="SettingsHotkeyReserveSpace" xml:space="preserve">
+    <value>Riserva spazio</value>
+    <comment>Settings hotkey reserve space</comment>
+  </data>
+  <data name="NetworkExtIP" xml:space="preserve">
+    <value>IP Pubblico</value>
+    <comment>Full name for the network ext IP address metric</comment>
+  </data>
+  <data name="NetworkExtIPLabel" xml:space="preserve">
+    <value>IP Pubblico</value>
+    <comment>Short label for network ext IP address metric</comment>
+  </data>
+  <data name="SettingsShowMachineName" xml:space="preserve">
+    <value>Mostra nome del PC</value>
+    <comment>Settings show machine name label</comment>
+  </data>
+  <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
+    <value>Mostra il nome del computer.</value>
+    <comment>Settings show machine name tooltip</comment>
+  </data>
+  <data name="SettingsHeaderStyle" xml:space="preserve">
+    <value>Stile intestazione</value>
+    <comment>Settings header style label</comment>
+  </data>
+  <data name="SettingsShowDate" xml:space="preserve">
+    <value>Mostra data</value>
+    <comment>Settings show date label</comment>
+  </data>
+  <data name="SettingsShowDateTooltip" xml:space="preserve">
+    <value>Mostra la data nel modulo orologio</value>
+    <comment>Settings show date tooltip</comment>
+  </data>
+  <data name="SettingsDateFontSize" xml:space="preserve">
+    <value>Dimensione font data</value>
+    <comment>Settings date font size label</comment>
+  </data>
+  <data name="SettingsDateFontSizeTooltip" xml:space="preserve">
+    <value>Regola la dimensione del font per la visualizzazione della data</value>
+    <comment>Settings date font size tooltip</comment>
+  </data>
+  <data name="SettingsShowTime" xml:space="preserve">
+    <value>Mostra ora</value>
+    <comment>Settings show time label</comment>
+  </data>
+  <data name="SettingsShowTimeTooltip" xml:space="preserve">
+    <value>Mostra l'ora nel modulo orologio</value>
+    <comment>Settings show time tooltip</comment>
+  </data>
+  <data name="SettingsTimeFontSize" xml:space="preserve">
+    <value>Dimensione font ora</value>
+    <comment>Settings time font size label</comment>
+  </data>
+  <data name="SettingsTimeFontSizeTooltip" xml:space="preserve">
+    <value>Regola la dimensione del font per la visualizzazione dell'ora</value>
+    <comment>Settings time font size tooltip</comment>
   </data>
 </root>

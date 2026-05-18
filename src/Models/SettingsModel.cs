@@ -52,7 +52,6 @@ namespace SSS.Models
             ShowTrayIcon = Core.Settings.Instance.ShowTrayIcon;
             RunAtStartup = Core.Settings.Instance.RunAtStartup;
             SidebarWidth = Core.Settings.Instance.SidebarWidth;
-            AutoBGColor = Core.Settings.Instance.AutoBGColor;
             BGColor = Core.Settings.Instance.BGColor;
             BGOpacity = Core.Settings.Instance.BGOpacity;
 
@@ -151,7 +150,6 @@ namespace SSS.Models
             Core.Settings.Instance.ShowTrayIcon = ShowTrayIcon;
             Core.Settings.Instance.RunAtStartup = RunAtStartup;
             Core.Settings.Instance.SidebarWidth = SidebarWidth;
-            Core.Settings.Instance.AutoBGColor = AutoBGColor;
             Core.Settings.Instance.BGColor = BGColor;
             Core.Settings.Instance.BGOpacity = BGOpacity;
             Core.Settings.Instance.TextAlign = TextAlign;
@@ -579,21 +577,6 @@ namespace SSS.Models
             }
         }
 
-        private bool _autoBGColor { get; set; }
-
-        public bool AutoBGColor
-        {
-            get
-            {
-                return _autoBGColor;
-            }
-            set
-            {
-                _autoBGColor = value;
-
-                NotifyPropertyChanged(nameof(AutoBGColor));
-            }
-        }
 
         private string? _bgColor { get; set; }
 

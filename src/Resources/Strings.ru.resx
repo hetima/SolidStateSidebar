@@ -133,10 +133,6 @@
     <value>ЦП</value>
     <comment>CPU monitor title</comment>
   </data>
-  <data name="ButtonDonate" xml:space="preserve">
-    <value>Пожертвовать</value>
-    <comment>Text of the donate button</comment>
-  </data>
   <data name="Drives" xml:space="preserve">
     <value>Диски</value>
     <comment>Drives monitor title</comment>
@@ -205,7 +201,7 @@
     <value>Использование ЦП</value>
     <comment>Full name for CPU load metric</comment>
   </data>
-<data name="CPUClockLabel" xml:space="preserve">
+  <data name="CPUClockLabel" xml:space="preserve">
     <value>Частота</value>
     <comment>Short label for CPU clock metric</comment>
   </data>
@@ -437,7 +433,7 @@
     <value>Ошибка Sidebar</value>
     <comment>Title of the error popup</comment>
   </data>
-<data name="LanguageChangedText" xml:space="preserve">
+  <data name="LanguageChangedText" xml:space="preserve">
     <value>Пожалуйста, перезапустите приложение.</value>
     <comment>Text of the language changed popup</comment>
   </data>
@@ -488,14 +484,6 @@
   <data name="SettingsAlwaysOnTopTooltip" xml:space="preserve">
     <value>Боковая панель будет отображаться всегда поверх других окон.</value>
     <comment>Settings always on top tooltip</comment>
-  </data>
-  <data name="SettingsAutoBackground" xml:space="preserve">
-    <value>Автоматический цвет фона</value>
-    <comment>Settings auto background label</comment>
-  </data>
-  <data name="SettingsAutoBackgroundTooltip" xml:space="preserve">
-    <value>Устанавливает цвет фона в соответствии с настройками цвета Windows.</value>
-    <comment>Settings auto background tooltip</comment>
   </data>
   <data name="SettingsAutoUpdate" xml:space="preserve">
     <value>Автоматическое обновление</value>
@@ -996,5 +984,41 @@
   <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
     <value>Показывает имя компьютера.</value>
     <comment>Settings show machine name tooltip</comment>
+  </data>
+  <data name="SettingsHeaderStyle" xml:space="preserve">
+    <value>Стиль заголовка</value>
+    <comment>Settings header style label</comment>
+  </data>
+  <data name="SettingsShowDate" xml:space="preserve">
+    <value>Показать дату</value>
+    <comment>Settings show date label</comment>
+  </data>
+  <data name="SettingsShowDateTooltip" xml:space="preserve">
+    <value>Показать дату в модуле времени</value>
+    <comment>Settings show date tooltip</comment>
+  </data>
+  <data name="SettingsDateFontSize" xml:space="preserve">
+    <value>Размер шрифта даты</value>
+    <comment>Settings date font size label</comment>
+  </data>
+  <data name="SettingsDateFontSizeTooltip" xml:space="preserve">
+    <value>Настройка размера шрифта для отображения даты</value>
+    <comment>Settings date font size tooltip</comment>
+  </data>
+  <data name="SettingsShowTime" xml:space="preserve">
+    <value>Показать время</value>
+    <comment>Settings show time label</comment>
+  </data>
+  <data name="SettingsShowTimeTooltip" xml:space="preserve">
+    <value>Показать время в модуле времени</value>
+    <comment>Settings show time tooltip</comment>
+  </data>
+  <data name="SettingsTimeFontSize" xml:space="preserve">
+    <value>Размер шрифта времени</value>
+    <comment>Settings time font size label</comment>
+  </data>
+  <data name="SettingsTimeFontSizeTooltip" xml:space="preserve">
+    <value>Настройка размера шрифта для отображения времени</value>
+    <comment>Settings time font size tooltip</comment>
   </data>
 </root>

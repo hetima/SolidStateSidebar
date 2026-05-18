@@ -97,15 +97,6 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Donate に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string ButtonDonate {
-            get {
-                return ResourceManager.GetString("ButtonDonate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Done に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ButtonDone {
@@ -142,11 +133,29 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Quit に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ButtonQuit {
+            get {
+                return ResourceManager.GetString("ButtonQuit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Reload に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ButtonReload {
             get {
                 return ResourceManager.GetString("ButtonReload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Revert に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string ButtonRevert {
+            get {
+                return ResourceManager.GetString("ButtonRevert", resourceCulture);
             }
         }
         
@@ -210,6 +219,15 @@ namespace SSS {
         public static string ButtonYes {
             get {
                 return ResourceManager.GetString("ButtonYes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Close に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Close {
+            get {
+                return ResourceManager.GetString("Close", resourceCulture);
             }
         }
         
@@ -358,16 +376,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Clock date metric label に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string DateLabel {
-            get {
-                return ResourceManager.GetString("DateLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Date format disabled option に類似しているローカライズされた文字列を検索します。
+        ///   Disabled に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DateDisabled {
             get {
@@ -376,7 +385,16 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Date format long option に類似しているローカライズされた文字列を検索します。
+        ///   Date に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string DateLabel {
+            get {
+                return ResourceManager.GetString("DateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Long に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DateLong {
             get {
@@ -385,7 +403,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Date format normal option に類似しているローカライズされた文字列を検索します。
+        ///   Normal に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DateNormal {
             get {
@@ -394,7 +412,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Date format short option に類似しているローカライズされた文字列を検索します。
+        ///   Short (Month only) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DateShort {
             get {
@@ -511,7 +529,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Write に類似しているローカライズされた文字列を検索します。
+        ///   Writ に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string DriveWriteLabel {
             get {
@@ -520,7 +538,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Your Performance Counter cache is corrupted. Click OK to visit the wiki and fix this error. に類似しているローカライズされた文字列を検索します。
+        ///   Your Performance Counter cache is corrupted に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string ErrorPerformanceCounter {
             get {
@@ -534,6 +552,15 @@ namespace SSS {
         public static string ErrorTitle {
             get {
                 return ResourceManager.GetString("ErrorTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   GitHub に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string GitHub {
+            get {
+                return ResourceManager.GetString("GitHub", resourceCulture);
             }
         }
         
@@ -673,6 +700,15 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Hide に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Hide {
+            get {
+                return ResourceManager.GetString("Hide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Please restart the app. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string LanguageChangedText {
@@ -745,7 +781,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   IP に類似しているローカライズされた文字列を検索します。
+        ///    IP に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string NetworkIPLabel {
             get {
@@ -871,6 +907,24 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Reload に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Reload {
+            get {
+                return ResourceManager.GetString("Reload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Settings に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   24 Hour Clock に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string Settings24HourClock {
@@ -970,24 +1024,6 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Auto Background Color に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string SettingsAutoBackground {
-            get {
-                return ResourceManager.GetString("SettingsAutoBackground", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sets the background color to your Windows color settings. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string SettingsAutoBackgroundTooltip {
-            get {
-                return ResourceManager.GetString("SettingsAutoBackgroundTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Auto Update に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsAutoUpdate {
@@ -1042,7 +1078,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Bandwidth In Alert に類似しているローカライズされた文字列を検索します。
+        ///   Bandwidth In Alert: に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsBandwidthInAlert {
             get {
@@ -1060,7 +1096,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Bandwidth Out Alert に類似しているローカライズされた文字列を検索します。
+        ///   Bandwidth Out Alert: に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsBandwidthOutAlert {
             get {
@@ -1137,6 +1173,24 @@ namespace SSS {
         public static string SettingsCustomizeTab {
             get {
                 return ResourceManager.GetString("SettingsCustomizeTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Date Font Size に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsDateFontSize {
+            get {
+                return ResourceManager.GetString("SettingsDateFontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Adjust the font size for the date display に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsDateFontSizeTooltip {
+            get {
+                return ResourceManager.GetString("SettingsDateFontSizeTooltip", resourceCulture);
             }
         }
         
@@ -1330,6 +1384,15 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Header Style に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsHeaderStyle {
+            get {
+                return ResourceManager.GetString("SettingsHeaderStyle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Horizontal Offset に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsHorizontalOffset {
@@ -1501,7 +1564,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Enables this monitor. に類似しているローカライズされた文字列を検索します。
+        ///   Enables this module. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsMonitorEnabledTooltip {
             get {
@@ -1519,7 +1582,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Monitor に類似しているローカライズされた文字列を検索します。
+        ///   Modules に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsMonitorsColumn2 {
             get {
@@ -1663,6 +1726,24 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Show Date に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsShowDate {
+            get {
+                return ResourceManager.GetString("SettingsShowDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Show the date in the time module に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsShowDateTooltip {
+            get {
+                return ResourceManager.GetString("SettingsShowDateTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Show Drive Details に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsShowDriveDetails {
@@ -1744,6 +1825,24 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Show Time に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsShowTime {
+            get {
+                return ResourceManager.GetString("SettingsShowTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Show the time in the time module に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsShowTimeTooltip {
+            get {
+                return ResourceManager.GetString("SettingsShowTimeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Show Tray Icon に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsShowTrayIcon {
@@ -1780,7 +1879,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Temperature Alert に類似しているローカライズされた文字列を検索します。
+        ///   Temperature Alert: に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsTemperatureAlert {
             get {
@@ -1834,6 +1933,24 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Time Font Size に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsTimeFontSize {
+            get {
+                return ResourceManager.GetString("SettingsTimeFontSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Adjust the font size for the time display に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsTimeFontSizeTooltip {
+            get {
+                return ResourceManager.GetString("SettingsTimeFontSizeTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sidebar Settings に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsTitle {
@@ -1870,7 +1987,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Scale of all windows and UI components. に類似しているローカライズされた文字列を検索します。
+        ///   Scale of Sidebar UI components. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsUIScaleTooltip {
             get {
@@ -1897,7 +2014,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Used Space Alert に類似しているローカライズされた文字列を検索します。
+        ///   Used Space Alert: に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsUsedSpaceAlert {
             get {
@@ -2077,7 +2194,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Time metric label に類似しているローカライズされた文字列を検索します。
+        ///   Time に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string TimeLabel {
             get {
@@ -2086,7 +2203,16 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   UpdateErrorFatalText に類似しているローカライズされた文字列を検索します。
+        ///   Update に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   A fatal error occurred while trying to update. Auto update is now disabled. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string UpdateErrorFatalText {
             get {

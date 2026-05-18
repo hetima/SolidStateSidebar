@@ -43,7 +43,7 @@
                         <Setter Property="Content" Value="{x:Static res:Strings.ButtonClose}" />
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding Path=IsChanged, Mode=OneWay}" Value="True">
-                                <Setter Property="Content" Value="{x:Static res:Strings.ButtonCancel}" />
+                                <Setter Property="Content" Value="{x:Static res:Strings.ButtonRevert}" />
                             </DataTrigger>
                         </Style.Triggers>
                     </Style>

@@ -31,7 +31,7 @@
                         </MenuItem>
                         <Separator />
                         <MenuItem Header="{x:Static res:Strings.ButtonGitHub}" Click="GitHub_Click" />
-                        <MenuItem Header="{x:Static res:Strings.ButtonClose}" Click="Close_Click" />
+                        <MenuItem Header="{x:Static res:Strings.ButtonQuit}" Click="Close_Click" />
                     </ContextMenu>
                 </tb:TaskbarIcon.ContextMenu>
             </tb:TaskbarIcon>
@@ -61,15 +61,6 @@
                         <SolidColorBrush Opacity="{Binding Source={x:Static core:Settings.Instance}, Path=BGOpacity, Mode=OneWay}" Color="{Binding Source={x:Static core:Settings.Instance}, Path=BGColor, Mode=OneWay}" />
                     </Setter.Value>
                 </Setter>
-                <Style.Triggers>
-                    <DataTrigger Binding="{Binding Source={x:Static core:Settings.Instance}, Path=AutoBGColor, Mode=OneWay}" Value="True">
-                        <Setter Property="Background">
-                            <Setter.Value>
-                                <SolidColorBrush Opacity="{Binding Source={x:Static core:Settings.Instance}, Path=BGOpacity, Mode=OneWay}" Color="{Binding Path=(SystemParameters.WindowGlassColor), Mode=OneWay}" />
-                            </Setter.Value>
-                        </Setter>
-                    </DataTrigger>
-                </Style.Triggers>
             </Style>
 
             <Style x:Key="MainPanel" TargetType="{x:Type DockPanel}">

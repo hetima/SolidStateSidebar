@@ -133,10 +133,6 @@
     <value>CPU</value>
     <comment>CPU monitor title</comment>
   </data>
-  <data name="ButtonDonate" xml:space="preserve">
-    <value>Lahjoita</value>
-    <comment>Text of the donate button</comment>
-  </data>
   <data name="Drives" xml:space="preserve">
     <value>Tallennustila</value>
     <comment>Drives monitor title</comment>
@@ -205,7 +201,7 @@
     <value>Käyttö</value>
     <comment>Full name for CPU load metric</comment>
   </data>
-<data name="CPUClockLabel" xml:space="preserve">
+  <data name="CPUClockLabel" xml:space="preserve">
     <value>Kellot</value>
     <comment>Short label for CPU clock metric</comment>
   </data>
@@ -437,7 +433,7 @@
     <value>Sivupalkin virhe</value>
     <comment>Title of the error popup</comment>
   </data>
-<data name="LanguageChangedText" xml:space="preserve">
+  <data name="LanguageChangedText" xml:space="preserve">
     <value>Käynnistä ohjelma uudelleen.</value>
     <comment>Text of the language changed popup</comment>
   </data>
@@ -488,14 +484,6 @@
   <data name="SettingsAlwaysOnTopTooltip" xml:space="preserve">
     <value>Asettaa sivupalkin päällimmäiseksi ikkunaksi.</value>
     <comment>Settings always on top tooltip</comment>
-  </data>
-  <data name="SettingsAutoBackground" xml:space="preserve">
-    <value>Automaattinen taustaväri</value>
-    <comment>Settings auto background label</comment>
-  </data>
-  <data name="SettingsAutoBackgroundTooltip" xml:space="preserve">
-    <value>Asettaa taustavärin Windows väriasetusten mukaisesti.</value>
-    <comment>Settings auto background tooltip</comment>
   </data>
   <data name="SettingsAutoUpdate" xml:space="preserve">
     <value>Automaattinen päivitys</value>
@@ -996,5 +984,41 @@
   <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
     <value>Näyttää tietokoneen nimen.</value>
     <comment>Settings show machine name tooltip</comment>
+  </data>
+  <data name="SettingsHeaderStyle" xml:space="preserve">
+    <value>Otsikkotyyli</value>
+    <comment>Settings header style label</comment>
+  </data>
+  <data name="SettingsShowDate" xml:space="preserve">
+    <value>Näytä päivämäärä</value>
+    <comment>Settings show date label</comment>
+  </data>
+  <data name="SettingsShowDateTooltip" xml:space="preserve">
+    <value>Näytä päivämäärä aikamoduulissa</value>
+    <comment>Settings show date tooltip</comment>
+  </data>
+  <data name="SettingsDateFontSize" xml:space="preserve">
+    <value>Päivämäärän kirjasinkoko</value>
+    <comment>Settings date font size label</comment>
+  </data>
+  <data name="SettingsDateFontSizeTooltip" xml:space="preserve">
+    <value>Säädä päivämäärän näytön kirjasinkokoa</value>
+    <comment>Settings date font size tooltip</comment>
+  </data>
+  <data name="SettingsShowTime" xml:space="preserve">
+    <value>Näytä aika</value>
+    <comment>Settings show time label</comment>
+  </data>
+  <data name="SettingsShowTimeTooltip" xml:space="preserve">
+    <value>Näytä aika aikamoduulissa</value>
+    <comment>Settings show time tooltip</comment>
+  </data>
+  <data name="SettingsTimeFontSize" xml:space="preserve">
+    <value>Ajan kirjasinkoko</value>
+    <comment>Settings time font size label</comment>
+  </data>
+  <data name="SettingsTimeFontSizeTooltip" xml:space="preserve">
+    <value>Säädä ajan näytön kirjasinkokoa</value>
+    <comment>Settings time font size tooltip</comment>
   </data>
 </root>

@@ -133,10 +133,6 @@
     <value>CPU</value>
     <comment>CPU monitor title</comment>
   </data>
-  <data name="ButtonDonate" xml:space="preserve">
-    <value>Bağış</value>
-    <comment>Text of the donate button</comment>
-  </data>
   <data name="Drives" xml:space="preserve">
     <value>DİSK</value>
     <comment>Drives monitor title</comment>
@@ -205,7 +201,7 @@
     <value>Yük</value>
     <comment>Full name for CPU load metric</comment>
   </data>
-<data name="CPUClockLabel" xml:space="preserve">
+  <data name="CPUClockLabel" xml:space="preserve">
     <value>Hız</value>
     <comment>Short label for CPU clock metric</comment>
   </data>
@@ -437,7 +433,7 @@
     <value>Kenar Çubuğu Hatası</value>
     <comment>Title of the error popup</comment>
   </data>
-<data name="LanguageChangedText" xml:space="preserve">
+  <data name="LanguageChangedText" xml:space="preserve">
     <value>Lütfen uygulamayı yeniden başlatın.</value>
     <comment>Text of the language changed popup</comment>
   </data>
@@ -488,14 +484,6 @@
   <data name="SettingsAlwaysOnTopTooltip" xml:space="preserve">
     <value>Kenar çubuğunu her zaman diğer pencerelerin üstünde tutar.</value>
     <comment>Settings always on top tooltip</comment>
-  </data>
-  <data name="SettingsAutoBackground" xml:space="preserve">
-    <value>Otomatik Arka Plan Rengi</value>
-    <comment>Settings auto background label</comment>
-  </data>
-  <data name="SettingsAutoBackgroundTooltip" xml:space="preserve">
-    <value>Arka plan rengini Windows renk ayarlarınıza göre ayarlanır.</value>
-    <comment>Settings auto background tooltip</comment>
   </data>
   <data name="SettingsAutoUpdate" xml:space="preserve">
     <value>Otomatik Güncelleme</value>
@@ -996,5 +984,41 @@
   <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
     <value>Bilgisayar kullanıcısının adını gösterir.</value>
     <comment>Settings show machine name tooltip</comment>
+  </data>
+  <data name="SettingsHeaderStyle" xml:space="preserve">
+    <value>Başlık stili</value>
+    <comment>Settings header style label</comment>
+  </data>
+  <data name="SettingsShowDate" xml:space="preserve">
+    <value>Tarihi göster</value>
+    <comment>Settings show date label</comment>
+  </data>
+  <data name="SettingsShowDateTooltip" xml:space="preserve">
+    <value>Saat modülünde tarihi göster</value>
+    <comment>Settings show date tooltip</comment>
+  </data>
+  <data name="SettingsDateFontSize" xml:space="preserve">
+    <value>Tarih yazı tipi boyutu</value>
+    <comment>Settings date font size label</comment>
+  </data>
+  <data name="SettingsDateFontSizeTooltip" xml:space="preserve">
+    <value>Tarih görüntüsünün yazı tipi boyutunu ayarla</value>
+    <comment>Settings date font size tooltip</comment>
+  </data>
+  <data name="SettingsShowTime" xml:space="preserve">
+    <value>Saati göster</value>
+    <comment>Settings show time label</comment>
+  </data>
+  <data name="SettingsShowTimeTooltip" xml:space="preserve">
+    <value>Saat modülünde saati göster</value>
+    <comment>Settings show time tooltip</comment>
+  </data>
+  <data name="SettingsTimeFontSize" xml:space="preserve">
+    <value>Saat yazı tipi boyutu</value>
+    <comment>Settings time font size label</comment>
+  </data>
+  <data name="SettingsTimeFontSizeTooltip" xml:space="preserve">
+    <value>Saat görüntüsünün yazı tipi boyutunu ayarla</value>
+    <comment>Settings time font size tooltip</comment>
   </data>
 </root>
