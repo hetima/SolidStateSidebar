@@ -65,4 +65,6 @@ This software is based on [SidebarDiagnostics](https://github.com/ArcadeRenegade
 
 Data provided by [Libre Hardware Monitor]("https://github.com/LibreHardwareMonitor/LibreHardwareMonitor").
 
-<img src="https://i.imgur.com/umREcnW.jpeg" />
+<img src="https://i.imgur.com/VFkZdfS.jpeg" />
+
+<img src="https://i.imgur.com/2gTN9Ow.jpeg" />
