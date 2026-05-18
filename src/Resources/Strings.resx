@@ -762,8 +762,8 @@
     <comment>Settings monitors subtitle line two</comment>
   </data>
   <data name="SettingsMonitorsTab" xml:space="preserve">
-    <value>Monitors</value>
-    <comment>Title of the settings monitors tab</comment>
+    <value>Modules</value>
+    <comment>Title of the settings modules tab</comment>
   </data>
   <data name="SettingsPollingInterval" xml:space="preserve">
     <value>Polling Interval</value>
