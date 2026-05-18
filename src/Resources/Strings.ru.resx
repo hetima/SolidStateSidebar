@@ -1029,4 +1029,16 @@
     <value>Настройка горизонтального отступа содержимого боковой панели</value>
     <comment>Settings sidebar margin tooltip</comment>
   </data>
+  <data name="SettingsHeaderStyleDefault" xml:space="preserve">
+    <value>По умолчанию</value>
+    <comment>Section header style default option</comment>
+  </data>
+  <data name="SettingsHeaderStyleSmall" xml:space="preserve">
+    <value>Маленький</value>
+    <comment>Section header style small option</comment>
+  </data>
+  <data name="SettingsHeaderStyleNone" xml:space="preserve">
+    <value>Нет</value>
+    <comment>Section header style none option</comment>
+  </data>
 </root>

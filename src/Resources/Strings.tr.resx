@@ -1029,4 +1029,16 @@
     <value>Kenar çubuğu içeriğinin yatay kenar boşluğunu ayarla</value>
     <comment>Settings sidebar margin tooltip</comment>
   </data>
+  <data name="SettingsHeaderStyleDefault" xml:space="preserve">
+    <value>Varsayılan</value>
+    <comment>Section header style default option</comment>
+  </data>
+  <data name="SettingsHeaderStyleSmall" xml:space="preserve">
+    <value>Küçük</value>
+    <comment>Section header style small option</comment>
+  </data>
+  <data name="SettingsHeaderStyleNone" xml:space="preserve">
+    <value>Yok</value>
+    <comment>Section header style none option</comment>
+  </data>
 </root>

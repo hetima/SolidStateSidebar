@@ -1032,4 +1032,16 @@
     <value>ضبط الهامش الأفقي لمحتوى الشريط الجانبي</value>
     <comment>Settings sidebar margin tooltip</comment>
   </data>
+  <data name="SettingsHeaderStyleDefault" xml:space="preserve">
+    <value>افتراضي</value>
+    <comment>Section header style default option</comment>
+  </data>
+  <data name="SettingsHeaderStyleSmall" xml:space="preserve">
+    <value>صغير</value>
+    <comment>Section header style small option</comment>
+  </data>
+  <data name="SettingsHeaderStyleNone" xml:space="preserve">
+    <value>بدون</value>
+    <comment>Section header style none option</comment>
+  </data>
 </root>

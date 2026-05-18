@@ -1029,4 +1029,16 @@
     <value>调整侧边栏内容的水平边距</value>
     <comment>Settings sidebar margin tooltip</comment>
   </data>
+  <data name="SettingsHeaderStyleDefault" xml:space="preserve">
+    <value>默认</value>
+    <comment>Section header style default option</comment>
+  </data>
+  <data name="SettingsHeaderStyleSmall" xml:space="preserve">
+    <value>小</value>
+    <comment>Section header style small option</comment>
+  </data>
+  <data name="SettingsHeaderStyleNone" xml:space="preserve">
+    <value>无</value>
+    <comment>Section header style none option</comment>
+  </data>
 </root>

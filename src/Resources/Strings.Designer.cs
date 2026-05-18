@@ -1393,6 +1393,33 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Default に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsHeaderStyleDefault {
+            get {
+                return ResourceManager.GetString("SettingsHeaderStyleDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   None に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsHeaderStyleNone {
+            get {
+                return ResourceManager.GetString("SettingsHeaderStyleNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Small に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsHeaderStyleSmall {
+            get {
+                return ResourceManager.GetString("SettingsHeaderStyleSmall", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Horizontal Offset に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsHorizontalOffset {

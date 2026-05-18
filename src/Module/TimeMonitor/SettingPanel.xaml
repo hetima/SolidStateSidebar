@@ -31,6 +31,12 @@
             <monitor:SectionHeaderStyle>Small</monitor:SectionHeaderStyle>
             <monitor:SectionHeaderStyle>None</monitor:SectionHeaderStyle>
         </x:Array>
+
+        <conv:SectionHeaderStyleDisplayConverter x:Key="SectionHeaderStyleDisplayConverter" />
+
+        <DataTemplate x:Key="SectionHeaderStyleItemTemplate">
+            <TextBlock Text="{Binding Converter={StaticResource SectionHeaderStyleDisplayConverter}}" />
+        </DataTemplate>
     </UserControl.Resources>
     <Border Style="{StaticResource MonitorDetailsBorder}">
         <StackPanel Style="{StaticResource VerticalPanel}">
@@ -39,7 +45,8 @@
                 <Label Content="{x:Static res:Strings.SettingsHeaderStyle}" VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
                 <ComboBox ItemsSource="{StaticResource SectionHeaderStyleItems}"
                           SelectedValue="{Binding Path=SectionHeaderStyle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          SelectedValuePath="." />
+                          SelectedValuePath="."
+                          ItemTemplate="{StaticResource SectionHeaderStyleItemTemplate}" />
             </StackPanel>
 
             <!-- Show Date / Show Time -->

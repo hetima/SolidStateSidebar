@@ -444,4 +444,16 @@
     <value>Juster den vandrette margen for sidelinjens indhold</value>
     <comment>Settings sidebar margin tooltip</comment>
   </data>
+  <data name="SettingsHeaderStyleDefault" xml:space="preserve">
+    <value>Standard</value>
+    <comment>Section header style default option</comment>
+  </data>
+  <data name="SettingsHeaderStyleSmall" xml:space="preserve">
+    <value>Lille</value>
+    <comment>Section header style small option</comment>
+  </data>
+  <data name="SettingsHeaderStyleNone" xml:space="preserve">
+    <value>Ingen</value>
+    <comment>Section header style none option</comment>
+  </data>
 </root>

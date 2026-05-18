@@ -1029,4 +1029,16 @@
     <value>Ajustar el margen horizontal del contenido de la barra lateral</value>
     <comment>Settings sidebar margin tooltip</comment>
   </data>
+  <data name="SettingsHeaderStyleDefault" xml:space="preserve">
+    <value>Predeterminado</value>
+    <comment>Section header style default option</comment>
+  </data>
+  <data name="SettingsHeaderStyleSmall" xml:space="preserve">
+    <value>Pequeño</value>
+    <comment>Section header style small option</comment>
+  </data>
+  <data name="SettingsHeaderStyleNone" xml:space="preserve">
+    <value>Ninguno</value>
+    <comment>Section header style none option</comment>
+  </data>
 </root>

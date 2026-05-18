@@ -159,6 +159,29 @@ namespace SSS.Converters
         }
     }
 
+    public class SectionHeaderStyleDisplayConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Core.SectionHeaderStyle style)
+            {
+                return style switch
+                {
+                    Core.SectionHeaderStyle.Default => Strings.SettingsHeaderStyleDefault,
+                    Core.SectionHeaderStyle.Small => Strings.SettingsHeaderStyleSmall,
+                    Core.SectionHeaderStyle.None => Strings.SettingsHeaderStyleNone,
+                    _ => style.ToString()
+                };
+            }
+            return value?.ToString() ?? "";
+        }
+
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
     public class FontSizeAddConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
