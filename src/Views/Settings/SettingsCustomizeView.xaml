@@ -94,10 +94,14 @@
                 PopupAnimation="Fade"
                 Grid.Column="1"
                 Grid.Row="2">
-            <Border Background="{DynamicResource WD.BackgroundBrush}"
+            <Border Margin="8"
+                    Background="{DynamicResource WD.BackgroundBrush}"
                     BorderBrush="{DynamicResource WD.BaseBrush}"
                     BorderThickness="1"
                     CornerRadius="4">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.2" />
+                </Border.Effect>
                 <wpfDev:ColorPicker SelectedColor="{Binding Path=BGColor, Converter={StaticResource WD.StringToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
         </Popup>
@@ -167,10 +171,14 @@
                PopupAnimation="Fade"
                Grid.Column="1"
                Grid.Row="8">
-            <Border Background="{DynamicResource WD.BackgroundBrush}"
+            <Border Margin="8"
+                    Background="{DynamicResource WD.BackgroundBrush}"
                     BorderBrush="{DynamicResource WD.BaseBrush}"
                     BorderThickness="1"
                     CornerRadius="4">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.2" />
+                </Border.Effect>
                 <wpfDev:ColorPicker SelectedColor="{Binding Path=FontColor, Converter={StaticResource WD.StringToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
         </Popup>
@@ -220,10 +228,14 @@
                PopupAnimation="Fade"
                Grid.Column="1"
                Grid.Row="9">
-            <Border Background="{DynamicResource WD.BackgroundBrush}"
+            <Border Margin="8"
+                    Background="{DynamicResource WD.BackgroundBrush}"
                     BorderBrush="{DynamicResource WD.BaseBrush}"
                     BorderThickness="1"
                     CornerRadius="4">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.2" />
+                </Border.Effect>
                 <wpfDev:ColorPicker SelectedColor="{Binding Path=AlertFontColor, Converter={StaticResource WD.StringToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </Border>
         </Popup>

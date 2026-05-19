@@ -7,7 +7,6 @@
              xmlns:monitor="clr-namespace:SSS.Core"
              xmlns:conv="clr-namespace:SSS.Converters"
              xmlns:res="clr-namespace:SSS"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:components="clr-namespace:SSS.Views.Components"
              xmlns:local="clr-namespace:SSS"
              mc:Ignorable="d">
@@ -38,10 +37,13 @@
                     Margin="0,15,0,0">
                 <Label DockPanel.Dock="Left"
                         Content="{x:Static res:Strings.SettingsMetrics}"
+                        VerticalAlignment="Center"
                         Margin="0,0,10,0"/>
-                <Button Name="MetricsBtn" Click="MetricsBtn_Click" Style="{StaticResource MetrixButton}">
+                <Button Name="MetricsBtn" Click="MetricsBtn_Click" VerticalAlignment="Center"
+                    MaxWidth="330" HorizontalAlignment="Left">
                     <Button.Content>
-                        <Binding Path="Metrics" Converter="{StaticResource EnabledMetricsConverter}" />
+                        <TextBlock Text="{Binding Path=Metrics, Converter={StaticResource EnabledMetricsConverter}}"
+                                   TextTrimming="CharacterEllipsis" />
                     </Button.Content>
                 </Button>
             </DockPanel>

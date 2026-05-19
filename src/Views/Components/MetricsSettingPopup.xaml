@@ -6,16 +6,20 @@
              xmlns:conv="clr-namespace:SSS.Converters"
              xmlns:res="clr-namespace:SSS"
              xmlns:dd="clr-namespace:GongSolutions.Wpf.DragDrop;assembly=GongSolutions.Wpf.DragDrop"
-             MinWidth="500"
-             MinHeight="200">
+             MinWidth="480"
+             MinHeight="400">
     <UserControl.Resources>
         <conv:MetricLabelDisplayConverter x:Key="LabelDisplayConverter" />
     </UserControl.Resources>
     <controls:SmallPanel>
-        <Border Background="{DynamicResource WD.BackgroundBrush}"
-                BorderBrush="{DynamicResource WD.BaseBrush}"
-                BorderThickness="1"
-                CornerRadius="4">
+        <Border Margin="8">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.4" />
+            </Border.Effect>
+            <Border Background="{DynamicResource WD.BackgroundBrush}"
+                    BorderBrush="{DynamicResource WD.BaseBrush}"
+                    BorderThickness="1"
+                    CornerRadius="4">
             <DockPanel LastChildFill="True">
                 <StackPanel DockPanel.Dock="Bottom" Style="{StaticResource WindowButtons}">
                     <Button DockPanel.Dock="Bottom"
@@ -49,7 +53,7 @@
                             <GridViewColumn Header="Label (Editable)" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="160">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate DataType="{x:Type monitor:MetricConfig}">
-                                        <TextBox BorderThickness="0" Padding="2,0">
+                                        <TextBox Style="{StaticResource MonitorHardwareText}" ToolTip="Edit label">
                                             <TextBox.Text>
                                                 <MultiBinding Converter="{StaticResource LabelDisplayConverter}"
                                                               Mode="TwoWay"
@@ -62,7 +66,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Width="40">
+                            <GridViewColumn Width="40" HeaderContainerStyle="{StaticResource MonitorHardwareHeaderCenter}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate DataType="{x:Type monitor:MetricConfig}">
                                         <Button Content="&#x21BA;" Style="{StaticResource MonitorHardwareResetButton}" ToolTip="Reset label" Click="MetricResetButton_Click" />
@@ -73,6 +77,7 @@
                     </ListView.View>
                 </ListView>
             </DockPanel>
+            </Border>
         </Border>
     </controls:SmallPanel>
 </UserControl>

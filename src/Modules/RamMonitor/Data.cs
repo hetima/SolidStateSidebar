@@ -53,7 +53,23 @@ namespace SSS.Module.RamMonitor
         public ObservableCollection<MetricConfig> Metrics
         {
             get => _metrics;
-            set { _metrics = value; NotifyPropertyChanged(); }
+            set
+            {
+                if (_metrics != null)
+                    foreach (var item in _metrics)
+                        item.PropertyChanged -= OnMetricPropertyChanged;
+                _metrics = value;
+                if (_metrics != null)
+                    foreach (var item in _metrics)
+                        item.PropertyChanged += OnMetricPropertyChanged;
+                NotifyPropertyChanged();
+            }
+        }
+
+        private void OnMetricPropertyChanged(object? sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == nameof(MetricConfig.Enabled))
+                NotifyPropertyChanged(nameof(Metrics));
         }
 
         // --- UI-only (not serialized) ---

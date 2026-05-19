@@ -7,11 +7,11 @@
              xmlns:monitor="clr-namespace:SSS.Core"
              xmlns:conv="clr-namespace:SSS.Converters"
              xmlns:res="clr-namespace:SSS"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:components="clr-namespace:SSS.Views.Components"
              mc:Ignorable="d">
     <UserControl.Resources>
         <conv:IntToStringConverter x:Key="IntConverter" />
+        <conv:EnabledMetricsConverter x:Key="EnabledMetricsConverter" />
         <x:Array x:Key="SectionHeaderStyleItems" Type="monitor:SectionHeaderStyle">
             <monitor:SectionHeaderStyle>Default</monitor:SectionHeaderStyle>
             <monitor:SectionHeaderStyle>Small</monitor:SectionHeaderStyle>
@@ -32,10 +32,27 @@
             <components:HardwareListView />
 
             <!-- Metrics -->
-            <DockPanel LastChildFill="True" Margin="0,15,0,0">
-                <Label DockPanel.Dock="Left" Content="{x:Static res:Strings.SettingsMetrics}" Margin="0,0,10,0" />
-                <xctk:CheckComboBox ItemsSource="{Binding Path=Metrics, Mode=OneWay}" DisplayMemberPath="Name" SelectedMemberPath="Enabled" Delimiter=", " ToolTip="{x:Static res:Strings.SettingsMetricsTooltip}" />
+            <DockPanel LastChildFill="True"
+                    Margin="0,15,0,0">
+                <Label DockPanel.Dock="Left"
+                        Content="{x:Static res:Strings.SettingsMetrics}"
+                        VerticalAlignment="Center"
+                        Margin="0,0,10,0"/>
+                <Button Name="MetricsBtn" Click="MetricsBtn_Click" VerticalAlignment="Center"
+                    MaxWidth="330" HorizontalAlignment="Left">
+                    <Button.Content>
+                        <TextBlock Text="{Binding Path=Metrics, Converter={StaticResource EnabledMetricsConverter}}"
+                                   TextTrimming="CharacterEllipsis" />
+                    </Button.Content>
+                </Button>
             </DockPanel>
+            <!-- Metrics Setting Popup -->
+            <Popup x:Name="MetricsPopup"
+                   StaysOpen="False"
+                   AllowsTransparency="True"
+                   PopupAnimation="Fade">
+                <components:MetricsSettingPopup CloseRequested="MetricsPopup_CloseRequested" Loaded="MetricsPopup_Loaded" />
+            </Popup>
 
             <!-- Params -->
             <StackPanel Margin="10">

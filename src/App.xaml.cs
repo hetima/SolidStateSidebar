@@ -13,8 +13,6 @@ using SSS;
 using SSS.Core;
 using SSS.Utilities;
 using SSS.Windows;
-using Xceed.Wpf.Toolkit;
-using System.Net.Http;
 
 namespace SSS
 {
