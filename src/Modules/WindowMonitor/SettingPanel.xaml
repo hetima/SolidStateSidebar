@@ -6,6 +6,7 @@
              xmlns:monitor="clr-namespace:SSS.Core"
              xmlns:conv="clr-namespace:SSS.Converters"
              xmlns:res="clr-namespace:SSS"
+             xmlns:components="clr-namespace:SSS.Views.Components"
              mc:Ignorable="d">
     <Border Style="{StaticResource MonitorDetailsBorder}">
         <StackPanel Style="{StaticResource VerticalPanel}">
@@ -22,8 +23,22 @@
                           ItemTemplate="{StaticResource SectionHeaderStyleItemTemplate}"/>
             </StackPanel>
 
-            <!-- Mock placeholder -->
-            <TextBlock Text="WindowMonitor settings (mock)" Foreground="Gray" Margin="0,10,0,0" />
+            <!-- Applications Label -->
+            <DockPanel LastChildFill="False" Margin="0,10,0,5">
+                <Label Content="{x:Static res:Strings.SettingsApplications}" VerticalAlignment="Center" />
+                <Button Name="AddButton" Content="{x:Static res:Strings.SettingsApplicationAdd}" Margin="10,0,0,0" Padding="8,2" VerticalAlignment="Center" Click="AddButton_Click" ToolTip="{x:Static res:Strings.SettingsApplicationAddTooltip}" />
+            </DockPanel>
+
+            <!-- Application List -->
+            <components:ApplicationListView />
+
+            <!-- Application Add Popup -->
+            <Popup x:Name="ApplicationPopup"
+                   StaysOpen="False"
+                   AllowsTransparency="True"
+                   PopupAnimation="Fade">
+                <components:ApplicationAddPopup x:Name="ApplicationAddPopupCtrl" CloseRequested="ApplicationPopup_CloseRequested" />
+            </Popup>
         </StackPanel>
     </Border>
 </UserControl>

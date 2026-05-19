@@ -112,6 +112,24 @@ namespace SSS.Models
                         orderby newhw.Order descending, newhw.Name ascending
                         select newhw
                         );
+
+                    // WindowMonitor: initialize ApplicationOC
+                    if (_module is SSS.Module.WindowMonitor.Data wmData && wmData.Applications != null)
+                    {
+                        wmData.ApplicationOC = new ObservableCollection<HardwareConfig>(
+                            from app in wmData.Applications
+                            let displayName = !string.IsNullOrEmpty(app.Name) ? app.Name : (app.ActualName ?? app.ID ?? "")
+                            orderby app.Order descending, displayName ascending
+                            select new HardwareConfig
+                            {
+                                ID = app.ID,
+                                Name = displayName,
+                                ActualName = app.ActualName,
+                                Enabled = app.Enabled,
+                                Order = app.Order
+                            }
+                            );
+                    }
                 }
             }
 
@@ -204,6 +222,20 @@ namespace SSS.Models
                     }
 
                     _module.Hardware = _hardware;
+                }
+
+                if (_module is SSS.Module.WindowMonitor.Data wmData && wmData.ApplicationOC != null)
+                {
+                    HardwareConfig[] _applications = new HardwareConfig[wmData.ApplicationOC.Count];
+
+                    for (int v = 0; v < _applications.Length; v++)
+                    {
+                        _applications[v] = wmData.ApplicationOC[v].Clone();
+
+                        _applications[v].Order = Convert.ToByte(_applications.Length - v);
+                    }
+
+                    wmData.Applications = _applications;
                 }
 
                 if (_module.Metrics != null)

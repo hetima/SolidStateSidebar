@@ -2381,5 +2381,41 @@ namespace SSS {
                 return ResourceManager.GetString("Window", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Applications に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsApplications {
+            get {
+                return ResourceManager.GetString("SettingsApplications", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Add に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsApplicationAdd {
+            get {
+                return ResourceManager.GetString("SettingsApplicationAdd", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Add running application に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsApplicationAddTooltip {
+            get {
+                return ResourceManager.GetString("SettingsApplicationAddTooltip", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Remove application に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsApplicationDeleteTooltip {
+            get {
+                return ResourceManager.GetString("SettingsApplicationDeleteTooltip", resourceCulture);
+            }
+        }
     }
 }

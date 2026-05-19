@@ -977,4 +977,20 @@
     <value>表示方法</value>
     <comment>Visibility taskbar menu item</comment>
   </data>
+  <data name="SettingsApplications" xml:space="preserve">
+    <value>アプリケーション</value>
+    <comment>Settings applications label</comment>
+  </data>
+  <data name="SettingsApplicationAdd" xml:space="preserve">
+    <value>追加</value>
+    <comment>Settings add application button</comment>
+  </data>
+  <data name="SettingsApplicationAddTooltip" xml:space="preserve">
+    <value>起動中のアプリケーションを追加</value>
+    <comment>Settings add application tooltip</comment>
+  </data>
+  <data name="SettingsApplicationDeleteTooltip" xml:space="preserve">
+    <value>アプリケーションを削除</value>
+    <comment>Settings delete application tooltip</comment>
+  </data>
 </root>

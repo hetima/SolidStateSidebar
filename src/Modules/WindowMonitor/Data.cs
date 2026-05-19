@@ -50,6 +50,15 @@ namespace SSS.Module.WindowMonitor
             set { _hardware = value; NotifyPropertyChanged(); }
         }
 
+        private HardwareConfig[] _applications = [];
+
+        [JsonProperty("applications")]
+        public HardwareConfig[] Applications
+        {
+            get => _applications;
+            set { _applications = value; NotifyPropertyChanged(); }
+        }
+
         // --- IModuleData (not used by WindowMonitor, empty for interface compliance) ---
 
         [JsonIgnore]
@@ -62,6 +71,9 @@ namespace SSS.Module.WindowMonitor
 
         [JsonIgnore]
         public ObservableCollection<HardwareConfig>? HardwareOC { get; set; }
+
+        [JsonIgnore]
+        public ObservableCollection<HardwareConfig>? ApplicationOC { get; set; }
 
         // --- WindowMonitor-specific params (mock) ---
 
@@ -84,6 +96,7 @@ namespace SSS.Module.WindowMonitor
             [
                 new HardwareConfig() { ID = "window", Name = "Window", ActualName = "Window" }
             ],
+            Applications = [],
             SectionHeaderStyle = SectionHeaderStyle.Default
         };
 
@@ -91,8 +104,10 @@ namespace SSS.Module.WindowMonitor
         {
             Data clone = (Data)MemberwiseClone();
             clone.Hardware = clone.Hardware.Select(h => h.Clone()).ToArray();
+            clone.Applications = clone.Applications.Select(a => a.Clone()).ToArray();
             clone.Metrics = [];
             clone.HardwareOC = null;
+            clone.ApplicationOC = null;
             return clone;
         }
 

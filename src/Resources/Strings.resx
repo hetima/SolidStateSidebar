@@ -1144,4 +1144,20 @@
     <value>Window</value>
     <comment>Window</comment>
   </data>
+  <data name="SettingsApplications" xml:space="preserve">
+    <value>Applications</value>
+    <comment>Settings applications label</comment>
+  </data>
+  <data name="SettingsApplicationAdd" xml:space="preserve">
+    <value>Add</value>
+    <comment>Settings add application button</comment>
+  </data>
+  <data name="SettingsApplicationAddTooltip" xml:space="preserve">
+    <value>Add running application</value>
+    <comment>Settings add application tooltip</comment>
+  </data>
+  <data name="SettingsApplicationDeleteTooltip" xml:space="preserve">
+    <value>Remove application</value>
+    <comment>Settings delete application tooltip</comment>
+  </data>
 </root>
