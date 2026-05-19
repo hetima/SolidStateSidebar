@@ -59,6 +59,7 @@ namespace SSS.Core
             }
 
             Metrics = _metrics.ToArray();
+            metrics.ApplyCustomLabels(Metrics);
         }
 
         ~NetworkMonitor()

@@ -12,6 +12,20 @@ namespace SSS.Core
             return metrics.Any(m => m.Key == key && m.Enabled);
         }
 
+        public static void ApplyCustomLabels(this IEnumerable<MetricConfig> config, IEnumerable<iMetric> metrics)
+        {
+            var configDict = config.Where(m => !string.IsNullOrEmpty(m.Label)).ToDictionary(m => m.Key);
+            if (configDict.Count == 0) return;
+
+            foreach (var metric in metrics)
+            {
+                if (configDict.TryGetValue(metric.Key, out var mc) && !string.IsNullOrEmpty(mc.Label))
+                {
+                    metric.CustomLabel = mc.Label;
+                }
+            }
+        }
+
         public static HardwareType[] GetHardwareTypes(this MonitorType type)
         {
             switch (type)

@@ -10,6 +10,8 @@ namespace SSS.Core
 
         string? FullName { get; }
 
+        string? CustomLabel { get; set; }
+
         string Label { get; }
 
         double Value { get; }
@@ -166,9 +168,25 @@ namespace SSS.Core
 
         private string? _label { get; set; }
 
+        private string? _customLabel { get; set; }
+
+        public string? CustomLabel
+        {
+            get => _customLabel;
+            set
+            {
+                if (_customLabel == value) return;
+
+                _customLabel = value;
+
+                NotifyPropertyChanged(nameof(CustomLabel));
+                NotifyPropertyChanged(nameof(Label));
+            }
+        }
+
         public string Label
         {
-            get => _label ?? string.Empty;
+            get => _customLabel ?? _label ?? string.Empty;
             protected set
             {
                 if (_label == value) return;

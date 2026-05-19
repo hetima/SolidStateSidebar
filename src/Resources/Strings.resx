@@ -754,7 +754,7 @@
     <comment>Metrics setting popup reset label button tooltip</comment>
   </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
-    <value>Enable or disable specific metrics.</value>
+    <value>Click to change the order or labels of the metrics.</value>
     <comment>Settings metrics tooltip</comment>
   </data>
   <data name="SettingsMonitorEnabledTooltip" xml:space="preserve">

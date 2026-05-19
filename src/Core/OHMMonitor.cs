@@ -200,6 +200,7 @@ namespace SSS.Core
             }
 
             Metrics = _sensorList.ToArray();
+            metrics.ApplyCustomLabels(Metrics);
         }
 
         public void InitRAM(IHardware board, MetricConfig[] metrics, bool roundAll)
@@ -260,6 +261,7 @@ namespace SSS.Core
             }
 
             Metrics = _sensorList.ToArray();
+            metrics.ApplyCustomLabels(Metrics);
         }
 
         public void InitGPU(MetricConfig[] metrics, bool roundAll, bool useGHz, bool useFahrenheit, double tempAlert)
@@ -351,6 +353,7 @@ namespace SSS.Core
             }
 
             Metrics = _sensorList.ToArray();
+            metrics.ApplyCustomLabels(Metrics);
         }
 
         private IHardware? _hardware { get; set; }

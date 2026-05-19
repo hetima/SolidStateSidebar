@@ -39,7 +39,7 @@
                         VerticalAlignment="Center"
                         Margin="0,0,10,0"/>
                 <Button Name="MetricsBtn" Click="MetricsBtn_Click" VerticalAlignment="Center"
-                    MaxWidth="330" HorizontalAlignment="Left">
+                    MaxWidth="330" HorizontalAlignment="Left" ToolTip="{x:Static res:Strings.SettingsMetricsTooltip}">
                     <Button.Content>
                         <TextBlock Text="{Binding Path=Metrics, Converter={StaticResource EnabledMetricsConverter}}"
                                    TextTrimming="CharacterEllipsis" />

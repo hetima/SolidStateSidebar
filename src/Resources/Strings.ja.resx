@@ -657,7 +657,7 @@
     <value>ラベルをデフォルト値に戻します</value>
   </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
-    <value>メトリクスの有効/無効の切り替え</value>
+    <value>クリックして表示するメトリクスの順番やラベルを変更できます</value>
   </data>
   <data name="SettingsMonitorEnabledTooltip" xml:space="preserve">
     <value>モジュールを有効にする</value>

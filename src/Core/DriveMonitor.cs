@@ -79,6 +79,7 @@ namespace SSS.Core
             }
 
             Metrics = _metrics.ToArray();
+            metrics.ApplyCustomLabels(Metrics);
         }
 
         protected override void Dispose(bool disposing)
