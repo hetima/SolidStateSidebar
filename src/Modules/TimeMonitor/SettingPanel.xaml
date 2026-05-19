@@ -24,19 +24,6 @@
         <DataTemplate x:Key="DateFormatItemTemplate">
             <TextBlock Text="{Binding Converter={StaticResource DateFormatDisplayConverter}}" />
         </DataTemplate>
-
-        <!-- SectionHeaderStyle ComboBox items -->
-        <x:Array x:Key="SectionHeaderStyleItems" Type="monitor:SectionHeaderStyle">
-            <monitor:SectionHeaderStyle>Default</monitor:SectionHeaderStyle>
-            <monitor:SectionHeaderStyle>Small</monitor:SectionHeaderStyle>
-            <monitor:SectionHeaderStyle>None</monitor:SectionHeaderStyle>
-        </x:Array>
-
-        <conv:SectionHeaderStyleDisplayConverter x:Key="SectionHeaderStyleDisplayConverter" />
-
-        <DataTemplate x:Key="SectionHeaderStyleItemTemplate">
-            <TextBlock Text="{Binding Converter={StaticResource SectionHeaderStyleDisplayConverter}}" />
-        </DataTemplate>
     </UserControl.Resources>
     <Border Style="{StaticResource MonitorDetailsBorder}">
         <StackPanel Style="{StaticResource VerticalPanel}">

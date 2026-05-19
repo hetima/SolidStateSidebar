@@ -66,6 +66,9 @@ namespace SSS.Core
                 case MonitorType.Time:
                     return Strings.Time;
 
+                case MonitorType.Window:
+                    return Strings.Window;
+
                 default:
                     return "???";
             }

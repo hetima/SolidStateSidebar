@@ -20,6 +20,7 @@ def main():
         "hd.svg": "hd",
         "net.svg": "net",
         "ram.svg": "ram",
+        "win.svg": "win",
     }
 
     icons: dict[str, str] = {}

@@ -10,7 +10,8 @@ namespace SSS.Core
         GPU,
         HD,
         Network,
-        Time
+        Time,
+        Window
     }
 
     [Serializable]
@@ -50,7 +51,9 @@ namespace SSS.Core
         DriveWrite = 25,
 
         Time = 28,
-        Date = 29
+        Date = 29,
+
+        WindowTitle = 30
     }
 
     public enum DataType : byte

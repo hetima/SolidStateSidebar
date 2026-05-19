@@ -1636,7 +1636,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Enable or disable specific metrics. に類似しているローカライズされた文字列を検索します。
+        ///   Click to change the order or labels of the metrics. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsMetricsTooltip {
             get {
@@ -2370,6 +2370,15 @@ namespace SSS {
         public static string UpdateTitle {
             get {
                 return ResourceManager.GetString("UpdateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Window に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string Window {
+            get {
+                return ResourceManager.GetString("Window", resourceCulture);
             }
         }
     }

@@ -9,6 +9,7 @@ using HdData = SSS.Module.HdMonitor.Data;
 using NetData = SSS.Module.NetworkMonitor.Data;
 using RamData = SSS.Module.RamMonitor.Data;
 using TimeData = SSS.Module.TimeMonitor.Data;
+using WindowData = SSS.Module.WindowMonitor.Data;
 
 namespace SSS.Core
 {
@@ -53,6 +54,7 @@ namespace SSS.Core
                     "HdMonitor" => HdPanel(m.Value),
                     "NetworkMonitor" => NetworkPanel(m.Value),
                     "TimeMonitor" => TimePanel(m.Value),
+                    "WindowMonitor" => WindowPanel(m.Value),
                     _ => null
                 })
                 .Where(p => p != null)
@@ -112,6 +114,9 @@ namespace SSS.Core
 
                 case MonitorType.Time:
                     return ClockMonitor.GetHardware().ToArray();
+
+                case MonitorType.Window:
+                    return [];
 
                 default:
                     throw new ArgumentException("Invalid MonitorType.");
@@ -232,6 +237,19 @@ namespace SSS.Core
                 MonitorType.Time.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("clock"),
                 ClockMonitor.GetInstances(d.Hardware!, d.ShowDate, d.ShowTime, d.Clock24HR, d.DateFormat, d.ShowDayOfWeek, d.DateFontSize, d.TimeFontSize)
+                );
+            panel.SectionHeaderStyle = d.SectionHeaderStyle;
+            return panel;
+        }
+
+        private MonitorPanel WindowPanel(IModuleData data)
+        {
+            var d = (WindowData)data;
+            var panel = new MonitorPanel(
+                MonitorType.Window,
+                MonitorType.Window.GetDescription(),
+                Core.Settings.Instance.GetIconSvgPath("win"),
+                WindowMonitor.GetInstances()
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;

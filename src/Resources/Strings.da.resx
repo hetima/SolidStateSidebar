@@ -368,6 +368,39 @@
     <value>Volt</value>
     <comment>Short label for RAM voltage metric</comment>
   </data>
+  <data name="ShowDayOfWeek" xml:space="preserve">
+    <value>Vis ugedag</value>
+    <comment>Show day of week label</comment>
+  </data>
+  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
+    <value>Vis ugedagen (f.eks. Man, Tir) efter datoen.</value>
+    <comment>Show day of week tooltip</comment>
+  </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>Label (Redigerbar)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>Rediger etiket</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>Nulstil etiket</value>
+  </data>
+  <data name="SettingsShowMachineName" xml:space="preserve">
+    <value>Vis PC-navn</value>
+    <comment>Settings show machine name label</comment>
+  </data>
+  <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
+    <value>Viser computerens navn.</value>
+    <comment>Settings show machine name tooltip</comment>
+  </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>Undlad at bryde tekst</value>
+    <comment>Settings metrics no wrap label</comment>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>Forhindrer tekst i at gå til næste linje.</value>
+    <comment>Settings metrics no wrap tooltip</comment>
+  </data>
   <data name="SettingsHeaderStyle" xml:space="preserve">
     <value>Overskriftstil</value>
     <comment>Settings header style label</comment>
@@ -424,17 +457,9 @@
     <value>Indstillinger</value>
     <comment>Settings taskbar menu item</comment>
   </data>
-  <data name="Show" xml:space="preserve">
-    <value>Vis</value>
-    <comment>Show taskbar menu item</comment>
-  </data>
   <data name="Update" xml:space="preserve">
     <value>Opdater</value>
     <comment>Update taskbar menu item</comment>
-  </data>
-  <data name="Visibility" xml:space="preserve">
-    <value>Synlighed</value>
-    <comment>Visibility taskbar menu item</comment>
   </data>
   <data name="SettingsSidebarMargin" xml:space="preserve">
     <value>Sidelinjemargen</value>
@@ -443,14 +468,6 @@
   <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
     <value>Juster den vandrette margen for sidelinjens indhold</value>
     <comment>Settings sidebar margin tooltip</comment>
-  </data>
-  <data name="ShowDayOfWeek" xml:space="preserve">
-    <value>Vis ugedag</value>
-    <comment>Show day of week label</comment>
-  </data>
-  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
-    <value>Vis ugedagen (f.eks. Man, Tir) efter datoen.</value>
-    <comment>Show day of week tooltip</comment>
   </data>
   <data name="SettingsHeaderStyleDefault" xml:space="preserve">
     <value>Standard</value>
@@ -464,29 +481,15 @@
     <value>Ingen</value>
     <comment>Section header style none option</comment>
   </data>
-  <data name="SettingsShowMachineName" xml:space="preserve">
-    <value>Vis PC-navn</value>
-    <comment>Settings show machine name label</comment>
+  <data name="Window" xml:space="preserve">
+    <value>Window</value>
   </data>
-  <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
-    <value>Viser computerens navn.</value>
-    <comment>Settings show machine name tooltip</comment>
+  <data name="Show" xml:space="preserve">
+    <value>Vis</value>
+    <comment>Show taskbar menu item</comment>
   </data>
-  <data name="SettingsMetricsNoWrap" xml:space="preserve">
-    <value>Undlad at bryde tekst</value>
-    <comment>Settings metrics no wrap label</comment>
-  </data>
-  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
-    <value>Forhindrer tekst i at gå til næste linje.</value>
-    <comment>Settings metrics no wrap tooltip</comment>
-  </data>
-  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
-    <value>Label (Redigerbar)</value>
-  </data>
-  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
-    <value>Rediger etiket</value>
-  </data>
-  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
-    <value>Nulstil etiket</value>
+  <data name="Visibility" xml:space="preserve">
+    <value>Synlighed</value>
+    <comment>Visibility taskbar menu item</comment>
   </data>
 </root>

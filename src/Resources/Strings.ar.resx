@@ -1072,4 +1072,7 @@
     <value>بدون</value>
     <comment>Section header style none option</comment>
   </data>
+  <data name="Window" xml:space="preserve">
+    <value>Window</value>
+  </data>
 </root>

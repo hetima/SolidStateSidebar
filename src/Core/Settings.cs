@@ -58,6 +58,19 @@ namespace SSS.Core
                         }
                         result.Add(theme.Name);
                     }
+                    else
+                    {
+                        // If the theme already exists, ensure all icons are present
+                        string themeDir = Path.Combine(iconThemesPath, theme.Name);
+                        foreach (var icon in theme.Icons)
+                        {
+                            string iconPath = Path.Combine(themeDir, icon.Key + ".svg");
+                            if (!File.Exists(iconPath))
+                            {
+                                File.WriteAllText(iconPath, icon.Value);
+                            }
+                        }
+                    }
                 }
 
                 // Move "Default" to the front

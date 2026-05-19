@@ -368,6 +368,39 @@
     <value>Voltage</value>
     <comment>Short label for RAM voltage metric</comment>
   </data>
+  <data name="ShowDayOfWeek" xml:space="preserve">
+    <value>Dag van de week weergeven</value>
+    <comment>Show day of week label</comment>
+  </data>
+  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
+    <value>Toon de dag van de week (bijv. Ma, Di) na de datum.</value>
+    <comment>Show day of week tooltip</comment>
+  </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>Label (Bewerkbaar)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>Label bewerken</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>Label resetten</value>
+  </data>
+  <data name="SettingsShowMachineName" xml:space="preserve">
+    <value>PC-naam weergeven</value>
+    <comment>Settings show machine name label</comment>
+  </data>
+  <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
+    <value>Toont de naam van de computer.</value>
+    <comment>Settings show machine name tooltip</comment>
+  </data>
+  <data name="SettingsMetricsNoWrap" xml:space="preserve">
+    <value>Tekst niet afbreken</value>
+    <comment>Settings metrics no wrap label</comment>
+  </data>
+  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
+    <value>Voorkomt dat tekst naar de volgende regel gaat.</value>
+    <comment>Settings metrics no wrap tooltip</comment>
+  </data>
   <data name="SettingsHeaderStyle" xml:space="preserve">
     <value>Kopstijl</value>
     <comment>Settings header style label</comment>
@@ -424,17 +457,9 @@
     <value>Zijbalk</value>
     <comment>Settings taskbar menu item</comment>
   </data>
-  <data name="Show" xml:space="preserve">
-    <value>Tonen</value>
-    <comment>Show taskbar menu item</comment>
-  </data>
   <data name="Update" xml:space="preserve">
     <value>Bijwerken</value>
     <comment>Update taskbar menu item</comment>
-  </data>
-  <data name="Visibility" xml:space="preserve">
-    <value>Zichtbaarheid</value>
-    <comment>Visibility taskbar menu item</comment>
   </data>
   <data name="SettingsSidebarMargin" xml:space="preserve">
     <value>Zijbalkmarge</value>
@@ -443,14 +468,6 @@
   <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
     <value>De horizontale marge van de zijbalkinhoud aanpassen</value>
     <comment>Settings sidebar margin tooltip</comment>
-  </data>
-  <data name="ShowDayOfWeek" xml:space="preserve">
-    <value>Dag van de week weergeven</value>
-    <comment>Show day of week label</comment>
-  </data>
-  <data name="ShowDayOfWeekTooltip" xml:space="preserve">
-    <value>Toon de dag van de week (bijv. Ma, Di) na de datum.</value>
-    <comment>Show day of week tooltip</comment>
   </data>
   <data name="SettingsHeaderStyleDefault" xml:space="preserve">
     <value>Standaard</value>
@@ -464,29 +481,15 @@
     <value>Geen</value>
     <comment>Section header style none option</comment>
   </data>
-  <data name="SettingsShowMachineName" xml:space="preserve">
-    <value>PC-naam weergeven</value>
-    <comment>Settings show machine name label</comment>
+  <data name="Window" xml:space="preserve">
+    <value>Window</value>
   </data>
-  <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
-    <value>Toont de naam van de computer.</value>
-    <comment>Settings show machine name tooltip</comment>
+  <data name="Show" xml:space="preserve">
+    <value>Tonen</value>
+    <comment>Show taskbar menu item</comment>
   </data>
-  <data name="SettingsMetricsNoWrap" xml:space="preserve">
-    <value>Tekst niet afbreken</value>
-    <comment>Settings metrics no wrap label</comment>
-  </data>
-  <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
-    <value>Voorkomt dat tekst naar de volgende regel gaat.</value>
-    <comment>Settings metrics no wrap tooltip</comment>
-  </data>
-  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
-    <value>Label (Bewerkbaar)</value>
-  </data>
-  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
-    <value>Label bewerken</value>
-  </data>
-  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
-    <value>Label resetten</value>
+  <data name="Visibility" xml:space="preserve">
+    <value>Zichtbaarheid</value>
+    <comment>Visibility taskbar menu item</comment>
   </data>
 </root>

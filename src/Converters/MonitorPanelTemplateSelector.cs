@@ -17,6 +17,8 @@ namespace SSS.Converters
 
         public DataTemplate? TimeTemplate { get; set; }
 
+        public DataTemplate? WindowTemplate { get; set; }
+
         public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
             if (item is Core.MonitorPanel panel)
@@ -29,6 +31,7 @@ namespace SSS.Converters
                     Core.MonitorType.HD => HdTemplate,
                     Core.MonitorType.Network => NetworkTemplate,
                     Core.MonitorType.Time => TimeTemplate,
+                    Core.MonitorType.Window => WindowTemplate,
                     _ => null
                 };
             }

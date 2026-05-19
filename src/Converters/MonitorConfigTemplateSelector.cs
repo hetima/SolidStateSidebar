@@ -6,6 +6,7 @@ using GpuData = SSS.Module.GpuMonitor.Data;
 using HdData = SSS.Module.HdMonitor.Data;
 using NetData = SSS.Module.NetworkMonitor.Data;
 using TimeData = SSS.Module.TimeMonitor.Data;
+using WindowData = SSS.Module.WindowMonitor.Data;
 
 namespace SSS.Converters
 {
@@ -23,6 +24,8 @@ namespace SSS.Converters
 
         public DataTemplate? TimeTemplate { get; set; }
 
+        public DataTemplate? WindowTemplate { get; set; }
+
         public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
             return item switch
@@ -33,6 +36,7 @@ namespace SSS.Converters
                 HdData => HdTemplate,
                 NetData => NetworkTemplate,
                 TimeData => TimeTemplate,
+                WindowData => WindowTemplate,
                 _ => base.SelectTemplate(item, container)
             };
         }

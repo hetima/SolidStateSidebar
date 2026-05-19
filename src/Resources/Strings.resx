@@ -1140,4 +1140,8 @@
     <value>None</value>
     <comment>Section header style none option</comment>
   </data>
+  <data name="Window" xml:space="preserve">
+    <value>Window</value>
+    <comment>Window</comment>
+  </data>
 </root>

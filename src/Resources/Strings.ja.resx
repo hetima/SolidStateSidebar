@@ -942,17 +942,9 @@
     <value>設定</value>
     <comment>Settings taskbar menu item</comment>
   </data>
-  <data name="Show" xml:space="preserve">
-    <value>表示</value>
-    <comment>Show taskbar menu item</comment>
-  </data>
   <data name="Update" xml:space="preserve">
     <value>アップデート</value>
     <comment>Update taskbar menu item</comment>
-  </data>
-  <data name="Visibility" xml:space="preserve">
-    <value>表示方法</value>
-    <comment>Visibility taskbar menu item</comment>
   </data>
   <data name="SettingsSidebarMargin" xml:space="preserve">
     <value>サイドバー余白</value>
@@ -973,5 +965,16 @@
   <data name="SettingsHeaderStyleNone" xml:space="preserve">
     <value>なし</value>
     <comment>Section header style none option</comment>
+  </data>
+  <data name="Window" xml:space="preserve">
+    <value>ウィンドウ</value>
+  </data>
+  <data name="Show" xml:space="preserve">
+    <value>表示</value>
+    <comment>Show taskbar menu item</comment>
+  </data>
+  <data name="Visibility" xml:space="preserve">
+    <value>表示方法</value>
+    <comment>Visibility taskbar menu item</comment>
   </data>
 </root>

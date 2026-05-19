@@ -15,7 +15,8 @@ namespace SSS.Core
             { "GpuMonitor", typeof(Module.GpuMonitor.Data) },
             { "HdMonitor", typeof(Module.HdMonitor.Data) },
             { "NetworkMonitor", typeof(Module.NetworkMonitor.Data) },
-            { "TimeMonitor", typeof(Module.TimeMonitor.Data) }
+            { "TimeMonitor", typeof(Module.TimeMonitor.Data) },
+            { "WindowMonitor", typeof(Module.WindowMonitor.Data) }
         };
 
         public override Dictionary<string, IModuleData> ReadJson(JsonReader reader, Type objectType, Dictionary<string, IModuleData>? existingValue, bool hasExistingValue, JsonSerializer serializer)
@@ -72,7 +73,8 @@ namespace SSS.Core
                 { "GpuMonitor", Module.GpuMonitor.Data.Default },
                 { "HdMonitor", Module.HdMonitor.Data.Default },
                 { "NetworkMonitor", Module.NetworkMonitor.Data.Default },
-                { "TimeMonitor", Module.TimeMonitor.Data.Default }
+                { "TimeMonitor", Module.TimeMonitor.Data.Default },
+                { "WindowMonitor", Module.WindowMonitor.Data.Default }
             };
         }
     }

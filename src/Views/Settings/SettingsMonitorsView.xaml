@@ -13,6 +13,7 @@
              xmlns:moduleHd="clr-namespace:SSS.Module.HdMonitor"
              xmlns:moduleNet="clr-namespace:SSS.Module.NetworkMonitor"
              xmlns:moduleTime="clr-namespace:SSS.Module.TimeMonitor"
+             xmlns:moduleWindow="clr-namespace:SSS.Module.WindowMonitor"
              mc:Ignorable="d">
     <UserControl.Resources>
         <!-- Monitor-specific setting panel DataTemplates -->
@@ -34,6 +35,9 @@
         <DataTemplate x:Key="TimeSettingsTemplate">
             <moduleTime:SettingPanel />
         </DataTemplate>
+        <DataTemplate x:Key="WindowSettingsTemplate">
+            <moduleWindow:SettingPanel />
+        </DataTemplate>
 
         <conv:MonitorConfigTemplateSelector x:Key="MonitorConfigTemplateSelector"
             CpuTemplate="{StaticResource CpuSettingsTemplate}"
@@ -41,7 +45,8 @@
             GpuTemplate="{StaticResource GpuSettingsTemplate}"
             HdTemplate="{StaticResource HdSettingsTemplate}"
             NetworkTemplate="{StaticResource NetworkSettingsTemplate}"
-            TimeTemplate="{StaticResource TimeSettingsTemplate}" />
+            TimeTemplate="{StaticResource TimeSettingsTemplate}"
+            WindowTemplate="{StaticResource WindowSettingsTemplate}" />
     </UserControl.Resources>
     <StackPanel Style="{StaticResource VerticalPanel}">
         <StackPanel Style="{StaticResource SettingTitle}">

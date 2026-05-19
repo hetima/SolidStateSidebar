@@ -36,7 +36,7 @@ namespace WPFDevelopers.Controls
 
         private static readonly DependencyPropertyKey HueColorPropertyKey =
             DependencyProperty.RegisterReadOnly("HueColor", typeof(Color), typeof(ColorPicker),
-                new PropertyMetadata(Colors.Red));
+                new PropertyMetadata(Colors.Red, OnHueColorChanged));
 
         public static readonly DependencyProperty HueColorProperty = HueColorPropertyKey.DependencyProperty;
 
@@ -65,6 +65,50 @@ namespace WPFDevelopers.Controls
         }
 
         public Color HueColor => (Color) GetValue(HueColorProperty);
+
+        private static void OnHueColorChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            if (d is not ColorPicker picker || picker._canvas == null) return;
+            var hueColor = (Color)e.NewValue;
+            var drawingBrush = new DrawingBrush
+            {
+                Drawing = new DrawingGroup
+                {
+                    Children = new DrawingCollection
+                    {
+                        new GeometryDrawing
+                        {
+                            Brush = new LinearGradientBrush
+                            {
+                                StartPoint = new Point(0, 0),
+                                EndPoint = new Point(1, 0),
+                                GradientStops = new GradientStopCollection
+                                {
+                                    new GradientStop(Colors.White, 0),
+                                    new GradientStop(hueColor, 1)
+                                }
+                            },
+                            Geometry = new RectangleGeometry(new Rect(0, 0, 5, 5))
+                        },
+                        new GeometryDrawing
+                        {
+                            Brush = new LinearGradientBrush
+                            {
+                                StartPoint = new Point(0, 0),
+                                EndPoint = new Point(0, 1),
+                                GradientStops = new GradientStopCollection
+                                {
+                                    new GradientStop(Colors.Transparent, 0),
+                                    new GradientStop(Colors.Black, 1)
+                                }
+                            },
+                            Geometry = new RectangleGeometry(new Rect(0, 0, 5, 5))
+                        }
+                    }
+                }
+            };
+            picker._canvas.Background = drawingBrush;
+        }
 
         public Color SelectedColor
         {

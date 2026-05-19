@@ -1,0 +1,29 @@
+<UserControl x:Class="SSS.Module.WindowMonitor.SettingPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:monitor="clr-namespace:SSS.Core"
+             xmlns:conv="clr-namespace:SSS.Converters"
+             xmlns:res="clr-namespace:SSS"
+             mc:Ignorable="d">
+    <Border Style="{StaticResource MonitorDetailsBorder}">
+        <StackPanel Style="{StaticResource VerticalPanel}">
+            <!-- Header Style -->
+            <StackPanel Orientation="Horizontal"
+                    Margin="0,0,0,10">
+                <Label Content="{x:Static res:Strings.SettingsHeaderStyle}"
+                        VerticalAlignment="Center"
+                        Margin="0,0,10,0"
+                        Padding="0"/>
+                <ComboBox ItemsSource="{StaticResource SectionHeaderStyleItems}"
+                          SelectedValue="{Binding Path=SectionHeaderStyle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedValuePath="."
+                          ItemTemplate="{StaticResource SectionHeaderStyleItemTemplate}"/>
+            </StackPanel>
+
+            <!-- Mock placeholder -->
+            <TextBlock Text="WindowMonitor settings (mock)" Foreground="Gray" Margin="0,10,0,0" />
+        </StackPanel>
+    </Border>
+</UserControl>

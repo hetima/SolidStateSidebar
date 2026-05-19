@@ -98,6 +98,7 @@ namespace SSS.Models
                         SSS.Module.HdMonitor.Data => MonitorType.HD,
                         SSS.Module.NetworkMonitor.Data => MonitorType.Network,
                         SSS.Module.TimeMonitor.Data => MonitorType.Time,
+                        SSS.Module.WindowMonitor.Data => MonitorType.Window,
                         _ => null
                     };
 
@@ -226,6 +227,7 @@ namespace SSS.Models
                         SSS.Module.HdMonitor.Data => "HdMonitor",
                         SSS.Module.NetworkMonitor.Data => "NetworkMonitor",
                         SSS.Module.TimeMonitor.Data => "TimeMonitor",
+                        SSS.Module.WindowMonitor.Data => "WindowMonitor",
                         _ => throw new InvalidOperationException("Unknown module data type")
                     }, m
                 ))

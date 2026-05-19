@@ -15,6 +15,7 @@
         xmlns:hdSection="clr-namespace:SSS.Module.HdMonitor"
         xmlns:netSection="clr-namespace:SSS.Module.NetworkMonitor"
         xmlns:timeSection="clr-namespace:SSS.Module.TimeMonitor"
+        xmlns:windowSection="clr-namespace:SSS.Module.WindowMonitor"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         StateChanged="Window_StateChanged"
@@ -109,6 +110,9 @@
                             <DataTemplate x:Key="TimeSectionTemplate">
                                 <timeSection:Section />
                             </DataTemplate>
+                            <DataTemplate x:Key="WindowSectionTemplate">
+                                <windowSection:Section />
+                            </DataTemplate>
                         </ItemsControl.Resources>
                         <ItemsControl.ItemTemplateSelector>
                             <converters:MonitorPanelTemplateSelector
@@ -117,7 +121,8 @@
                                 GpuTemplate="{StaticResource GpuSectionTemplate}"
                                 HdTemplate="{StaticResource HdSectionTemplate}"
                                 NetworkTemplate="{StaticResource NetworkSectionTemplate}"
-                                TimeTemplate="{StaticResource TimeSectionTemplate}" />
+                                TimeTemplate="{StaticResource TimeSectionTemplate}"
+                                WindowTemplate="{StaticResource WindowSectionTemplate}" />
                         </ItemsControl.ItemTemplateSelector>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

@@ -43,6 +43,16 @@
             <conv:FontSizeAddConverter x:Key="FontSizeAddConverter" />
             <conv:IntToThicknessConverter x:Key="IntToThicknessConverter" />
 
+            <conv:SectionHeaderStyleDisplayConverter x:Key="SectionHeaderStyleDisplayConverter" />
+            <x:Array x:Key="SectionHeaderStyleItems" Type="core:SectionHeaderStyle">
+                <core:SectionHeaderStyle>Default</core:SectionHeaderStyle>
+                <core:SectionHeaderStyle>Small</core:SectionHeaderStyle>
+                <core:SectionHeaderStyle>None</core:SectionHeaderStyle>
+            </x:Array>
+            <DataTemplate x:Key="SectionHeaderStyleItemTemplate">
+                <TextBlock Text="{Binding Converter={StaticResource SectionHeaderStyleDisplayConverter}}" />
+            </DataTemplate>
+
             <Style x:Key="SidebarWindow" TargetType="{x:Type win:AppBarWindow}">
                 <Setter Property="Title" Value="{x:Static res:Strings.Sidebar}" />
                 <Setter Property="Icon" Value="Resources/Sidebar.ico" />

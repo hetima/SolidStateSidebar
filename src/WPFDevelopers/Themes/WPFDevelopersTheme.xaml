@@ -507,7 +507,7 @@
                                                     <GeometryDrawing.Brush>
                                                         <LinearGradientBrush EndPoint="1,0">
                                                             <GradientStop Offset="0" Color="White" />
-                                                            <GradientStop Offset="1" Color="{Binding HueColor, RelativeSource={RelativeSource TemplatedParent}}" />
+                                                            <GradientStop Offset="1" Color="Red" />
                                                         </LinearGradientBrush>
                                                     </GeometryDrawing.Brush>
                                                     <GeometryDrawing.Geometry>
