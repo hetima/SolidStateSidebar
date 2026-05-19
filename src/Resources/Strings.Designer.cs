@@ -250,7 +250,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Clok に類似しているローカライズされた文字列を検索します。
+        ///   Clock に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string CPUClockLabel {
             get {

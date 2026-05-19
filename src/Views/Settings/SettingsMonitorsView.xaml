@@ -56,7 +56,7 @@
         </StackPanel>
         <Grid Margin="0,0,0,10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="128" MinWidth="100" />
+                <ColumnDefinition Width="150" MinWidth="100" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>

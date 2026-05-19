@@ -222,7 +222,7 @@
     <comment>Full name for CPU load metric</comment>
   </data>
   <data name="CPUClockLabel" xml:space="preserve">
-    <value>Clok</value>
+    <value>Clock</value>
     <comment>Short label for CPU clock metric</comment>
   </data>
   <data name="CPUCoreClock" xml:space="preserve">
