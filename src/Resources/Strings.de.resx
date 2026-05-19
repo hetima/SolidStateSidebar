@@ -480,4 +480,13 @@
     <value>Verhindert, dass Text in die nächste Zeile umbrochen wird.</value>
     <comment>Settings metrics no wrap tooltip</comment>
   </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>Bezeichnung (Bearbeitbar)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>Bezeichnung bearbeiten</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>Bezeichnung zurücksetzen</value>
+  </data>
 </root>

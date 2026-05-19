@@ -647,6 +647,15 @@
   <data name="SettingsMetricsColumnHeader" xml:space="preserve">
     <value>メトリクス</value>
   </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>ラベル (編集可)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>ラベルを編集して表示をカスタマイズできます</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>ラベルをデフォルト値に戻します</value>
+  </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>メトリクスの有効/無効の切り替え</value>
   </data>

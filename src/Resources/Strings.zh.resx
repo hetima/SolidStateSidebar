@@ -696,6 +696,15 @@
   <data name="SettingsMetricsColumnHeader" xml:space="preserve">
     <value>指标</value>
   </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>标签（可编辑）</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>编辑标签</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>重置标签</value>
+  </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>启用或禁用特定指标。</value>
     <comment>Settings metrics tooltip</comment>

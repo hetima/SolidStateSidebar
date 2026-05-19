@@ -696,6 +696,15 @@
   <data name="SettingsMetricsColumnHeader" xml:space="preserve">
     <value>Mittaukset</value>
   </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>Nimiö (Muokattavissa)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>Muokkaa nimeötä</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>Nollaa nimiö</value>
+  </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>Ota tai poista käytöstä tietyt mittaukset.</value>
     <comment>Settings metrics tooltip</comment>

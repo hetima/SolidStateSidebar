@@ -480,4 +480,13 @@
     <value>Forhindrer tekst i at gå til næste linje.</value>
     <comment>Settings metrics no wrap tooltip</comment>
   </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>Label (Redigerbar)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>Rediger etiket</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>Nulstil etiket</value>
+  </data>
 </root>

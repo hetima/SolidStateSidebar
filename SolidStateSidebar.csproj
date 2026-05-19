@@ -68,23 +68,25 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Update="src\Resources\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
-  <ItemGroup>
+  <!-- <ItemGroup>
     <EmbeddedResource Update="src\Resources\Strings.resx">
-      <Generator>MSBuild:Compile</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
       <StronglyTypedClassName>Strings</StronglyTypedClassName>
       <StronglyTypedNamespace>SSS</StronglyTypedNamespace>
       <CustomToolNamespace>SSS</CustomToolNamespace>
+      <StronglyTypedLanguage>CSharp</StronglyTypedLanguage>
   </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-  <Compile Update="src\Resources\Strings.Designer.cs">
-    <DesignTime>True</DesignTime>
-    <AutoGen>True</AutoGen>
-    <DependentUpon>Strings.resx</DependentUpon>
-  </Compile>
-</ItemGroup>
+  </ItemGroup> -->
+  <!-- <ItemGroup>
+    <Compile Remove="src\Resources\Strings.Designer.cs" />
+  </ItemGroup> -->
   <ItemGroup>
     <EmbeddedResource Include="IconTheme\Default.json">
       <LogicalName>SSS.Styling.IconTheme.Default.json</LogicalName>

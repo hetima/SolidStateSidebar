@@ -688,6 +688,15 @@
   <data name="SettingsMetricsColumnHeader" xml:space="preserve">
     <value>Anzeigen</value>
   </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>Bezeichnung (Bearbeitbar)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>Bezeichnung bearbeiten</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>Bezeichnung zurücksetzen</value>
+  </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>Verschiedene Anzeigen ein- und ausschalten.</value>
     <comment>Settings metrics tooltip</comment>

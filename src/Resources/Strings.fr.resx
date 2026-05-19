@@ -696,6 +696,15 @@
   <data name="SettingsMetricsColumnHeader" xml:space="preserve">
     <value>Métriques</value>
   </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>Étiquette (Modifiable)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>Modifier l'étiquette</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>Réinitialiser l'étiquette</value>
+  </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>Activer ou désactiver des métriques spécifiques.</value>
     <comment>Settings metrics tooltip</comment>

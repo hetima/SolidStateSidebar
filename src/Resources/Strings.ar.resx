@@ -696,6 +696,15 @@
   <data name="SettingsMetricsColumnHeader" xml:space="preserve">
     <value>المقاييس</value>
   </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>التسمية (قابلة للتعديل)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>تعديل التسمية</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>إعادة تعيين التسمية</value>
+  </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>تفعيل أو تعطيل المقاييس.</value>
     <comment>Settings metrics tooltip</comment>

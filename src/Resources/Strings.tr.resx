@@ -696,6 +696,15 @@
   <data name="SettingsMetricsColumnHeader" xml:space="preserve">
     <value>Ölçümler</value>
   </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>Etiket (Düzenlenebilir)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>Etiketi düzenle</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>Etiketi sıfırla</value>
+  </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>Belirli ölçümleri etkinleştirin veya devre dışı bırakın.</value>
     <comment>Settings metrics tooltip</comment>

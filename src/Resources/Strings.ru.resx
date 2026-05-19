@@ -696,6 +696,15 @@
   <data name="SettingsMetricsColumnHeader" xml:space="preserve">
     <value>Показатели</value>
   </data>
+  <data name="SettingsMetricsLabelColumn" xml:space="preserve">
+    <value>Метка (Редактируемая)</value>
+  </data>
+  <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
+    <value>Редактировать метку</value>
+  </data>
+  <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
+    <value>Сбросить метку</value>
+  </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>Включить или отключить некоторые показатели.</value>
     <comment>Settings metrics tooltip</comment>

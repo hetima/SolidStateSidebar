@@ -50,10 +50,10 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Label (Editable)" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="160">
+                            <GridViewColumn Header="{x:Static res:Strings.SettingsMetricsLabelColumn}" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="160">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate DataType="{x:Type monitor:MetricConfig}">
-                                        <TextBox Style="{StaticResource MonitorHardwareText}" ToolTip="Edit label">
+                                        <TextBox Style="{StaticResource MonitorHardwareText}" ToolTip="{x:Static res:Strings.SettingsMetricsLabelTooltip}">
                                             <TextBox.Text>
                                                 <MultiBinding Converter="{StaticResource LabelDisplayConverter}"
                                                               Mode="TwoWay"
@@ -69,7 +69,7 @@
                             <GridViewColumn Width="40" HeaderContainerStyle="{StaticResource MonitorHardwareHeaderCenter}">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate DataType="{x:Type monitor:MetricConfig}">
-                                        <Button Content="&#x21BA;" Style="{StaticResource MonitorHardwareResetButton}" ToolTip="Reset label" Click="MetricResetButton_Click" />
+                                        <Button Content="&#x21BA;" Style="{StaticResource MonitorHardwareResetButton}" ToolTip="{x:Static res:Strings.SettingsMetricsResetLabelTooltip}" Click="MetricResetButton_Click" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

@@ -1357,7 +1357,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Hardware に類似しているローカライズされた文字列を検索します。
+        ///   Hardware (Editable) に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsHardwareColumn2 {
             get {
@@ -1582,6 +1582,60 @@ namespace SSS {
         }
         
         /// <summary>
+        ///   Metrics に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsMetricsColumnHeader {
+            get {
+                return ResourceManager.GetString("SettingsMetricsColumnHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Label (Editable) に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsMetricsLabelColumn {
+            get {
+                return ResourceManager.GetString("SettingsMetricsLabelColumn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Edit labels to customize the display に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsMetricsLabelTooltip {
+            get {
+                return ResourceManager.GetString("SettingsMetricsLabelTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Don&apos;t Wrap Text に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsMetricsNoWrap {
+            get {
+                return ResourceManager.GetString("SettingsMetricsNoWrap", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Prevents text from wrapping to the next line. に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsMetricsNoWrapTooltip {
+            get {
+                return ResourceManager.GetString("SettingsMetricsNoWrapTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Restore default label に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        public static string SettingsMetricsResetLabelTooltip {
+            get {
+                return ResourceManager.GetString("SettingsMetricsResetLabelTooltip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Enable or disable specific metrics. に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsMetricsTooltip {
@@ -1636,7 +1690,7 @@ namespace SSS {
         }
         
         /// <summary>
-        ///   Monitors に類似しているローカライズされた文字列を検索します。
+        ///   Modules に類似しているローカライズされた文字列を検索します。
         /// </summary>
         public static string SettingsMonitorsTab {
             get {
@@ -1848,24 +1902,6 @@ namespace SSS {
         public static string SettingsShowMachineNameTooltip {
             get {
                 return ResourceManager.GetString("SettingsShowMachineNameTooltip", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Don't Wrap Text に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string SettingsMetricsNoWrap {
-            get {
-                return ResourceManager.GetString("SettingsMetricsNoWrap", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Prevents text from wrapping to the next line. に類似しているローカライズされた文字列を検索します。
-        /// </summary>
-        public static string SettingsMetricsNoWrapTooltip {
-            get {
-                return ResourceManager.GetString("SettingsMetricsNoWrapTooltip", resourceCulture);
             }
         }
         
