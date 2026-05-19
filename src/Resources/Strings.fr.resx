@@ -626,7 +626,7 @@
     <comment>Settings hardware data grid enabled column header</comment>
   </data>
   <data name="SettingsHardwareColumn2" xml:space="preserve">
-    <value>Composant</value>
+    <value>Composant (Editable)</value>
     <comment>Settings hardware data grid hardware column header</comment>
   </data>
   <data name="SettingsHardwareEnabledTooltip" xml:space="preserve">
@@ -692,6 +692,9 @@
   <data name="SettingsMetrics" xml:space="preserve">
     <value>Métriques:</value>
     <comment>Settings metrics label with colon</comment>
+  </data>
+  <data name="SettingsMetricsColumnHeader" xml:space="preserve">
+    <value>Métriques</value>
   </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>Activer ou désactiver des métriques spécifiques.</value>

@@ -71,11 +71,20 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Update="src\Resources\Strings.resx">
-      <!-- MSBuildにビルド時の自動生成を命令 -->
       <Generator>MSBuild:Compile</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+      <StronglyTypedClassName>Strings</StronglyTypedClassName>
+      <StronglyTypedNamespace>SSS</StronglyTypedNamespace>
+      <CustomToolNamespace>SSS</CustomToolNamespace>
+  </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+  <Compile Update="src\Resources\Strings.Designer.cs">
+    <DesignTime>True</DesignTime>
+    <AutoGen>True</AutoGen>
+    <DependentUpon>Strings.resx</DependentUpon>
+  </Compile>
+</ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="IconTheme\Default.json">
       <LogicalName>SSS.Styling.IconTheme.Default.json</LogicalName>

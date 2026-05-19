@@ -594,7 +594,7 @@
     <value>有効</value>
   </data>
   <data name="SettingsHardwareColumn2" xml:space="preserve">
-    <value>ハードウェア</value>
+    <value>ハードウェア (編集可能)</value>
   </data>
   <data name="SettingsHardwareEnabledTooltip" xml:space="preserve">
     <value>このハードウェアを有効にする</value>
@@ -643,6 +643,9 @@
   </data>
   <data name="SettingsMetrics" xml:space="preserve">
     <value>メトリクス:</value>
+  </data>
+  <data name="SettingsMetricsColumnHeader" xml:space="preserve">
+    <value>メトリクス</value>
   </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>メトリクスの有効/無効の切り替え</value>

@@ -626,7 +626,7 @@
     <comment>Settings hardware data grid enabled column header</comment>
   </data>
   <data name="SettingsHardwareColumn2" xml:space="preserve">
-    <value>الأجهزة</value>
+    <value>الأجهزة (Editable)</value>
     <comment>Settings hardware data grid hardware column header</comment>
   </data>
   <data name="SettingsHardwareEnabledTooltip" xml:space="preserve">
@@ -692,6 +692,9 @@
   <data name="SettingsMetrics" xml:space="preserve">
     <value>المقاييس</value>
     <comment>Settings metrics label with colon</comment>
+  </data>
+  <data name="SettingsMetricsColumnHeader" xml:space="preserve">
+    <value>المقاييس</value>
   </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>تفعيل أو تعطيل المقاييس.</value>

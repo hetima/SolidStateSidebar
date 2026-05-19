@@ -43,7 +43,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Metrics" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="160">
+                            <GridViewColumn Header="{x:Static res:Strings.SettingsMetricsColumnHeader}" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="160">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate DataType="{x:Type monitor:MetricConfig}">
                                         <TextBlock Text="{Binding Name, Mode=OneWay}" VerticalAlignment="Center" />

@@ -626,7 +626,7 @@
     <comment>Settings hardware data grid enabled column header</comment>
   </data>
   <data name="SettingsHardwareColumn2" xml:space="preserve">
-    <value>硬件</value>
+    <value>硬件 (Editable)</value>
     <comment>Settings hardware data grid hardware column header</comment>
   </data>
   <data name="SettingsHardwareEnabledTooltip" xml:space="preserve">
@@ -692,6 +692,9 @@
   <data name="SettingsMetrics" xml:space="preserve">
     <value>指标：</value>
     <comment>Settings metrics label with colon</comment>
+  </data>
+  <data name="SettingsMetricsColumnHeader" xml:space="preserve">
+    <value>指标</value>
   </data>
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>启用或禁用特定指标。</value>
