@@ -5,8 +5,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System;
 using SSS.Core;
-
 namespace SSS.Views.Components
 {
     public partial class ApplicationAddPopup : UserControl
@@ -36,26 +36,27 @@ namespace SSS.Views.Components
                     .Select(a => a.ID!)
             );
 
+
             var processes = Process.GetProcesses()
-                .Where(p => !string.IsNullOrWhiteSpace(p.MainWindowTitle))
-                .Select(p =>
-                {
-                    string fileName = "";
-                    try { fileName = System.IO.Path.GetFileName(p.MainModule?.FileName) ?? p.ProcessName; }
-                    catch { fileName = p.ProcessName; }
-                    return new { p.ProcessName, FileName = fileName };
-                })
-                .GroupBy(x => x.ProcessName)
+                .Where(p => p.MainWindowHandle != IntPtr.Zero)
+                // 1. 先に ProcessName で重複を除外（MainModule へのアクセス回数を激減させる）
+                .GroupBy(p => p.ProcessName)
                 .Select(g => g.First())
-                .OrderBy(x => x.FileName, System.StringComparer.OrdinalIgnoreCase)
-                .Select(x => new HardwareConfig
+                // 2. FileName の取得と並び替えを同時に行う（余計な匿名型を作らない）
+                .OrderBy(p =>
                 {
-                    ID = x.ProcessName,
-                    Name = x.FileName,
-                    ActualName = x.FileName,
-                    Enabled = existingIds.Contains(x.ProcessName)
+                    try { return p.MainModule?.ModuleName ?? p.ProcessName; }
+                    catch { return p.ProcessName; }
+                }, StringComparer.OrdinalIgnoreCase)
+                // 3. 直接目的の型にマッピング
+                .Select(p => new HardwareConfig
+                {
+                    ID = p.ProcessName,
+                    Name = p.ProcessName,
+                    ActualName = p.ProcessName,
+                    Enabled = existingIds.Contains(p.ProcessName)
                 })
-                .ToArray(); // evaluate before Dispose
+                .ToArray();
 
             ProcessesListView.ItemsSource = new ObservableCollection<HardwareConfig>(processes);
         }
