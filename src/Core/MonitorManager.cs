@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using LibreHardwareMonitor.Hardware;
-using CpuData = SSS.Module.CpuMonitor.Data;
-using GpuData = SSS.Module.GpuMonitor.Data;
 using HdData = SSS.Module.HdMonitor.Data;
 using NetData = SSS.Module.NetworkMonitor.Data;
-using RamData = SSS.Module.RamMonitor.Data;
 using TimeData = SSS.Module.TimeMonitor.Data;
 using WindowData = SSS.Module.WindowMonitor.Data;
 
@@ -33,24 +30,14 @@ namespace SSS.Core
 
             UpdateBoard();
 
-            var ramData = modules["RamMonitor"];
-            // De-duplicate RAM hardware IDs
-            if (ramData.Hardware != null)
-            {
-                ramData.Hardware = ramData.Hardware
-                    .GroupBy(h => h.ID)
-                    .Select(g => g.First())
-                    .ToArray();
-            }
-
             MonitorPanels = modules
                 .Where(m => m.Value.Enabled)
                 .OrderByDescending(m => m.Value.Order)
                 .Select(m => m.Key switch
                 {
-                    "CpuMonitor" => CpuPanel(m.Value),
-                    "RamMonitor" => RamPanel(m.Value),
-                    "GpuMonitor" => GpuPanel(m.Value),
+                    "CpuMonitor" => CreateCpuPanel(m.Value),
+                    "RamMonitor" => CreateRamPanel(m.Value),
+                    "GpuMonitor" => CreateGpuPanel(m.Value),
                     "HdMonitor" => HdPanel(m.Value),
                     "NetworkMonitor" => NetworkPanel(m.Value),
                     "TimeMonitor" => TimePanel(m.Value),
@@ -107,13 +94,13 @@ namespace SSS.Core
                     return GetHardware(type.GetHardwareTypes()).Select(h => new HardwareConfig() { ID = h.Identifier.ToString(), Name = h.Name, ActualName = h.Name }).ToArray();
 
                 case MonitorType.HD:
-                    return DriveMonitor.GetHardware().ToArray();
+                    return SSS.Module.HdMonitor.DriveMonitor.GetHardware().ToArray();
 
                 case MonitorType.Network:
-                    return NetworkMonitor.GetHardware().ToArray();
+                    return SSS.Module.NetworkMonitor.NetworkMonitor.GetHardware().ToArray();
 
                 case MonitorType.Time:
-                    return ClockMonitor.GetHardware().ToArray();
+                    return SSS.Module.TimeMonitor.ClockMonitor.GetHardware().ToArray();
 
                 case MonitorType.Window:
                     return [];
@@ -161,43 +148,43 @@ namespace SSS.Core
             return _computer!.Hardware.Where(h => types.Contains(h.HardwareType));
         }
 
-        private MonitorPanel CpuPanel(IModuleData data)
+        private MonitorPanel CreateCpuPanel(IModuleData data)
         {
-            var d = (CpuData)data;
+            var d = (SSS.Module.CpuMonitor.Data)data;
+            var hw = GetHardware(MonitorType.CPU.GetHardwareTypes()).ToArray();
             var panel = new MonitorPanel(
                 MonitorType.CPU,
                 MonitorType.CPU.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("cpu"),
-                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), MonitorType.CPU, _board!, GetHardware(MonitorType.CPU.GetHardwareTypes()).ToArray(),
-                    d.ShowHardwareNames, d.RoundAll, d.AllCoreClocks, d.UseGHz, d.UseFahrenheit, d.TempAlert)
+                SSS.Module.CpuMonitor.CPUMonitor.GetInstances(d, _board!, hw)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;
         }
 
-        private MonitorPanel RamPanel(IModuleData data)
+        private MonitorPanel CreateRamPanel(IModuleData data)
         {
-            var d = (RamData)data;
+            var d = (SSS.Module.RamMonitor.Data)data;
+            var hw = GetHardware(MonitorType.RAM.GetHardwareTypes()).ToArray();
             var panel = new MonitorPanel(
                 MonitorType.RAM,
                 MonitorType.RAM.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("ram"),
-                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), MonitorType.RAM, _board!, GetHardware(MonitorType.RAM.GetHardwareTypes()).ToArray(),
-                    false, d.RoundAll, false, false, false, 0)
+                SSS.Module.RamMonitor.RAMMonitor.GetInstances(d, _board!, hw)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;
         }
 
-        private MonitorPanel GpuPanel(IModuleData data)
+        private MonitorPanel CreateGpuPanel(IModuleData data)
         {
-            var d = (GpuData)data;
+            var d = (SSS.Module.GpuMonitor.Data)data;
+            var hw = GetHardware(MonitorType.GPU.GetHardwareTypes()).ToArray();
             var panel = new MonitorPanel(
                 MonitorType.GPU,
                 MonitorType.GPU.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("gpu"),
-                OHMMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), MonitorType.GPU, _board!, GetHardware(MonitorType.GPU.GetHardwareTypes()).ToArray(),
-                    d.ShowHardwareNames, d.RoundAll, false, d.UseGHz, d.UseFahrenheit, d.TempAlert)
+                SSS.Module.GpuMonitor.GPUMonitor.GetInstances(d, _board!, hw)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;
@@ -210,7 +197,7 @@ namespace SSS.Core
                 MonitorType.HD,
                 MonitorType.HD.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("hd"),
-                DriveMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), d.RoundAll, d.UsedSpaceAlert)
+                SSS.Module.HdMonitor.DriveMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), d.RoundAll, d.UsedSpaceAlert)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;
@@ -223,7 +210,7 @@ namespace SSS.Core
                 MonitorType.Network,
                 MonitorType.Network.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("net"),
-                NetworkMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), d.ShowHardwareNames, d.RoundAll, d.UseBytes, d.BandwidthInAlert, d.BandwidthOutAlert)
+                SSS.Module.NetworkMonitor.NetworkMonitor.GetInstances(d.Hardware!, d.Metrics!.ToArray(), d.ShowHardwareNames, d.RoundAll, d.UseBytes, d.BandwidthInAlert, d.BandwidthOutAlert)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;
@@ -236,7 +223,7 @@ namespace SSS.Core
                 MonitorType.Time,
                 MonitorType.Time.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("clock"),
-                ClockMonitor.GetInstances(d.Hardware!, d.ShowDate, d.ShowTime, d.Clock24HR, d.DateFormat, d.ShowDayOfWeek, d.DateFontSize, d.TimeFontSize)
+                SSS.Module.TimeMonitor.ClockMonitor.GetInstances(d.Hardware!, d.ShowDate, d.ShowTime, d.Clock24HR, d.DateFormat, d.ShowDayOfWeek, d.DateFontSize, d.TimeFontSize)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;
@@ -249,7 +236,7 @@ namespace SSS.Core
                 MonitorType.Window,
                 MonitorType.Window.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("win"),
-                WindowMonitor.GetInstances()
+                SSS.Module.WindowMonitor.WindowMonitor.GetInstances()
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;

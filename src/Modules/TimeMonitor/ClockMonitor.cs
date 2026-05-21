@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using SSS.Core;
 using SSS.Utilities;
 
-namespace SSS.Core
+namespace SSS.Module.TimeMonitor
 {
     public class ClockTimeMetric : BaseMetric
     {

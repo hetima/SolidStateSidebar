@@ -1,8 +1,9 @@
 using System;
 using System.ComponentModel;
+using SSS.Core;
 using SSS.Utilities;
 
-namespace SSS.Core
+namespace SSS.Module.WindowMonitor
 {
     public class WindowTitleMetric : BaseMetric
     {

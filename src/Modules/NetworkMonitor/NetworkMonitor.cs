@@ -8,8 +8,9 @@ using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using SSS.Core;
 
-namespace SSS.Core
+namespace SSS.Module.NetworkMonitor
 {
     public partial class NetworkMonitor : BaseMonitor
     {

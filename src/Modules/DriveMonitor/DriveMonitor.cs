@@ -4,8 +4,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
+using SSS.Core;
 
-namespace SSS.Core
+namespace SSS.Module.HdMonitor
 {
     public partial class DriveMonitor : BaseMonitor
     {

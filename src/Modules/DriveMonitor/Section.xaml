@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:core="clr-namespace:SSS.Core"
+             xmlns:local="clr-namespace:SSS.Module.HdMonitor"
              xmlns:components="clr-namespace:SSS.Views.Components"
              mc:Ignorable="d">
     <StackPanel Style="{StaticResource GroupPanel}">
@@ -11,7 +12,7 @@
 
         <ItemsControl ItemsSource="{Binding Path=Monitors, Mode=OneWay}">
             <ItemsControl.Resources>
-                <DataTemplate DataType="{x:Type core:DriveMonitor}">
+                <DataTemplate DataType="{x:Type local:DriveMonitor}">
                     <StackPanel Style="{StaticResource MonitorPanel}">
                         <ContentControl>
                             <ContentControl.Style>
