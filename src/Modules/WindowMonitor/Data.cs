@@ -75,7 +75,7 @@ namespace SSS.Module.WindowMonitor
         [JsonIgnore]
         public ObservableCollection<HardwareConfig>? ApplicationOC { get; set; }
 
-        // --- WindowMonitor-specific params (mock) ---
+        // --- WindowMonitor-specific params ---
 
         private SectionHeaderStyle _sectionHeaderStyle = SectionHeaderStyle.Default;
 
@@ -84,6 +84,15 @@ namespace SSS.Module.WindowMonitor
         {
             get => _sectionHeaderStyle;
             set { _sectionHeaderStyle = value; NotifyPropertyChanged(); }
+        }
+
+        private int _maxDisplayCount = 8;
+
+        [JsonProperty("maxDisplayCount")]
+        public int MaxDisplayCount
+        {
+            get => _maxDisplayCount;
+            set { _maxDisplayCount = value; NotifyPropertyChanged(); }
         }
 
         // --- Defaults & Clone ---
@@ -97,7 +106,8 @@ namespace SSS.Module.WindowMonitor
                 new HardwareConfig() { ID = "window", Name = "Window", ActualName = "Window" }
             ],
             Applications = [],
-            SectionHeaderStyle = SectionHeaderStyle.Default
+            SectionHeaderStyle = SectionHeaderStyle.Default,
+            MaxDisplayCount = 8
         };
 
         public Data Clone()

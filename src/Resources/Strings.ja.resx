@@ -594,7 +594,7 @@
     <value>有効</value>
   </data>
   <data name="SettingsHardwareColumn2" xml:space="preserve">
-    <value>ハードウェア (編集可能)</value>
+    <value>ハードウェア (名前編集可能)</value>
   </data>
   <data name="SettingsHardwareEnabledTooltip" xml:space="preserve">
     <value>このハードウェアを有効にする</value>
@@ -989,8 +989,26 @@
     <value>起動中のアプリケーションを追加</value>
     <comment>Settings add application tooltip</comment>
   </data>
+  <data name="SettingsMaxDisplayCount" xml:space="preserve">
+    <value>最大表示数</value>
+    <comment>Settings max display count label</comment>
+  </data>
+  <data name="SettingsMaxDisplayCountTooltip" xml:space="preserve">
+    <value>表示するウィンドウの最大数</value>
+    <comment>Settings max display count tooltip</comment>
+  </data>
   <data name="SettingsApplicationDeleteTooltip" xml:space="preserve">
     <value>アプリケーションを削除</value>
     <comment>Settings delete application tooltip</comment>
   </data>
+    <data name="SettingsAppsColumn1" xml:space="preserve">
+    <value>有効</value>
+    <comment>Settings Apps data grid enabled column header</comment>
+  </data>
+
+  <data name="SettingsAppsColumn2" xml:space="preserve">
+    <value>アプリケーション</value>
+    <comment>Settings applications data grid applications column header</comment>
+  </data>
+
 </root>

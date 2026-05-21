@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using SSS.Core;
 using SSS.Views.Components;
 
@@ -30,6 +32,11 @@ namespace SSS.Module.WindowMonitor
                 ApplicationPopup.Placement = PlacementMode.Center;
             }
             ApplicationPopup.IsOpen = true;
+        }
+
+        private void NumberBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !Regex.IsMatch(e.Text, @"^[0-9]*$");
         }
 
         private void ApplicationPopup_CloseRequested(object sender, RoutedEventArgs e)

@@ -19,7 +19,7 @@
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
-                <GridViewColumn Header="{x:Static res:Strings.SettingsHardwareColumn2}" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="290">
+                <GridViewColumn Header="{x:Static res:Strings.SettingsAppsColumn2}" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="290">
                     <GridViewColumn.CellTemplate>
                         <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
                             <TextBox Text="{Binding Path=Name, Mode=TwoWay}" Style="{StaticResource MonitorHardwareText}" ToolTip="{x:Static res:Strings.SettingsHardwareNameTooltip}" />
