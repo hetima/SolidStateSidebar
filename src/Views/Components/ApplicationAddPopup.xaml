@@ -37,7 +37,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            <GridViewColumn Header="Application" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="380">
+                            <GridViewColumn Header="{x:Static res:Strings.SettingsChooseAppsColumn2}" HeaderContainerStyle="{StaticResource MonitorHardwareHeader}" Width="380">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate DataType="{x:Type monitor:HardwareConfig}">
                                         <TextBlock Text="{Binding Path=ActualName, Mode=OneWay}" VerticalAlignment="Center" />

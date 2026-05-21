@@ -778,6 +778,12 @@ namespace SSS {
             }
         }
 
+        public static string SettingsChooseAppsColumn2 {
+            get {
+                return ResourceManager.GetString("SettingsChooseAppsColumn2", resourceCulture);
+            }
+        }
+
         public static string SettingsClickThrough {
             get {
                 return ResourceManager.GetString("SettingsClickThrough", resourceCulture);

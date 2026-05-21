@@ -1007,8 +1007,11 @@
   </data>
 
   <data name="SettingsAppsColumn2" xml:space="preserve">
+    <value>アプリケーション (編集可能)</value>
+    <comment>Settings applications data grid applications column header</comment>
+  </data>
+  <data name="SettingsChooseAppsColumn2" xml:space="preserve">
     <value>アプリケーション</value>
     <comment>Settings applications data grid applications column header</comment>
   </data>
-
 </root>

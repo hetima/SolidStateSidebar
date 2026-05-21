@@ -18,12 +18,14 @@ namespace SSS.Views.Components
             ExistingApplications = [];
             InitializeComponent();
             Focusable = true;
-            Loaded += ApplicationAddPopup_Loaded;
         }
 
-        private void ApplicationAddPopup_Loaded(object sender, RoutedEventArgs e)
+        public void LoadProcessesIfNeeded()
         {
-            LoadProcesses();
+            if (ProcessesListView.ItemsSource == null)
+            {
+                LoadProcesses();
+            }
         }
 
         private void LoadProcesses()

@@ -25,6 +25,8 @@ namespace SSS.Module.WindowMonitor
                 ApplicationAddPopupCtrl.ExistingApplications = data.ApplicationOC ?? [];
             }
 
+            ApplicationAddPopupCtrl.LoadProcessesIfNeeded();
+
             var window = Window.GetWindow(this);
             if (window != null)
             {

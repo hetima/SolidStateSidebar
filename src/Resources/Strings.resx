@@ -1373,6 +1373,10 @@
   </data>
 
   <data name="SettingsAppsColumn2" xml:space="preserve">
+    <value>Applications (Editable)</value>
+    <comment>Settings applications data grid applications column header</comment>
+  </data>
+  <data name="SettingsChooseAppsColumn2" xml:space="preserve">
     <value>Applications</value>
     <comment>Settings applications data grid applications column header</comment>
   </data>
