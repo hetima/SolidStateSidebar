@@ -84,14 +84,8 @@ namespace SSS.Windows
 
     internal static partial class NativeMethods
     {
-        [LibraryImport("user32.dll", EntryPoint = "GetWindowLongW", StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial long GetWindowLong(IntPtr hwnd, int index);
-
         [LibraryImport("user32.dll", EntryPoint = "GetWindowLongPtrW", StringMarshalling = StringMarshalling.Utf16)]
         internal static partial long GetWindowLongPtr(IntPtr hwnd, int index);
-
-        [LibraryImport("user32.dll", EntryPoint = "SetWindowLongW", StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial long SetWindowLong(IntPtr hwnd, int index, long newStyle);
 
         [LibraryImport("user32.dll", EntryPoint = "SetWindowLongPtrW", StringMarshalling = StringMarshalling.Utf16)]
         internal static partial long SetWindowLongPtr(IntPtr hwnd, int index, long newStyle);
@@ -1473,20 +1467,7 @@ namespace SSS.Windows
         {
             IntPtr _hwnd = new WindowInteropHelper(this).Handle;
 
-            bool _32bit = IntPtr.Size == 4;
-
-            long _style;
-
-            if (_32bit)
-            {
-                _style = NativeMethods.GetWindowLong(_hwnd, WND_STYLE.GWL_EXSTYLE);
-                Debug.WriteLine($"32-bit");
-            }
-            else
-            {
-                _style = NativeMethods.GetWindowLongPtr(_hwnd, WND_STYLE.GWL_EXSTYLE);
-                Debug.WriteLine($"64-bit");
-            }
+            long _style = NativeMethods.GetWindowLongPtr(_hwnd, WND_STYLE.GWL_EXSTYLE);
 
             if (add.HasValue)
             {
@@ -1498,14 +1479,7 @@ namespace SSS.Windows
                 _style &= ~remove.Value;
             }
 
-            if (_32bit)
-            {
-                NativeMethods.SetWindowLong(_hwnd, WND_STYLE.GWL_EXSTYLE, _style);
-            }
-            else
-            {
-                NativeMethods.SetWindowLongPtr(_hwnd, WND_STYLE.GWL_EXSTYLE, _style);
-            }
+            NativeMethods.SetWindowLongPtr(_hwnd, WND_STYLE.GWL_EXSTYLE, _style);
         }
 
         public async Task SetAppBar()
