@@ -11,6 +11,7 @@ Go to the <a href="https://github.com/hetima/SolidStateSidebar/releases">release
 
 ### Features
 - Monitors CPU, RAM, GPU, network, and logical drives.
+- Window monitor to list and select preferred application windows
 - Allows for lots of customization.
 
 
