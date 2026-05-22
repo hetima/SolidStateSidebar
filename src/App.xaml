@@ -42,6 +42,8 @@
             <conv:PercentConverter x:Key="PercentConverter" />
             <conv:FontSizeAddConverter x:Key="FontSizeAddConverter" />
             <conv:IntToThicknessConverter x:Key="IntToThicknessConverter" />
+            <conv:IntWithFallbackConverter x:Key="IntWithFallbackConverter" />
+            <conv:StringWithFallbackConverter x:Key="StringWithFallbackConverter" />
 
             <conv:SectionHeaderStyleDisplayConverter x:Key="SectionHeaderStyleDisplayConverter" />
             <x:Array x:Key="SectionHeaderStyleItems" Type="core:SectionHeaderStyle">

@@ -21,7 +21,6 @@
                                         Visibility="{Binding Path=Visibility, Mode=OneWay}"
                                         Padding="8,4"
                                         Cursor="Hand"
-                                        FontSize="{Binding Source={x:Static core:Settings.Instance}, Path=FontSize, Mode=OneWay}"
                                         ToolTip="{Binding Path=ProcessName, Mode=OneWay}">
 
                                     <!-- 1. スタイル定義（重複を削り、ルールだけをシンプルに記述） -->

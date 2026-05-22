@@ -65,7 +65,7 @@ namespace SSS.Models
             TextAlign = Core.Settings.Instance.TextAlign;
 
             FontSize = Core.Settings.Instance.FontSize;
-            FontNameItems = Fonts.SystemFontFamilies.Select(i => i.Source).ToArray();
+            FontNameItems = App.InitFontNameItems();
             FontName = Core.Settings.Instance.FontName;
             FontColor = Core.Settings.Instance.FontColor;
             AlertFontColor = Core.Settings.Instance.AlertFontColor;

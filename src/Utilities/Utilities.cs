@@ -98,7 +98,21 @@ namespace SSS.Utilities
 
                 // パターンA：背景が「黒」のアイコンの場合（絵柄が白っぽい）
                 // 明るい部分ほどクッキリ残し、黒い背景ほど透明にする
-                pixels[i + 3] = (byte)(brightness * (originalAlpha / 255.0));
+                // pixels[i + 3] = (byte)(brightness * (originalAlpha / 255.0));
+                double baseAlpha = brightness * (originalAlpha / 255.0);
+
+                // 2. ★ここで明るさをブーストする★
+                // 1.2 〜 1.5 倍すると、中間の薄い部分が引き上げられてクッキリ明るくなります
+                double boostFactor = 1.2;
+                double finalAlpha = baseAlpha * boostFactor;
+
+                // 3. 最大値（255）を超えないように制限をかける
+                if (finalAlpha > 255)
+                {
+                    finalAlpha = 255;
+                }
+                // 新しいアルファ値を適用
+                pixels[i + 3] = (byte)finalAlpha;
 
                 /* 
                 // パターンB：背景が「白」のアイコンの場合（絵柄が黒っぽい）

@@ -95,6 +95,24 @@ namespace SSS.Module.WindowMonitor
             set { _maxDisplayCount = value; NotifyPropertyChanged(); }
         }
 
+        private int _fontSize = 0;
+
+        [JsonProperty("fontSize")]
+        public int FontSize
+        {
+            get => _fontSize;
+            set { _fontSize = value; NotifyPropertyChanged(); }
+        }
+
+        private string? _fontName = null;
+
+        [JsonProperty("fontName")]
+        public string? FontName
+        {
+            get => _fontName;
+            set { _fontName = value; NotifyPropertyChanged(); }
+        }
+
         // --- Defaults & Clone ---
 
         public static Data Default => new Data
@@ -107,7 +125,9 @@ namespace SSS.Module.WindowMonitor
             ],
             Applications = [],
             SectionHeaderStyle = SectionHeaderStyle.Default,
-            MaxDisplayCount = 8
+            MaxDisplayCount = 8,
+            FontSize = 0,
+            FontName = null
         };
 
         public Data Clone()

@@ -239,6 +239,8 @@ namespace SSS.Core
                 SSS.Module.WindowMonitor.WindowMonitor.GetInstances(d.Applications ?? [], d.MaxDisplayCount)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
+            panel.FontSize = d.FontSize;
+            panel.FontName = d.FontName;
             return panel;
         }
 

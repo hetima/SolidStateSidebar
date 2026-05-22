@@ -258,4 +258,53 @@ namespace SSS.Converters
             return null;
         }
     }
+
+    public class IntWithFallbackConverter : IMultiValueConverter
+    {
+        /// <summary>
+        /// Binding[0] = module value (int), Binding[1] = global fallback (int).
+        /// If module value is 0, returns global fallback.
+        /// </summary>
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (values.Length >= 2 && values[0] is int moduleValue && values[1] is int globalValue)
+            {
+                return moduleValue == 0 ? globalValue : moduleValue;
+            }
+            if (values.Length >= 1 && values[0] is int fallback)
+            {
+                return fallback;
+            }
+            return 0;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            return [value ?? 0];
+        }
+    }
+
+    public class StringWithFallbackConverter : IMultiValueConverter
+    {
+        /// <summary>
+        /// Binding[0] = module value (string?), Binding[1] = global fallback (string?).
+        /// If module value is null or empty, returns global fallback.
+        /// </summary>
+        public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+        {
+            string? moduleValue = values.Length >= 1 ? values[0] as string : null;
+            string? globalValue = values.Length >= 2 ? values[1] as string : null;
+
+            if (!string.IsNullOrEmpty(moduleValue))
+            {
+                return moduleValue;
+            }
+            return globalValue ?? string.Empty;
+        }
+
+        public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+        {
+            return [value ?? string.Empty];
+        }
+    }
 }

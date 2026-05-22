@@ -151,5 +151,35 @@ namespace SSS.Core
                 NotifyPropertyChanged(nameof(SectionHeaderStyle));
             }
         }
+
+        private int _fontSize = 0;
+
+        public int FontSize
+        {
+            get
+            {
+                return _fontSize;
+            }
+            set
+            {
+                _fontSize = value;
+                NotifyPropertyChanged(nameof(FontSize));
+            }
+        }
+
+        private string? _fontName = null;
+
+        public string? FontName
+        {
+            get
+            {
+                return _fontName;
+            }
+            set
+            {
+                _fontName = value;
+                NotifyPropertyChanged(nameof(FontName));
+            }
+        }
     }
 }

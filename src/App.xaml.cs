@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using Hardcodet.Wpf.TaskbarNotification;
 using SSS;
 using SSS.Core;
@@ -21,6 +22,18 @@ namespace SSS
     /// </summary>
     public partial class App : Application
     {
+        public static string[]? FontNameItems { get; private set; }
+
+        public static string[] InitFontNameItems()
+        {
+            FontNameItems ??= Fonts.SystemFontFamilies.Select(i => i.Source).ToArray();
+            if(FontNameItems == null || FontNameItems.Length == 0)
+            {
+                FontNameItems = ["Segoe UI"];
+            }
+            return FontNameItems;
+        }
+
         protected async override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
