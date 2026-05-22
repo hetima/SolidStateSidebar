@@ -65,7 +65,14 @@ namespace SSS.Module.WindowMonitor
             {
                 AutoReset = true
             };
-            _cacheResetTimer.Elapsed += (_, _) => _processNameCache.Clear();
+            // System.Timers.Timer の Elapsed は ThreadPool スレッドで発火するが、
+            // Dictionary はスレッドセーフではないため、UI スレッドでクリアする
+            _cacheResetTimer.Elapsed += (_, _) =>
+                Application.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    _processNameCache.Clear();
+                    _processIconCache.Clear();
+                });
             _cacheResetTimer.Start();
 
             InitializeSlots();
