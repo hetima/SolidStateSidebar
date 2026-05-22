@@ -20,25 +20,47 @@
                                 <Button Command="{Binding Path=ActivateCommand}"
                                         Visibility="{Binding Path=Visibility, Mode=OneWay}"
                                         Padding="8,4"
+                                        HorizontalContentAlignment="Left"
+                                        Content="{Binding Path=Title, Mode=OneWay}"
+                                        Cursor="Hand"
                                         FontSize="{Binding Source={x:Static core:Settings.Instance}, Path=FontSize, Mode=OneWay}"
+                                        Foreground="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}"
+                                        Background="Transparent"
+                                        BorderThickness="1,1,1,1"
                                         ToolTip="{Binding Path=ProcessName, Mode=OneWay}">
                                     <Button.Style>
                                         <Style TargetType="Button">
+                                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
                                             <Setter Property="HorizontalContentAlignment" Value="Left" />
                                             <Setter Property="Foreground" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
                                             <Setter Property="Background" Value="Transparent" />
-                                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                            <Setter Property="BorderThickness" Value="1,1,1,1" />
                                             <Setter Property="BorderBrush" Value="Transparent" />
                                             <Setter Property="Cursor" Value="Hand" />
                                             <Setter Property="Content" Value="{Binding Path=Title, Mode=OneWay}" />
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="{x:Type Button}">
+                                                        <Border Background="{TemplateBinding Background}"
+                                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                                SnapsToDevicePixels="True">
+                                                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                                        </Border>
+                                                        <ControlTemplate.Triggers>
+                                                            <Trigger Property="IsMouseOver" Value="True">
+                                                                <Setter Property="BorderBrush" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
+                                                            </Trigger>
+                                                        </ControlTemplate.Triggers>
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Path=IsMinimized, Mode=OneWay}" Value="True">
                                                     <Setter Property="Opacity" Value="0.5" />
                                                 </DataTrigger>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="Transparent"/>
-                                                    <Setter Property="BorderBrush" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
-                                                </Trigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Button.Style>
