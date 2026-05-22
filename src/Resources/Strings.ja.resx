@@ -1,110 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+  
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+  
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+  
     Example:
-    
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-                
-    There are any number of "resheader" rows that contain simple 
-    name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
-    mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
-    extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
-    read any of the formats listed below.
-    
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-    
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
+  
+    ... ado.net/XML headers/schema ...
+    <resheader name="resmimetype">
+      <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+      <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+      <value>System.Resources.ResXResourceReader, System.Windows.Forms, ...</value>
+    </resheader>
+    <resheader name="writer">
+      <value>System.Resources.ResXResourceWriter, System.Windows.Forms, ...</value>
+    </resheader>
+  -->
 
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -117,891 +39,1152 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+
+  <data name="Name1" xml:space="preserve">
+    <value>this is my long string</value>
+    <comment>this is a comment</comment>
+  </data>
+
   <data name="AppName" xml:space="preserve">
     <value>Solid State Sidebar</value>
     <comment>Name of the app</comment>
   </data>
+
   <data name="CPUClock" xml:space="preserve">
     <value>CPU クロック</value>
     <comment>Full name for CPU clock metric</comment>
   </data>
+
   <data name="ButtonClose" xml:space="preserve">
     <value>閉じる</value>
   </data>
+
   <data name="ButtonRevert" xml:space="preserve">
     <value>元に戻す</value>
     <comment>Text of the revert button</comment>
   </data>
+
   <data name="ButtonQuit" xml:space="preserve">
     <value>終了</value>
     <comment>Text of the quit button</comment>
   </data>
+
   <data name="CPU" xml:space="preserve">
     <value>CPU</value>
     <comment>CPU monitor title</comment>
   </data>
+
   <data name="Drives" xml:space="preserve">
     <value>ドライブ</value>
     <comment>Drives monitor title</comment>
   </data>
+
   <data name="CPUFan" xml:space="preserve">
     <value>ファン</value>
     <comment>Full name for CPU fan metric</comment>
   </data>
+
   <data name="GPU" xml:space="preserve">
     <value>GPU</value>
     <comment>GPU monitor title</comment>
   </data>
+
   <data name="ButtonHide" xml:space="preserve">
     <value>隠す</value>
   </data>
+
   <data name="Network" xml:space="preserve">
     <value>ネットワーク</value>
     <comment>Network monitor title</comment>
   </data>
+
   <data name="RAM" xml:space="preserve">
     <value>メモリ</value>
     <comment>RAM monitor title</comment>
   </data>
+
   <data name="ButtonReload" xml:space="preserve">
     <value>リロード</value>
   </data>
+
   <data name="ButtonSettings" xml:space="preserve">
     <value>環境設定</value>
   </data>
+
   <data name="ButtonShow" xml:space="preserve">
     <value>表示する</value>
   </data>
+
   <data name="Sidebar" xml:space="preserve">
     <value>サイドバー</value>
     <comment>Title of the sidebar window</comment>
   </data>
+
   <data name="CPUTemp" xml:space="preserve">
     <value>温度</value>
     <comment>Full name for CPU temp metric</comment>
   </data>
+
   <data name="Time" xml:space="preserve">
     <value>時間</value>
     <comment>Sidebar clock title</comment>
   </data>
+
   <data name="Date" xml:space="preserve">
     <value>日付</value>
     <comment>Clock date label</comment>
   </data>
+
   <data name="TimeLabel" xml:space="preserve">
     <value>時間</value>
     <comment>Clock time metric label</comment>
   </data>
+
   <data name="DateLabel" xml:space="preserve">
     <value>日付</value>
     <comment>Clock date metric label</comment>
   </data>
+
   <data name="ButtonUpdate" xml:space="preserve">
     <value>アップデート</value>
   </data>
+
   <data name="ButtonVisibility" xml:space="preserve">
     <value>表示</value>
   </data>
+
   <data name="CPUVoltage" xml:space="preserve">
     <value>電圧</value>
     <comment>Full name for CPU voltage metric</comment>
   </data>
+
   <data name="ButtonGitHub" xml:space="preserve">
     <value>GitHub</value>
   </data>
+
   <data name="CPULoad" xml:space="preserve">
     <value>負荷</value>
     <comment>Full name for CPU load metric</comment>
   </data>
+
   <data name="CPUClockLabel" xml:space="preserve">
     <value>速度</value>
     <comment>Short label for CPU clock metric</comment>
   </data>
+
   <data name="CPUCoreClock" xml:space="preserve">
     <value>Core クロック</value>
     <comment>Full name for CPU core clock metric</comment>
   </data>
+
   <data name="CPUCoreClockLabel" xml:space="preserve">
     <value>コア</value>
     <comment>Short label for CPU core clock metric</comment>
   </data>
+
   <data name="CPUCoreLoad" xml:space="preserve">
     <value>Core ロード</value>
     <comment>Full name for CPU core load metric</comment>
   </data>
+
   <data name="CPUCoreLoadLabel" xml:space="preserve">
     <value>コア</value>
     <comment>Short label for CPU core load metric</comment>
   </data>
+
   <data name="CPUFanLabel" xml:space="preserve">
     <value>ファン</value>
     <comment>Short label for CPU fan metric</comment>
   </data>
+
   <data name="CPULoadLabel" xml:space="preserve">
     <value>負荷</value>
     <comment>Short label for CPU load metric</comment>
   </data>
+
   <data name="CPUTempLabel" xml:space="preserve">
     <value>温度</value>
     <comment>Short label for CPU temp metric</comment>
   </data>
+
   <data name="CPUVoltageLabel" xml:space="preserve">
     <value>電圧</value>
     <comment>Short label for CPU voltage metric</comment>
   </data>
+
   <data name="DriveFree" xml:space="preserve">
     <value>空き容量</value>
     <comment>Full name for drive free metric</comment>
   </data>
+
   <data name="DriveFreeLabel" xml:space="preserve">
     <value>空き容量</value>
     <comment>Short label for drive free metric</comment>
   </data>
+
   <data name="DriveLoad" xml:space="preserve">
     <value>使用率</value>
     <comment>Full name for drive load metric</comment>
   </data>
+
   <data name="DriveLoadBar" xml:space="preserve">
     <value>Load Bar</value>
     <comment>Full name for drive load bar metric</comment>
   </data>
+
   <data name="DriveLoadBarLabel" xml:space="preserve">
     <value>使用率</value>
     <comment>Short label for drive load bar metric</comment>
   </data>
+
   <data name="DriveLoadLabel" xml:space="preserve">
     <value>使用率</value>
     <comment>Short label for drive load metric</comment>
   </data>
+
   <data name="DriveRead" xml:space="preserve">
     <value>読み込み</value>
     <comment>Full name for drive read metric</comment>
   </data>
+
   <data name="DriveReadLabel" xml:space="preserve">
     <value>読み込み</value>
     <comment>Short label for drive read metric</comment>
   </data>
+
   <data name="DriveUsed" xml:space="preserve">
     <value>使用量</value>
     <comment>Full name for drive used metric</comment>
   </data>
+
   <data name="DriveUsedLabel" xml:space="preserve">
     <value>使用量</value>
     <comment>Short label for drive used metric</comment>
   </data>
+
   <data name="DriveWrite" xml:space="preserve">
     <value>書き込み</value>
     <comment>Full name for drive write metric</comment>
   </data>
+
   <data name="DriveWriteLabel" xml:space="preserve">
     <value>書き込み</value>
     <comment>Short label for drive write metric</comment>
   </data>
+
   <data name="GPUCoreClock" xml:space="preserve">
     <value>Core クロック</value>
     <comment>Full name for GPU core clock metric</comment>
   </data>
+
   <data name="GPUCoreClockLabel" xml:space="preserve">
     <value>コア</value>
     <comment>Short label for RAM core clock metric</comment>
   </data>
+
   <data name="GPUCoreLoad" xml:space="preserve">
     <value>Core ロード</value>
     <comment>Full name for GPU core load metric</comment>
   </data>
+
   <data name="GPUCoreLoadLabel" xml:space="preserve">
     <value>コア</value>
     <comment>Short label for GPU core load metric</comment>
   </data>
+
   <data name="GPUFan" xml:space="preserve">
     <value>ファン</value>
     <comment>Full name for GPU fan metric</comment>
   </data>
+
   <data name="GPUFanLabel" xml:space="preserve">
     <value>ファン</value>
     <comment>Short label for GPU voltage metric</comment>
   </data>
+
   <data name="GPUTemp" xml:space="preserve">
     <value>温度</value>
     <comment>Full name for GPU temp metric</comment>
   </data>
+
   <data name="GPUTempLabel" xml:space="preserve">
     <value>温度</value>
     <comment>Short label for GPU temp metric</comment>
   </data>
+
   <data name="GPUVoltage" xml:space="preserve">
     <value>電圧</value>
     <comment>Full name for GPU voltage metric</comment>
   </data>
+
   <data name="GPUVoltageLabel" xml:space="preserve">
     <value>電圧</value>
     <comment>Short label for GPU voltage metric</comment>
   </data>
+
   <data name="GPUVRAMClock" xml:space="preserve">
     <value>VRAM Clock</value>
     <comment>Full name for GPU VRAM clock metric</comment>
   </data>
+
   <data name="GPUVRAMClockLabel" xml:space="preserve">
     <value>VRAM</value>
     <comment>Short label for GPU VRAM clock metric</comment>
   </data>
+
   <data name="GPUVRAMLoad" xml:space="preserve">
     <value>VRAM Load</value>
     <comment>Full name for GPU VRAM load metric</comment>
   </data>
+
   <data name="GPUVRAMLoadLabel" xml:space="preserve">
     <value>VRAM</value>
     <comment>Short label for GPU VRAM load metric</comment>
   </data>
+
   <data name="NetworkIn" xml:space="preserve">
     <value>受信</value>
     <comment>Full name for network in metric</comment>
   </data>
+
   <data name="NetworkInLabel" xml:space="preserve">
     <value>受信</value>
     <comment>Short label for network in metric</comment>
   </data>
+
   <data name="NetworkOut" xml:space="preserve">
     <value>送信</value>
     <comment>Full name for network out metric</comment>
   </data>
+
   <data name="NetworkOutLabel" xml:space="preserve">
     <value>送信</value>
     <comment>Short label for network out metric</comment>
   </data>
+
   <data name="RAMClock" xml:space="preserve">
     <value>速度</value>
     <comment>Full name for RAM clock metric</comment>
   </data>
+
   <data name="RAMClockLabel" xml:space="preserve">
     <value>速度</value>
     <comment>Short label for RAM clock metric</comment>
   </data>
+
   <data name="RAMFree" xml:space="preserve">
     <value>利用可能</value>
     <comment>Full name for RAM free metric</comment>
   </data>
+
   <data name="RAMFreeLabel" xml:space="preserve">
     <value>利用可能</value>
     <comment>Short label for RAM free metric</comment>
   </data>
+
   <data name="RAMLoad" xml:space="preserve">
     <value>使用率</value>
     <comment>Full name for RAM load metric</comment>
   </data>
+
   <data name="RAMLoadLabel" xml:space="preserve">
     <value>使用率</value>
     <comment>Short label for RAM load metric</comment>
   </data>
+
   <data name="RAMUsed" xml:space="preserve">
     <value>使用量</value>
     <comment>Full name for RAM load metric</comment>
   </data>
+
   <data name="RAMUsedLabel" xml:space="preserve">
     <value>使用量</value>
     <comment>Short label for RAM used metric</comment>
   </data>
+
   <data name="RAMVoltage" xml:space="preserve">
     <value>電圧</value>
     <comment>Full name for RAM voltage metric</comment>
   </data>
+
   <data name="RAMVoltageLabel" xml:space="preserve">
     <value>電圧</value>
     <comment>Short label for RAM voltage metric</comment>
   </data>
+
   <data name="ButtonApply" xml:space="preserve">
     <value>適用</value>
   </data>
+
   <data name="ButtonCancel" xml:space="preserve">
     <value>キャンセル</value>
   </data>
+
   <data name="ButtonDone" xml:space="preserve">
     <value>Done</value>
   </data>
+
   <data name="ButtonNo" xml:space="preserve">
     <value>No</value>
   </data>
+
   <data name="ButtonSave" xml:space="preserve">
     <value>保存</value>
   </data>
+
   <data name="ButtonSkip" xml:space="preserve">
     <value>スキップ</value>
   </data>
+
   <data name="ButtonYes" xml:space="preserve">
     <value>OK</value>
   </data>
+
   <data name="LanguageChangedText" xml:space="preserve">
     <value>適用するにはアプリケーションを再起動してください</value>
   </data>
+
   <data name="LanguageChangedTitle" xml:space="preserve">
     <value>言語設定が変更されました</value>
   </data>
+
   <data name="Settings24HourClock" xml:space="preserve">
     <value>24時間表示</value>
   </data>
+
   <data name="Settings24HourClockTooltip" xml:space="preserve">
     <value>時刻を24時間表示します</value>
   </data>
+
   <data name="SettingsAdvancedTab" xml:space="preserve">
     <value>詳細設定</value>
   </data>
+
   <data name="SettingsAlertFontColor" xml:space="preserve">
     <value>アラート色</value>
   </data>
+
   <data name="SettingsAlertFontColorTooltip" xml:space="preserve">
     <value>アラート文字の色</value>
   </data>
+
   <data name="SettingsAllCoreClocks" xml:space="preserve">
     <value>すべてのコアのクロックを表示</value>
   </data>
+
   <data name="SettingsAllCoreClocksTooltip" xml:space="preserve">
     <value>第1コアだけでなく、すべてのコアのクロックスピードを表示します</value>
   </data>
+
   <data name="SettingsToolbarMode" xml:space="preserve">
     <value>ツールバーモード</value>
   </data>
+
   <data name="SettingsToolbarModeTooltip" xml:space="preserve">
     <value>Alt+Tabの切り替え画面にサイドバーを表示せず、仮想デスクトップを切り替えても常に表示したままにします</value>
   </data>
+
   <data name="SettingsAlwaysOnTop" xml:space="preserve">
     <value>常に最前面に表示</value>
   </data>
+
   <data name="SettingsAlwaysOnTopTooltip" xml:space="preserve">
     <value>サイドバーを常に最前面に表示します</value>
   </data>
+
   <data name="SettingsBackgroundColor" xml:space="preserve">
     <value>背景色</value>
   </data>
+
   <data name="SettingsBackgroundColorTooltip" xml:space="preserve">
     <value>サイドバーの背景色</value>
   </data>
+
   <data name="SettingsBackgroundOpacity" xml:space="preserve">
     <value>不透明度</value>
   </data>
+
   <data name="SettingsBackgroundOpacityTooltip" xml:space="preserve">
     <value>背景の不透明度</value>
   </data>
+
   <data name="SettingsBandwidthInAlert" xml:space="preserve">
     <value>受信帯域幅のアラート:</value>
   </data>
+
   <data name="SettingsBandwidthInAlertTooltip" xml:space="preserve">
     <value>ダウンロード帯域幅のアラートを発生させる kbps または kBps のしきい値。0を指定すると無効になります</value>
   </data>
+
   <data name="SettingsBandwidthOutAlert" xml:space="preserve">
     <value>送信帯域幅のアラート:</value>
   </data>
+
   <data name="SettingsBandwidthOutAlertTooltip" xml:space="preserve">
     <value>送信帯域幅のアラートを発生させる kbps または kBps のしきい値。0を指定すると無効になります</value>
   </data>
+
   <data name="SettingsClickThrough" xml:space="preserve">
     <value>クリックスルー</value>
   </data>
+
   <data name="SettingsClickThroughTooltip" xml:space="preserve">
     <value>マウスイベントを透過させます。※注意：これを有効にすると、サイドバーへの操作（クリック等）が一切できなくなります</value>
   </data>
+
   <data name="SettingsCollapseMenuBar" xml:space="preserve">
     <value>メニューボタンを非表示</value>
   </data>
+
   <data name="SettingsCollapseMenuBarTooltip" xml:space="preserve">
     <value>サイドバー上部にある無駄なスペースを詰めます</value>
   </data>
+
   <data name="SettingsCoreLoads" xml:space="preserve">
     <value>コアロードを表示</value>
   </data>
+
   <data name="SettingsCoreLoadsTooltip" xml:space="preserve">
     <value>すべてのコアの負荷（使用率）をパーセンテージで表示します</value>
   </data>
+
   <data name="SettingsCustomizeTab" xml:space="preserve">
     <value>カスタマイズ</value>
   </data>
+
   <data name="SettingsDateFormat" xml:space="preserve">
     <value>日付のフォーマット</value>
   </data>
+
   <data name="SettingsDateFormatDisabled" xml:space="preserve">
     <value>無効</value>
   </data>
+
   <data name="SettingsDateFormatTooltip" xml:space="preserve">
     <value>日付のフォーマット</value>
   </data>
+
   <data name="ShowDayOfWeek" xml:space="preserve">
     <value>曜日を表示</value>
     <comment>Show day of week label</comment>
   </data>
+
   <data name="ShowDayOfWeekTooltip" xml:space="preserve">
     <value>日付の後に曜日（月、火など）を表示します。</value>
     <comment>Show day of week tooltip</comment>
   </data>
+
   <data name="DateDisabled" xml:space="preserve">
     <value>無効</value>
     <comment>Date format disabled option</comment>
   </data>
+
   <data name="DateShort" xml:space="preserve">
     <value>短い</value>
     <comment>Date format short option</comment>
   </data>
+
   <data name="DateNormal" xml:space="preserve">
     <value>標準</value>
     <comment>Date format normal option</comment>
   </data>
+
   <data name="DateLong" xml:space="preserve">
     <value>長い</value>
     <comment>Date format long option</comment>
   </data>
+
   <data name="SettingsDock" xml:space="preserve">
     <value>表示位置</value>
     <comment>Dock settings label</comment>
   </data>
+
   <data name="SettingsDockBottom" xml:space="preserve">
     <value>下</value>
   </data>
+
   <data name="SettingsDockLeft" xml:space="preserve">
     <value>左</value>
   </data>
+
   <data name="SettingsDockRight" xml:space="preserve">
     <value>右</value>
   </data>
+
   <data name="SettingsDockTooltip" xml:space="preserve">
     <value>サイドバーを表示する場所</value>
   </data>
+
   <data name="SettingsDockTop" xml:space="preserve">
     <value>上</value>
   </data>
+
   <data name="SettingsDriveDetailsTooltip" xml:space="preserve">
     <value>ドライブの詳細情報をテキストとして表示します</value>
   </data>
+
   <data name="SettingsFontColor" xml:space="preserve">
     <value>フォントカラー</value>
   </data>
+
   <data name="SettingsFontColorTooltip" xml:space="preserve">
     <value>サイドバーの前面色</value>
   </data>
+
   <data name="SettingsFontName" xml:space="preserve">
     <value>フォントファミリー</value>
   </data>
+
   <data name="SettingsFontNameTooltip" xml:space="preserve">
     <value>サイドバーのフォントファミリー</value>
   </data>
+
   <data name="SettingsFontSize" xml:space="preserve">
     <value>フォントサイズ</value>
   </data>
+
   <data name="SettingsFontSizeTooltip" xml:space="preserve">
     <value>サイドバーのフォントサイズ</value>
   </data>
+
   <data name="SettingsGeneralTab" xml:space="preserve">
     <value>一般</value>
   </data>
+
   <data name="SettingsHardwareColumn1" xml:space="preserve">
     <value>有効</value>
   </data>
+
   <data name="SettingsHardwareColumn2" xml:space="preserve">
     <value>ハードウェア (名前編集可能)</value>
   </data>
+
   <data name="SettingsHardwareEnabledTooltip" xml:space="preserve">
     <value>このハードウェアを有効にする</value>
   </data>
+
   <data name="SettingsHardwareNameTooltip" xml:space="preserve">
     <value>名前を変更</value>
   </data>
+
   <data name="SettingsHorizontalOffset" xml:space="preserve">
     <value>水平オフセット</value>
   </data>
+
   <data name="SettingsHorizontalOffsetTooltip" xml:space="preserve">
     <value>サイドバーの水平オフセット</value>
   </data>
+
   <data name="SettingsHotkeyClose" xml:space="preserve">
     <value>閉じる</value>
   </data>
+
   <data name="SettingsHotkeyCycleEdge" xml:space="preserve">
     <value>表示位置を切り替え</value>
   </data>
+
   <data name="SettingsHotkeyCycleScreen" xml:space="preserve">
     <value>表示スクリーンを切り替え</value>
   </data>
+
   <data name="SettingsHotkeyHide" xml:space="preserve">
     <value>隠す</value>
   </data>
+
   <data name="SettingsHotkeyReload" xml:space="preserve">
     <value>リロード</value>
   </data>
+
   <data name="SettingsHotkeyShow" xml:space="preserve">
     <value>表示</value>
   </data>
+
   <data name="SettingsHotkeysTab" xml:space="preserve">
     <value>ホットキー</value>
   </data>
+
   <data name="SettingsHotkeyToggle" xml:space="preserve">
     <value>切り替え</value>
   </data>
+
   <data name="SettingsLanguage" xml:space="preserve">
     <value>言語</value>
   </data>
+
   <data name="SettingsLanguageDefault" xml:space="preserve">
     <value>デフォルト</value>
   </data>
+
   <data name="SettingsLanguageTooltip" xml:space="preserve">
     <value>アプリケーションの使用言語</value>
   </data>
+
   <data name="SettingsMetrics" xml:space="preserve">
     <value>メトリクス:</value>
   </data>
+
   <data name="SettingsMetricsColumnHeader" xml:space="preserve">
     <value>メトリクス</value>
   </data>
+
   <data name="SettingsMetricsLabelColumn" xml:space="preserve">
     <value>ラベル (編集可)</value>
   </data>
+
   <data name="SettingsMetricsLabelTooltip" xml:space="preserve">
     <value>ラベルを編集して表示をカスタマイズできます</value>
   </data>
+
   <data name="SettingsMetricsResetLabelTooltip" xml:space="preserve">
     <value>ラベルをデフォルト値に戻します</value>
   </data>
+
   <data name="SettingsMetricsTooltip" xml:space="preserve">
     <value>クリックして表示するメトリクスの順番やラベルを変更できます</value>
   </data>
+
   <data name="SettingsMonitorEnabledTooltip" xml:space="preserve">
     <value>モジュールを有効にする</value>
   </data>
+
   <data name="SettingsMonitorsColumn1" xml:space="preserve">
     <value>有効</value>
   </data>
+
   <data name="SettingsMonitorsColumn2" xml:space="preserve">
     <value>モジュール</value>
   </data>
+
   <data name="SettingsMonitorsSubtitle1" xml:space="preserve">
     <value>クリックしてそれぞれの設定を開きます</value>
   </data>
+
   <data name="SettingsMonitorsSubtitle2" xml:space="preserve">
     <value>リストをドラッグして順番を変更できます</value>
   </data>
+
   <data name="SettingsMonitorsTab" xml:space="preserve">
     <value>モジュール</value>
   </data>
+
   <data name="SettingsPollingInterval" xml:space="preserve">
     <value>データ更新間隔</value>
   </data>
+
   <data name="SettingsPollingIntervalTooltip" xml:space="preserve">
     <value>データ更新間隔をミリ秒で指定します</value>
   </data>
+
   <data name="SettingsReserveSpace" xml:space="preserve">
     <value>表示領域を確保する</value>
   </data>
+
   <data name="SettingsReserveSpaceTooltip" xml:space="preserve">
     <value>起動時/リロード時にサイドバーの表示領域に含まれる他のウィンドウを移動します</value>
   </data>
+
   <data name="SettingsRoundAllDecimals" xml:space="preserve">
     <value>整数に丸める</value>
   </data>
+
   <data name="SettingsRoundAllDecimalsTooltip" xml:space="preserve">
     <value>すべての小数点を整数に丸めます</value>
   </data>
+
   <data name="SettingsRunAtStartup" xml:space="preserve">
     <value>スタートアップ項目に登録</value>
   </data>
+
   <data name="SettingsRunAtStartupTooltip" xml:space="preserve">
     <value>ログイン時に起動します</value>
   </data>
+
   <data name="SettingsScreen" xml:space="preserve">
     <value>スクリーン</value>
   </data>
+
   <data name="SettingsScreenTooltip" xml:space="preserve">
     <value>サイドバーを表示させるスクリーンを選びます</value>
   </data>
+
   <data name="SettingsShowClock" xml:space="preserve">
     <value>時刻を表示</value>
   </data>
+
   <data name="SettingsShowClockTooltip" xml:space="preserve">
     <value>時刻を表示します</value>
   </data>
+
   <data name="SettingsShowDriveDetails" xml:space="preserve">
     <value>ドライブの詳細を表示</value>
   </data>
+
   <data name="SettingsShowDriveIO" xml:space="preserve">
     <value>ドライブの IO を表示</value>
   </data>
+
   <data name="SettingsShowDriveIOTooltip" xml:space="preserve">
     <value>「ドライブの詳細情報」が有効な場合、ドライブの読み込みおよび書き込み速度を表示します</value>
   </data>
+
   <data name="SettingsShowDriveSpace" xml:space="preserve">
     <value>ドライブの容量を表示</value>
   </data>
+
   <data name="SettingsShowDriveSpaceTooltip" xml:space="preserve">
     <value>「ドライブの詳細情報」が有効な場合、負荷の割合（使用率）、使用済み容量、および空き容量を表示します</value>
   </data>
+
   <data name="SettingsShowHardwareNames" xml:space="preserve">
     <value>ハードウェア名を表示</value>
   </data>
+
   <data name="SettingsShowHardwareNamesTooltip" xml:space="preserve">
     <value>ハードウェア名を表示します</value>
   </data>
+
   <data name="SettingsShowTrayIcon" xml:space="preserve">
     <value>タスクバーにアイコンを表示</value>
   </data>
+
   <data name="SettingsShowTrayIconTooltip" xml:space="preserve">
     <value>タスクバーにトレイアイコンを表示します。サイドバーを見失った時に必要となる場合があります</value>
   </data>
+
   <data name="SettingsSidebarWidth" xml:space="preserve">
     <value>サイドバーの幅</value>
   </data>
+
   <data name="SettingsSidebarWidthTooltip" xml:space="preserve">
     <value>サイドバーの幅のピクセル数</value>
   </data>
+
   <data name="SettingsTemperatureAlert" xml:space="preserve">
     <value>温度アラート:</value>
   </data>
+
   <data name="SettingsTemperatureAlertTooltip" xml:space="preserve">
     <value>温度アラートの通知しきい値。0で無効化</value>
   </data>
+
   <data name="SettingsTitle" xml:space="preserve">
     <value>環境設定</value>
   </data>
+
   <data name="SettingsUIScale" xml:space="preserve">
     <value>UI の拡大率</value>
   </data>
+
   <data name="SettingsUIScaleTooltip" xml:space="preserve">
     <value>サイドバー全体のUIコンポーネントの表示倍率</value>
   </data>
+
   <data name="SettingsUseBytesPerSecond" xml:space="preserve">
     <value>Bytes/s で表示</value>
   </data>
+
   <data name="SettingsUseBytesPerSecondTooltip" xml:space="preserve">
     <value>帯域幅をビット毎秒（bps）ではなくバイト（Bytes）単位で表示します</value>
   </data>
+
   <data name="SettingsUsedSpaceAlert" xml:space="preserve">
     <value>空き容量アラート:</value>
   </data>
+
   <data name="SettingsUsedSpaceAlertTooltip" xml:space="preserve">
     <value>使用量アラートの通知しきい値（%）。0で無効化。</value>
   </data>
+
   <data name="SettingsUseFahrenheit" xml:space="preserve">
     <value>華氏（°F）で表示</value>
   </data>
+
   <data name="SettingsUseFahrenheitTooltip" xml:space="preserve">
     <value>センサーの温度およびアラートの単位が、摂氏（℃）ではなく華氏（°F）になります</value>
   </data>
+
   <data name="SettingsUseGHz" xml:space="preserve">
     <value>GHzで表示</value>
   </data>
+
   <data name="SettingsUseGHzTooltip" xml:space="preserve">
     <value>クロックスピードの単位が、MHzではなくGHzになります</value>
   </data>
+
   <data name="SettingsVerticalOffset" xml:space="preserve">
     <value>垂直オフセット</value>
   </data>
+
   <data name="SettingsVerticalOffsetTooltip" xml:space="preserve">
     <value>サイドバーの垂直方向の位置調整</value>
   </data>
+
   <data name="SetupCustomSubtitle" xml:space="preserve">
     <value>スライダーとテキストボックスを使用して、サイドバーを正しい位置に移動してください</value>
   </data>
+
   <data name="SetupCustomTitle" xml:space="preserve">
     <value>カスタム</value>
   </data>
+
   <data name="SetupDoneSubtitle" xml:space="preserve">
     <value>サイドバーをカスタマイズするには、設定ボタンをクリックしてください</value>
   </data>
+
   <data name="SetupDoneText" xml:space="preserve">
     <value>設定には、サイドバー右上にある歯車アイコン、またはタスクバーのトレイアイコンからもアクセスできます</value>
   </data>
+
   <data name="SetupDoneTitle" xml:space="preserve">
-    <value />
+    <value></value>
   </data>
+
   <data name="SetupSubtitle" xml:space="preserve">
     <value>サイドバーを正しい位置に配置するための簡易設定です。</value>
   </data>
+
   <data name="SetupText" xml:space="preserve">
     <value>メインモニターの右端に、サイドバーが表示されていますか？</value>
   </data>
+
   <data name="SetupTitle" xml:space="preserve">
     <value>簡易設定</value>
   </data>
+
   <data name="UpdateErrorFatalText" xml:space="preserve">
     <value>アップデート中にエラーが発生しました。自動更新を無効化しました</value>
   </data>
+
   <data name="UpdateSuccessText" xml:space="preserve">
     <value>最新バージョンがインストールされています</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="UpdateTitle" type="System.Resources.ResXNullRef, System.Windows.Forms">
-    <value />
-  </data>
+
   <data name="SettingsTextAlign" xml:space="preserve">
     <value>文字揃え</value>
   </data>
+
   <data name="SettingsTextAlignLeft" xml:space="preserve">
     <value>左</value>
   </data>
+
   <data name="SettingsTextAlignRight" xml:space="preserve">
     <value>右</value>
   </data>
+
   <data name="SettingsTextAlignTooltip" xml:space="preserve">
     <value>メトリックテキストの表示位置（左揃え/右揃え）を設定します</value>
   </data>
+
   <data name="SettingsAlertBlink" xml:space="preserve">
     <value>高負荷アラート</value>
   </data>
+
   <data name="SettingsAlertBlinkTooltip" xml:space="preserve">
     <value>高負荷時にテキストを点滅させます</value>
   </data>
+
   <data name="SettingsIconTheme" xml:space="preserve">
     <value>アイコンテーマ</value>
     <comment>Settings icon theme label</comment>
   </data>
+
   <data name="NetworkIP" xml:space="preserve">
     <value>IP アドレス</value>
   </data>
+
   <data name="NetworkIPLabel" xml:space="preserve">
     <value> IP</value>
   </data>
+
   <data name="SettingsInitiallyHidden" xml:space="preserve">
     <value>起動時に隠す</value>
   </data>
+
   <data name="SettingsInitiallyHiddenTooltip" xml:space="preserve">
     <value>起動時に隠します</value>
   </data>
+
   <data name="SettingsVirtualDesktop" xml:space="preserve">
     <value>仮想デスクトップ</value>
   </data>
+
   <data name="SettingsVirtualDesktopTooltip" xml:space="preserve">
     <value>仮想デスクトップへの対応を有効にする</value>
   </data>
+
   <data name="SettingsHotkeyReserveSpace" xml:space="preserve">
     <value>表示スペースを確保する</value>
   </data>
+
   <data name="NetworkExtIP" xml:space="preserve">
     <value>グローバル IP アドレス</value>
   </data>
+
   <data name="NetworkExtIPLabel" xml:space="preserve">
     <value>gIP</value>
   </data>
+
   <data name="SettingsShowMachineName" xml:space="preserve">
     <value>PC名を表示</value>
   </data>
+
   <data name="SettingsShowMachineNameTooltip" xml:space="preserve">
     <value>PCの名前を表示します</value>
   </data>
+
   <data name="SettingsMetricsNoWrap" xml:space="preserve">
     <value>テキストを折り返さない</value>
   </data>
+
   <data name="SettingsMetricsNoWrapTooltip" xml:space="preserve">
     <value>テキストが次の行に折り返されるのを防ぎます。</value>
   </data>
+
   <data name="SettingsHeaderStyle" xml:space="preserve">
     <value>ヘッダースタイル</value>
     <comment>Settings header style label</comment>
   </data>
+
   <data name="SettingsShowDate" xml:space="preserve">
     <value>日付を表示</value>
     <comment>Settings show date label</comment>
   </data>
+
   <data name="SettingsShowDateTooltip" xml:space="preserve">
     <value>時刻モジュールに日付を表示します</value>
     <comment>Settings show date tooltip</comment>
   </data>
+
   <data name="SettingsDateFontSize" xml:space="preserve">
     <value>日付フォントサイズ</value>
     <comment>Settings date font size label</comment>
   </data>
+
   <data name="SettingsDateFontSizeTooltip" xml:space="preserve">
     <value>日付表示のフォントサイズを調整します</value>
     <comment>Settings date font size tooltip</comment>
   </data>
+
   <data name="SettingsShowTime" xml:space="preserve">
     <value>時刻を表示</value>
     <comment>Settings show time label</comment>
   </data>
+
   <data name="SettingsShowTimeTooltip" xml:space="preserve">
     <value>時刻モジュールに時刻を表示します</value>
     <comment>Settings show time tooltip</comment>
   </data>
+
   <data name="SettingsTimeFontSize" xml:space="preserve">
     <value>時刻フォントサイズ</value>
     <comment>Settings time font size label</comment>
   </data>
+
   <data name="SettingsTimeFontSizeTooltip" xml:space="preserve">
     <value>時刻表示のフォントサイズを調整します</value>
     <comment>Settings time font size tooltip</comment>
   </data>
+
   <data name="Close" xml:space="preserve">
     <value>閉じる</value>
     <comment>Close app taskbar menu item</comment>
   </data>
+
   <data name="GitHub" xml:space="preserve">
     <value>GitHub</value>
     <comment>GitHub taskbar menu item</comment>
   </data>
+
   <data name="Hide" xml:space="preserve">
     <value>隠す</value>
     <comment>Hide taskbar menu item</comment>
   </data>
+
   <data name="Reload" xml:space="preserve">
     <value>再読み込み</value>
     <comment>Reload taskbar menu item</comment>
   </data>
+
   <data name="Settings" xml:space="preserve">
     <value>設定</value>
     <comment>Settings taskbar menu item</comment>
   </data>
+
   <data name="Update" xml:space="preserve">
     <value>アップデート</value>
     <comment>Update taskbar menu item</comment>
   </data>
+
   <data name="SettingsSidebarMargin" xml:space="preserve">
     <value>サイドバー余白</value>
     <comment>Settings sidebar margin label</comment>
   </data>
+
   <data name="SettingsSidebarMarginTooltip" xml:space="preserve">
     <value>サイドバーコンテンツの水平余白を調整します</value>
     <comment>Settings sidebar margin tooltip</comment>
   </data>
+
   <data name="SettingsHeaderStyleDefault" xml:space="preserve">
     <value>デフォルト</value>
     <comment>Section header style default option</comment>
   </data>
+
   <data name="SettingsHeaderStyleSmall" xml:space="preserve">
     <value>小さめ</value>
     <comment>Section header style small option</comment>
   </data>
+
   <data name="SettingsHeaderStyleNone" xml:space="preserve">
     <value>なし</value>
     <comment>Section header style none option</comment>
   </data>
+
   <data name="Window" xml:space="preserve">
     <value>ウィンドウ</value>
   </data>
+
   <data name="Show" xml:space="preserve">
     <value>表示</value>
     <comment>Show taskbar menu item</comment>
   </data>
+
   <data name="Visibility" xml:space="preserve">
     <value>表示方法</value>
     <comment>Visibility taskbar menu item</comment>
   </data>
+
   <data name="SettingsApplications" xml:space="preserve">
-    <value>アプリケーション</value>
+    <value>対象アプリケーション</value>
     <comment>Settings applications label</comment>
   </data>
+
   <data name="SettingsApplicationAdd" xml:space="preserve">
     <value>追加</value>
     <comment>Settings add application button</comment>
   </data>
+
   <data name="SettingsApplicationAddTooltip" xml:space="preserve">
     <value>起動中のアプリケーションを追加</value>
     <comment>Settings add application tooltip</comment>
   </data>
+
   <data name="SettingsMaxDisplayCount" xml:space="preserve">
     <value>最大表示数</value>
     <comment>Settings max display count label</comment>
   </data>
+
   <data name="SettingsMaxDisplayCountTooltip" xml:space="preserve">
     <value>表示するウィンドウの最大数</value>
     <comment>Settings max display count tooltip</comment>
   </data>
+
   <data name="SettingsApplicationDeleteTooltip" xml:space="preserve">
     <value>アプリケーションを削除</value>
     <comment>Settings delete application tooltip</comment>
   </data>
-    <data name="SettingsAppsColumn1" xml:space="preserve">
+
+  <data name="SettingsAppsColumn1" xml:space="preserve">
     <value>有効</value>
     <comment>Settings Apps data grid enabled column header</comment>
   </data>
@@ -1010,8 +1193,10 @@
     <value>アプリケーション (編集可能)</value>
     <comment>Settings applications data grid applications column header</comment>
   </data>
+
   <data name="SettingsChooseAppsColumn2" xml:space="preserve">
     <value>アプリケーション</value>
     <comment>Settings applications data grid applications column header</comment>
   </data>
+
 </root>

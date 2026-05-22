@@ -31,17 +31,119 @@
             <RowDefinition Height="38px"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="{x:Static res:Strings.SettingsSidebarWidth}" />
-        <DockPanel Grid.Column="1" Grid.Row="0">
-            <TextBox Text="{Binding ElementName=SidebarWidthSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
-            <Slider x:Name="SidebarWidthSlider" Value="{Binding Path=SidebarWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="100" Maximum="300" TickFrequency="5" LargeChange="5" ToolTip="{x:Static res:Strings.SettingsSidebarWidthTooltip}" />
-        </DockPanel>
+        <!-- Font Name -->
+        <Label Grid.Column="0"
+                Grid.Row="0"
+                Content="{x:Static res:Strings.SettingsFontName}"/>
+        <ComboBox Grid.Column="1"
+                Grid.Row="0"
+                ItemsSource="{Binding Path=FontNameItems, Mode=OneWay}"
+                SelectedValue="{Binding Path=FontName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{x:Static res:Strings.SettingsFontNameTooltip}"/>
 
+        <!-- Font Size -->
         <Label Grid.Column="0"
                 Grid.Row="1"
-                Content="{x:Static res:Strings.SettingsSidebarMargin}"/>
+                Content="{x:Static res:Strings.SettingsFontSize}"/>
         <DockPanel Grid.Column="1"
                 Grid.Row="1">
+            <TextBox Text="{Binding ElementName=FontSizeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                    PreviewTextInput="NumberBox_PreviewTextInput"/>
+            <Slider x:Name="FontSizeSlider"
+                    Value="{Binding Path=FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Minimum="10"
+                    Maximum="40"
+                    LargeChange="1"
+                    TickFrequency="1"
+                    IsSnapToTickEnabled="True"
+                    ToolTip="{x:Static res:Strings.SettingsFontSizeTooltip}"/>
+        </DockPanel>
+
+        <!-- Font Color -->
+        <Label Grid.Column="0"
+                Grid.Row="2"
+                Content="{x:Static res:Strings.SettingsFontColor}"/>
+        <Button Grid.Column="1"
+                Grid.Row="2"
+                x:Name="FontColorButton"
+                HorizontalAlignment="Left"
+                MinWidth="100"
+                ToolTip="{x:Static res:Strings.SettingsFontColorTooltip}">
+            <Button.Content>
+                <StackPanel Orientation="Horizontal">
+                    <Border Width="20"
+                            Height="20"
+                            CornerRadius="3"
+                            BorderBrush="Gray"
+                            BorderThickness="1">
+                        <Border.Background>
+                            <SolidColorBrush Color="{Binding Path=FontColor, Converter={StaticResource WD.StringToColorConverter}}"/>
+                        </Border.Background>
+                    </Border>
+                    <TextBlock Text="{Binding Path=FontColor, Converter={StaticResource WD.ColorToStringConverter}}"
+                               VerticalAlignment="Center"
+                               Margin="6,0,0,0"/>
+                </StackPanel>
+            </Button.Content>
+            <Button.Triggers>
+                <EventTrigger RoutedEvent="Button.Click">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="FontColorPopup"
+                                                            Storyboard.TargetProperty="IsOpen">
+                                <DiscreteBooleanKeyFrame KeyTime="0:0:0"
+                                                         Value="True"/>
+                            </BooleanAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Button.Triggers>
+        </Button>
+        <Popup x:Name="FontColorPopup"
+               PlacementTarget="{Binding ElementName=FontColorButton}"
+               Placement="Bottom"
+               StaysOpen="False"
+               AllowsTransparency="True"
+               PopupAnimation="Fade"
+               Grid.Column="1"
+               Grid.Row="2">
+            <Border Margin="8"
+                    Background="{DynamicResource WD.BackgroundBrush}"
+                    BorderBrush="{DynamicResource WD.BaseBrush}"
+                    BorderThickness="1"
+                    CornerRadius="4">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="8"
+                            ShadowDepth="2"
+                            Opacity="0.2"/>
+                </Border.Effect>
+                <wpfDev:ColorPicker SelectedColor="{Binding Path=FontColor, Converter={StaticResource WD.StringToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </Border>
+        </Popup>
+
+        <!-- Sidebar Width -->
+        <Label Grid.Column="0"
+                Grid.Row="3"
+                Content="{x:Static res:Strings.SettingsSidebarWidth}"/>
+        <DockPanel Grid.Column="1"
+                Grid.Row="3">
+            <TextBox Text="{Binding ElementName=SidebarWidthSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
+                    PreviewTextInput="NumberBox_PreviewTextInput"/>
+            <Slider x:Name="SidebarWidthSlider"
+                    Value="{Binding Path=SidebarWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    Minimum="100"
+                    Maximum="300"
+                    TickFrequency="5"
+                    LargeChange="5"
+                    ToolTip="{x:Static res:Strings.SettingsSidebarWidthTooltip}"/>
+        </DockPanel>
+
+        <!-- Sidebar Margin -->
+        <Label Grid.Column="0"
+                Grid.Row="4"
+                Content="{x:Static res:Strings.SettingsSidebarMargin}"/>
+        <DockPanel Grid.Column="1"
+                Grid.Row="4">
             <TextBox Text="{Binding ElementName=SidebarMarginSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}"
                     PreviewTextInput="NumberBox_PreviewTextInput"/>
             <Slider x:Name="SidebarMarginSlider"
@@ -53,9 +155,10 @@
                     ToolTip="{x:Static res:Strings.SettingsSidebarMarginTooltip}"/>
         </DockPanel>
 
-        <Label Grid.Column="0" Grid.Row="2" Content="{x:Static res:Strings.SettingsBackgroundColor}" />
+        <!-- Background Color -->
+        <Label Grid.Column="0" Grid.Row="5" Content="{x:Static res:Strings.SettingsBackgroundColor}" />
         <Button Grid.Column="1"
-                Grid.Row="2"
+                Grid.Row="5"
                 x:Name="BGColorButton"
                 HorizontalAlignment="Left"
                 MinWidth="100"
@@ -93,7 +196,7 @@
                 AllowsTransparency="True"
                 PopupAnimation="Fade"
                 Grid.Column="1"
-                Grid.Row="2">
+                Grid.Row="5">
             <Border Margin="8"
                     Background="{DynamicResource WD.BackgroundBrush}"
                     BorderBrush="{DynamicResource WD.BaseBrush}"
@@ -106,86 +209,31 @@
             </Border>
         </Popup>
 
-        <Label Grid.Column="0" Grid.Row="3" Content="{x:Static res:Strings.SettingsBackgroundOpacity}" />
-        <DockPanel Grid.Column="1" Grid.Row="3">
+        <!-- Background Opacity -->
+        <Label Grid.Column="0" Grid.Row="6" Content="{x:Static res:Strings.SettingsBackgroundOpacity}" />
+        <DockPanel Grid.Column="1" Grid.Row="6">
             <TextBox Text="{Binding ElementName=BGOpacitySlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
             <Slider x:Name="BGOpacitySlider" Value="{Binding Path=BGOpacity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="0.01" Maximum="1.0" LargeChange="0.05" TickFrequency="0.01" ToolTip="{x:Static res:Strings.SettingsBackgroundOpacityTooltip}" />
         </DockPanel>
 
-        <Label Grid.Column="0" Grid.Row="4" Content="{x:Static res:Strings.SettingsTextAlign}" />
-        <ComboBox Grid.Column="1" Grid.Row="4" ItemsSource="{Binding Path=TextAlignItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Value" SelectedValue="{Binding Path=TextAlign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsTextAlignTooltip}" />
+        <!-- Text Align -->
+        <Label Grid.Column="0" Grid.Row="7" Content="{x:Static res:Strings.SettingsTextAlign}" />
+        <ComboBox Grid.Column="1" Grid.Row="7" ItemsSource="{Binding Path=TextAlignItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Value" SelectedValue="{Binding Path=TextAlign, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsTextAlignTooltip}" />
 
-        <CheckBox Grid.Column="1" Grid.Row="5" Content="{x:Static res:Strings.SettingsMetricsNoWrap}" IsChecked="{Binding Path=MetricsNoWrap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsMetricsNoWrapTooltip}" />
+        <!-- Metrics No Wrap -->
+        <CheckBox Grid.Column="1" Grid.Row="8" Content="{x:Static res:Strings.SettingsMetricsNoWrap}" IsChecked="{Binding Path=MetricsNoWrap, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsMetricsNoWrapTooltip}" />
 
-        <Label Grid.Column="0" Grid.Row="6" Content="{x:Static res:Strings.SettingsFontName}" />
-        <ComboBox Grid.Column="1" Grid.Row="6" ItemsSource="{Binding Path=FontNameItems, Mode=OneWay}" SelectedValue="{Binding Path=FontName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsFontNameTooltip}" />
-        
-        <Label Grid.Column="0" Grid.Row="7" Content="{x:Static res:Strings.SettingsFontSize}" />
-        <DockPanel Grid.Column="1" Grid.Row="7">
-            <TextBox Text="{Binding ElementName=FontSizeSlider, Path=Value, UpdateSourceTrigger=PropertyChanged}" PreviewTextInput="NumberBox_PreviewTextInput" />
-            <Slider x:Name="FontSizeSlider" Value="{Binding Path=FontSize, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Minimum="10" Maximum="40" LargeChange="1" TickFrequency="1" IsSnapToTickEnabled="True" ToolTip="{x:Static res:Strings.SettingsFontSizeTooltip}" />
-        </DockPanel>
-
-        <Label Grid.Column="0" Grid.Row="8" Content="{x:Static res:Strings.SettingsFontColor}" />
-        <Button Grid.Column="1"
-                Grid.Row="8"
-                x:Name="FontColorButton"
-                HorizontalAlignment="Left"
-                MinWidth="100"
-                ToolTip="{x:Static res:Strings.SettingsFontColorTooltip}">
-            <Button.Content>
-                <StackPanel Orientation="Horizontal">
-                    <Border Width="20"
-                            Height="20"
-                            CornerRadius="3"
-                            BorderBrush="Gray"
-                            BorderThickness="1">
-                        <Border.Background>
-                            <SolidColorBrush Color="{Binding Path=FontColor, Converter={StaticResource WD.StringToColorConverter}}"/>
-                        </Border.Background>
-                    </Border>
-                    <TextBlock Text="{Binding Path=FontColor, Converter={StaticResource WD.ColorToStringConverter}}"
-                               VerticalAlignment="Center"
-                            Margin="6,0,0,0"/>
-                </StackPanel>
-            </Button.Content>
-            <Button.Triggers>
-                <EventTrigger RoutedEvent="Button.Click">
-                    <BeginStoryboard>
-                        <Storyboard>
-                            <BooleanAnimationUsingKeyFrames Storyboard.TargetName="FontColorPopup"
-                                                            Storyboard.TargetProperty="IsOpen">
-                                <DiscreteBooleanKeyFrame KeyTime="0:0:0"
-                                                         Value="True"/>
-                            </BooleanAnimationUsingKeyFrames>
-                        </Storyboard>
-                    </BeginStoryboard>
-                </EventTrigger>
-            </Button.Triggers>
-        </Button>
-        <Popup x:Name="FontColorPopup"
-               PlacementTarget="{Binding ElementName=FontColorButton}"
-               Placement="Bottom"
-               StaysOpen="False"
-               AllowsTransparency="True"
-               PopupAnimation="Fade"
-               Grid.Column="1"
-               Grid.Row="8">
-            <Border Margin="8"
-                    Background="{DynamicResource WD.BackgroundBrush}"
-                    BorderBrush="{DynamicResource WD.BaseBrush}"
-                    BorderThickness="1"
-                    CornerRadius="4">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="8" ShadowDepth="2" Opacity="0.2" />
-                </Border.Effect>
-                <wpfDev:ColorPicker SelectedColor="{Binding Path=FontColor, Converter={StaticResource WD.StringToColorConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-            </Border>
-        </Popup>
-
-        <Label Grid.Column="0" Grid.Row="9" Content="{x:Static res:Strings.SettingsAlertFontColor}" />
-        <Button Grid.Column="1"
+        <!-- Alert Blink -->
+        <CheckBox Grid.Column="1"
                 Grid.Row="9"
+                Content="{x:Static res:Strings.SettingsAlertBlink}"
+                IsChecked="{Binding Path=AlertBlink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                ToolTip="{x:Static res:Strings.SettingsAlertBlinkTooltip}"/>
+
+        <!-- Alert Font Color -->
+        <Label Grid.Column="0" Grid.Row="10" Content="{x:Static res:Strings.SettingsAlertFontColor}" />
+        <Button Grid.Column="1"
+                Grid.Row="10"
                 x:Name="AlertFontColorButton"
                 HorizontalAlignment="Left"
                 MinWidth="100"
@@ -227,7 +275,7 @@
                AllowsTransparency="True"
                PopupAnimation="Fade"
                Grid.Column="1"
-               Grid.Row="9">
+               Grid.Row="10">
             <Border Margin="8"
                     Background="{DynamicResource WD.BackgroundBrush}"
                     BorderBrush="{DynamicResource WD.BaseBrush}"
@@ -240,11 +288,11 @@
             </Border>
         </Popup>
 
-        <CheckBox Grid.Column="1" Grid.Row="10" Content="{x:Static res:Strings.SettingsAlertBlink}" IsChecked="{Binding Path=AlertBlink, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlertBlinkTooltip}" />
-
+        <!-- Icon Theme -->
         <Label Grid.Column="0" Grid.Row="11" Content="{x:Static res:Strings.SettingsIconTheme}" />
         <ComboBox Grid.Column="1" Grid.Row="11" ItemsSource="{Binding Path=IconThemeItems, Mode=OneWay}" SelectedValue="{Binding Path=IconTheme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
+        <!-- Show Machine Name -->
         <CheckBox Grid.Column="1" Grid.Row="12" Content="{x:Static res:Strings.SettingsShowMachineName}" IsChecked="{Binding Path=ShowMachineName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsShowMachineNameTooltip}" />
         
         

@@ -1331,7 +1331,7 @@
   </data>
 
   <data name="SettingsApplications" xml:space="preserve">
-    <value>Applications</value>
+    <value>Target Applications</value>
     <comment>Settings applications label</comment>
   </data>
 
@@ -1367,6 +1367,7 @@
   <data name="Visibility" xml:space="preserve">
     <value>Visibility</value>
   </data>
+
   <data name="SettingsAppsColumn1" xml:space="preserve">
     <value>Enabled</value>
     <comment>Settings Apps data grid enabled column header</comment>
@@ -1376,6 +1377,7 @@
     <value>Applications (Editable)</value>
     <comment>Settings applications data grid applications column header</comment>
   </data>
+
   <data name="SettingsChooseAppsColumn2" xml:space="preserve">
     <value>Applications</value>
     <comment>Settings applications data grid applications column header</comment>
