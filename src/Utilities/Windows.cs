@@ -90,7 +90,7 @@ namespace SSS.Windows
         [LibraryImport("user32.dll", EntryPoint = "SetWindowLongPtrW", StringMarshalling = StringMarshalling.Utf16)]
         internal static partial long SetWindowLongPtr(IntPtr hwnd, int index, long newStyle);
 
-        [LibraryImport("user32.dll", EntryPoint = "SetWindowPosW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool SetWindowPos(IntPtr hwnd, IntPtr hwnd_after, int x, int y, int cx, int cy, uint uflags);
 
