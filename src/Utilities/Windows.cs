@@ -185,6 +185,18 @@ namespace SSS.Windows
         [LibraryImport("user32.dll")]
         internal static partial void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
 
+        // ★ アイコン取得に必要な2つのAPI
+        [LibraryImport("user32.dll", EntryPoint = "SendMessageW")] // 明示的にUnicode版を指定
+        internal static partial IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        // ※GetClassLongPtrは64bit環境に対応するため、EntrypointでGetClassLongPtrを指定（32bit時は内部で自動フォールバックされます）
+        [LibraryImport("user32.dll", EntryPoint = "GetClassLongPtrW")]
+        internal static partial IntPtr GetClassLongPtr(IntPtr hWnd, int nIndex);
+
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool DestroyIcon(IntPtr hIcon);
+
         internal delegate bool EnumWindowsProc(IntPtr hwnd, IntPtr lParam);
     }
 

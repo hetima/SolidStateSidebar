@@ -20,24 +20,25 @@
                                 <Button Command="{Binding Path=ActivateCommand}"
                                         Visibility="{Binding Path=Visibility, Mode=OneWay}"
                                         Padding="8,4"
-                                        HorizontalContentAlignment="Left"
-                                        Content="{Binding Path=Title, Mode=OneWay}"
                                         Cursor="Hand"
                                         FontSize="{Binding Source={x:Static core:Settings.Instance}, Path=FontSize, Mode=OneWay}"
-                                        Foreground="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}"
-                                        Background="Transparent"
-                                        BorderThickness="1,1,1,1"
                                         ToolTip="{Binding Path=ProcessName, Mode=OneWay}">
+
+                                    <!-- 1. スタイル定義（重複を削り、ルールだけをシンプルに記述） -->
                                     <Button.Style>
                                         <Style TargetType="Button">
-                                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                                            <Setter Property="HorizontalContentAlignment" Value="Left" />
-                                            <Setter Property="Foreground" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
-                                            <Setter Property="Background" Value="Transparent" />
-                                            <Setter Property="BorderThickness" Value="1,1,1,1" />
-                                            <Setter Property="BorderBrush" Value="Transparent" />
-                                            <Setter Property="Cursor" Value="Hand" />
-                                            <Setter Property="Content" Value="{Binding Path=Title, Mode=OneWay}" />
+                                            <Setter Property="FocusVisualStyle"
+                                                    Value="{x:Null}"/>
+                                            <Setter Property="HorizontalContentAlignment"
+                                                    Value="Left"/>
+                                            <Setter Property="Foreground"
+                                                    Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}"/>
+                                            <Setter Property="Background"
+                                                    Value="Transparent"/>
+                                            <Setter Property="BorderThickness"
+                                                    Value="1"/>
+                                            <Setter Property="BorderBrush"
+                                                    Value="Transparent"/>
                                             <Setter Property="Template">
                                                 <Setter.Value>
                                                     <ControlTemplate TargetType="{x:Type Button}">
@@ -45,25 +46,59 @@
                                                                 BorderBrush="{TemplateBinding BorderBrush}"
                                                                 BorderThickness="{TemplateBinding BorderThickness}"
                                                                 SnapsToDevicePixels="True">
+                                                            <!-- 内容（アイコンとテキスト）をここに表示 -->
                                                             <ContentPresenter Margin="{TemplateBinding Padding}"
                                                                               HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                                                         </Border>
                                                         <ControlTemplate.Triggers>
-                                                            <Trigger Property="IsMouseOver" Value="True">
-                                                                <Setter Property="BorderBrush" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
+                                                            <Trigger Property="IsMouseOver"
+                                                                    Value="True">
+                                                                <Setter Property="BorderBrush"
+                                                                        Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}"/>
                                                             </Trigger>
                                                         </ControlTemplate.Triggers>
                                                     </ControlTemplate>
                                                 </Setter.Value>
                                             </Setter>
                                             <Style.Triggers>
-                                                <DataTrigger Binding="{Binding Path=IsMinimized, Mode=OneWay}" Value="True">
-                                                    <Setter Property="Opacity" Value="0.5" />
+                                                <!-- 最小化のときはボタンを半透明にする -->
+                                                <DataTrigger Binding="{Binding Path=IsMinimized, Mode=OneWay}"
+                                                        Value="True">
+                                                    <Setter Property="Opacity"
+                                                            Value="0.5"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Button.Style>
+
+                                    <!-- 2. ボタンの中身（Content）: 重複を解消し、Gridで文字溢れと色連動を完璧に対応 -->
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <!-- アイコン用（サイズぴったりに縮める） -->
+                                            <ColumnDefinition Width="*"/>
+                                            <!-- テキスト用（残りの横幅をすべて使う） -->
+                                        </Grid.ColumnDefinitions>
+
+                                        <!-- 左側：アイコン（OpacityMaskを使ってボタンの文字色と完全連動） -->
+                                        <Border Grid.Column="0"
+                                                Width="16"
+                                                Height="16"
+                                                Margin="0,0,6,0"
+                                                Background="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
+                                            <Border.OpacityMask>
+                                                <ImageBrush ImageSource="{Binding ProcessIcon, Mode=OneWay}"
+                                                        Stretch="Uniform"/>
+                                            </Border.OpacityMask>
+                                        </Border>
+
+                                        <!-- 右側：ウィンドウタイトル（文字が長いときは自動で ... になる） -->
+                                        <TextBlock Grid.Column="1"
+                                                   Text="{Binding Path=Title, Mode=OneWay}"
+                                                   TextTrimming="CharacterEllipsis"
+                                                   VerticalAlignment="Center"/>
+                                    </Grid>
                                 </Button>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>

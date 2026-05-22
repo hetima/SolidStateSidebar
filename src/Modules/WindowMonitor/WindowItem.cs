@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using SSS.Windows;
+using System.Windows.Media;
 
 namespace SSS.Module.WindowMonitor
 {
@@ -45,6 +46,22 @@ namespace SSS.Module.WindowMonitor
                 }
             }
         }
+
+        private ImageSource? _processIcon;
+
+        public ImageSource? ProcessIcon
+        {
+            get => _processIcon;
+            set
+            {
+                if (_processIcon != value)
+                {
+                    _processIcon = value;
+                    NotifyPropertyChanged(nameof(ProcessIcon));
+                }
+            }
+        }
+        
 
         private IntPtr _hwnd;
 

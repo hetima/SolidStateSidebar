@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing; // Icon, Bitmapの利用に必要
 using System.Globalization;
 using System.Linq;
 using System.IO;
@@ -6,12 +7,155 @@ using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Markup;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Microsoft.Win32.TaskScheduler;
 using SSS.Core;
 using System.Diagnostics;
+using SSS.Windows;
+using System.Windows.Interop;
+using System.Runtime.InteropServices;
+
 
 namespace SSS.Utilities
 {
+    public static class Image
+    {
+        private const uint WM_GETICON = 0x007F;
+        private const int ICON_SMALL = 0;
+        private const int ICON_BIG = 1;
+        private const int GCLP_HICONSM = -34; // 小アイコンのクラスインデックス
+        private const int GCLP_HICON = -14;   // 大アイコンのクラスインデックス
+
+
+        public static ImageSource? GetWindowImageSource(IntPtr hWnd)
+        {
+            Icon? winIcon = GetWindowIcon(hWnd);
+            if (winIcon == null)
+            {
+                return null;
+            }
+            BitmapSource originalSource;
+            IntPtr hIcon = winIcon.Handle;
+            try
+            {
+                originalSource = System.Windows.Interop.Imaging.CreateBitmapSourceFromHIcon(
+                    hIcon,
+                    Int32Rect.Empty,
+                    BitmapSizeOptions.FromEmptyOptions());
+
+
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                // 1. CreateBitmapSourceFromHIconが内部で増やしたハンドルを解放
+                // (これを忘れるとGDIオブジェクトのメモリリークになります)
+                NativeMethods.DestroyIcon(hIcon);
+                // 2. 元のC#のIconオブジェクト自体を解放
+                winIcon.Dispose();
+            }
+            // 縮小
+            if (originalSource.PixelWidth != 16.0f)
+            {
+                // 2. 取得したアイコンを16x16ピクセルに強制リサイズする
+                double targetWidth = 16.0;
+                double targetHeight = 16.0;
+                double scaleX = targetWidth / originalSource.PixelWidth;
+                double scaleY = targetHeight / originalSource.PixelHeight;
+                originalSource = new TransformedBitmap(originalSource, new ScaleTransform(scaleX, scaleY));
+            }
+
+            // 2. 一度 FormatConvertedBitmap で標準的な Bgra32（アルファチャンネルあり）に変換
+            var bgra32Source = new FormatConvertedBitmap(originalSource, PixelFormats.Bgra32, null, 0);
+
+            // 3. 【重要】ピクセルをスキャンして「背景色」を透明にする
+            int width = bgra32Source.PixelWidth;
+            int height = bgra32Source.PixelHeight;
+            int stride = width * 4; // 1ピクセル4バイト (B, G, R, A)
+            byte[] pixels = new byte[stride * height];
+            bgra32Source.CopyPixels(pixels, stride, 0);
+
+
+            for (int i = 0; i < pixels.Length; i += 4)
+            {
+                byte b = pixels[i];
+                byte g = pixels[i + 1];
+                byte r = pixels[i + 2];
+                byte originalAlpha = pixels[i + 3];
+
+                // 1. もともと透明なピクセルはそのまま透明にする
+                if (originalAlpha == 0) continue;
+
+                // 2. 輝度（明るさ）を計算する (RGBからグレーの濃さを出す数式)
+                // 白(255)に近づくほど高くなり、黒(0)に近づくほど低くなります
+                double brightness = (0.299 * r) + (0.587 * g) + (0.114 * b);
+
+                // 3. 背景が【黒】ベースか【白】ベースかで処理を分ける
+
+                // パターンA：背景が「黒」のアイコンの場合（絵柄が白っぽい）
+                // 明るい部分ほどクッキリ残し、黒い背景ほど透明にする
+                pixels[i + 3] = (byte)(brightness * (originalAlpha / 255.0));
+
+                /* 
+                // パターンB：背景が「白」のアイコンの場合（絵柄が黒っぽい）
+                // もし背景が白の場合は、上記のパターンAの行をコメントアウトして、以下の行を使ってください
+                double inverted = 255.0 - brightness;
+                pixels[i + 3] = (byte)(inverted * (originalAlpha / 255.0));
+                */
+            }
+
+            // 4. 処理したピクセルデータから、新しい透過BitmapSourceを生成
+            BitmapSource transparentSource = BitmapSource.Create(
+                width, height,
+                bgra32Source.DpiX, bgra32Source.DpiY,
+                PixelFormats.Bgra32, null,
+                pixels, stride);
+
+            transparentSource.Freeze();
+            return transparentSource;
+        }
+
+        public static Icon? GetWindowIcon(IntPtr hWnd)
+        {
+
+            IntPtr hIcon = IntPtr.Zero;
+
+            // 1. まずウィンドウメッセージで小さいアイコンを要求
+            hIcon = NativeMethods.SendMessage(hWnd, WM_GETICON, (IntPtr)ICON_SMALL, IntPtr.Zero);
+
+            // 2. 取れなければ大きいアイコンを要求
+            if (hIcon == IntPtr.Zero)
+                hIcon = NativeMethods.SendMessage(hWnd, WM_GETICON, (IntPtr)ICON_BIG, IntPtr.Zero);
+
+            // 3. それでも取れなければクラスに登録されている小さいアイコンを取得
+            if (hIcon == IntPtr.Zero)
+                hIcon = NativeMethods.GetClassLongPtr(hWnd, GCLP_HICONSM);
+
+            // 4. 最後の手動手段としてクラスの大きいアイコンを取得
+            if (hIcon == IntPtr.Zero)
+                hIcon = NativeMethods.GetClassLongPtr(hWnd, GCLP_HICON);
+
+            // ハンドルが取得できたらC#のIconオブジェクトに変換
+            if (hIcon != IntPtr.Zero)
+            {
+                try
+                {
+                    return Icon.FromHandle(hIcon);
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+
+            return null;
+        }
+    }
+    
     public static class Paths
     {
         private const string SETTINGS = "settings.json";

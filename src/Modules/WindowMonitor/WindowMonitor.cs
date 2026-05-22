@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Media;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Timers;
@@ -17,6 +18,7 @@ namespace SSS.Module.WindowMonitor
         private readonly int _maxDisplayCount;
         private WindowItem[] _windows = [];
         private readonly Dictionary<int, string> _processNameCache = [];
+        private readonly Dictionary<int, ImageSource> _processIconCache = [];
         private readonly Timer _cacheResetTimer;
 
         public WindowItem[] Windows
@@ -113,7 +115,7 @@ namespace SSS.Module.WindowMonitor
             }
 
             // 見つかったウィンドウを格納するリスト
-            var found = new List<(IntPtr Hwnd, string Title, string ProcessName, bool IsMinimized)>();
+            var found = new List<(IntPtr Hwnd, string Title, string ProcessName, bool IsMinimized, ImageSource? ProcessIcon)>();
 
             // EnumWindows はZ-order順（背面→前面）に列挙される
             NativeMethods.EnumWindows((hwnd, lParam) =>
@@ -143,6 +145,10 @@ namespace SSS.Module.WindowMonitor
                         var process = System.Diagnostics.Process.GetProcessById((int)processId);
                         processName = process.ProcessName;
                         _processNameCache[(int)processId] = processName;
+                        ImageSource? icon = Utilities.Image.GetWindowImageSource(hwnd);
+                        if (icon != null) {
+                            _processIconCache[(int)processId] = icon;
+                        }
                     }
                     catch
                     {
@@ -169,7 +175,9 @@ namespace SSS.Module.WindowMonitor
                 // タイトルを整形
                 title = SanitizeWindowTitle(title, processName);
 
-                found.Add((hwnd, title, processName, isMinimized));
+                ImageSource? pRocessicon; 
+                _processIconCache.TryGetValue((int)processId, out pRocessicon);
+                found.Add((hwnd, title, processName, isMinimized, pRocessicon));
 
                 // MaxDisplayCount に達したら列挙を中断
                 return found.Count < _maxDisplayCount;
@@ -183,23 +191,25 @@ namespace SSS.Module.WindowMonitor
             // 見つかったウィンドウを固定配列のスロットに反映
             for (int i = 0; i < count; i++)
             {
-                var item = _windows[i];
+                WindowItem item = _windows[i];
                 item.Hwnd = found[i].Hwnd;
                 item.Title = found[i].Title;
                 item.ProcessName = found[i].ProcessName;
                 item.IsMinimized = found[i].IsMinimized;
                 item.Visibility = Visibility.Visible;
+                item.ProcessIcon = found[i].ProcessIcon;
             }
 
             // 余ったスロットは非表示にリセット
             for (int i = count; i < _maxDisplayCount; i++)
             {
-                var item = _windows[i];
+                WindowItem item = _windows[i];
                 item.Visibility = Visibility.Collapsed;
                 item.Hwnd = IntPtr.Zero;
                 item.Title = "";
                 item.ProcessName = "";
                 item.IsMinimized = false;
+                item.ProcessIcon = null;
             }
         }
 

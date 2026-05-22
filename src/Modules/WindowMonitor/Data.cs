@@ -67,7 +67,7 @@ namespace SSS.Module.WindowMonitor
         // --- UI-only (not serialized) ---
 
         [JsonIgnore]
-        public string Name => "Window";
+        public string Name => Strings.Window;
 
         [JsonIgnore]
         public ObservableCollection<HardwareConfig>? HardwareOC { get; set; }
