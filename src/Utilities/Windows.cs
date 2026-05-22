@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -82,64 +82,174 @@ namespace SSS.Windows
         }
     }
 
-    internal static class NativeMethods
+    internal static partial class NativeMethods
     {
-        [DllImport("user32.dll")]
-        internal static extern long GetWindowLong(IntPtr hwnd, int index);
+        [LibraryImport("user32.dll", EntryPoint = "GetWindowLongW", StringMarshalling = StringMarshalling.Utf16)]
+        internal static partial long GetWindowLong(IntPtr hwnd, int index);
 
-        [DllImport("user32.dll")]
-        internal static extern long GetWindowLongPtr(IntPtr hwnd, int index);
+        [LibraryImport("user32.dll", EntryPoint = "GetWindowLongPtrW", StringMarshalling = StringMarshalling.Utf16)]
+        internal static partial long GetWindowLongPtr(IntPtr hwnd, int index);
 
-        [DllImport("user32.dll")]
-        internal static extern long SetWindowLong(IntPtr hwnd, int index, long newStyle);
+        [LibraryImport("user32.dll", EntryPoint = "SetWindowLongW", StringMarshalling = StringMarshalling.Utf16)]
+        internal static partial long SetWindowLong(IntPtr hwnd, int index, long newStyle);
 
-        [DllImport("user32.dll")]
-        internal static extern long SetWindowLongPtr(IntPtr hwnd, int index, long newStyle);
+        [LibraryImport("user32.dll", EntryPoint = "SetWindowLongPtrW", StringMarshalling = StringMarshalling.Utf16)]
+        internal static partial long SetWindowLongPtr(IntPtr hwnd, int index, long newStyle);
 
-        [DllImport("user32.dll")]
-        internal static extern bool SetWindowPos(IntPtr hwnd, IntPtr hwnd_after, int x, int y, int cx, int cy, uint uflags);
+        [LibraryImport("user32.dll", EntryPoint = "SetWindowPosW", StringMarshalling = StringMarshalling.Utf16)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool SetWindowPos(IntPtr hwnd, IntPtr hwnd_after, int x, int y, int cx, int cy, uint uflags);
 
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        internal static extern int RegisterWindowMessage(string msg);
+        [LibraryImport("user32.dll", EntryPoint = "RegisterWindowMessageW", StringMarshalling = StringMarshalling.Utf16)]
+        internal static partial int RegisterWindowMessage(string msg);
 
-        [DllImport("shell32.dll", CallingConvention = CallingConvention.StdCall)]
-        internal static extern UIntPtr SHAppBarMessage(int dwMessage, ref AppBarWindow.APPBARDATA pData);
+        [LibraryImport("shell32.dll")]
+        [UnmanagedCallConv(CallConvs = new[] { typeof(System.Runtime.CompilerServices.CallConvStdcall) })]
+        internal static partial UIntPtr SHAppBarMessage(int dwMessage, ref AppBarWindow.APPBARDATA pData);
 
-        [DllImport("user32.dll")]
-        internal static extern bool EnumDisplayMonitors(IntPtr hdc, IntPtr lpRect, Monitor.EnumCallback callback, int dwData);
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool EnumDisplayMonitors(IntPtr hdc, IntPtr lpRect, Monitor.EnumCallback callback, int dwData);
 
-        [DllImport("user32.dll")]
-        internal static extern bool GetMonitorInfo(IntPtr hMonitor, ref Monitor.MONITORINFO lpmi);
+        [LibraryImport("user32.dll", EntryPoint = "GetMonitorInfoW", StringMarshalling = StringMarshalling.Utf16)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool GetMonitorInfo(IntPtr hMonitor, ref Monitor.MONITORINFO lpmi);
 
-        [DllImport("shcore.dll")]
-        internal static extern IntPtr GetDpiForMonitor(IntPtr hmonitor, Monitor.MONITOR_DPI_TYPE dpiType, out uint dpiX, out uint dpiY);
+        [LibraryImport("shcore.dll")]
+        internal static partial IntPtr GetDpiForMonitor(IntPtr hmonitor, Monitor.MONITOR_DPI_TYPE dpiType, out uint dpiX, out uint dpiY);
 
-        [DllImport("user32.dll")]
-        internal static extern IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
+        [LibraryImport("user32.dll")]
+        internal static partial IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
 
-        [DllImport("user32.dll")]
-        internal static extern bool RegisterHotKey(IntPtr hwnd, int id, uint modifiers, uint vk);
+        [LibraryImport("user32.dll", EntryPoint = "RegisterHotKeyW", StringMarshalling = StringMarshalling.Utf16)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool RegisterHotKey(IntPtr hwnd, int id, uint modifiers, uint vk);
 
-        [DllImport("user32.dll")]
-        internal static extern bool UnregisterHotKey(IntPtr hwnd, int id);
+        [LibraryImport("user32.dll", EntryPoint = "UnregisterHotKeyW", StringMarshalling = StringMarshalling.Utf16)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool UnregisterHotKey(IntPtr hwnd, int id);
 
-        [DllImport("user32.dll")]
-        internal static extern IntPtr RegisterDeviceNotification(IntPtr recipient, IntPtr notificationFilter, int flags);
+        [LibraryImport("user32.dll", EntryPoint = "RegisterDeviceNotificationW", StringMarshalling = StringMarshalling.Utf16)]
+        internal static partial IntPtr RegisterDeviceNotification(IntPtr recipient, IntPtr notificationFilter, int flags);
 
-        [DllImport("user32.dll")]
-        internal static extern bool UnregisterDeviceNotification(IntPtr handle);
+        //[LibraryImport("user32.dll")]
+        //internal static partial bool UnregisterDeviceNotification(IntPtr handle);
 
-        [DllImport("user32.dll")]
-        internal static extern IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc, ShowDesktop.WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
+        [LibraryImport("user32.dll")]
+        internal static partial IntPtr SetWinEventHook(uint eventMin, uint eventMax, IntPtr hmodWinEventProc, ShowDesktop.WinEventDelegate lpfnWinEventProc, uint idProcess, uint idThread, uint dwFlags);
 
-        [DllImport("user32.dll")]
-        internal static extern bool UnhookWinEvent(IntPtr hWinEventHook);
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool UnhookWinEvent(IntPtr hWinEventHook);
 
-        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        internal static extern int GetClassName(IntPtr hwnd, StringBuilder name, int count);
+        [LibraryImport("user32.dll", EntryPoint = "GetClassNameW", StringMarshalling = StringMarshalling.Utf16)]
+        internal static partial int GetClassName(IntPtr hwnd, IntPtr name, int count);
 
-        [DllImport("dwmapi.dll")]
-        internal static extern int DwmSetWindowAttribute(IntPtr hwnd, AppBarWindow.DWMWINDOWATTRIBUTE dwmAttribute, IntPtr pvAttribute, uint cbAttribute);
+        [LibraryImport("dwmapi.dll")]
+        internal static partial int DwmSetWindowAttribute(IntPtr hwnd, AppBarWindow.DWMWINDOWATTRIBUTE dwmAttribute, IntPtr pvAttribute, uint cbAttribute);
+
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool EnumWindows(EnumWindowsProc lpEnumFunc, IntPtr lParam);
+
+        [LibraryImport("user32.dll", EntryPoint = "GetWindowTextW", StringMarshalling = StringMarshalling.Utf16)]
+        internal static partial int GetWindowText(IntPtr hwnd, IntPtr lpString, int nMaxCount);
+
+        [LibraryImport("user32.dll", EntryPoint = "GetWindowTextLengthW", StringMarshalling = StringMarshalling.Utf16)]
+        internal static partial int GetWindowTextLength(IntPtr hwnd);
+
+        [LibraryImport("user32.dll")]
+        internal static partial uint GetWindowThreadProcessId(IntPtr hwnd, out uint lpdwProcessId);
+
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool IsWindowVisible(IntPtr hwnd);
+
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool IsIconic(IntPtr hwnd);
+
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool IsWindow(IntPtr hwnd);
+
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool ShowWindow(IntPtr hwnd, int nCmdShow);
+
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool SetForegroundWindow(IntPtr hwnd);
+
+        // [LibraryImport("user32.dll")]
+        // internal static partial uint GetCurrentThreadId();
+
+        [LibraryImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool AttachThreadInput(uint idAttach, uint idAttachTo, [MarshalAs(UnmanagedType.Bool)] bool fAttach);
+
+        [LibraryImport("user32.dll")]
+        internal static partial void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
+
+        internal delegate bool EnumWindowsProc(IntPtr hwnd, IntPtr lParam);
+    }
+
+    public static class WindowHelper
+    {
+        private const int SW_RESTORE = 9;
+        private const int SW_SHOW = 5;
+        private const byte VK_MENU = 0x12;
+        private const uint KEYEVENTF_KEYUP = 0x0002u;
+
+        // ★指定したハンドルを最前面に移動するメソッド
+        public static void ActivateWindow(IntPtr hWnd)
+        {
+            if (hWnd == IntPtr.Zero) return;
+
+            // もしアイコン化（最小化）されていたら元に戻す
+            NativeMethods.ShowWindow(hWnd, SW_RESTORE);
+
+            // ウィンドウを最前面（アクティブ）にする
+            NativeMethods.SetForegroundWindow(hWnd);
+        }
+
+        // public static void ActivateWindow(IntPtr hwnd)
+        // {
+        //     if (!NativeMethods.IsWindow(hwnd))
+        //     {
+        //         return;
+        //     }
+
+        //     bool isMinimized = NativeMethods.IsIconic(hwnd);
+
+        //     if (isMinimized)
+        //     {
+        //         NativeMethods.ShowWindow(hwnd, SW_RESTORE);
+        //     }
+
+        //     uint targetThreadId = NativeMethods.GetWindowThreadProcessId(hwnd, out _);
+        //     uint currentThreadId = NativeMethods.GetCurrentThreadId();
+
+        //     if (targetThreadId != currentThreadId)
+        //     {
+        //         NativeMethods.AttachThreadInput(currentThreadId, targetThreadId, true);
+        //     }
+
+        //     if (!NativeMethods.SetForegroundWindow(hwnd))
+        //     {
+        //         // フォアグラウンドロック解除ハック
+        //         NativeMethods.keybd_event(VK_MENU, 0, 0, UIntPtr.Zero);
+        //         NativeMethods.keybd_event(VK_MENU, 0, KEYEVENTF_KEYUP, UIntPtr.Zero);
+        //         NativeMethods.SetForegroundWindow(hwnd);
+        //     }
+
+        //     if (targetThreadId != currentThreadId)
+        //     {
+        //         NativeMethods.AttachThreadInput(currentThreadId, targetThreadId, false);
+        //     }
+
+        //     NativeMethods.ShowWindow(hwnd, SW_SHOW);
+        // }
     }
 
     public static class ShowDesktop
@@ -185,11 +295,23 @@ namespace SSS.Windows
             _sidebarHwnd = null;
         }
 
-        private static string GetWindowClass(IntPtr hwnd)
+        public static string GetWindowClass(IntPtr hwnd)
         {
-            StringBuilder _sb = new StringBuilder(32);
-            NativeMethods.GetClassName(hwnd, _sb, _sb.Capacity);
-            return _sb.ToString();
+            Span<char> buffer = stackalloc char[260];
+
+            unsafe
+            {
+                fixed (char* pBuffer = buffer)
+                {
+                    int length = NativeMethods.GetClassName(hwnd, (IntPtr)pBuffer, buffer.Length);
+                    if (length > 0)
+                    {
+                        // 実際に書き込まれた長さ分だけを切り出して文字列化
+                        return buffer[..length].ToString();
+                    }
+                }
+            }
+            return string.Empty;
         }
 
         internal delegate void WinEventDelegate(IntPtr hWinEventHook, uint eventType, IntPtr hwnd, int idObject, int idChild, uint dwEventThread, uint dwmsEventTime);
@@ -742,8 +864,15 @@ namespace SSS.Windows
             public int cbSize;
             public RECT Size;
             public RECT WorkArea;
-            public bool IsPrimary;
+            public uint _dwFlags;
+            // 外側に見せるための bool 型のプロパティを生やす
+            public bool IsPrimary
+            {
+                get => (_dwFlags & 1) != 0; // 1（MONITORINFOF_PRIMARY）なら true
+                set => _dwFlags = value ? 1u : 0u;
+            }
         }
+
 
         internal enum MONITOR_DPI_TYPE : int
         {
@@ -1351,10 +1480,12 @@ namespace SSS.Windows
             if (_32bit)
             {
                 _style = NativeMethods.GetWindowLong(_hwnd, WND_STYLE.GWL_EXSTYLE);
+                Debug.WriteLine($"32-bit");
             }
             else
             {
                 _style = NativeMethods.GetWindowLongPtr(_hwnd, WND_STYLE.GWL_EXSTYLE);
+                Debug.WriteLine($"64-bit");
             }
 
             if (add.HasValue)

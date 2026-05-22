@@ -26,6 +26,7 @@
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>SolidStateSidebar_TemporaryKey.pfx</ManifestKeyFile>
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="IconTheme\conv.py" />

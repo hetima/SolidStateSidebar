@@ -4,28 +4,53 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:core="clr-namespace:SSS.Core"
+             xmlns:local="clr-namespace:SSS.Module.WindowMonitor"
              xmlns:components="clr-namespace:SSS.Views.Components"
-             mc:Ignorable="d">
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="200">
     <StackPanel Style="{StaticResource GroupPanel}">
         <components:ModuleHeader />
 
         <ItemsControl ItemsSource="{Binding Path=Monitors, Mode=OneWay}">
             <ItemsControl.Resources>
                 <DataTemplate DataType="{x:Type core:BaseMonitor}">
-                    <StackPanel Style="{StaticResource MonitorPanel}">
-                        <ItemsControl ItemsSource="{Binding Path=Metrics, Mode=OneWay}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate DataType="{x:Type core:iMetric}">
-                                    <TextBlock Text="{Binding Path=Text, Mode=OneWay}" Style="{StaticResource MetricValue}" FontSize="{Binding Path=FontSize, Mode=OneWay}" />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <StackPanel Style="{StaticResource VerticalPanel}" />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </StackPanel>
+                    <ItemsControl ItemsSource="{Binding Path=Windows, Mode=OneWay}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate DataType="{x:Type local:WindowItem}">
+                                <Button Command="{Binding Path=ActivateCommand}"
+                                        Visibility="{Binding Path=Visibility, Mode=OneWay}"
+                                        Padding="8,4"
+                                        FontSize="{Binding Source={x:Static core:Settings.Instance}, Path=FontSize, Mode=OneWay}"
+                                        ToolTip="{Binding Path=ProcessName, Mode=OneWay}">
+                                    <Button.Style>
+                                        <Style TargetType="Button">
+                                            <Setter Property="HorizontalContentAlignment" Value="Left" />
+                                            <Setter Property="Foreground" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="Cursor" Value="Hand" />
+                                            <Setter Property="Content" Value="{Binding Path=Title, Mode=OneWay}" />
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Path=IsMinimized, Mode=OneWay}" Value="True">
+                                                    <Setter Property="Opacity" Value="0.5" />
+                                                </DataTrigger>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="BorderBrush" Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}" />
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Style>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Style="{StaticResource VerticalPanel}" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
                 </DataTemplate>
             </ItemsControl.Resources>
             <ItemsControl.ItemsPanel>

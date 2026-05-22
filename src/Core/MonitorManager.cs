@@ -236,7 +236,7 @@ namespace SSS.Core
                 MonitorType.Window,
                 MonitorType.Window.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("win"),
-                SSS.Module.WindowMonitor.WindowMonitor.GetInstances()
+                SSS.Module.WindowMonitor.WindowMonitor.GetInstances(d.Applications ?? [], d.MaxDisplayCount)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             return panel;
