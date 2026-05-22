@@ -166,6 +166,8 @@ namespace SSS.Module.WindowMonitor
 
                 // 最小化状態を取得
                 bool isMinimized = NativeMethods.IsIconic(hwnd);
+                // タイトルを整形
+                title = SanitizeWindowTitle(title, processName);
 
                 found.Add((hwnd, title, processName, isMinimized));
 
@@ -199,6 +201,29 @@ namespace SSS.Module.WindowMonitor
                 item.ProcessName = "";
                 item.IsMinimized = false;
             }
+        }
+
+        private static List<string> _CodeLikeApps = ["Code", "Code - Insiders", "VSCodium"];
+
+        // タイトルに" - "が含まれている場合、末尾の " - 任意" を削除して短縮する
+        // processNameが"code"などの場合末尾を残す
+        private static string SanitizeWindowTitle(string title, string processName)
+        {
+            // タイトルに" - "が含まれている場合、末尾の " - 任意" を削除して短縮する
+            // processNameが "Code" などの場合末尾を残す
+            int index = title.LastIndexOf(" - ");
+            if (index > 0)
+            {
+                if (_CodeLikeApps.Contains(processName, StringComparer.OrdinalIgnoreCase))
+                {
+                    title = title[(index + 3)..];
+                }
+                else
+                {
+                    title = title[..index];
+                }
+            }
+            return title;
         }
 
         private static string? GetWindowTitle(IntPtr hwnd)
