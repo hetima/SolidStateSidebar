@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Timers;
 using System.Windows;
 using SSS.Core;
 using SSS.Windows;
@@ -15,6 +16,8 @@ namespace SSS.Module.WindowMonitor
         private readonly HardwareConfig[] _applications;
         private readonly int _maxDisplayCount;
         private WindowItem[] _windows = [];
+        private readonly Dictionary<int, string> _processNameCache = [];
+        private readonly Timer _cacheResetTimer;
 
         public WindowItem[] Windows
         {
@@ -55,6 +58,13 @@ namespace SSS.Module.WindowMonitor
         {
             _applications = applications;
             _maxDisplayCount = Math.Max(0, maxDisplayCount);
+
+            _cacheResetTimer = new Timer(20 * 60 * 1000) // 20分ごとにキャッシュをリセット
+            {
+                AutoReset = true
+            };
+            _cacheResetTimer.Elapsed += (_, _) => _processNameCache.Clear();
+            _cacheResetTimer.Start();
 
             InitializeSlots();
         }
@@ -124,16 +134,21 @@ namespace SSS.Module.WindowMonitor
                 // ウィンドウのプロセスIDからプロセス名を取得
                 NativeMethods.GetWindowThreadProcessId(hwnd, out uint processId);
 
-                string? processName;
-                try
+                // キャッシュからプロセス名を検索、なければ Process.GetProcessById で取得してキャッシュに登録
+                string processName;
+                if (!_processNameCache.TryGetValue((int)processId, out processName!))
                 {
-                    var process = System.Diagnostics.Process.GetProcessById((int)processId);
-                    processName = process.ProcessName;
-                }
-                catch
-                {
-                    // プロセスが既に終了している等の場合は除外
-                    return true;
+                    try
+                    {
+                        var process = System.Diagnostics.Process.GetProcessById((int)processId);
+                        processName = process.ProcessName;
+                        _processNameCache[(int)processId] = processName;
+                    }
+                    catch
+                    {
+                        // プロセスが既に終了している等の場合は除外
+                        return true;
+                    }
                 }
 
                 // 対象アプリのプロセス名に含まれない場合は除外
@@ -142,9 +157,9 @@ namespace SSS.Module.WindowMonitor
                     return true;
                 }
 
-                // デスクトップやタスクバーは除外
+                // デスクトップやタスクバーは除外 
                 string className = ShowDesktop.GetWindowClass(hwnd);
-                if (className == "Progman" || className == "Shell_TrayWnd")
+                if (processName == "explorer" && className != "CabinetWClass")
                 {
                     return true;
                 }
@@ -159,7 +174,7 @@ namespace SSS.Module.WindowMonitor
             }, IntPtr.Zero);
 
             // 背面→前面の順で列挙されたリストを反転して前面→背面にする
-            found.Reverse();
+            //found.Reverse();
 
             int count = Math.Min(found.Count, _maxDisplayCount);
 
@@ -216,6 +231,8 @@ namespace SSS.Module.WindowMonitor
         {
             if (!_disposed)
             {
+                _cacheResetTimer.Dispose();
+
                 if (disposing && _windows != null)
                 {
                     foreach (var w in _windows)
