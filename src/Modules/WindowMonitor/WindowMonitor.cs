@@ -9,16 +9,18 @@ using System.Timers;
 using System.Windows;
 using SSS.Core;
 using SSS.Windows;
+using System.Diagnostics;
 
 namespace SSS.Module.WindowMonitor
 {
     public class WindowMonitor : BaseMonitor
     {
-        private readonly HardwareConfig[] _applications;
+        private readonly HardwareConfig[] _applications; //いらない
+        private readonly HashSet<string> _applicationNames;
         private readonly int _maxDisplayCount;
         private WindowItem[] _windows = [];
-        private readonly Dictionary<int, string> _processNameCache = [];
-        private readonly Dictionary<int, ImageSource> _processIconCache = [];
+        private readonly Dictionary<uint, string> _processNameCache = [];
+        private readonly Dictionary<uint, ImageSource> _processIconCache = [];
         private readonly Timer _cacheResetTimer;
 
         public WindowItem[] Windows
@@ -59,6 +61,10 @@ namespace SSS.Module.WindowMonitor
             : base("window", "Window", false)
         {
             _applications = applications;
+            // 有効な対象アプリのプロセス名を収集
+            _applicationNames = new HashSet<string>(
+                _applications.Where(a => a.Enabled).Select(a => a.ActualName ?? a.ID ?? "")
+            );
             _maxDisplayCount = Math.Max(0, maxDisplayCount);
 
             _cacheResetTimer = new Timer(20 * 60 * 1000) // 20分ごとにキャッシュをリセット
@@ -105,6 +111,11 @@ namespace SSS.Module.WindowMonitor
 
         public sealed override void Update()
         {
+            
+        }
+
+        public void UpdateFromHook(IntPtr? frontHwnd)
+        {
             // 表示件数が0、または対象アプリが未設定の場合は何もしない
             if (_maxDisplayCount == 0 || _applications == null || _applications.Length == 0)
             {
@@ -112,14 +123,26 @@ namespace SSS.Module.WindowMonitor
             }
 
             // 有効な対象アプリのプロセス名を収集
-            var targetNames = new HashSet<string>(
-                _applications.Where(a => a.Enabled).Select(a => a.ActualName ?? a.ID ?? "")
-            );
+            var targetNames = _applicationNames;
 
             if (targetNames.Count == 0)
             {
                 return;
             }
+
+            // 最初かキャッシュクリア後のスキャンならフルスキャン
+            // キャッシュにfrontHwndが含まれてなかったらフルスキャン
+            // キャッシュにfrontHwndが含まれていたら、監視対象アプリでなければearly return
+            if (_processNameCache.Count() > 0 && frontHwnd != null)
+            {
+                NativeMethods.GetWindowThreadProcessId((IntPtr)frontHwnd, out uint processId);
+                _processNameCache.TryGetValue(processId, out string? frontAppName);
+                if (!string.IsNullOrEmpty(frontAppName) && !targetNames.Contains(frontAppName))
+                {
+                    return;
+                }
+            }
+
 
             // 見つかったウィンドウを格納するリスト
             var found = new List<(IntPtr Hwnd, string Title, string ProcessName, bool IsMinimized, ImageSource? ProcessIcon)>();
@@ -145,16 +168,17 @@ namespace SSS.Module.WindowMonitor
 
                 // キャッシュからプロセス名を検索、なければ Process.GetProcessById で取得してキャッシュに登録
                 string processName;
-                if (!_processNameCache.TryGetValue((int)processId, out processName!))
+                if (!_processNameCache.TryGetValue(processId, out processName!))
                 {
                     try
                     {
                         var process = System.Diagnostics.Process.GetProcessById((int)processId);
                         processName = process.ProcessName;
-                        _processNameCache[(int)processId] = processName;
+                        _processNameCache[processId] = processName;
                         ImageSource? icon = Utilities.Image.GetWindowImageSource(hwnd);
-                        if (icon != null) {
-                            _processIconCache[(int)processId] = icon;
+                        if (icon != null)
+                        {
+                            _processIconCache[processId] = icon;
                         }
                     }
                     catch
@@ -182,8 +206,7 @@ namespace SSS.Module.WindowMonitor
                 // タイトルを整形
                 title = SanitizeWindowTitle(title, processName);
 
-                ImageSource? pRocessicon; 
-                _processIconCache.TryGetValue((int)processId, out pRocessicon);
+                _processIconCache.TryGetValue(processId, out ImageSource? pRocessicon);
                 found.Add((hwnd, title, processName, isMinimized, pRocessicon));
 
                 // MaxDisplayCount に達したら列挙を中断

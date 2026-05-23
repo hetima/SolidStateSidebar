@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+
 using System.ComponentModel;
 using System.Windows.Threading;
 using SSS.Core;
@@ -99,6 +101,11 @@ namespace SSS.Models
         private void UpdateMonitors()
         {
             MonitorManager.Update();
+        }
+
+        public void TriggerHookUpdate(IntPtr frontHwnd)
+        {
+            MonitorManager?.UpdateFromHook(frontHwnd);
         }
 
         private void PauseMonitors()

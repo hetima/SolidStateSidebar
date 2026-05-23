@@ -326,16 +326,28 @@ namespace SSS.Windows
         {
             if (eventType == EVENT_SYSTEM_FOREGROUND)
             {
-                string _class = GetWindowClass(hwnd);
+                // AlwaysTop でない場合のみ Z-order 操作を行う
+                if (!Core.Settings.Instance.AlwaysTop)
+                {
+                    string _class = GetWindowClass(hwnd);
 
-                if (string.Equals(_class, WORKERW, StringComparison.Ordinal) /*|| string.Equals(_class, PROGMAN, StringComparison.Ordinal)*/ )
-                {
-                    _sidebar?.SetTopMost(false);
+                    if (string.Equals(_class, WORKERW, StringComparison.Ordinal))
+                    {
+                        _sidebar?.SetTopMost(false);
+                    }
+                    else if (_sidebar != null && _sidebar.IsTopMost)
+                    {
+                        _sidebar.ClearTopMost(false);
+                    }
                 }
-                else if (_sidebar != null && _sidebar.IsTopMost)
+
+                // フォアグラウンドウィンドウ変更時にモニター更新をトリガー
+                // Z-order の反映を待つため Dispatcher で遅延実行
+                var hwndCapture = hwnd;
+                _sidebar?.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, (Action)(() =>
                 {
-                    _sidebar.SetBottom(false);
-                }
+                    _sidebar?.TriggerMonitorUpdate(hwndCapture);
+                }));
             }
         }
 

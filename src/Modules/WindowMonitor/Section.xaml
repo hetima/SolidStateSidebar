@@ -65,13 +65,13 @@
                                                 <DataTrigger Binding="{Binding Path=IsMinimized, Mode=OneWay}"
                                                         Value="True">
                                                     <Setter Property="Opacity"
-                                                            Value="0.5"/>
+                                                            Value="0.6"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Button.Style>
 
-                                    <!-- 2. ボタンの中身（Content）: 重複を解消し、Gridで文字溢れと色連動を完璧に対応 -->
+                                    <!-- 2. ボタンの中身（Content） -->
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="Auto"/>
@@ -80,7 +80,7 @@
                                             <!-- テキスト用（残りの横幅をすべて使う） -->
                                         </Grid.ColumnDefinitions>
 
-                                        <!-- 左側：アイコン（OpacityMaskを使ってボタンの文字色と完全連動） -->
+                                        <!-- 左側：アイコン -->
                                         <Image Grid.Column="0"
                                                Source="{Binding ProcessIcon, Mode=OneWay}"
                                                Width="16"

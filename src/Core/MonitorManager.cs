@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Diagnostics;
 using LibreHardwareMonitor.Hardware;
+using SSS.Module.WindowMonitor;
 using HdData = SSS.Module.HdMonitor.Data;
 using NetData = SSS.Module.NetworkMonitor.Data;
 using TimeData = SSS.Module.TimeMonitor.Data;
@@ -114,9 +116,26 @@ namespace SSS.Core
         {
             UpdateBoard();
 
-            foreach (iMonitor _monitor in MonitorPanels!.SelectMany(p => p.Monitors))
+            UpdateWindowMonitor();
+        }
+
+        public void UpdateWindowMonitor()
+        {
+            if (MonitorPanels == null) return;
+            foreach (iMonitor _monitor in MonitorPanels.SelectMany(p => p.Monitors))
             {
                 _monitor.Update();
+            }
+        }
+
+        public void UpdateFromHook(IntPtr frontHwnd)
+        {
+            if (MonitorPanels == null) return;
+            foreach (WindowMonitor _monitor in MonitorPanels!
+                .Where(p => p.Type == MonitorType.Window)
+                .SelectMany(p => p.Monitors).Cast<WindowMonitor>())
+            {
+                _monitor.UpdateFromHook(frontHwnd);
             }
         }
 

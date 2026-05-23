@@ -1,11 +1,13 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Threading;
 using SSS.Windows;
 using SSS.Models;
+
 
 namespace SSS
 {
@@ -114,17 +116,15 @@ namespace SSS
         {
             await BindPosition();
 
+            ShowDesktop.AddHook(this);
+
             if (Core.Settings.Instance.AlwaysTop)
             {
                 SetTopMost(false);
-
-                ShowDesktop.RemoveHook();
             }
             else
             {
                 ClearTopMost(false);
-
-                ShowDesktop.AddHook(this);
             }
 
             if (Core.Settings.Instance.ClickThrough)
@@ -284,6 +284,11 @@ namespace SSS
         }
 
         public SidebarModel? Model { get; private set; }
+
+        public void TriggerMonitorUpdate(IntPtr frontHwnd)
+        {
+            Model?.TriggerHookUpdate(frontHwnd);
+        }
 
         private bool _openSettings { get; set; } = false;
 
