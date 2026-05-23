@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows.Media;
 using Newtonsoft.Json;
 using SSS.Utilities;
 using SSS.Windows;
@@ -548,7 +549,18 @@ namespace SSS.Core
 
 
         private string _fontColor { get; set; } = "#FFFFFF";
-        
+
+        private Color _fontColorColor;
+
+        [JsonIgnore]
+        public Color FontColorColor
+        {
+            get
+            {
+                return _fontColorColor;
+            }
+        }
+
         [JsonProperty]
         public string FontColor
         {
@@ -559,8 +571,10 @@ namespace SSS.Core
             set
             {
                 _fontColor = value;
+                _fontColorColor = (Color)ColorConverter.ConvertFromString(_fontColor);
 
                 NotifyPropertyChanged(nameof(FontColor));
+                NotifyPropertyChanged(nameof(FontColorColor));
             }
         }
 

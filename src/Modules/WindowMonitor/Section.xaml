@@ -81,16 +81,12 @@
                                         </Grid.ColumnDefinitions>
 
                                         <!-- 左側：アイコン（OpacityMaskを使ってボタンの文字色と完全連動） -->
-                                        <Border Grid.Column="0"
-                                                Width="16"
-                                                Height="16"
-                                                Margin="0,0,6,0"
-                                                Background="{Binding RelativeSource={RelativeSource AncestorType=Button}, Path=Foreground}">
-                                            <Border.OpacityMask>
-                                                <ImageBrush ImageSource="{Binding ProcessIcon, Mode=OneWay}"
-                                                        Stretch="Uniform"/>
-                                            </Border.OpacityMask>
-                                        </Border>
+                                        <Image Grid.Column="0"
+                                               Source="{Binding ProcessIcon, Mode=OneWay}"
+                                               Width="16"
+                                               Height="16"
+                                               Margin="0,0,6,0"
+                                               Stretch="Uniform"/>
 
                                         <!-- 右側：ウィンドウタイトル（文字が長いときは自動で ... になる） -->
                                         <TextBlock Grid.Column="1"

@@ -69,60 +69,106 @@ namespace SSS.Utilities
                 originalSource = new TransformedBitmap(originalSource, new ScaleTransform(scaleX, scaleY));
             }
 
-            // 2. 一度 FormatConvertedBitmap で標準的な Bgra32（アルファチャンネルあり）に変換
-            var bgra32Source = new FormatConvertedBitmap(originalSource, PixelFormats.Bgra32, null, 0);
+            System.Windows.Media.Color clr = Core.Settings.Instance.FontColorColor;
+            return ConvertToUniformGrayscale(originalSource, clr);
+        }
 
-            // 3. 【重要】ピクセルをスキャンして「背景色」を透明にする
+        public static BitmapSource ConvertToUniformGrayscale(BitmapSource originalSource, System.Windows.Media.Color targetColor)
+        {
+            // ==========================================
+            // ★【追加】targetColor の輝度から目標の明るさを自動計算
+            // ==========================================
+            double colorBrightness = (0.299 * targetColor.R) + (0.587 * targetColor.G) + (0.114 * targetColor.B);
+
+            // 基本の目標値を色の輝度にする（ただし、極端に真っ黒・真っ白になるのを防ぐため 60 〜 220 の範囲に収める）
+            double targetAverageBrightness = colorBrightness;
+            if (targetAverageBrightness < 70.0) targetAverageBrightness = 70.0;
+            if (targetAverageBrightness > 230.0) targetAverageBrightness = 230.0;
+
+
+            // 1. 標準的な Bgra32 に変換
+            var bgra32Source = new FormatConvertedBitmap(originalSource, PixelFormats.Bgra32, null, 0);
             int width = bgra32Source.PixelWidth;
             int height = bgra32Source.PixelHeight;
-            int stride = width * 4; // 1ピクセル4バイト (B, G, R, A)
+            int stride = width * 4;
             byte[] pixels = new byte[stride * height];
             bgra32Source.CopyPixels(pixels, stride, 0);
 
+            // ==========================================
+            // パス 1: 全体の平均輝度を計算する
+            // ==========================================
+            double totalBrightness = 0;
+            int validPixelCount = 0;
 
             for (int i = 0; i < pixels.Length; i += 4)
             {
-                byte b = pixels[i];
-                byte g = pixels[i + 1];
-                byte r = pixels[i + 2];
                 byte originalAlpha = pixels[i + 3];
+                if (originalAlpha == 0) continue; // 透明ピクセルは除外
 
-                // 1. もともと透明なピクセルはそのまま透明にする
-                if (originalAlpha == 0) continue;
+                double b = pixels[i];
+                double g = pixels[i + 1];
+                double r = pixels[i + 2];
 
-                // 2. 輝度（明るさ）を計算する (RGBからグレーの濃さを出す数式)
-                // 白(255)に近づくほど高くなり、黒(0)に近づくほど低くなります
-                double brightness = (0.299 * r) + (0.587 * g) + (0.114 * b);
-
-                // 3. 背景が【黒】ベースか【白】ベースかで処理を分ける
-
-                // パターンA：背景が「黒」のアイコンの場合（絵柄が白っぽい）
-                // 明るい部分ほどクッキリ残し、黒い背景ほど透明にする
-                // pixels[i + 3] = (byte)(brightness * (originalAlpha / 255.0));
-                double baseAlpha = brightness * (originalAlpha / 255.0);
-
-                // 2. ★ここで明るさをブーストする★
-                // 1.2 〜 1.5 倍すると、中間の薄い部分が引き上げられてクッキリ明るくなります
-                double boostFactor = 1.2;
-                double finalAlpha = baseAlpha * boostFactor;
-
-                // 3. 最大値（255）を超えないように制限をかける
-                if (finalAlpha > 255)
-                {
-                    finalAlpha = 255;
-                }
-                // 新しいアルファ値を適用
-                pixels[i + 3] = (byte)finalAlpha;
-
-                /* 
-                // パターンB：背景が「白」のアイコンの場合（絵柄が黒っぽい）
-                // もし背景が白の場合は、上記のパターンAの行をコメントアウトして、以下の行を使ってください
-                double inverted = 255.0 - brightness;
-                pixels[i + 3] = (byte)(inverted * (originalAlpha / 255.0));
-                */
+                // 輝度を計算して足す
+                totalBrightness += (0.299 * r) + (0.587 * g) + (0.114 * b);
+                validPixelCount++;
             }
 
-            // 4. 処理したピクセルデータから、新しい透過BitmapSourceを生成
+            // 画像が空、または完全に透明な場合はそのまま返す
+            if (validPixelCount == 0) return originalSource;
+
+            // このアイコンの「平均の明るさ」
+            double currentAverage = totalBrightness / validPixelCount;
+
+            // ★自動ブースト倍率の計算
+            // 例: 目標が128で、この画像が64（暗い）なら「128 / 64 = 2.0倍」にする
+            // 画像が目標より明るい場合は 1.0倍（そのまま）に制限する
+            double dynamicBoost = 1.0;
+            if (currentAverage < targetAverageBrightness)
+            {
+                dynamicBoost = targetAverageBrightness / currentAverage;
+            }
+
+            // ==========================================
+            // パス 2: 特定のColorでモノトーン化 ＋ 可変補正
+            // ==========================================
+            for (int i = 0; i < pixels.Length; i += 4)
+            {
+                byte originalAlpha = pixels[i + 3];
+                if (originalAlpha == 0) continue;
+
+                double b = pixels[i];
+                double g = pixels[i + 1];
+                double r = pixels[i + 2];
+
+                // 1. 元の輝度 (0 〜 255)
+                double brightness = (0.299 * r) + (0.587 * g) + (0.114 * b);
+
+                // 2. 暗いところ・明るいところの可変補正 (0.0 〜 1.0)
+                double normalized = brightness / 255.0;
+                double pixelSpecificBoost = dynamicBoost * (1.0 - normalized) + (0.9 * normalized);
+
+                // 補正後の輝度割合（0.0 〜 1.0）を計算
+                double finalIntensity = (brightness * pixelSpecificBoost) / 255.0;
+                if (finalIntensity > 1.0) finalIntensity = 1.0;
+                if (finalIntensity < 0.0) finalIntensity = 0.0;
+
+                // 3. ★【変更】指定されたColorのRGBに、輝度割合を掛け算する
+                // これにより、元の画像が明るい部分ほど指定した色が濃く（明るく）出ます
+                pixels[i] = (byte)(targetColor.B * finalIntensity); // B
+                pixels[i + 1] = (byte)(targetColor.G * finalIntensity); // G
+                pixels[i + 2] = (byte)(targetColor.R * finalIntensity); // R
+
+                // 4. アルファ値の処理（輝度に合わせて透過度を調整）
+                double boostedGray = finalIntensity * 255.0;
+                double baseAlpha = boostedGray * (originalAlpha / 255.0);
+                double finalAlpha = baseAlpha * 1.2;
+
+                if (finalAlpha > 255) finalAlpha = 255;
+                pixels[i + 3] = (byte)finalAlpha;
+            }
+
+            // 4. 新しい透過BitmapSourceを生成
             BitmapSource transparentSource = BitmapSource.Create(
                 width, height,
                 bgra32Source.DpiX, bgra32Source.DpiY,

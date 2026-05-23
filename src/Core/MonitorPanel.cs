@@ -68,7 +68,7 @@ namespace SSS.Core
                 if (string.IsNullOrEmpty(_svgContentPath)) return null;
 
                 var render = new SVGRender();
-                Color clr = (Color)ColorConverter.ConvertFromString(Core.Settings.Instance.FontColor);
+                Color clr = Core.Settings.Instance.FontColorColor;
                 render.OverrideColor = clr;
                 render.OverrideFillColor = clr;
                 DrawingGroup drawing = render.LoadDrawing(_svgContentPath);
