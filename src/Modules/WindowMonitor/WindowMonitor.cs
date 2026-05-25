@@ -5,7 +5,6 @@ using System.Linq;
 using System.Windows.Media;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Timers;
 using System.Windows;
 using SSS.Core;
 using SSS.Windows;
@@ -19,9 +18,9 @@ namespace SSS.Module.WindowMonitor
         private readonly HashSet<string> _applicationNames;
         private readonly int _maxDisplayCount;
         private WindowItem[] _windows = [];
-        private readonly Dictionary<uint, string> _processNameCache = [];
-        private readonly Dictionary<uint, ImageSource> _processIconCache = [];
-        private readonly Timer _cacheResetTimer;
+        private Dictionary<uint, string> _processNameCache = [];
+        private Dictionary<uint, ImageSource> _processIconCache = [];
+        private DateTime _lastCacheClearTime = DateTime.MinValue;
 
         public WindowItem[] Windows
         {
@@ -66,20 +65,6 @@ namespace SSS.Module.WindowMonitor
                 _applications.Where(a => a.Enabled).Select(a => a.ActualName ?? a.ID ?? "")
             );
             _maxDisplayCount = Math.Max(0, maxDisplayCount);
-
-            _cacheResetTimer = new Timer(20 * 60 * 1000) // 20分ごとにキャッシュをリセット
-            {
-                AutoReset = true
-            };
-            // System.Timers.Timer の Elapsed は ThreadPool スレッドで発火するが、
-            // Dictionary はスレッドセーフではないため、UI スレッドでクリアする
-            _cacheResetTimer.Elapsed += (_, _) =>
-                Application.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    _processNameCache.Clear();
-                    _processIconCache.Clear();
-                });
-            _cacheResetTimer.Start();
 
             InitializeSlots();
         }
@@ -130,10 +115,8 @@ namespace SSS.Module.WindowMonitor
                 return;
             }
 
-            // 最初かキャッシュクリア後のスキャンならフルスキャン
-            // キャッシュにfrontHwndが含まれてなかったらフルスキャン
             // キャッシュにfrontHwndが含まれていたら、監視対象アプリでなければearly return
-            if (_processNameCache.Count() > 0 && frontHwnd != null)
+            if (_processNameCache.Count > 0 && frontHwnd != null)
             {
                 NativeMethods.GetWindowThreadProcessId((IntPtr)frontHwnd, out uint processId);
                 _processNameCache.TryGetValue(processId, out string? frontAppName);
@@ -143,6 +126,15 @@ namespace SSS.Module.WindowMonitor
                 }
             }
 
+            // 30分経過時にキャッシュをリフレッシュ（使用されたエントリのみ新しいキャッシュに移し替える）
+            Dictionary<uint, string>? processNameNewCache = null;
+            Dictionary<uint, ImageSource>? processIconNewCache = null;
+            if (DateTime.Now - _lastCacheClearTime > TimeSpan.FromMinutes(30))
+            {
+                processNameNewCache = [];
+                processIconNewCache = [];
+                _lastCacheClearTime = DateTime.Now;
+            }
 
             // 見つかったウィンドウを格納するリスト
             var found = new List<(IntPtr Hwnd, string Title, string ProcessName, bool IsMinimized, ImageSource? ProcessIcon)>();
@@ -175,10 +167,12 @@ namespace SSS.Module.WindowMonitor
                         var process = System.Diagnostics.Process.GetProcessById((int)processId);
                         processName = process.ProcessName;
                         _processNameCache[processId] = processName;
+                        processNameNewCache?[processId] = processName;
                         ImageSource? icon = Utilities.Image.GetWindowImageSource(hwnd);
                         if (icon != null)
                         {
                             _processIconCache[processId] = icon;
+                            processIconNewCache?[processId] = icon;
                         }
                     }
                     catch
@@ -186,6 +180,11 @@ namespace SSS.Module.WindowMonitor
                         // プロセスが既に終了している等の場合は除外
                         return true;
                     }
+                }
+                else if (processNameNewCache != null)
+                {
+                    // キャッシュヒット時は新しいキャッシュにコピー（使うものを拾い出す）
+                    processNameNewCache[processId] = processName;
                 }
 
                 // 対象アプリのプロセス名に含まれない場合は除外
@@ -207,14 +206,22 @@ namespace SSS.Module.WindowMonitor
                 title = SanitizeWindowTitle(title, processName);
 
                 _processIconCache.TryGetValue(processId, out ImageSource? pRocessicon);
+                if (processIconNewCache != null && pRocessicon != null)
+                {
+                    processIconNewCache[processId] = pRocessicon;
+                }
                 found.Add((hwnd, title, processName, isMinimized, pRocessicon));
 
                 // MaxDisplayCount に達したら列挙を中断
                 return found.Count < _maxDisplayCount;
             }, IntPtr.Zero);
 
-            // 背面→前面の順で列挙されたリストを反転して前面→背面にする
-            //found.Reverse();
+            // キャッシュリフレッシュ: 新しいキャッシュと入れ替え（古いキャッシュはGC回収）
+            if (processNameNewCache != null)
+            {
+                _processNameCache = processNameNewCache;
+                _processIconCache = processIconNewCache!;
+            }
 
             int count = Math.Min(found.Count, _maxDisplayCount);
 
@@ -296,8 +303,6 @@ namespace SSS.Module.WindowMonitor
         {
             if (!_disposed)
             {
-                _cacheResetTimer.Dispose();
-
                 if (disposing && _windows != null)
                 {
                     foreach (var w in _windows)
