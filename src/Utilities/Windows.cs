@@ -1025,8 +1025,8 @@ namespace SSS.Windows
 
             windowWA = Windows.WorkArea.FromRECT(_active.WorkArea);
             
-            double scaleX = _active.ScaleX / _primary.ScaleX;
-            double scaleY = _active.ScaleY / _primary.ScaleY;
+            double scaleX = _primary.ScaleX / _active.ScaleX;
+            double scaleY = _primary.ScaleY / _active.ScaleY;
             windowWA.Scale(scaleX, scaleY);
 
             double _modifyX = 0d;
