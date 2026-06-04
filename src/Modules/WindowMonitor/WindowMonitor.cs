@@ -21,6 +21,10 @@ namespace SSS.Module.WindowMonitor
         private Dictionary<uint, string> _processNameCache = [];
         private Dictionary<uint, ImageSource> _processIconCache = [];
         private DateTime _lastCacheClearTime = DateTime.MinValue;
+        private DateTime _lastFullRefreshTime = DateTime.MinValue;
+
+        private static readonly TimeSpan EmptyRefreshInterval = TimeSpan.FromSeconds(2);
+        private static readonly TimeSpan FullRefreshInterval = TimeSpan.FromSeconds(30);
 
         public WindowItem[] Windows
         {
@@ -96,7 +100,20 @@ namespace SSS.Module.WindowMonitor
 
         public sealed override void Update()
         {
-            
+            if (_maxDisplayCount == 0 || _applications == null || _applications.Length == 0)
+            {
+                return;
+            }
+
+            var now = DateTime.Now;
+            bool hasVisibleWindows = HasVisibleWindows();
+            TimeSpan refreshInterval = hasVisibleWindows ? FullRefreshInterval : EmptyRefreshInterval;
+            if (now - _lastFullRefreshTime < refreshInterval)
+            {
+                return;
+            }
+
+            RefreshWindows(null, ignoreFrontWindowCheck: true);
         }
 
         public void UpdateFromHook(IntPtr? frontHwnd)
@@ -115,8 +132,24 @@ namespace SSS.Module.WindowMonitor
                 return;
             }
 
+            RefreshWindows(frontHwnd, ignoreFrontWindowCheck: false);
+        }
+
+        /// <summary>
+        /// 必要最小限の条件で対象ウィンドウ一覧を更新する。
+        /// </summary>
+        private void RefreshWindows(IntPtr? frontHwnd, bool ignoreFrontWindowCheck)
+        {
+            var targetNames = _applicationNames;
+            if (targetNames.Count == 0)
+            {
+                return;
+            }
+
+            bool hasVisibleWindows = HasVisibleWindows();
+
             // キャッシュにfrontHwndが含まれていたら、監視対象アプリでなければearly return
-            if (_processNameCache.Count > 0 && frontHwnd != null)
+            if (!ignoreFrontWindowCheck && hasVisibleWindows && _processNameCache.Count > 0 && frontHwnd != null)
             {
                 NativeMethods.GetWindowThreadProcessId((IntPtr)frontHwnd, out uint processId);
                 _processNameCache.TryGetValue(processId, out string? frontAppName);
@@ -223,6 +256,8 @@ namespace SSS.Module.WindowMonitor
                 _processIconCache = processIconNewCache!;
             }
 
+            _lastFullRefreshTime = DateTime.Now;
+
             int count = Math.Min(found.Count, _maxDisplayCount);
 
             // 見つかったウィンドウを固定配列のスロットに反映
@@ -248,6 +283,14 @@ namespace SSS.Module.WindowMonitor
                 item.IsMinimized = false;
                 item.ProcessIcon = null;
             }
+        }
+
+        /// <summary>
+        /// 現在表示中のスロットがあるかを返す。
+        /// </summary>
+        private bool HasVisibleWindows()
+        {
+            return _windows.Any(w => w.Visibility == Visibility.Visible && w.Hwnd != IntPtr.Zero);
         }
 
         private static List<string> _CodeLikeApps = ["Code", "Code - Insiders", "VSCodium"];
