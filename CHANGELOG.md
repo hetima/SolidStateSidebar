@@ -1,5 +1,9 @@
 # Changelog
 
+## [0.9.4]
+- Fixed top alignment on secondary monitors.
+- Fixed DPI scaling placement.
+
 ## [0.9.3]
 - Added a window monitor to display and select specific application windows
 - Added an option to include the day of the week with dates
