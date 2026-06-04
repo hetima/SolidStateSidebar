@@ -1043,9 +1043,6 @@ namespace SSS.Windows
 
             windowWA.Offset(_offsetX, _offsetY);
 
-            windowWA.Top = 0;
-            windowWA.Bottom = _active.WorkArea.Height;
-            
             appbarWA = Windows.WorkArea.FromRECT(_active.WorkArea);
 
             appbarWA.Offset(_modifyX, _modifyY);
