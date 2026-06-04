@@ -1,6 +1,6 @@
 # Changelog
 
-## [0.9.4]
+## [0.9.4] - 2026-06-05
 - Fixed top alignment on secondary monitors.
 - Fixed DPI scaling placement.
 
