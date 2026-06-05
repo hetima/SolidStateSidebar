@@ -140,6 +140,11 @@ namespace SSS.Module.WindowMonitor
         /// </summary>
         private void RefreshWindows(IntPtr? frontHwnd, bool ignoreFrontWindowCheck)
         {
+            if (IsPointerOnSidebar())
+            {
+                return;
+            }
+
             var targetNames = _applicationNames;
             if (targetNames.Count == 0)
             {
@@ -291,6 +296,14 @@ namespace SSS.Module.WindowMonitor
         private bool HasVisibleWindows()
         {
             return _windows.Any(w => w.Visibility == Visibility.Visible && w.Hwnd != IntPtr.Zero);
+        }
+
+        /// <summary>
+        /// マウスポインタが Sidebar 上にある間は更新を止める。
+        /// </summary>
+        private static bool IsPointerOnSidebar()
+        {
+            return App.Current.Sidebar?.IsMouseOver == true;
         }
 
         private static List<string> _CodeLikeApps = ["Code", "Code - Insiders", "VSCodium"];
