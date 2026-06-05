@@ -1240,4 +1240,12 @@
     <value>Window</value>
   </data>
 
+  <data name="SettingsScrollToSwitch" xml:space="preserve">
+    <value>Scroll to Switch</value>
+  </data>
+
+  <data name="SettingsScrollToSwitchTooltip" xml:space="preserve">
+    <value></value>
+  </data>
+
 </root>

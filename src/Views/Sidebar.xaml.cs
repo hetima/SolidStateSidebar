@@ -225,6 +225,14 @@ namespace SSS
             WindowControls.Visibility = Core.Settings.Instance.CollapseMenuBar ? Visibility.Collapsed : Visibility.Hidden;
         }
 
+        private void ContentScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (Model?.TryHandleWindowScrollSwitch(e.Delta) == true)
+            {
+                e.Handled = true;
+            }
+        }
+
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             await Initialize();

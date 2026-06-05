@@ -9,6 +9,8 @@ using System.Windows;
 using SSS.Core;
 using SSS.Windows;
 using System.Diagnostics;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace SSS.Module.WindowMonitor
 {
@@ -17,11 +19,14 @@ namespace SSS.Module.WindowMonitor
         private readonly HardwareConfig[] _applications; //いらない
         private readonly HashSet<string> _applicationNames;
         private readonly int _maxDisplayCount;
+        private readonly bool _scrollToSwitch;
         private WindowItem[] _windows = [];
         private Dictionary<uint, string> _processNameCache = [];
         private Dictionary<uint, ImageSource> _processIconCache = [];
         private DateTime _lastCacheClearTime = DateTime.MinValue;
         private DateTime _lastFullRefreshTime = DateTime.MinValue;
+        private CancellationTokenSource? _switchHighlightCancellation;
+        private IntPtr _lastSwitchedHwnd = IntPtr.Zero;
 
         private static readonly TimeSpan EmptyRefreshInterval = TimeSpan.FromSeconds(2);
         private static readonly TimeSpan FullRefreshInterval = TimeSpan.FromSeconds(30);
@@ -60,7 +65,7 @@ namespace SSS.Module.WindowMonitor
         {
         }
 
-        public WindowMonitor(HardwareConfig[] applications, int maxDisplayCount)
+        public WindowMonitor(HardwareConfig[] applications, int maxDisplayCount, bool scrollToSwitch)
             : base("window", "Window", false)
         {
             _applications = applications;
@@ -69,6 +74,7 @@ namespace SSS.Module.WindowMonitor
                 _applications.Where(a => a.Enabled).Select(a => a.ActualName ?? a.ID ?? "")
             );
             _maxDisplayCount = Math.Max(0, maxDisplayCount);
+            _scrollToSwitch = scrollToSwitch;
 
             InitializeSlots();
         }
@@ -90,18 +96,63 @@ namespace SSS.Module.WindowMonitor
             Windows = slots;
         }
 
-        public static iMonitor[] GetInstances(HardwareConfig[] applications, int maxDisplayCount)
+        public static iMonitor[] GetInstances(HardwareConfig[] applications, int maxDisplayCount, bool scrollToSwitch)
         {
             return
             [
-                new WindowMonitor(applications, maxDisplayCount)
+                new WindowMonitor(applications, maxDisplayCount, scrollToSwitch)
             ];
+        }
+
+        /// <summary>
+        /// マウスホイール操作で対象ウィンドウを順送りする。
+        /// </summary>
+        public bool TryScrollSwitch(int delta)
+        {
+            if (!_scrollToSwitch || !IsPointerOnSidebar())
+            {
+                return false;
+            }
+
+            WindowItem[] visibleWindows = _windows
+                .Where(w => w.Visibility == Visibility.Visible && w.Hwnd != IntPtr.Zero)
+                .ToArray();
+            if (visibleWindows.Length <= 1)
+            {
+                return false;
+            }
+
+            int direction = delta < 0 ? 1 : -1;
+            int currentIndex = Array.FindIndex(visibleWindows, w => w.Hwnd == _lastSwitchedHwnd);
+            if (currentIndex < 0)
+            {
+                currentIndex = 0;
+            }
+
+            int targetIndex = (currentIndex + direction + visibleWindows.Length) % visibleWindows.Length;
+            if (targetIndex == currentIndex)
+            {
+                return false;
+            }
+
+            WindowItem target = visibleWindows[targetIndex];
+
+            _lastSwitchedHwnd = target.Hwnd;
+            SetSwitchHighlight(target);
+            WindowHelper.ActivateWindow(target.Hwnd);
+            return true;
         }
 
         public sealed override void Update()
         {
             if (_maxDisplayCount == 0 || _applications == null || _applications.Length == 0)
             {
+                return;
+            }
+
+            if(_lastSwitchedHwnd != IntPtr.Zero)
+            {
+                RefreshWindows(null, ignoreFrontWindowCheck: true);
                 return;
             }
 
@@ -140,11 +191,13 @@ namespace SSS.Module.WindowMonitor
         /// </summary>
         private void RefreshWindows(IntPtr? frontHwnd, bool ignoreFrontWindowCheck)
         {
+
             if (IsPointerOnSidebar())
             {
                 return;
             }
 
+            
             var targetNames = _applicationNames;
             if (targetNames.Count == 0)
             {
@@ -154,7 +207,7 @@ namespace SSS.Module.WindowMonitor
             bool hasVisibleWindows = HasVisibleWindows();
 
             // キャッシュにfrontHwndが含まれていたら、監視対象アプリでなければearly return
-            if (!ignoreFrontWindowCheck && hasVisibleWindows && _processNameCache.Count > 0 && frontHwnd != null)
+            if (_lastSwitchedHwnd == IntPtr.Zero && !ignoreFrontWindowCheck && hasVisibleWindows && _processNameCache.Count > 0 && frontHwnd != null)
             {
                 NativeMethods.GetWindowThreadProcessId((IntPtr)frontHwnd, out uint processId);
                 _processNameCache.TryGetValue(processId, out string? frontAppName);
@@ -173,6 +226,9 @@ namespace SSS.Module.WindowMonitor
                 processIconNewCache = [];
                 _lastCacheClearTime = DateTime.Now;
             }
+            
+            // _lastSwitchedHwnd の破棄は IsPointerOnSidebar() と targetNames.Count の後です。この順序で今回の目的には合っていますが、もし今後「対象アプリ設定を空にした直後」みたいな分岐でも必ず破棄したいなら、破棄位置は再検討の余地があります。
+            _lastSwitchedHwnd = IntPtr.Zero;
 
             // 見つかったウィンドウを格納するリスト
             var found = new List<(IntPtr Hwnd, string Title, string ProcessName, bool IsMinimized, ImageSource? ProcessIcon)>();
@@ -288,6 +344,7 @@ namespace SSS.Module.WindowMonitor
                 item.IsMinimized = false;
                 item.ProcessIcon = null;
             }
+
         }
 
         /// <summary>
@@ -299,11 +356,53 @@ namespace SSS.Module.WindowMonitor
         }
 
         /// <summary>
+        /// ホイール操作で切り替えた項目を短時間強調表示する。
+        /// </summary>
+        private async void SetSwitchHighlight(WindowItem target)
+        {
+            _switchHighlightCancellation?.Cancel();
+            _switchHighlightCancellation?.Dispose();
+            _switchHighlightCancellation = new CancellationTokenSource();
+            CancellationToken cancellationToken = _switchHighlightCancellation.Token;
+
+            foreach (WindowItem window in _windows)
+            {
+                window.IsSwitchHighlighted = false;
+            }
+
+            target.IsSwitchHighlighted = true;
+
+            try
+            {
+                await Task.Delay(800, cancellationToken);
+            }
+            catch (TaskCanceledException)
+            {
+                return;
+            }
+
+            if (!cancellationToken.IsCancellationRequested)
+            {
+                target.IsSwitchHighlighted = false;
+            }
+        }
+
+        /// <summary>
         /// マウスポインタが Sidebar 上にある間は更新を止める。
         /// </summary>
         private static bool IsPointerOnSidebar()
         {
-            return App.Current.Sidebar?.IsMouseOver == true;
+            if (Application.Current?.Dispatcher == null)
+            {
+                return false;
+            }
+
+            if (Application.Current.Dispatcher.CheckAccess())
+            {
+                return App.Current.Sidebar?.IsMouseOver == true;
+            }
+
+            return Application.Current.Dispatcher.Invoke(() => App.Current.Sidebar?.IsMouseOver == true);
         }
 
         private static List<string> _CodeLikeApps = ["Code", "Code - Insiders", "VSCodium"];
@@ -365,6 +464,13 @@ namespace SSS.Module.WindowMonitor
                     {
                         w.PropertyChanged -= WindowItem_PropertyChanged;
                     }
+                }
+
+                if (disposing)
+                {
+                    _switchHighlightCancellation?.Cancel();
+                    _switchHighlightCancellation?.Dispose();
+                    _switchHighlightCancellation = null;
                 }
 
                 _disposed = true;

@@ -67,6 +67,11 @@
                                                     <Setter Property="Opacity"
                                                             Value="0.6"/>
                                                 </DataTrigger>
+                                                <DataTrigger Binding="{Binding Path=IsSwitchHighlighted, Mode=OneWay}"
+                                                             Value="True">
+                                                    <Setter Property="BorderBrush"
+                                                            Value="{Binding Source={x:Static core:Settings.Instance}, Path=FontColor, Mode=OneWay}"/>
+                                                </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
                                     </Button.Style>

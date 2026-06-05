@@ -1383,4 +1383,12 @@
     <comment>Settings applications data grid applications column header</comment>
   </data>
 
+  <data name="SettingsScrollToSwitch" xml:space="preserve">
+    <value>Scroll to Switch</value>
+  </data>
+
+  <data name="SettingsScrollToSwitchTooltip" xml:space="preserve">
+    <value>Scrolling with the mouse wheel in the sidebar switches windows</value>
+  </data>
+
 </root>

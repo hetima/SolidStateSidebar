@@ -139,6 +139,24 @@ namespace SSS.Core
             }
         }
 
+        public bool TryHandleWindowScrollSwitch(int delta)
+        {
+            if (MonitorPanels == null) return false;
+
+            foreach (WindowMonitor monitor in MonitorPanels
+                .Where(p => p.Type == MonitorType.Window)
+                .SelectMany(p => p.Monitors)
+                .Cast<WindowMonitor>())
+            {
+                if (monitor.TryScrollSwitch(delta))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public void UpdateTime()
         {
             if (MonitorPanels == null) return;
@@ -255,7 +273,7 @@ namespace SSS.Core
                 MonitorType.Window,
                 MonitorType.Window.GetDescription(),
                 Core.Settings.Instance.GetIconSvgPath("win"),
-                SSS.Module.WindowMonitor.WindowMonitor.GetInstances(d.Applications ?? [], d.MaxDisplayCount)
+                SSS.Module.WindowMonitor.WindowMonitor.GetInstances(d.Applications ?? [], d.MaxDisplayCount, d.ScrollToSwitch)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             panel.FontSize = d.FontSize;

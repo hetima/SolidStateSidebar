@@ -113,6 +113,15 @@ namespace SSS.Module.WindowMonitor
             set { _fontName = value; NotifyPropertyChanged(); }
         }
 
+        private bool _scrollToSwitch = false;
+
+        [JsonProperty("scrollToSwitch")]
+        public bool ScrollToSwitch
+        {
+            get => _scrollToSwitch;
+            set { _scrollToSwitch = value; NotifyPropertyChanged(); }
+        }
+
         // --- Defaults & Clone ---
 
         public static Data Default => new Data
@@ -127,7 +136,8 @@ namespace SSS.Module.WindowMonitor
             SectionHeaderStyle = SectionHeaderStyle.Default,
             MaxDisplayCount = 8,
             FontSize = 0,
-            FontName = null
+            FontName = null,
+            ScrollToSwitch = false
         };
 
         public Data Clone()

@@ -108,6 +108,11 @@ namespace SSS.Models
             MonitorManager?.UpdateFromHook(frontHwnd);
         }
 
+        public bool TryHandleWindowScrollSwitch(int delta)
+        {
+            return MonitorManager?.TryHandleWindowScrollSwitch(delta) == true;
+        }
+
         private void PauseMonitors()
         {
             _monitorTimer?.Stop();

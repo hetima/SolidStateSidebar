@@ -1,6 +1,6 @@
 namespace SSS {
     using System;
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("hetima.resx-designer", "0.1.1")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("hetima.resx-designer", "0.3.1")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -1243,6 +1243,18 @@ namespace SSS {
         public static string SettingsScreenTooltip {
             get {
                 return ResourceManager.GetString("SettingsScreenTooltip", resourceCulture);
+            }
+        }
+
+        public static string SettingsScrollToSwitch {
+            get {
+                return ResourceManager.GetString("SettingsScrollToSwitch", resourceCulture);
+            }
+        }
+
+        public static string SettingsScrollToSwitchTooltip {
+            get {
+                return ResourceManager.GetString("SettingsScrollToSwitchTooltip", resourceCulture);
             }
         }
 

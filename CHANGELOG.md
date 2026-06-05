@@ -1,5 +1,7 @@
 # Changelog
 
+- Scrolling with the mouse wheel in the sidebar switches windows when window monitor is active and setting to on
+
 ## [0.9.4] - 2026-06-05
 - Fixed top alignment on secondary monitors.
 - Fixed DPI scaling placement.

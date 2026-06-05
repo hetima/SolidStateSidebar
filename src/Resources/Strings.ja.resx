@@ -1199,4 +1199,12 @@
     <comment>Settings applications data grid applications column header</comment>
   </data>
 
+  <data name="SettingsScrollToSwitch" xml:space="preserve">
+    <value>スクロールで切り替え</value>
+  </data>
+
+  <data name="SettingsScrollToSwitchTooltip" xml:space="preserve">
+    <value>サイドバー上でホイールスクロールするとウィンドウを切り替えます</value>
+  </data>
+
 </root>

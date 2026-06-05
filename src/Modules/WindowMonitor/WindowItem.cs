@@ -108,6 +108,21 @@ namespace SSS.Module.WindowMonitor
             }
         }
 
+        private bool _isSwitchHighlighted;
+
+        public bool IsSwitchHighlighted
+        {
+            get => _isSwitchHighlighted;
+            set
+            {
+                if (_isSwitchHighlighted != value)
+                {
+                    _isSwitchHighlighted = value;
+                    NotifyPropertyChanged(nameof(IsSwitchHighlighted));
+                }
+            }
+        }
+
         private ICommand? _activateCommand;
 
         public ICommand? ActivateCommand

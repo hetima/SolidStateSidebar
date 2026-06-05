@@ -68,7 +68,8 @@
                 </Button>
             </StackPanel>
 
-            <ScrollViewer Style="{StaticResource ContentView}">
+            <ScrollViewer Style="{StaticResource ContentView}"
+                          PreviewMouseWheel="ContentScrollViewer_PreviewMouseWheel">
                 <StackPanel Style="{StaticResource ContentPanel}">
                     <ContentControl>
                         <ContentControl.Style>
