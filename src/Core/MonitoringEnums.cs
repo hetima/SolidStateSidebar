@@ -11,7 +11,9 @@ namespace SSS.Core
         HD,
         Network,
         Time,
-        Window
+        Window,
+        Claude,
+        Codex
     }
 
     [Serializable]
@@ -53,7 +55,26 @@ namespace SSS.Core
         Time = 28,
         Date = 29,
 
-        WindowTitle = 30
+        WindowTitle = 30,
+
+        Claude5h = 31,
+        Claude1w = 32,
+        Codex5h  = 33,
+        Codex1w  = 34
+    }
+
+    public enum ResetTimeDisplay : byte
+    {
+        Countdown,
+        Absolute
+    }
+
+    public enum AutoRefreshInterval : byte
+    {
+        Manual,
+        OneMin,
+        FiveMin,
+        TenMin
     }
 
     public enum DataType : byte

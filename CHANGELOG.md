@@ -1,5 +1,8 @@
 # Changelog
 
+
+## [0.9.5] - 2026
+- Added Claude Monitor and Codex Monitor to display paid plan usage.
 - Scrolling with the mouse wheel in the sidebar switches windows when window monitor is active and setting to on
 
 ## [0.9.4] - 2026-06-05

@@ -152,6 +152,10 @@ namespace SSS.Core
             }
         }
 
+        public ResetTimeDisplay ShortResetDisplay { get; set; } = ResetTimeDisplay.Countdown;
+        public ResetTimeDisplay LongResetDisplay  { get; set; } = ResetTimeDisplay.Countdown;
+        public AutoRefreshInterval AutoRefresh    { get; set; } = AutoRefreshInterval.Manual;
+
         private int _fontSize = 0;
 
         public int FontSize

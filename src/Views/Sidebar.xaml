@@ -16,6 +16,8 @@
         xmlns:netSection="clr-namespace:SSS.Module.NetworkMonitor"
         xmlns:timeSection="clr-namespace:SSS.Module.TimeMonitor"
         xmlns:windowSection="clr-namespace:SSS.Module.WindowMonitor"
+        xmlns:claudeSection="clr-namespace:SSS.Module.ClaudeMonitor"
+        xmlns:codexSection="clr-namespace:SSS.Module.CodexMonitor"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         StateChanged="Window_StateChanged"
@@ -114,6 +116,12 @@
                             <DataTemplate x:Key="WindowSectionTemplate">
                                 <windowSection:Section />
                             </DataTemplate>
+                            <DataTemplate x:Key="ClaudeSectionTemplate">
+                                <claudeSection:Section />
+                            </DataTemplate>
+                            <DataTemplate x:Key="CodexSectionTemplate">
+                                <codexSection:Section />
+                            </DataTemplate>
                         </ItemsControl.Resources>
                         <ItemsControl.ItemTemplateSelector>
                             <converters:MonitorPanelTemplateSelector
@@ -123,7 +131,9 @@
                                 HdTemplate="{StaticResource HdSectionTemplate}"
                                 NetworkTemplate="{StaticResource NetworkSectionTemplate}"
                                 TimeTemplate="{StaticResource TimeSectionTemplate}"
-                                WindowTemplate="{StaticResource WindowSectionTemplate}" />
+                                WindowTemplate="{StaticResource WindowSectionTemplate}"
+                                ClaudeTemplate="{StaticResource ClaudeSectionTemplate}"
+                                CodexTemplate="{StaticResource CodexSectionTemplate}" />
                         </ItemsControl.ItemTemplateSelector>
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>

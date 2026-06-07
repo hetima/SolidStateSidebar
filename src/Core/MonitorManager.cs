@@ -9,6 +9,8 @@ using HdData = SSS.Module.HdMonitor.Data;
 using NetData = SSS.Module.NetworkMonitor.Data;
 using TimeData = SSS.Module.TimeMonitor.Data;
 using WindowData = SSS.Module.WindowMonitor.Data;
+using ClaudeData = SSS.Module.ClaudeMonitor.Data;
+using CodexData = SSS.Module.CodexMonitor.Data;
 
 namespace SSS.Core
 {
@@ -44,6 +46,8 @@ namespace SSS.Core
                     "NetworkMonitor" => NetworkPanel(m.Value),
                     "TimeMonitor" => TimePanel(m.Value),
                     "WindowMonitor" => WindowPanel(m.Value),
+                    "ClaudeMonitor" => ClaudePanel(m.Value),
+                    "CodexMonitor" => CodexPanel(m.Value),
                     _ => null
                 })
                 .Where(p => p != null)
@@ -105,6 +109,8 @@ namespace SSS.Core
                     return SSS.Module.TimeMonitor.ClockMonitor.GetHardware().ToArray();
 
                 case MonitorType.Window:
+                case MonitorType.Claude:
+                case MonitorType.Codex:
                     return [];
 
                 default:
@@ -278,6 +284,38 @@ namespace SSS.Core
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             panel.FontSize = d.FontSize;
             panel.FontName = d.FontName;
+            return panel;
+        }
+
+        private MonitorPanel ClaudePanel(IModuleData data)
+        {
+            var d = (ClaudeData)data;
+            var panel = new MonitorPanel(
+                MonitorType.Claude,
+                "Claude",
+                null,
+                SSS.Module.ClaudeMonitor.ClaudeMonitor.GetInstances()
+                );
+            panel.SectionHeaderStyle = d.SectionHeaderStyle;
+            panel.ShortResetDisplay   = d.ShortResetDisplay;
+            panel.LongResetDisplay    = d.LongResetDisplay;
+            panel.AutoRefresh         = d.AutoRefresh;
+            return panel;
+        }
+
+        private MonitorPanel CodexPanel(IModuleData data)
+        {
+            var d = (CodexData)data;
+            var panel = new MonitorPanel(
+                MonitorType.Codex,
+                "Codex",
+                null,
+                SSS.Module.CodexMonitor.CodexMonitor.GetInstances()
+                );
+            panel.SectionHeaderStyle = d.SectionHeaderStyle;
+            panel.ShortResetDisplay   = d.ShortResetDisplay;
+            panel.LongResetDisplay    = d.LongResetDisplay;
+            panel.AutoRefresh         = d.AutoRefresh;
             return panel;
         }
 

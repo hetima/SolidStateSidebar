@@ -18,6 +18,12 @@
   <PropertyGroup>
     <ApplicationManifest>src/Resources/app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="var\**" />
+    <EmbeddedResource Remove="var\**" />
+    <None Remove="var\**" />
+    <Page Remove="var\**" />
+  </ItemGroup>
   <PropertyGroup>
     <StartupObject>SSS.App</StartupObject>
   </PropertyGroup>
@@ -58,6 +64,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="src/Resources/Settings.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="src/Resources/claude.svg" />
+    <EmbeddedResource Include="src/Resources/codex.svg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="src/Resources/Sidebar.ico" />

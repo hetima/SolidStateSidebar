@@ -773,7 +773,8 @@ namespace SSS.Core
     {
         Default,
         Small,
-        None
+        None,
+        NoIcon
     }
 
     [JsonObject(MemberSerialization.OptIn)]

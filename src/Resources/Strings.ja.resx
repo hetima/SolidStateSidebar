@@ -1140,6 +1140,11 @@
     <comment>Section header style none option</comment>
   </data>
 
+  <data name="SettingsHeaderStyleNoIcon" xml:space="preserve">
+    <value>アイコンなし</value>
+    <comment>Section header style no icon option</comment>
+  </data>
+
   <data name="Window" xml:space="preserve">
     <value>ウィンドウ</value>
   </data>
@@ -1205,6 +1210,42 @@
 
   <data name="SettingsScrollToSwitchTooltip" xml:space="preserve">
     <value>サイドバー上でホイールスクロールするとウィンドウを切り替えます</value>
+  </data>
+
+  <data name="SettingsAutoRefresh" xml:space="preserve">
+    <value>更新間隔</value>
+  </data>
+
+  <data name="SettingsAutoRefreshManual" xml:space="preserve">
+    <value>手動更新</value>
+  </data>
+
+  <data name="SettingsAutoRefreshOneMin" xml:space="preserve">
+    <value>1分</value>
+  </data>
+
+  <data name="SettingsAutoRefreshFiveMin" xml:space="preserve">
+    <value>5分</value>
+  </data>
+
+  <data name="SettingsAutoRefreshTenMin" xml:space="preserve">
+    <value>10分</value>
+  </data>
+
+  <data name="SettingsShortResetDisplay" xml:space="preserve">
+    <value>5h の時間表示</value>
+  </data>
+
+  <data name="SettingsLongResetDisplay" xml:space="preserve">
+    <value>1w の時間表示</value>
+  </data>
+
+  <data name="SettingsResetTimeCountdown" xml:space="preserve">
+    <value>カウントダウン</value>
+  </data>
+
+  <data name="SettingsResetTimeAbsolute" xml:space="preserve">
+    <value>リセット時刻</value>
   </data>
 
 </root>

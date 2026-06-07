@@ -718,6 +718,36 @@ namespace SSS {
             }
         }
 
+        public static string SettingsAutoRefresh {
+            get {
+                return ResourceManager.GetString("SettingsAutoRefresh", resourceCulture);
+            }
+        }
+
+        public static string SettingsAutoRefreshFiveMin {
+            get {
+                return ResourceManager.GetString("SettingsAutoRefreshFiveMin", resourceCulture);
+            }
+        }
+
+        public static string SettingsAutoRefreshManual {
+            get {
+                return ResourceManager.GetString("SettingsAutoRefreshManual", resourceCulture);
+            }
+        }
+
+        public static string SettingsAutoRefreshOneMin {
+            get {
+                return ResourceManager.GetString("SettingsAutoRefreshOneMin", resourceCulture);
+            }
+        }
+
+        public static string SettingsAutoRefreshTenMin {
+            get {
+                return ResourceManager.GetString("SettingsAutoRefreshTenMin", resourceCulture);
+            }
+        }
+
         public static string SettingsAutoUpdate {
             get {
                 return ResourceManager.GetString("SettingsAutoUpdate", resourceCulture);
@@ -976,6 +1006,12 @@ namespace SSS {
             }
         }
 
+        public static string SettingsHeaderStyleNoIcon {
+            get {
+                return ResourceManager.GetString("SettingsHeaderStyleNoIcon", resourceCulture);
+            }
+        }
+
         public static string SettingsHeaderStyleNone {
             get {
                 return ResourceManager.GetString("SettingsHeaderStyleNone", resourceCulture);
@@ -1087,6 +1123,12 @@ namespace SSS {
         public static string SettingsLanguageTooltip {
             get {
                 return ResourceManager.GetString("SettingsLanguageTooltip", resourceCulture);
+            }
+        }
+
+        public static string SettingsLongResetDisplay {
+            get {
+                return ResourceManager.GetString("SettingsLongResetDisplay", resourceCulture);
             }
         }
 
@@ -1210,6 +1252,18 @@ namespace SSS {
             }
         }
 
+        public static string SettingsResetTimeAbsolute {
+            get {
+                return ResourceManager.GetString("SettingsResetTimeAbsolute", resourceCulture);
+            }
+        }
+
+        public static string SettingsResetTimeCountdown {
+            get {
+                return ResourceManager.GetString("SettingsResetTimeCountdown", resourceCulture);
+            }
+        }
+
         public static string SettingsRoundAllDecimals {
             get {
                 return ResourceManager.GetString("SettingsRoundAllDecimals", resourceCulture);
@@ -1255,6 +1309,12 @@ namespace SSS {
         public static string SettingsScrollToSwitchTooltip {
             get {
                 return ResourceManager.GetString("SettingsScrollToSwitchTooltip", resourceCulture);
+            }
+        }
+
+        public static string SettingsShortResetDisplay {
+            get {
+                return ResourceManager.GetString("SettingsShortResetDisplay", resourceCulture);
             }
         }
 

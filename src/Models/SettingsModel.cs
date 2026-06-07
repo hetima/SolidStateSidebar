@@ -260,6 +260,8 @@ namespace SSS.Models
                         SSS.Module.NetworkMonitor.Data => "NetworkMonitor",
                         SSS.Module.TimeMonitor.Data => "TimeMonitor",
                         SSS.Module.WindowMonitor.Data => "WindowMonitor",
+                        SSS.Module.ClaudeMonitor.Data => "ClaudeMonitor",
+                        SSS.Module.CodexMonitor.Data => "CodexMonitor",
                         _ => throw new InvalidOperationException("Unknown module data type")
                     }, m
                 ))

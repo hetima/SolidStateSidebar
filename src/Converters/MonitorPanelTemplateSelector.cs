@@ -19,6 +19,10 @@ namespace SSS.Converters
 
         public DataTemplate? WindowTemplate { get; set; }
 
+        public DataTemplate? ClaudeTemplate { get; set; }
+
+        public DataTemplate? CodexTemplate { get; set; }
+
         public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
             if (item is Core.MonitorPanel panel)
@@ -32,6 +36,8 @@ namespace SSS.Converters
                     Core.MonitorType.Network => NetworkTemplate,
                     Core.MonitorType.Time => TimeTemplate,
                     Core.MonitorType.Window => WindowTemplate,
+                    Core.MonitorType.Claude => ClaudeTemplate,
+                    Core.MonitorType.Codex => CodexTemplate,
                     _ => null
                 };
             }

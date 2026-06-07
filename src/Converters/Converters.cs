@@ -208,6 +208,7 @@ namespace SSS.Converters
                     Core.SectionHeaderStyle.Default => Strings.SettingsHeaderStyleDefault,
                     Core.SectionHeaderStyle.Small => Strings.SettingsHeaderStyleSmall,
                     Core.SectionHeaderStyle.None => Strings.SettingsHeaderStyleNone,
+                    Core.SectionHeaderStyle.NoIcon => Strings.SettingsHeaderStyleNoIcon,
                     _ => style.ToString()
                 };
             }
@@ -218,6 +219,46 @@ namespace SSS.Converters
         {
             return null;
         }
+    }
+
+    public class ResetTimeDisplayConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Core.ResetTimeDisplay v)
+            {
+                return v switch
+                {
+                    Core.ResetTimeDisplay.Countdown => Strings.SettingsResetTimeCountdown,
+                    Core.ResetTimeDisplay.Absolute  => Strings.SettingsResetTimeAbsolute,
+                    _ => v.ToString()
+                };
+            }
+            return value?.ToString() ?? "";
+        }
+
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
+    }
+
+    public class AutoRefreshIntervalDisplayConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is Core.AutoRefreshInterval v)
+            {
+                return v switch
+                {
+                    Core.AutoRefreshInterval.Manual  => Strings.SettingsAutoRefreshManual,
+                    Core.AutoRefreshInterval.OneMin  => Strings.SettingsAutoRefreshOneMin,
+                    Core.AutoRefreshInterval.FiveMin => Strings.SettingsAutoRefreshFiveMin,
+                    Core.AutoRefreshInterval.TenMin  => Strings.SettingsAutoRefreshTenMin,
+                    _ => v.ToString()
+                };
+            }
+            return value?.ToString() ?? "";
+        }
+
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture) => null;
     }
 
     public class FontSizeAddConverter : IValueConverter

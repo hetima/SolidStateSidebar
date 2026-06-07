@@ -1325,6 +1325,56 @@
     <comment>Section header style none option</comment>
   </data>
 
+  <data name="SettingsHeaderStyleNoIcon" xml:space="preserve">
+    <value>No Icon</value>
+    <comment>Section header style no icon option</comment>
+  </data>
+
+  <data name="SettingsAutoRefresh" xml:space="preserve">
+    <value>Auto refresh</value>
+    <comment>Label for auto refresh interval setting</comment>
+  </data>
+
+  <data name="SettingsAutoRefreshManual" xml:space="preserve">
+    <value>Manual</value>
+    <comment>Auto refresh interval: manual only</comment>
+  </data>
+
+  <data name="SettingsAutoRefreshOneMin" xml:space="preserve">
+    <value>1 min</value>
+    <comment>Auto refresh interval: 1 minute</comment>
+  </data>
+
+  <data name="SettingsAutoRefreshFiveMin" xml:space="preserve">
+    <value>5 min</value>
+    <comment>Auto refresh interval: 5 minutes</comment>
+  </data>
+
+  <data name="SettingsAutoRefreshTenMin" xml:space="preserve">
+    <value>10 min</value>
+    <comment>Auto refresh interval: 10 minutes</comment>
+  </data>
+
+  <data name="SettingsShortResetDisplay" xml:space="preserve">
+    <value>5h time</value>
+    <comment>Label for 5h window reset time display style</comment>
+  </data>
+
+  <data name="SettingsLongResetDisplay" xml:space="preserve">
+    <value>1w time</value>
+    <comment>Label for 1w window reset time display style</comment>
+  </data>
+
+  <data name="SettingsResetTimeCountdown" xml:space="preserve">
+    <value>Countdown</value>
+    <comment>Reset time display style: countdown</comment>
+  </data>
+
+  <data name="SettingsResetTimeAbsolute" xml:space="preserve">
+    <value>Absolute</value>
+    <comment>Reset time display style: absolute time</comment>
+  </data>
+
   <data name="Window" xml:space="preserve">
     <value>Window</value>
     <comment>Window</comment>

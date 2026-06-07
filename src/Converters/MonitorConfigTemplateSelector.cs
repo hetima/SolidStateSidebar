@@ -7,6 +7,8 @@ using HdData = SSS.Module.HdMonitor.Data;
 using NetData = SSS.Module.NetworkMonitor.Data;
 using TimeData = SSS.Module.TimeMonitor.Data;
 using WindowData = SSS.Module.WindowMonitor.Data;
+using ClaudeData = SSS.Module.ClaudeMonitor.Data;
+using CodexData = SSS.Module.CodexMonitor.Data;
 
 namespace SSS.Converters
 {
@@ -26,6 +28,10 @@ namespace SSS.Converters
 
         public DataTemplate? WindowTemplate { get; set; }
 
+        public DataTemplate? ClaudeTemplate { get; set; }
+
+        public DataTemplate? CodexTemplate { get; set; }
+
         public override DataTemplate? SelectTemplate(object item, DependencyObject container)
         {
             return item switch
@@ -37,6 +43,8 @@ namespace SSS.Converters
                 NetData => NetworkTemplate,
                 TimeData => TimeTemplate,
                 WindowData => WindowTemplate,
+                ClaudeData => ClaudeTemplate,
+                CodexData => CodexTemplate,
                 _ => base.SelectTemplate(item, container)
             };
         }

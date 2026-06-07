@@ -325,6 +325,36 @@ namespace SSS.Utilities
         }
     }
 
+public static class EmbeddedSvg
+{
+    /// <summary>
+    /// EmbeddedResource の SVG を LocalAppData フォルダに書き出し、そのパスを返す。
+    /// ファイルが既に存在する場合はスキップする。
+    /// </summary>
+    public static string Extract(string resourceName, string outputFileName)
+    {
+        var dir = Paths.LocalIconThemesPath;
+        if (!Directory.Exists(dir))
+            Directory.CreateDirectory(dir);
+
+        var dest = Path.Combine(dir, outputFileName);
+        if (!File.Exists(dest))
+        {
+            var asm = System.Reflection.Assembly.GetExecutingAssembly();
+            // リソース名はパスのセパレーターがドットに変換されるため末尾一致で検索
+            var name = Array.Find(asm.GetManifestResourceNames(),
+                n => n.EndsWith(resourceName, StringComparison.OrdinalIgnoreCase));
+            if (name != null)
+            {
+                using var stream = asm.GetManifestResourceStream(name)!;
+                using var fs = File.Create(dest);
+                stream.CopyTo(fs);
+            }
+        }
+        return dest;
+    }
+}
+
 public static class Startup
 {
     /// <summary>

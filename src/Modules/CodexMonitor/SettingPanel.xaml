@@ -1,0 +1,89 @@
+<UserControl x:Class="SSS.Module.CodexMonitor.SettingPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:core="clr-namespace:SSS.Core"
+             xmlns:conv="clr-namespace:SSS.Converters"
+             xmlns:res="clr-namespace:SSS"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <conv:SectionHeaderStyleDisplayConverter x:Key="SectionHeaderStyleDisplayConverter" />
+        <conv:AutoRefreshIntervalDisplayConverter x:Key="AutoRefreshIntervalDisplayConverter" />
+        <conv:ResetTimeDisplayConverter x:Key="ResetTimeDisplayConverter" />
+
+        <!-- Codex 専用: Default / Small / NoIcon の3択（None は除外）-->
+        <x:Array x:Key="CodexHeaderStyleItems" Type="core:SectionHeaderStyle">
+            <core:SectionHeaderStyle>Default</core:SectionHeaderStyle>
+            <core:SectionHeaderStyle>Small</core:SectionHeaderStyle>
+            <core:SectionHeaderStyle>NoIcon</core:SectionHeaderStyle>
+        </x:Array>
+
+        <DataTemplate x:Key="HeaderStyleItemTemplate">
+            <TextBlock Text="{Binding Converter={StaticResource SectionHeaderStyleDisplayConverter}}" />
+        </DataTemplate>
+
+        <x:Array x:Key="ResetTimeDisplayItems" Type="core:ResetTimeDisplay">
+            <core:ResetTimeDisplay>Countdown</core:ResetTimeDisplay>
+            <core:ResetTimeDisplay>Absolute</core:ResetTimeDisplay>
+        </x:Array>
+
+        <x:Array x:Key="AutoRefreshItems" Type="core:AutoRefreshInterval">
+            <core:AutoRefreshInterval>Manual</core:AutoRefreshInterval>
+            <core:AutoRefreshInterval>OneMin</core:AutoRefreshInterval>
+            <core:AutoRefreshInterval>FiveMin</core:AutoRefreshInterval>
+            <core:AutoRefreshInterval>TenMin</core:AutoRefreshInterval>
+        </x:Array>
+    </UserControl.Resources>
+    <Border Style="{StaticResource MonitorDetailsBorder}">
+        <StackPanel Style="{StaticResource VerticalPanel}">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="{x:Static res:Strings.SettingsHeaderStyle}"
+                       VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
+                <ComboBox ItemsSource="{StaticResource CodexHeaderStyleItems}"
+                          SelectedValue="{Binding Path=SectionHeaderStyle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedValuePath="."
+                          ItemTemplate="{StaticResource HeaderStyleItemTemplate}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="{x:Static res:Strings.SettingsAutoRefresh}"
+                       VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
+                <ComboBox ItemsSource="{StaticResource AutoRefreshItems}"
+                          SelectedValue="{Binding Path=AutoRefresh, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedValuePath=".">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource AutoRefreshIntervalDisplayConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="{x:Static res:Strings.SettingsShortResetDisplay}"
+                       VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
+                <ComboBox ItemsSource="{StaticResource ResetTimeDisplayItems}"
+                          SelectedValue="{Binding Path=ShortResetDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedValuePath=".">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource ResetTimeDisplayConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <Label Content="{x:Static res:Strings.SettingsLongResetDisplay}"
+                       VerticalAlignment="Center" Margin="0,0,10,0" Padding="0" />
+                <ComboBox ItemsSource="{StaticResource ResetTimeDisplayItems}"
+                          SelectedValue="{Binding Path=LongResetDisplay, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedValuePath=".">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Converter={StaticResource ResetTimeDisplayConverter}}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </StackPanel>
+    </Border>
+</UserControl>
