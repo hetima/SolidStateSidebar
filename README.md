@@ -53,7 +53,7 @@ Written in C#, .NET10, WPF, built with Visual Studio 2026.
 
 This software is based on [SidebarDiagnostics](https://github.com/ArcadeRenegade/SidebarDiagnostics)
 
-Data provided by [Libre Hardware Monitor]("https://github.com/LibreHardwareMonitor/LibreHardwareMonitor").
+Data provided by [Libre Hardware Monitor](https://github.com/LibreHardwareMonitor/LibreHardwareMonitor).
 
 ![Screenshot](https://raw.githubusercontent.com/hetima/SolidStateSidebar/main/assets/sss01.jpg)
 
