@@ -6,28 +6,17 @@ This is currently under development.
 
 ### Download
 
-Go to the <a href="https://github.com/hetima/SolidStateSidebar/releases">releases page</a>.
+Download from the <a href="https://github.com/hetima/SolidStateSidebar/releases">releases page</a>.
 
 
 ### Features
-- Monitors CPU, RAM, GPU, network, and logical drives.
+- Monitors CPU, RAM, GPU, network, and logical drives
 - Window monitor to list and select preferred application windows
+- Claude and Codex usage monitor
 - Allows for lots of customization.
 
 
 ### Install
-
-If you have the SidebarDiagnostics installed, you can migrate your settings; however, the configuration file may be deleted when uninstalling the previous version. Please back up the file at the following path before uninstalling.
-
-Before uninstalling, it is recommended to disable "Run At Startup" to avoid potential issues.
-
-```
-C:\Users\YOURNAME\AppData\Local\SidebarDiagnostics\settings.json
-    ↓ 
-    ↓ Move to new lcation
-    ↓ 
-C:\Users\YOURNAME\AppData\Local\SolidStateSidebar\settings.json
-```
 
 This application does not include an installer. Simply extract and place it in any folder of your choice. The recommended location is:
 
@@ -66,6 +55,10 @@ This software is based on [SidebarDiagnostics](https://github.com/ArcadeRenegade
 
 Data provided by [Libre Hardware Monitor]("https://github.com/LibreHardwareMonitor/LibreHardwareMonitor").
 
-<img src="https://i.imgur.com/VFkZdfS.jpeg" />
+![Screenshot](https://raw.githubusercontent.com/hetima/SolidStateSidebar/main/assets/sss01.jpg)
 
-<img src="https://i.imgur.com/2gTN9Ow.jpeg" />
+![Screenshot](https://raw.githubusercontent.com/hetima/SolidStateSidebar/main/assets/sss02.jpg)
+
+![Screenshot](https://raw.githubusercontent.com/hetima/SolidStateSidebar/main/assets/sss03.jpg)
+
+

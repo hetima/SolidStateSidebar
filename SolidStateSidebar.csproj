@@ -24,6 +24,12 @@
     <None Remove="var\**" />
     <Page Remove="var\**" />
   </ItemGroup>
+    <ItemGroup>
+    <Compile Remove="assets\**" />
+    <EmbeddedResource Remove="assets\**" />
+    <None Remove="assets\**" />
+    <Page Remove="assets\**" />
+  </ItemGroup>
   <PropertyGroup>
     <StartupObject>SSS.App</StartupObject>
   </PropertyGroup>
