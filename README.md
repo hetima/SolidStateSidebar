@@ -4,10 +4,6 @@ A simple sidebar for Windows desktop that displays hardware diagnostic informati
 
 This is currently under development.
 
-### Download
-
-Download from the <a href="https://github.com/hetima/SolidStateSidebar/releases">releases page</a>.
-
 
 ### Features
 - Monitors CPU, RAM, GPU, network, and logical drives
@@ -17,6 +13,19 @@ Download from the <a href="https://github.com/hetima/SolidStateSidebar/releases"
 
 
 ### Install
+
+Download from the <a href="https://github.com/hetima/SolidStateSidebar/releases">releases page</a>.
+
+Or Install via Scoop
+
+```
+scoop bucket add hetima https://github.com/hetima/scoop-bucket
+scoop install hetima/SolidStateSidebar
+
+#launch
+SolidStateSidebar
+```
+
 
 This application does not include an installer. Simply extract and place it in any folder of your choice. The recommended location is:
 
