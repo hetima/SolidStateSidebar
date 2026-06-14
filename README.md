@@ -24,6 +24,9 @@ scoop install hetima/SolidStateSidebar
 
 #launch
 SolidStateSidebar
+
+#update
+scoop update hetima/SolidStateSidebar
 ```
 
 
