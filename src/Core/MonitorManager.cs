@@ -117,10 +117,10 @@ namespace SSS.Core
         {
             UpdateBoard();
 
-            UpdateWindowMonitor();
+            UpdateAllMonitors();
         }
 
-        public void UpdateWindowMonitor()
+        public void UpdateAllMonitors()
         {
             if (MonitorPanels == null) return;
             foreach (iMonitor _monitor in MonitorPanels.SelectMany(p => p.Monitors))

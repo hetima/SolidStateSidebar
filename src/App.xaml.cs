@@ -88,9 +88,6 @@ namespace SSS
 
         public static void StartApp(bool openSettings)
         {
-            Version? _version = Assembly.GetExecutingAssembly().GetName().Version;
-            string _vstring = _version?.ToString(3) ?? "0.0.0";
-
             new Sidebar(openSettings, Core.Settings.Instance.InitiallyHidden).Show();
 
             RefreshIcon();

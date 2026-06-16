@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
 using System.Runtime.InteropServices;
@@ -16,7 +15,6 @@ namespace SSS.Module.WindowMonitor
 {
     public class WindowMonitor : BaseMonitor
     {
-        private readonly HardwareConfig[] _applications; //いらない
         private readonly HashSet<string> _applicationNames;
         private readonly int _maxDisplayCount;
         private readonly bool _scrollToSwitch;
@@ -38,40 +36,19 @@ namespace SSS.Module.WindowMonitor
             {
                 if (_windows != value)
                 {
-                    if (_windows != null)
-                    {
-                        foreach (var w in _windows)
-                        {
-                            w.PropertyChanged -= WindowItem_PropertyChanged;
-                        }
-                    }
-
                     _windows = value;
-
-                    if (_windows != null)
-                    {
-                        foreach (var w in _windows)
-                        {
-                            w.PropertyChanged += WindowItem_PropertyChanged;
-                        }
-                    }
 
                     NotifyPropertyChanged(nameof(Windows));
                 }
             }
         }
 
-        private void WindowItem_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-        {
-        }
-
         public WindowMonitor(HardwareConfig[] applications, int maxDisplayCount, bool scrollToSwitch)
             : base("window", "Window", false)
         {
-            _applications = applications;
             // 有効な対象アプリのプロセス名を収集
             _applicationNames = new HashSet<string>(
-                _applications.Where(a => a.Enabled).Select(a => a.ActualName ?? a.ID ?? "")
+                applications.Where(a => a.Enabled).Select(a => a.ActualName ?? a.ID ?? "")
             );
             _maxDisplayCount = Math.Max(0, maxDisplayCount);
             _scrollToSwitch = scrollToSwitch;
@@ -141,7 +118,7 @@ namespace SSS.Module.WindowMonitor
 
         public sealed override void Update()
         {
-            if (_maxDisplayCount == 0 || _applications == null || _applications.Length == 0)
+            if (_maxDisplayCount == 0 || _applicationNames.Count == 0)
             {
                 return;
             }
@@ -166,15 +143,7 @@ namespace SSS.Module.WindowMonitor
         public void UpdateFromHook(IntPtr? frontHwnd)
         {
             // 表示件数が0、または対象アプリが未設定の場合は何もしない
-            if (_maxDisplayCount == 0 || _applications == null || _applications.Length == 0)
-            {
-                return;
-            }
-
-            // 有効な対象アプリのプロセス名を収集
-            var targetNames = _applicationNames;
-
-            if (targetNames.Count == 0)
+            if (_maxDisplayCount == 0 || _applicationNames.Count == 0)
             {
                 return;
             }
@@ -295,12 +264,12 @@ namespace SSS.Module.WindowMonitor
                 // タイトルを整形
                 title = SanitizeWindowTitle(title, processName);
 
-                _processIconCache.TryGetValue(processId, out ImageSource? pRocessicon);
-                if (processIconNewCache != null && pRocessicon != null)
+                _processIconCache.TryGetValue(processId, out ImageSource? pRocessIcon);
+                if (processIconNewCache != null && pRocessIcon != null)
                 {
-                    processIconNewCache[processId] = pRocessicon;
+                    processIconNewCache[processId] = pRocessIcon;
                 }
-                found.Add((hwnd, title, processName, isMinimized, pRocessicon));
+                found.Add((hwnd, title, processName, isMinimized, pRocessIcon));
 
                 // MaxDisplayCount に達したら列挙を中断
                 return found.Count < _maxDisplayCount;
@@ -454,14 +423,6 @@ namespace SSS.Module.WindowMonitor
         {
             if (!_disposed)
             {
-                if (disposing && _windows != null)
-                {
-                    foreach (var w in _windows)
-                    {
-                        w.PropertyChanged -= WindowItem_PropertyChanged;
-                    }
-                }
-
                 if (disposing)
                 {
                     _switchHighlightCancellation?.Cancel();

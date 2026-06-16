@@ -82,9 +82,9 @@ namespace SSS.Core
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private String? _svgContentPath;
+        private string? _svgContentPath;
 
-        public String? SvgContentPath
+        public string? SvgContentPath
         {
             get
             {
