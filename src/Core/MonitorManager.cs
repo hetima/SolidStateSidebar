@@ -57,7 +57,6 @@ namespace SSS.Core
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -85,10 +84,6 @@ namespace SSS.Core
             }
         }
 
-        ~MonitorManager()
-        {
-            Dispose(false);
-        }
 
         public HardwareConfig[] GetHardware(MonitorType type)
         {

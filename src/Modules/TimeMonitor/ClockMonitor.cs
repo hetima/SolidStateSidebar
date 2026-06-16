@@ -31,10 +31,6 @@ namespace SSS.Module.TimeMonitor
             }
         }
 
-        ~ClockTimeMetric()
-        {
-            Dispose(false);
-        }
 
         public override bool IsNumeric
         {
@@ -75,10 +71,6 @@ namespace SSS.Module.TimeMonitor
             }
         }
 
-        ~ClockDateMetric()
-        {
-            Dispose(false);
-        }
 
         public override bool IsNumeric
         {
@@ -121,10 +113,6 @@ namespace SSS.Module.TimeMonitor
             Metrics = _metrics.ToArray();
         }
 
-        ~ClockMonitor()
-        {
-            Dispose(false);
-        }
 
         public static IEnumerable<HardwareConfig> GetHardware()
         {

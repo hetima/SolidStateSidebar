@@ -79,10 +79,6 @@ namespace SSS.Module.WindowMonitor
             InitializeSlots();
         }
 
-        ~WindowMonitor()
-        {
-            Dispose(false);
-        }
 
         private void InitializeSlots()
         {

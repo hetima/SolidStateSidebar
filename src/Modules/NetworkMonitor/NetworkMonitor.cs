@@ -63,10 +63,6 @@ namespace SSS.Module.NetworkMonitor
             metrics.ApplyCustomLabels(Metrics);
         }
 
-        ~NetworkMonitor()
-        {
-            Dispose(false);
-        }
 
         public static IEnumerable<HardwareConfig> GetHardware()
         {

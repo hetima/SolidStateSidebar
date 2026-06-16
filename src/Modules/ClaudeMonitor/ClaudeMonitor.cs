@@ -19,10 +19,6 @@ namespace SSS.Module.ClaudeMonitor
             Text = "-";
         }
 
-        ~ClaudeUsageMetric()
-        {
-            Dispose(false);
-        }
 
         public override bool IsNumeric => false;
 
@@ -58,10 +54,6 @@ namespace SSS.Module.ClaudeMonitor
             ];
         }
 
-        ~ClaudeMonitor()
-        {
-            Dispose(false);
-        }
 
         protected override void Dispose(bool disposing)
         {

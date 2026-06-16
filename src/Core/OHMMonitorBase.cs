@@ -29,10 +29,6 @@ namespace SSS.Core
             base.Dispose(disposing);
         }
 
-        ~OHMMonitorBase()
-        {
-            Dispose(false);
-        }
 
         public override void Update()
         {

@@ -26,10 +26,6 @@ namespace SSS.Core
             base.Dispose(disposing);
         }
 
-        ~OHMMetric()
-        {
-            Dispose(false);
-        }
 
         public override void Update()
         {
@@ -70,10 +66,6 @@ namespace SSS.Core
             base.Dispose(disposing);
         }
 
-        ~GPUVRAMMLoadMetric()
-        {
-            Dispose(false);
-        }
 
         public override void Update()
         {
@@ -101,10 +93,6 @@ namespace SSS.Core
             Text = ipAddress;
         }
 
-        ~IPMetric()
-        {
-            Dispose(false);
-        }
 
         public override bool IsNumeric
         {
@@ -135,10 +123,6 @@ namespace SSS.Core
             base.Dispose(disposing);
         }
 
-        ~PCMetric()
-        {
-            Dispose(false);
-        }
 
         public override void Update()
         {

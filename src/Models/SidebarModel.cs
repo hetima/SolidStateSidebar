@@ -19,7 +19,6 @@ namespace SSS.Models
         public void Dispose()
         {
             Dispose(true);
-            GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
@@ -35,10 +34,6 @@ namespace SSS.Models
             }
         }
 
-        ~SidebarModel()
-        {
-            Dispose(false);
-        }
 
         public void Start()
         {

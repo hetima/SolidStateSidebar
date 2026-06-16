@@ -101,10 +101,6 @@ namespace SSS.Module.HdMonitor
             base.Dispose(disposing);
         }
 
-        ~DriveMonitor()
-        {
-            Dispose(false);
-        }
 
         public static IEnumerable<HardwareConfig> GetHardware()
         {
