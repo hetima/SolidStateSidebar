@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -122,9 +122,9 @@ namespace SSS
 
         public Page CurrentPage { get; set; } = Page.Initial;
 
-        private CancellationTokenSource? _cancelReposition { get; set; }
+        private CancellationTokenSource? _cancelReposition;
 
-        private bool _openSettings { get; set; } = false;
+        private bool _openSettings = false;
 
         [GeneratedRegex("[^0-9.-]+")]
         private static partial Regex NonNumericRegex();

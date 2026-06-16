@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 
 using System.ComponentModel;
@@ -150,7 +150,7 @@ namespace SSS.Models
             MonitorManager?.UpdateTime();
         }
 
-        private bool _ready { get; set; } = false;
+        private bool _ready = false;
 
         public bool Ready
         {
@@ -166,7 +166,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _showMachineName { get; set; }
+        private bool _showMachineName;
 
         public bool ShowMachineName
         {
@@ -182,7 +182,7 @@ namespace SSS.Models
             }
         }
 
-        private string? _machineName { get; set; }
+        private string? _machineName;
 
         public string MachineName
         {
@@ -198,7 +198,7 @@ namespace SSS.Models
             }
         }
 
-        private MonitorManager? _monitorManager { get; set; }
+        private MonitorManager? _monitorManager;
 
         public MonitorManager MonitorManager
         {
@@ -214,10 +214,10 @@ namespace SSS.Models
             }
         }
 
-        private DispatcherTimer? _monitorTimer { get; set; }
+        private DispatcherTimer? _monitorTimer;
 
-        private DispatcherTimer? _clockTimer { get; set; }
+        private DispatcherTimer? _clockTimer;
 
-        private bool _disposed { get; set; } = false;
+        private bool _disposed = false;
     }
 }

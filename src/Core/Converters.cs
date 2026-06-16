@@ -43,7 +43,7 @@ namespace SSS.Core
             }
         }
 
-        private static CelciusToFahrenheit? _instance { get; set; } = null;
+        private static CelciusToFahrenheit? _instance = null;
 
         public static CelciusToFahrenheit Instance
         {
@@ -91,7 +91,7 @@ namespace SSS.Core
             }
         }
 
-        private static MHzToGHz? _instance { get; set; } = null;
+        private static MHzToGHz? _instance = null;
 
         public static MHzToGHz Instance
         {
@@ -158,7 +158,7 @@ namespace SSS.Core
             }
         }
 
-        private static BitsPerSecondConverter? _instance { get; set; } = null;
+        private static BitsPerSecondConverter? _instance = null;
 
         public static BitsPerSecondConverter Instance
         {
@@ -225,7 +225,7 @@ namespace SSS.Core
             }
         }
 
-        private static BytesPerSecondConverter? _instance { get; set; } = null;
+        private static BytesPerSecondConverter? _instance = null;
 
         public static BytesPerSecondConverter Instance
         {

@@ -66,7 +66,7 @@ namespace SSS.Core
 
         protected IHardware? Hardware => _hardware;
 
-        private IHardware? _hardware { get; set; }
+        private IHardware? _hardware;
 
         protected static ISensor? FindSensor(ISensor[] sensors, Func<ISensor, bool> predicate)
         {

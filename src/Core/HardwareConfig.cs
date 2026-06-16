@@ -27,7 +27,7 @@ namespace SSS.Core
             return Clone();
         }
 
-        private string? _id { get; set; }
+        private string? _id;
 
         [JsonProperty]
         public string? ID
@@ -44,7 +44,7 @@ namespace SSS.Core
             }
         }
 
-        private string? _name { get; set; }
+        private string? _name;
 
         [JsonProperty]
         public string? Name
@@ -61,7 +61,7 @@ namespace SSS.Core
             }
         }
 
-        private string? _actualName { get; set; }
+        private string? _actualName;
 
         [JsonProperty]
         public string? ActualName
@@ -78,7 +78,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _enabled { get; set; } = true;
+        private bool _enabled = true;
 
         [JsonProperty]
         public bool Enabled
@@ -95,7 +95,7 @@ namespace SSS.Core
             }
         }
 
-        private byte _order { get; set; } = 0;
+        private byte _order = 0;
 
         [JsonProperty]
         public byte Order

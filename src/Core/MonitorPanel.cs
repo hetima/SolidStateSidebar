@@ -16,7 +16,7 @@ namespace SSS.Core
             Monitors = monitors;
         }
 
-        private MonitorType _type { get; set; }
+        private MonitorType _type;
 
         public MonitorType Type
         {
@@ -87,7 +87,7 @@ namespace SSS.Core
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private String? _svgContentPath { get; set; }
+        private String? _svgContentPath;
 
         public String? SvgContentPath
         {
@@ -103,7 +103,7 @@ namespace SSS.Core
             }
         }
 
-        private string? _title { get; set; }
+        private string? _title;
 
         public string Title
         {
@@ -119,7 +119,7 @@ namespace SSS.Core
             }
         }
 
-        private iMonitor[]? _monitors { get; set; }
+        private iMonitor[]? _monitors;
 
         public iMonitor[] Monitors
         {
@@ -135,9 +135,9 @@ namespace SSS.Core
             }
         }
 
-        private bool _disposed { get; set; } = false;
+        private bool _disposed = false;
 
-        private SectionHeaderStyle _sectionHeaderStyle { get; set; } = SectionHeaderStyle.Default;
+        private SectionHeaderStyle _sectionHeaderStyle = SectionHeaderStyle.Default;
 
         public SectionHeaderStyle SectionHeaderStyle
         {

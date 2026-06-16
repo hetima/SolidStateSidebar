@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -352,7 +352,7 @@ namespace SSS.Models
             IsChanged = true;
         }
 
-        private bool _isChanged { get; set; } = false;
+        private bool _isChanged = false;
 
         public bool IsChanged
         {
@@ -368,7 +368,7 @@ namespace SSS.Models
             }
         }
 
-        private DockEdge _dockEdge { get; set; }
+        private DockEdge _dockEdge;
 
         public DockEdge DockEdge
         {
@@ -384,7 +384,7 @@ namespace SSS.Models
             }
         }
 
-        private DockItem[]? _dockEdgeItems { get; set; }
+        private DockItem[]? _dockEdgeItems;
 
         public DockItem[]? DockEdgeItems
         {
@@ -400,7 +400,7 @@ namespace SSS.Models
             }
         }
 
-        private int _screenIndex { get; set; }
+        private int _screenIndex;
 
         public int ScreenIndex
         {
@@ -416,7 +416,7 @@ namespace SSS.Models
             }
         }
 
-        private ScreenItem[]? _screenItems { get; set; }
+        private ScreenItem[]? _screenItems;
 
         public ScreenItem[]? ScreenItems
         {
@@ -432,7 +432,7 @@ namespace SSS.Models
             }
         }
 
-        private string? _culture { get; set; }
+        private string? _culture;
 
         public string Culture
         {
@@ -448,7 +448,7 @@ namespace SSS.Models
             }
         }
 
-        private CultureItem[]? _cultureItems { get; set; }
+        private CultureItem[]? _cultureItems;
 
         public CultureItem[]? CultureItems
         {
@@ -464,7 +464,7 @@ namespace SSS.Models
             }
         }
 
-        private double _uiScale { get; set; }
+        private double _uiScale;
 
         public double UIScale
         {
@@ -480,7 +480,7 @@ namespace SSS.Models
             }
         }
 
-        private int _xOffset { get; set; }
+        private int _xOffset;
 
         public int XOffset
         {
@@ -496,7 +496,7 @@ namespace SSS.Models
             }
         }
 
-        private int _yOffset { get; set; }
+        private int _yOffset;
 
         public int YOffset
         {
@@ -512,7 +512,7 @@ namespace SSS.Models
             }
         }
 
-        private int _pollingInterval { get; set; }
+        private int _pollingInterval;
 
         public int PollingInterval
         {
@@ -528,7 +528,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _useAppBar { get; set; }
+        private bool _useAppBar;
 
         public bool UseAppBar
         {
@@ -544,7 +544,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _alwaysTop { get; set; }
+        private bool _alwaysTop;
 
         public bool AlwaysTop
         {
@@ -560,7 +560,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _toolbarMode { get; set; }
+        private bool _toolbarMode;
         
         public bool ToolbarMode
         {
@@ -576,7 +576,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _clickThrough { get; set; }
+        private bool _clickThrough;
 
         public bool ClickThrough
         {
@@ -592,7 +592,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _showTrayIcon { get; set; }
+        private bool _showTrayIcon;
 
         public bool ShowTrayIcon
         {
@@ -608,7 +608,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _runAtStartup { get; set; }
+        private bool _runAtStartup;
 
         public bool RunAtStartup
         {
@@ -623,7 +623,7 @@ namespace SSS.Models
                 NotifyPropertyChanged(nameof(RunAtStartup));
             }
         }
-        private int _sidebarMargin { get; set; }
+        private int _sidebarMargin;
 
         public int SidebarMargin
         {
@@ -638,7 +638,7 @@ namespace SSS.Models
                 NotifyPropertyChanged(nameof(SidebarMargin));
             }
         }
-        private int _sidebarWidth { get; set; }
+        private int _sidebarWidth;
 
         public int SidebarWidth
         {
@@ -655,7 +655,7 @@ namespace SSS.Models
         }
 
 
-        private string? _bgColor { get; set; }
+        private string? _bgColor;
 
         public string BGColor
         {
@@ -671,7 +671,7 @@ namespace SSS.Models
             }
         }
 
-        private double _bgOpacity { get; set; }
+        private double _bgOpacity;
 
         public double BGOpacity
         {
@@ -687,7 +687,7 @@ namespace SSS.Models
             }
         }
 
-        private TextAlign _textAlign { get; set; }
+        private TextAlign _textAlign;
 
         public TextAlign TextAlign
         {
@@ -703,7 +703,7 @@ namespace SSS.Models
             }
         }
 
-        private TextAlignItem[]? _textAlignItems { get; set; }
+        private TextAlignItem[]? _textAlignItems;
 
         public TextAlignItem[] TextAlignItems
         {
@@ -719,7 +719,7 @@ namespace SSS.Models
             }
         }
 
-        private int _fontSize { get; set; }
+        private int _fontSize;
 
         public int FontSize
         {
@@ -734,7 +734,7 @@ namespace SSS.Models
                 NotifyPropertyChanged(nameof(FontSize));
             }
         }
-        private string? _fontName { get; set; }
+        private string? _fontName;
 
         public string FontName
         {
@@ -750,7 +750,7 @@ namespace SSS.Models
             }
         }
 
-        private String[]? _fontNameItems { get; set; }
+        private String[]? _fontNameItems;
 
         public String[] FontNameItems
         {
@@ -766,7 +766,7 @@ namespace SSS.Models
             }
         }
 
-        private string? _fontColor { get; set; }
+        private string? _fontColor;
 
         public string FontColor
         {
@@ -782,7 +782,7 @@ namespace SSS.Models
             }
         }
 
-        private string? _alertFontColor { get; set; }
+        private string? _alertFontColor;
 
         public string AlertFontColor
         {
@@ -798,7 +798,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _alertBlink { get; set; } = true;
+        private bool _alertBlink = true;
         
         public bool AlertBlink
         {
@@ -814,7 +814,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _collapseMenuBar { get; set; }
+        private bool _collapseMenuBar;
 
         public bool CollapseMenuBar
         {
@@ -830,7 +830,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _initiallyHidden { get; set; }
+        private bool _initiallyHidden;
         
         public bool InitiallyHidden
         {
@@ -846,7 +846,7 @@ namespace SSS.Models
             }
         }
 
-        private string[]? _iconThemeItems { get; set; }
+        private string[]? _iconThemeItems;
 
         public string[] IconThemeItems
         {
@@ -862,7 +862,7 @@ namespace SSS.Models
             }
         }
 
-        private string? _iconTheme { get; set; } = "Default";
+        private string? _iconTheme = "Default";
 
         public string IconTheme
         {
@@ -878,7 +878,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _showMachineName { get; set; } = true;
+        private bool _showMachineName = true;
 
         public bool ShowMachineName
         {
@@ -894,7 +894,7 @@ namespace SSS.Models
             }
         }
 
-        private bool _metricsNoWrap { get; set; } = false;
+        private bool _metricsNoWrap = false;
 
         public bool MetricsNoWrap
         {
@@ -910,7 +910,7 @@ namespace SSS.Models
             }
         }
 
-        private ObservableCollection<IModuleData>? _modules { get; set; }
+        private ObservableCollection<IModuleData>? _modules;
 
         public ObservableCollection<IModuleData> Modules
         {
@@ -953,7 +953,7 @@ namespace SSS.Models
             }
         }
 
-        private IModuleData? _selectedModule { get; set; }
+        private IModuleData? _selectedModule;
 
         public IModuleData? SelectedModule
         {
@@ -969,7 +969,7 @@ namespace SSS.Models
             }
         }
 
-        private Hotkey? _toggleKey { get; set; }
+        private Hotkey? _toggleKey;
 
         public Hotkey? ToggleKey
         {
@@ -985,7 +985,7 @@ namespace SSS.Models
             }
         }
 
-        private Hotkey? _showKey { get; set; }
+        private Hotkey? _showKey;
 
         public Hotkey? ShowKey
         {
@@ -1001,7 +1001,7 @@ namespace SSS.Models
             }
         }
 
-        private Hotkey? _hideKey { get; set; }
+        private Hotkey? _hideKey;
 
         public Hotkey? HideKey
         {
@@ -1017,7 +1017,7 @@ namespace SSS.Models
             }
         }
 
-        private Hotkey? _reloadKey { get; set; }
+        private Hotkey? _reloadKey;
 
         public Hotkey? ReloadKey
         {
@@ -1030,7 +1030,7 @@ namespace SSS.Models
             }
         }
 
-        private Hotkey? _closeKey { get; set; }
+        private Hotkey? _closeKey;
 
         public Hotkey? CloseKey
         {
@@ -1043,7 +1043,7 @@ namespace SSS.Models
             }
         }
 
-        private Hotkey? _cycleEdgeKey { get; set; }
+        private Hotkey? _cycleEdgeKey;
 
         public Hotkey? CycleEdgeKey
         {
@@ -1056,7 +1056,7 @@ namespace SSS.Models
             }
         }
 
-        private Hotkey? _cycleScreenKey { get; set; } = null;
+        private Hotkey? _cycleScreenKey = null;
 
         public Hotkey? CycleScreenKey
         {
@@ -1069,7 +1069,7 @@ namespace SSS.Models
             }
         }
 
-        private Hotkey? _reserveSpaceKey { get; set; }
+        private Hotkey? _reserveSpaceKey;
 
         public Hotkey? ReserveSpaceKey
         {

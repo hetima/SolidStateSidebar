@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -129,7 +129,7 @@ namespace SSS.Core
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private bool _initialSetup { get; set; } = true;
+        private bool _initialSetup = true;
 
         [JsonProperty]
         public bool InitialSetup
@@ -146,7 +146,7 @@ namespace SSS.Core
             }
         }
 
-        private DockEdge _dockEdge { get; set; } = DockEdge.Right;
+        private DockEdge _dockEdge = DockEdge.Right;
 
         [JsonProperty]
         public DockEdge DockEdge
@@ -163,7 +163,7 @@ namespace SSS.Core
             }
         }
 
-        private int _screenIndex { get; set; } = 0;
+        private int _screenIndex = 0;
 
         [JsonProperty]
         public int ScreenIndex
@@ -180,7 +180,7 @@ namespace SSS.Core
             }
         }
 
-        private string _culture { get; set; } = Utilities.Culture.DEFAULT;
+        private string _culture = Utilities.Culture.DEFAULT;
 
         [JsonProperty]
         public string Culture
@@ -197,7 +197,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _useAppBar { get; set; } = true;
+        private bool _useAppBar = true;
         
         [JsonProperty]
         public bool UseAppBar
@@ -214,7 +214,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _alwaysTop { get; set; } = true;
+        private bool _alwaysTop = true;
 
         [JsonProperty]
         public bool AlwaysTop
@@ -232,7 +232,7 @@ namespace SSS.Core
         }
 
 
-        private bool _runAtStartup { get; set; } = true;
+        private bool _runAtStartup = true;
 
         [JsonProperty]
         public bool RunAtStartup
@@ -249,7 +249,7 @@ namespace SSS.Core
             }
         }
 
-        private double _uiScale { get; set; } = 1d;
+        private double _uiScale = 1d;
 
         [JsonProperty]
         public double UIScale
@@ -266,7 +266,7 @@ namespace SSS.Core
             }
         }
 
-        private int _xOffset { get; set; } = 0;
+        private int _xOffset = 0;
 
         [JsonProperty]
         public int XOffset
@@ -283,7 +283,7 @@ namespace SSS.Core
             }
         }
 
-        private int _yOffset { get; set; } = 0;
+        private int _yOffset = 0;
 
         [JsonProperty]
         public int YOffset
@@ -300,7 +300,7 @@ namespace SSS.Core
             }
         }
 
-        private int _pollingInterval { get; set; } = 1000;
+        private int _pollingInterval = 1000;
 
         [JsonProperty]
         public int PollingInterval
@@ -317,7 +317,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _toolbarMode { get; set; } = true;
+        private bool _toolbarMode = true;
 
         [JsonProperty]
         public bool ToolbarMode
@@ -334,7 +334,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _clickThrough { get; set; } = false;
+        private bool _clickThrough = false;
 
         [JsonProperty]
         public bool ClickThrough
@@ -351,7 +351,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _showTrayIcon { get; set; } = true;
+        private bool _showTrayIcon = true;
 
         [JsonProperty]
         public bool ShowTrayIcon
@@ -368,7 +368,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _collapseMenuBar { get; set; } = false;
+        private bool _collapseMenuBar = false;
 
         [JsonProperty]
         public bool CollapseMenuBar
@@ -385,7 +385,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _initiallyHidden { get; set; } = false;
+        private bool _initiallyHidden = false;
 
         [JsonProperty]
         public bool InitiallyHidden
@@ -402,7 +402,7 @@ namespace SSS.Core
             }
         }
 
-        private int _sidebarMargin { get; set; } = 15;
+        private int _sidebarMargin = 15;
 
         [JsonProperty]
         public int SidebarMargin
@@ -419,7 +419,7 @@ namespace SSS.Core
             }
         }
 
-        private int _sidebarWidth { get; set; } = 180;
+        private int _sidebarWidth = 180;
 
         [JsonProperty]
         public int SidebarWidth
@@ -436,7 +436,7 @@ namespace SSS.Core
             }
         }
 
-        private string _bgColor { get; set; } = "#1F1F1F";
+        private string _bgColor = "#1F1F1F";
 
         [JsonProperty]
         public string BGColor
@@ -453,7 +453,7 @@ namespace SSS.Core
             }
         }
 
-        private double _bgOpacity { get; set; } = 0.85d;
+        private double _bgOpacity = 0.85d;
 
         [JsonProperty]
         public double BGOpacity
@@ -470,7 +470,7 @@ namespace SSS.Core
             }
         }
 
-        private TextAlign _textAlign { get; set; } = TextAlign.Left;
+        private TextAlign _textAlign = TextAlign.Left;
 
         [JsonProperty]
         public TextAlign TextAlign
@@ -487,7 +487,7 @@ namespace SSS.Core
             }
         }
 
-        private int _fontSize { get; set; } = 14;
+        private int _fontSize = 14;
 
         [JsonProperty]
         public int FontSize
@@ -530,7 +530,7 @@ namespace SSS.Core
         [JsonIgnore]
         public int BarWidthWide => BarHeight * 8;
 
-        private string _fontName { get; set; } = "Arial";
+        private string _fontName = "Arial";
 
         [JsonProperty]
         public string FontName
@@ -548,7 +548,7 @@ namespace SSS.Core
         }
 
 
-        private string _fontColor { get; set; } = "#FFFFFF";
+        private string _fontColor = "#FFFFFF";
 
         private Color _fontColorColor;
 
@@ -578,7 +578,7 @@ namespace SSS.Core
             }
         }
 
-        private string _alertFontColor { get; set; } = "#FF4136";
+        private string _alertFontColor = "#FF4136";
 
         [JsonProperty]
         public string AlertFontColor
@@ -595,7 +595,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _alertBlink { get; set; } = true;
+        private bool _alertBlink = true;
 
         [JsonProperty]
         public bool AlertBlink
@@ -612,7 +612,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _metricsNoWrap { get; set; } = false;
+        private bool _metricsNoWrap = false;
 
         [JsonProperty]
         public bool MetricsNoWrap
@@ -629,7 +629,7 @@ namespace SSS.Core
             }
         }
 
-        private string _iconTheme { get; set; } = "Default";
+        private string _iconTheme = "Default";
 
         [JsonProperty]
         public string IconTheme
@@ -652,7 +652,7 @@ namespace SSS.Core
             return File.Exists(path) ? path : null;
         }
 
-        private bool _showMachineName { get; set; } = false;
+        private bool _showMachineName = false;
 
         [JsonProperty]
         public bool ShowMachineName
@@ -669,7 +669,7 @@ namespace SSS.Core
             }
         }
 
-        private Dictionary<string, IModuleData>? _modules { get; set; } = null;
+        private Dictionary<string, IModuleData>? _modules = null;
 
         [JsonProperty("Modules")]
         [JsonConverter(typeof(ModuleDataConverter))]
@@ -730,7 +730,7 @@ namespace SSS.Core
             return modules;
         }
 
-        private Hotkey[] _hotkeys { get; set; } = [];
+        private Hotkey[] _hotkeys = [];
 
         [JsonProperty]
         public Hotkey[] Hotkeys
@@ -747,7 +747,7 @@ namespace SSS.Core
             }
         }
 
-        private static Settings? _instance { get; set; } = null;
+        private static Settings? _instance = null;
 
         public static Settings Instance
         {

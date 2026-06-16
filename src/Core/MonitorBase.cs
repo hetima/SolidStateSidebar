@@ -75,7 +75,7 @@ namespace SSS.Core
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private string? _id { get; set; }
+        private string? _id;
 
         public string? ID
         {
@@ -91,7 +91,7 @@ namespace SSS.Core
             }
         }
 
-        private string? _name { get; set; }
+        private string? _name;
 
         public string? Name
         {
@@ -107,7 +107,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _showName { get; set; }
+        private bool _showName;
 
         public bool ShowName
         {
@@ -123,7 +123,7 @@ namespace SSS.Core
             }
         }
 
-        private iMetric[]? _metrics { get; set; }
+        private iMetric[]? _metrics;
 
         public iMetric[]? Metrics
         {
@@ -139,6 +139,6 @@ namespace SSS.Core
             }
         }
 
-        protected bool _disposed { get; set; } = false;
+        protected bool _disposed = false;
     }
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Drawing; // Icon, Bitmapの利用に必要
 using System.Globalization;
 using System.Linq;
@@ -245,7 +245,7 @@ namespace SSS.Utilities
             }
         }
 
-        private static string? _assemblyName { get; set; } = null;
+        private static string? _assemblyName = null;
 
         public static string AssemblyName
         {
@@ -260,7 +260,7 @@ namespace SSS.Utilities
             }
         }
 
-        private static string? _exeName { get; set; } = null;
+        private static string? _exeName = null;
 
         public static string ExeName
         {
@@ -275,7 +275,7 @@ namespace SSS.Utilities
             }
         }
 
-        private static string? _settingsFile { get; set; } = null;
+        private static string? _settingsFile = null;
 
         public static string SettingsFile
         {
@@ -295,8 +295,8 @@ namespace SSS.Utilities
         }
 
 
-        private static string? _localAppDirPath { get; set; } = null;
-        private static string? _localIconThemesPath { get; set; } = null;
+        private static string? _localAppDirPath = null;
+        private static string? _localIconThemesPath = null;
 
         public static string LocalAppDirPath
         {

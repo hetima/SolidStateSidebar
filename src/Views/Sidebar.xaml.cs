@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
@@ -275,7 +275,7 @@ namespace SSS
             }
         }
 
-        private bool _ready { get; set; } = false;
+        private bool _ready = false;
 
         public bool Ready
         {
@@ -298,8 +298,8 @@ namespace SSS
             Model?.TriggerHookUpdate(frontHwnd);
         }
 
-        private bool _openSettings { get; set; } = false;
+        private bool _openSettings = false;
 
-        private bool _initiallyHidden { get; set; } = false;
+        private bool _initiallyHidden = false;
     }
 }

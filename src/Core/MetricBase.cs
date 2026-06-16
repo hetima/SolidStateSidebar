@@ -138,7 +138,7 @@ namespace SSS.Core
 
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        private MetricKey _key { get; set; }
+        private MetricKey _key;
 
         public MetricKey Key
         {
@@ -153,7 +153,7 @@ namespace SSS.Core
             }
         }
 
-        private string? _fullName { get; set; }
+        private string? _fullName;
 
         public string? FullName
         {
@@ -166,9 +166,9 @@ namespace SSS.Core
             }
         }
 
-        private string? _label { get; set; }
+        private string? _label;
 
-        private string? _customLabel { get; set; }
+        private string? _customLabel;
 
         public string? CustomLabel
         {
@@ -197,7 +197,7 @@ namespace SSS.Core
             }
         }
 
-        private double _value { get; set; }
+        private double _value;
 
         public double Value
         {
@@ -212,7 +212,7 @@ namespace SSS.Core
             }
         }
 
-        private string? _append { get; set; }
+        private string? _append;
 
         public string Append
         {
@@ -225,7 +225,7 @@ namespace SSS.Core
             }
         }
 
-        private double _nValue { get; set; }
+        private double _nValue;
 
         public double nValue
         {
@@ -240,7 +240,7 @@ namespace SSS.Core
             }
         }
 
-        private string? _nAppend { get; set; }
+        private string? _nAppend;
 
         public string nAppend
         {
@@ -255,7 +255,7 @@ namespace SSS.Core
             }
         }
 
-        private string? _text { get; set; }
+        private string? _text;
 
         public string? Text
         {
@@ -270,7 +270,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _isAlert { get; set; }
+        private bool _isAlert;
 
         public bool IsAlert
         {
@@ -325,12 +325,12 @@ namespace SSS.Core
 
         private bool _alertColorFlag = false;
 
-        protected iConverter? _converter { get; set; }
+        protected iConverter? _converter;
 
-        protected bool? _round { get; set; }
+        protected bool? _round;
 
-        protected double? _alertValue { get; set; }
+        protected double? _alertValue;
 
-        protected bool _disposed { get; set; } = false;
+        protected bool _disposed = false;
     }
 }

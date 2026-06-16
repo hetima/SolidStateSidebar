@@ -324,7 +324,7 @@ namespace SSS.Core
             _board?.Update();
         }
 
-        private MonitorPanel[]? _monitorPanels { get; set; }
+        private MonitorPanel[]? _monitorPanels;
 
         public MonitorPanel[]? MonitorPanels
         {
@@ -340,10 +340,10 @@ namespace SSS.Core
             }
         }
 
-        private Computer? _computer { get; set; }
+        private Computer? _computer;
 
-        private IHardware? _board { get; set; }
+        private IHardware? _board;
 
-        private bool _disposed { get; set; } = false;
+        private bool _disposed = false;
     }
 }

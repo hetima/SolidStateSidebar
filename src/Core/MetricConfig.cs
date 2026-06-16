@@ -35,7 +35,7 @@ namespace SSS.Core
             return Clone();
         }
 
-        private MetricKey _key { get; set; }
+        private MetricKey _key;
 
         [JsonProperty]
         public MetricKey Key
@@ -52,7 +52,7 @@ namespace SSS.Core
             }
         }
 
-        private bool _enabled { get; set; }
+        private bool _enabled;
 
         [JsonProperty]
         public bool Enabled
@@ -90,7 +90,7 @@ namespace SSS.Core
             }
         }
 
-        private string? _label { get; set; }
+        private string? _label;
 
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string? Label
@@ -107,7 +107,7 @@ namespace SSS.Core
             }
         }
 
-        private byte _order { get; set; }
+        private byte _order;
 
         [JsonProperty]
         public byte Order

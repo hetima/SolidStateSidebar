@@ -43,7 +43,7 @@ namespace SSS.Core
             }
         }
 
-        private ISensor? _sensor { get; set; }
+        private ISensor? _sensor;
     }
 
     public class GPUVRAMMLoadMetric : BaseMetric
@@ -89,9 +89,9 @@ namespace SSS.Core
             }
         }
 
-        private ISensor? _memoryUsedSensor { get; set; }
+        private ISensor? _memoryUsedSensor;
 
-        private ISensor? _memoryTotalSensor { get; set; }
+        private ISensor? _memoryTotalSensor;
     }
 
     public class IPMetric : BaseMetric
@@ -145,6 +145,6 @@ namespace SSS.Core
             Update(_counter!.NextValue());
         }
 
-        private PerformanceCounter? _counter { get; set; }
+        private PerformanceCounter? _counter;
     }
 }

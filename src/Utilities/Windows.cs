@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace SSS.Windows
 
     public static class OS
     {
-        private static WinOS _os { get; set; } = WinOS.Unknown;
+        private static WinOS _os = WinOS.Unknown;
 
         public static WinOS Get
         {
@@ -353,13 +353,13 @@ namespace SSS.Windows
 
         public static bool IsHooked { get; private set; } = false;
 
-        private static IntPtr? _hookIntPtr { get; set; }
+        private static IntPtr? _hookIntPtr;
 
-        private static WinEventDelegate? _delegate { get; set; }
+        private static WinEventDelegate? _delegate;
 
-        private static Sidebar? _sidebar { get; set; }
+        private static Sidebar? _sidebar;
 
-        private static IntPtr? _sidebarHwnd { get; set; }
+        private static IntPtr? _sidebarHwnd;
     }
 
     public static class Devices
@@ -483,7 +483,7 @@ namespace SSS.Windows
 
         public static bool IsHooked { get; private set; } = false;
 
-        private static CancellationTokenSource? _cancelRestart { get; set; }
+        private static CancellationTokenSource? _cancelRestart;
     }
 
     [JsonObject(MemberSerialization.OptIn)]
@@ -774,9 +774,9 @@ namespace SSS.Windows
 
         public static bool IsHooked { get; private set; } = false;
 
-        private static Sidebar? _sidebar { get; set; }
+        private static Sidebar? _sidebar;
 
-        private static int _index { get; set; }
+        private static int _index;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -1201,9 +1201,9 @@ namespace SSS.Windows
             }
         }
 
-        private double _originalWidth { get; set; }
+        private double _originalWidth;
 
-        private double _originalHeight { get; set; }
+        private double _originalHeight;
     }
 
     [Serializable]
@@ -1661,12 +1661,12 @@ namespace SSS.Windows
 
         public double AppBarWidth { get; private set; } = 0;
 
-        private bool _canMove { get; set; } = true;
+        private bool _canMove = true;
 
-        private bool _wasTopMost { get; set; } = false;
+        private bool _wasTopMost = false;
 
-        private int _callbackID { get; set; }
+        private int _callbackID;
 
-        private RECT _monitorWorkArea { get; set; }
+        private RECT _monitorWorkArea;
     }
 }

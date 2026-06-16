@@ -161,7 +161,7 @@ namespace SSS.Module.HdMonitor
             base.Update();
         }
 
-        private State _status { get; set; }
+        private State _status;
 
         public State Status
         {
@@ -176,7 +176,7 @@ namespace SSS.Module.HdMonitor
             }
         }
 
-        private iMetric? _loadMetric { get; set; }
+        private iMetric? _loadMetric;
 
         public iMetric? LoadMetric
         {
@@ -192,7 +192,7 @@ namespace SSS.Module.HdMonitor
             }
         }
 
-        private iMetric? _usedMetric { get; set; }
+        private iMetric? _usedMetric;
 
         public iMetric? UsedMetric
         {
@@ -208,7 +208,7 @@ namespace SSS.Module.HdMonitor
             }
         }
 
-        private iMetric? _freeMetric { get; set; }
+        private iMetric? _freeMetric;
 
         public iMetric? FreeMetric
         {
@@ -239,11 +239,11 @@ namespace SSS.Module.HdMonitor
             }
         }
 
-        private PerformanceCounter? _counterFreeMB { get; set; }
+        private PerformanceCounter? _counterFreeMB;
 
-        private PerformanceCounter? _counterFreePercent { get; set; }
+        private PerformanceCounter? _counterFreePercent;
 
-        private bool _loadEnabled { get; set; }
+        private bool _loadEnabled;
 
         [GeneratedRegex("^[A-Z]:$")]
         private static partial Regex MyRegex();
