@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Diagnostics;
 using LibreHardwareMonitor.Hardware;
@@ -14,7 +13,7 @@ using CodexData = SSS.Module.CodexMonitor.Data;
 
 namespace SSS.Core
 {
-    public class MonitorManager : INotifyPropertyChanged, IDisposable
+    public class MonitorManager : ObservableObject, IDisposable
     {
 
         public MonitorManager(Dictionary<string, IModuleData> modules)
@@ -171,16 +170,6 @@ namespace SSS.Core
             }
         }
 
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         private IEnumerable<IHardware> GetHardware(params HardwareType[] types)
         {
             return _computer!.Hardware.Where(h => types.Contains(h.HardwareType));
@@ -323,16 +312,8 @@ namespace SSS.Core
 
         public MonitorPanel[]? MonitorPanels
         {
-            get
-            {
-                return _monitorPanels;
-            }
-            private set
-            {
-                _monitorPanels = value;
-
-                NotifyPropertyChanged(nameof(MonitorPanels));
-            }
+            get => _monitorPanels;
+            private set => SetProperty(ref _monitorPanels, value);
         }
 
         private Computer? _computer;

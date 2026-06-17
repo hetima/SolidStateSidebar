@@ -33,7 +33,7 @@ namespace SSS.Core
         void Update(double value);
     }
 
-    public class BaseMetric : iMetric
+    public class BaseMetric : ObservableObject, iMetric
     {
         public BaseMetric(MetricKey key, DataType dataType, string? label = null, bool round = false, double alertValue = 0, iConverter? converter = null)
         {
@@ -125,26 +125,12 @@ namespace SSS.Core
                 );
         }
 
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         private MetricKey _key;
 
         public MetricKey Key
         {
             get => _key;
-            protected set
-            {
-                if (_key == value) return;
-
-                _key = value;
-
-                NotifyPropertyChanged(nameof(Key));
-            }
+            protected set => SetProperty(ref _key, value);
         }
 
         private string? _fullName;
@@ -152,12 +138,7 @@ namespace SSS.Core
         public string? FullName
         {
             get => _fullName;
-            protected set
-            {
-                _fullName = value;
-
-                NotifyPropertyChanged(nameof(FullName));
-            }
+            protected set => SetProperty(ref _fullName, value);
         }
 
         private string? _label;
@@ -181,14 +162,7 @@ namespace SSS.Core
         public string Label
         {
             get => _customLabel ?? _label ?? string.Empty;
-            protected set
-            {
-                if (_label == value) return;
-
-                _label = value;
-
-                NotifyPropertyChanged(nameof(Label));
-            }
+            protected set => SetProperty(ref _label, value);
         }
 
         private double _value;
@@ -196,14 +170,7 @@ namespace SSS.Core
         public double Value
         {
             get => _value;
-            protected set
-            {
-                if (_value == value) return;
-
-                _value = value;
-
-                NotifyPropertyChanged(nameof(Value));
-            }
+            protected set => SetProperty(ref _value, value);
         }
 
         private string? _append;
@@ -211,12 +178,7 @@ namespace SSS.Core
         public string Append
         {
             get => _append ?? string.Empty;
-            protected set
-            {
-                _append = value;
-
-                NotifyPropertyChanged(nameof(Append));
-            }
+            protected set => SetProperty(ref _append, value);
         }
 
         private double _nValue;
@@ -224,14 +186,7 @@ namespace SSS.Core
         public double nValue
         {
             get => _nValue;
-            set
-            {
-                if (_nValue == value) return;
-
-                _nValue = value;
-
-                NotifyPropertyChanged(nameof(nValue));
-            }
+            set => SetProperty(ref _nValue, value);
         }
 
         private string? _nAppend;
@@ -239,14 +194,7 @@ namespace SSS.Core
         public string nAppend
         {
             get => _nAppend ?? string.Empty;
-            set
-            {
-                if (_nAppend == value) return;
-
-                _nAppend = value;
-
-                NotifyPropertyChanged(nameof(nAppend));
-            }
+            set => SetProperty(ref _nAppend, value);
         }
 
         private string? _text;
@@ -254,14 +202,7 @@ namespace SSS.Core
         public string? Text
         {
             get => _text;
-            protected set
-            {
-                if (_text == value) return;
-
-                _text = value;
-
-                NotifyPropertyChanged(nameof(Text));
-            }
+            protected set => SetProperty(ref _text, value);
         }
 
         private bool _isAlert;

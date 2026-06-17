@@ -1,14 +1,13 @@
 using System;
 using System.Diagnostics;
 
-using System.ComponentModel;
 using System.Windows.Threading;
 using SSS.Core;
 using SSS.Utilities;
 
 namespace SSS.Models
 {
-    public class SidebarModel : INotifyPropertyChanged, IDisposable
+    public class SidebarModel : ObservableObject, IDisposable
     {
         public SidebarModel()
         {
@@ -56,16 +55,6 @@ namespace SSS.Models
         {
             ResumeMonitors();
         }
-
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         private void InitMachineName()
         {
@@ -149,64 +138,32 @@ namespace SSS.Models
 
         public bool Ready
         {
-            get
-            {
-                return _ready;
-            }
-            set
-            {
-                _ready = value;
-
-                NotifyPropertyChanged(nameof(Ready));
-            }
+            get => _ready;
+            set => SetProperty(ref _ready, value);
         }
 
         private bool _showMachineName;
 
         public bool ShowMachineName
         {
-            get
-            {
-                return _showMachineName;
-            }
-            set
-            {
-                _showMachineName = value;
-
-                NotifyPropertyChanged(nameof(ShowMachineName));
-            }
+            get => _showMachineName;
+            set => SetProperty(ref _showMachineName, value);
         }
 
         private string? _machineName;
 
         public string MachineName
         {
-            get
-            {
-                return _machineName ?? string.Empty;
-            }
-            set
-            {
-                _machineName = value;
-
-                NotifyPropertyChanged(nameof(MachineName));
-            }
+            get => _machineName ?? string.Empty;
+            set => SetProperty(ref _machineName, value);
         }
 
         private MonitorManager? _monitorManager;
 
         public MonitorManager MonitorManager
         {
-            get
-            {
-                return _monitorManager!;
-            }
-            set
-            {
-                _monitorManager = value;
-
-                NotifyPropertyChanged(nameof(MonitorManager));
-            }
+            get => _monitorManager!;
+            set => SetProperty(ref _monitorManager, value);
         }
 
         private DispatcherTimer? _monitorTimer;

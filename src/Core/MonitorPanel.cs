@@ -1,11 +1,10 @@
 using System;
-using System.ComponentModel;
 using System.Windows.Media;
 using SVGImage.SVG;
 
 namespace SSS.Core
 {
-    public class MonitorPanel : INotifyPropertyChanged, IDisposable
+    public class MonitorPanel : ObservableObject, IDisposable
     {
         public MonitorPanel(MonitorType type, string title, string? iconData, params iMonitor[] monitors)
         {
@@ -20,15 +19,8 @@ namespace SSS.Core
 
         public MonitorType Type
         {
-            get
-            {
-                return _type;
-            }
-            private set
-            {
-                _type = value;
-                NotifyPropertyChanged(nameof(Type));
-            }
+            get => _type;
+            private set => SetProperty(ref _type, value);
         }
 
         public void Dispose()
@@ -72,24 +64,11 @@ namespace SSS.Core
             }
         }
 
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         private string? _svgContentPath;
 
         public string? SvgContentPath
         {
-            get
-            {
-                return _svgContentPath;
-            }
+            get => _svgContentPath;
             private set
             {
                 _svgContentPath = value;
@@ -102,32 +81,16 @@ namespace SSS.Core
 
         public string Title
         {
-            get
-            {
-                return _title!;
-            }
-            private set
-            {
-                _title = value;
-
-                NotifyPropertyChanged(nameof(Title));
-            }
+            get => _title!;
+            private set => SetProperty(ref _title, value);
         }
 
         private iMonitor[]? _monitors;
 
         public iMonitor[] Monitors
         {
-            get
-            {
-                return _monitors!;
-            }
-            private set
-            {
-                _monitors = value;
-
-                NotifyPropertyChanged(nameof(Monitors));
-            }
+            get => _monitors!;
+            private set => SetProperty(ref _monitors, value);
         }
 
         private bool _disposed = false;
@@ -136,15 +99,8 @@ namespace SSS.Core
 
         public SectionHeaderStyle SectionHeaderStyle
         {
-            get
-            {
-                return _sectionHeaderStyle;
-            }
-            set
-            {
-                _sectionHeaderStyle = value;
-                NotifyPropertyChanged(nameof(SectionHeaderStyle));
-            }
+            get => _sectionHeaderStyle;
+            set => SetProperty(ref _sectionHeaderStyle, value);
         }
 
         public ResetTimeDisplay ShortResetDisplay { get; set; } = ResetTimeDisplay.Countdown;
@@ -155,30 +111,16 @@ namespace SSS.Core
 
         public int FontSize
         {
-            get
-            {
-                return _fontSize;
-            }
-            set
-            {
-                _fontSize = value;
-                NotifyPropertyChanged(nameof(FontSize));
-            }
+            get => _fontSize;
+            set => SetProperty(ref _fontSize, value);
         }
 
         private string? _fontName = null;
 
         public string? FontName
         {
-            get
-            {
-                return _fontName;
-            }
-            set
-            {
-                _fontName = value;
-                NotifyPropertyChanged(nameof(FontName));
-            }
+            get => _fontName;
+            set => SetProperty(ref _fontName, value);
         }
     }
 }

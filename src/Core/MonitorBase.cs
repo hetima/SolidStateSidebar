@@ -16,7 +16,7 @@ namespace SSS.Core
         void Update();
     }
 
-    public class BaseMonitor : iMonitor
+    public class BaseMonitor : ObservableObject, iMonitor
     {
         public BaseMonitor(string id, string name, bool showName)
         {
@@ -59,78 +59,36 @@ namespace SSS.Core
             }
         }
 
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         private string? _id;
 
         public string? ID
         {
-            get
-            {
-                return _id;
-            }
-            protected set
-            {
-                _id = value;
-
-                NotifyPropertyChanged(nameof(ID));
-            }
+            get => _id;
+            protected set => SetProperty(ref _id, value);
         }
 
         private string? _name;
 
         public string? Name
         {
-            get
-            {
-                return _name;
-            }
-            protected set
-            {
-                _name = value;
-
-                NotifyPropertyChanged(nameof(Name));
-            }
+            get => _name;
+            protected set => SetProperty(ref _name, value);
         }
 
         private bool _showName;
 
         public bool ShowName
         {
-            get
-            {
-                return _showName;
-            }
-            protected set
-            {
-                _showName = value;
-
-                NotifyPropertyChanged(nameof(ShowName));
-            }
+            get => _showName;
+            protected set => SetProperty(ref _showName, value);
         }
 
         private iMetric[]? _metrics;
 
         public iMetric[]? Metrics
         {
-            get
-            {
-                return _metrics;
-            }
-            protected set
-            {
-                _metrics = value;
-
-                NotifyPropertyChanged(nameof(Metrics));
-            }
+            get => _metrics;
+            protected set => SetProperty(ref _metrics, value);
         }
 
         protected bool _disposed = false;
