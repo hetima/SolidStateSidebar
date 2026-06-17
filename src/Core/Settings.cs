@@ -521,20 +521,6 @@ namespace SSS.Core
         }
     }
 
-    public enum TextAlign : byte
-    {
-        Left,
-        Right
-    }
-
-    public enum SectionHeaderStyle : byte
-    {
-        Default,
-        Small,
-        None,
-        NoIcon
-    }
-
     [JsonObject(MemberSerialization.OptIn)]
     public sealed class DateSetting
     {

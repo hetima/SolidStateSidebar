@@ -77,6 +77,20 @@ namespace SSS.Core
         TenMin
     }
 
+    public enum TextAlign : byte
+    {
+        Left,
+        Right
+    }
+
+    public enum SectionHeaderStyle : byte
+    {
+        Default,
+        Small,
+        None,
+        NoIcon
+    }
+
     public enum DataType : byte
     {
         Dynamic,
