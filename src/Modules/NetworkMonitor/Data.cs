@@ -2,21 +2,14 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using SSS.Core;
 
 namespace SSS.Module.NetworkMonitor
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class Data : Core.IModuleData, ICloneable
+    public class Data : ObservableObject, Core.IModuleData, ICloneable
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         // --- IModuleData ---
 
@@ -26,7 +19,7 @@ namespace SSS.Module.NetworkMonitor
         public bool Enabled
         {
             get => _enabled;
-            set { _enabled = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _enabled, value);
         }
 
         private byte _order = 1;
@@ -35,7 +28,7 @@ namespace SSS.Module.NetworkMonitor
         public byte Order
         {
             get => _order;
-            set { _order = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _order, value);
         }
 
         private HardwareConfig[] _hardware = [];
@@ -44,7 +37,7 @@ namespace SSS.Module.NetworkMonitor
         public HardwareConfig[] Hardware
         {
             get => _hardware;
-            set { _hardware = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _hardware, value);
         }
 
         private ObservableCollection<MetricConfig> _metrics = [];
@@ -88,7 +81,7 @@ namespace SSS.Module.NetworkMonitor
         public bool ShowHardwareNames
         {
             get => _showHardwareNames;
-            set { _showHardwareNames = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _showHardwareNames, value);
         }
 
         private bool _roundAll = false;
@@ -97,7 +90,7 @@ namespace SSS.Module.NetworkMonitor
         public bool RoundAll
         {
             get => _roundAll;
-            set { _roundAll = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _roundAll, value);
         }
 
         private bool _useBytes = false;
@@ -106,7 +99,7 @@ namespace SSS.Module.NetworkMonitor
         public bool UseBytes
         {
             get => _useBytes;
-            set { _useBytes = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _useBytes, value);
         }
 
         private int _bandwidthInAlert = 0;
@@ -115,7 +108,7 @@ namespace SSS.Module.NetworkMonitor
         public int BandwidthInAlert
         {
             get => _bandwidthInAlert;
-            set { _bandwidthInAlert = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _bandwidthInAlert, value);
         }
 
         private int _bandwidthOutAlert = 0;
@@ -124,7 +117,7 @@ namespace SSS.Module.NetworkMonitor
         public int BandwidthOutAlert
         {
             get => _bandwidthOutAlert;
-            set { _bandwidthOutAlert = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _bandwidthOutAlert, value);
         }
 
         private SectionHeaderStyle _sectionHeaderStyle = SectionHeaderStyle.Default;
@@ -133,7 +126,7 @@ namespace SSS.Module.NetworkMonitor
         public SectionHeaderStyle SectionHeaderStyle
         {
             get => _sectionHeaderStyle;
-            set { _sectionHeaderStyle = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _sectionHeaderStyle, value);
         }
 
         // --- Defaults & Clone ---

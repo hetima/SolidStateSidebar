@@ -2,22 +2,14 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using SSS.Core;
 
 namespace SSS.Module.CpuMonitor
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class Data : Core.IModuleData, ICloneable
+    public class Data : ObservableObject, Core.IModuleData, ICloneable
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         // --- IModuleData ---
 
         private bool _enabled = true;
@@ -26,7 +18,7 @@ namespace SSS.Module.CpuMonitor
         public bool Enabled
         {
             get => _enabled;
-            set { _enabled = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _enabled, value);
         }
 
         private byte _order = 5;
@@ -35,7 +27,7 @@ namespace SSS.Module.CpuMonitor
         public byte Order
         {
             get => _order;
-            set { _order = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _order, value);
         }
 
         private HardwareConfig[] _hardware = [];
@@ -44,7 +36,7 @@ namespace SSS.Module.CpuMonitor
         public HardwareConfig[] Hardware
         {
             get => _hardware;
-            set { _hardware = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _hardware, value);
         }
 
         private ObservableCollection<MetricConfig> _metrics = [];
@@ -88,7 +80,7 @@ namespace SSS.Module.CpuMonitor
         public bool ShowHardwareNames
         {
             get => _showHardwareNames;
-            set { _showHardwareNames = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _showHardwareNames, value);
         }
 
         private bool _roundAll = false;
@@ -97,7 +89,7 @@ namespace SSS.Module.CpuMonitor
         public bool RoundAll
         {
             get => _roundAll;
-            set { _roundAll = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _roundAll, value);
         }
 
         private bool _allCoreClocks = false;
@@ -106,7 +98,7 @@ namespace SSS.Module.CpuMonitor
         public bool AllCoreClocks
         {
             get => _allCoreClocks;
-            set { _allCoreClocks = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _allCoreClocks, value);
         }
 
         private bool _useGHz = false;
@@ -115,7 +107,7 @@ namespace SSS.Module.CpuMonitor
         public bool UseGHz
         {
             get => _useGHz;
-            set { _useGHz = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _useGHz, value);
         }
 
         private bool _useFahrenheit = false;
@@ -124,7 +116,7 @@ namespace SSS.Module.CpuMonitor
         public bool UseFahrenheit
         {
             get => _useFahrenheit;
-            set { _useFahrenheit = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _useFahrenheit, value);
         }
 
         private int _tempAlert = 0;
@@ -133,7 +125,7 @@ namespace SSS.Module.CpuMonitor
         public int TempAlert
         {
             get => _tempAlert;
-            set { _tempAlert = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _tempAlert, value);
         }
 
         private SectionHeaderStyle _sectionHeaderStyle = SectionHeaderStyle.Default;
@@ -142,7 +134,7 @@ namespace SSS.Module.CpuMonitor
         public SectionHeaderStyle SectionHeaderStyle
         {
             get => _sectionHeaderStyle;
-            set { _sectionHeaderStyle = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _sectionHeaderStyle, value);
         }
 
         // --- Defaults & Clone ---

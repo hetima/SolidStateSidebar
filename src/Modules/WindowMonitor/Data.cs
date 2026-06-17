@@ -1,22 +1,14 @@
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using SSS.Core;
 
 namespace SSS.Module.WindowMonitor
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class Data : Core.IModuleData, ICloneable
+    public class Data : ObservableObject, Core.IModuleData, ICloneable
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         // --- IModuleData ---
 
@@ -26,7 +18,7 @@ namespace SSS.Module.WindowMonitor
         public bool Enabled
         {
             get => _enabled;
-            set { _enabled = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _enabled, value);
         }
 
         private byte _order = 7;
@@ -35,7 +27,7 @@ namespace SSS.Module.WindowMonitor
         public byte Order
         {
             get => _order;
-            set { _order = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _order, value);
         }
 
         private HardwareConfig[] _hardware =
@@ -47,7 +39,7 @@ namespace SSS.Module.WindowMonitor
         public HardwareConfig[] Hardware
         {
             get => _hardware;
-            set { _hardware = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _hardware, value);
         }
 
         private HardwareConfig[] _applications = [];
@@ -56,7 +48,7 @@ namespace SSS.Module.WindowMonitor
         public HardwareConfig[] Applications
         {
             get => _applications;
-            set { _applications = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _applications, value);
         }
 
         // --- IModuleData (not used by WindowMonitor, empty for interface compliance) ---
@@ -83,7 +75,7 @@ namespace SSS.Module.WindowMonitor
         public SectionHeaderStyle SectionHeaderStyle
         {
             get => _sectionHeaderStyle;
-            set { _sectionHeaderStyle = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _sectionHeaderStyle, value);
         }
 
         private int _maxDisplayCount = 8;
@@ -92,7 +84,7 @@ namespace SSS.Module.WindowMonitor
         public int MaxDisplayCount
         {
             get => _maxDisplayCount;
-            set { _maxDisplayCount = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _maxDisplayCount, value);
         }
 
         private int _fontSize = 0;
@@ -101,7 +93,7 @@ namespace SSS.Module.WindowMonitor
         public int FontSize
         {
             get => _fontSize;
-            set { _fontSize = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _fontSize, value);
         }
 
         private string? _fontName = null;
@@ -110,7 +102,7 @@ namespace SSS.Module.WindowMonitor
         public string? FontName
         {
             get => _fontName;
-            set { _fontName = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _fontName, value);
         }
 
         private bool _scrollToSwitch = false;
@@ -119,7 +111,7 @@ namespace SSS.Module.WindowMonitor
         public bool ScrollToSwitch
         {
             get => _scrollToSwitch;
-            set { _scrollToSwitch = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _scrollToSwitch, value);
         }
 
         // --- Defaults & Clone ---

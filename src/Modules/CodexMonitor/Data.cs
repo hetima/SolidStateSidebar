@@ -1,21 +1,13 @@
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using SSS.Core;
 
 namespace SSS.Module.CodexMonitor
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class Data : Core.IModuleData, ICloneable
+    public class Data : ObservableObject, Core.IModuleData, ICloneable
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         // --- IModuleData ---
 
@@ -25,7 +17,7 @@ namespace SSS.Module.CodexMonitor
         public bool Enabled
         {
             get => _enabled;
-            set { _enabled = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _enabled, value);
         }
 
         private byte _order = 1;
@@ -34,7 +26,7 @@ namespace SSS.Module.CodexMonitor
         public byte Order
         {
             get => _order;
-            set { _order = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _order, value);
         }
 
         private HardwareConfig[] _hardware =
@@ -46,7 +38,7 @@ namespace SSS.Module.CodexMonitor
         public HardwareConfig[] Hardware
         {
             get => _hardware;
-            set { _hardware = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _hardware, value);
         }
 
         [JsonIgnore]
@@ -66,7 +58,7 @@ namespace SSS.Module.CodexMonitor
         public SectionHeaderStyle SectionHeaderStyle
         {
             get => _sectionHeaderStyle;
-            set { _sectionHeaderStyle = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _sectionHeaderStyle, value);
         }
 
         private AutoRefreshInterval _autoRefresh = AutoRefreshInterval.TenMin;
@@ -75,7 +67,7 @@ namespace SSS.Module.CodexMonitor
         public AutoRefreshInterval AutoRefresh
         {
             get => _autoRefresh;
-            set { _autoRefresh = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _autoRefresh, value);
         }
 
         private ResetTimeDisplay _shortResetDisplay = ResetTimeDisplay.Absolute;
@@ -84,7 +76,7 @@ namespace SSS.Module.CodexMonitor
         public ResetTimeDisplay ShortResetDisplay
         {
             get => _shortResetDisplay;
-            set { _shortResetDisplay = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _shortResetDisplay, value);
         }
 
         private ResetTimeDisplay _longResetDisplay = ResetTimeDisplay.Countdown;
@@ -93,7 +85,7 @@ namespace SSS.Module.CodexMonitor
         public ResetTimeDisplay LongResetDisplay
         {
             get => _longResetDisplay;
-            set { _longResetDisplay = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _longResetDisplay, value);
         }
 
         // --- Defaults & Clone ---

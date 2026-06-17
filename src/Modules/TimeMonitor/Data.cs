@@ -1,22 +1,14 @@
 using System;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using SSS.Core;
 
 namespace SSS.Module.TimeMonitor
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class Data : Core.IModuleData, ICloneable
+    public class Data : ObservableObject, Core.IModuleData, ICloneable
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         // --- IModuleData ---
 
@@ -26,7 +18,7 @@ namespace SSS.Module.TimeMonitor
         public bool Enabled
         {
             get => _enabled;
-            set { _enabled = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _enabled, value);
         }
 
         private byte _order = 6;
@@ -35,7 +27,7 @@ namespace SSS.Module.TimeMonitor
         public byte Order
         {
             get => _order;
-            set { _order = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _order, value);
         }
 
         private HardwareConfig[] _hardware =
@@ -47,7 +39,7 @@ namespace SSS.Module.TimeMonitor
         public HardwareConfig[] Hardware
         {
             get => _hardware;
-            set { _hardware = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _hardware, value);
         }
 
         // --- IModuleData (not used by TimeMonitor, empty for interface compliance) ---
@@ -71,7 +63,7 @@ namespace SSS.Module.TimeMonitor
         public bool ShowDate
         {
             get => _showDate;
-            set { _showDate = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _showDate, value);
         }
 
         private bool _showTime = true;
@@ -80,7 +72,7 @@ namespace SSS.Module.TimeMonitor
         public bool ShowTime
         {
             get => _showTime;
-            set { _showTime = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _showTime, value);
         }
 
         private bool _clock24HR = false;
@@ -89,7 +81,7 @@ namespace SSS.Module.TimeMonitor
         public bool Clock24HR
         {
             get => _clock24HR;
-            set { _clock24HR = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _clock24HR, value);
         }
 
         private int _dateFormat = 2;
@@ -98,7 +90,7 @@ namespace SSS.Module.TimeMonitor
         public int DateFormat
         {
             get => _dateFormat;
-            set { _dateFormat = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _dateFormat, value);
         }
 
         private bool _showDayOfWeek = false;
@@ -107,7 +99,7 @@ namespace SSS.Module.TimeMonitor
         public bool ShowDayOfWeek
         {
             get => _showDayOfWeek;
-            set { _showDayOfWeek = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _showDayOfWeek, value);
         }
 
         private int _dateFontSize = 14;
@@ -116,7 +108,7 @@ namespace SSS.Module.TimeMonitor
         public int DateFontSize
         {
             get => _dateFontSize;
-            set { _dateFontSize = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _dateFontSize, value);
         }
 
         private int _timeFontSize = 12;
@@ -125,7 +117,7 @@ namespace SSS.Module.TimeMonitor
         public int TimeFontSize
         {
             get => _timeFontSize;
-            set { _timeFontSize = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _timeFontSize, value);
         }
 
         private SectionHeaderStyle _sectionHeaderStyle = SectionHeaderStyle.Default;
@@ -134,7 +126,7 @@ namespace SSS.Module.TimeMonitor
         public SectionHeaderStyle SectionHeaderStyle
         {
             get => _sectionHeaderStyle;
-            set { _sectionHeaderStyle = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _sectionHeaderStyle, value);
         }
 
         // --- Defaults & Clone ---

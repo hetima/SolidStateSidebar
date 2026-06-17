@@ -2,21 +2,14 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using SSS.Core;
 
 namespace SSS.Module.HdMonitor
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class Data : Core.IModuleData, ICloneable
+    public class Data : ObservableObject, Core.IModuleData, ICloneable
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         // --- IModuleData ---
 
@@ -26,7 +19,7 @@ namespace SSS.Module.HdMonitor
         public bool Enabled
         {
             get => _enabled;
-            set { _enabled = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _enabled, value);
         }
 
         private byte _order = 2;
@@ -35,7 +28,7 @@ namespace SSS.Module.HdMonitor
         public byte Order
         {
             get => _order;
-            set { _order = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _order, value);
         }
 
         private HardwareConfig[] _hardware = [];
@@ -44,7 +37,7 @@ namespace SSS.Module.HdMonitor
         public HardwareConfig[] Hardware
         {
             get => _hardware;
-            set { _hardware = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _hardware, value);
         }
 
         private ObservableCollection<MetricConfig> _metrics = [];
@@ -88,7 +81,7 @@ namespace SSS.Module.HdMonitor
         public bool RoundAll
         {
             get => _roundAll;
-            set { _roundAll = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _roundAll, value);
         }
 
         private int _usedSpaceAlert = 0;
@@ -97,7 +90,7 @@ namespace SSS.Module.HdMonitor
         public int UsedSpaceAlert
         {
             get => _usedSpaceAlert;
-            set { _usedSpaceAlert = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _usedSpaceAlert, value);
         }
 
         private SectionHeaderStyle _sectionHeaderStyle = SectionHeaderStyle.Default;
@@ -106,7 +99,7 @@ namespace SSS.Module.HdMonitor
         public SectionHeaderStyle SectionHeaderStyle
         {
             get => _sectionHeaderStyle;
-            set { _sectionHeaderStyle = value; NotifyPropertyChanged(); }
+            set => SetProperty(ref _sectionHeaderStyle, value);
         }
 
         // --- Defaults & Clone ---
