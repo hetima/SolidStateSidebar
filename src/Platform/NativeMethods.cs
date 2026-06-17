@@ -27,6 +27,15 @@ namespace SSS.Windows
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool SetWindowPos(IntPtr hwnd, IntPtr hwnd_after, int x, int y, int cx, int cy, uint uflags);
 
+        [LibraryImport("user32.dll")]
+        internal static partial IntPtr GetForegroundWindow();
+
+        [LibraryImport("user32.dll")]
+        internal static partial IntPtr GetWindow(IntPtr hwnd, uint uCmd);
+
+        [LibraryImport("user32.dll")]
+        internal static partial IntPtr GetAncestor(IntPtr hwnd, uint gaFlags);
+
         [LibraryImport("user32.dll", EntryPoint = "RegisterWindowMessageW", StringMarshalling = StringMarshalling.Utf16)]
         internal static partial int RegisterWindowMessage(string msg);
 
@@ -117,6 +126,10 @@ namespace SSS.Windows
 
         [LibraryImport("user32.dll")]
         internal static partial void keybd_event(byte bVk, byte bScan, uint dwFlags, UIntPtr dwExtraInfo);
+
+        [LibraryImport("user32.dll", EntryPoint = "PostMessageW", StringMarshalling = StringMarshalling.Utf16)]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        internal static partial bool PostMessage(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
         // ★ アイコン取得に必要な2つのAPI
         [LibraryImport("user32.dll", EntryPoint = "SendMessageW")] // 明示的にUnicode版を指定

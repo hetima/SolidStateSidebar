@@ -1288,6 +1288,18 @@ namespace SSS {
             }
         }
 
+        public static string SettingsEnableFileDialogSync {
+            get {
+                return ResourceManager.GetString("SettingsEnableFileDialogSync", resourceCulture);
+            }
+        }
+
+        public static string SettingsEnableFileDialogSyncTooltip {
+            get {
+                return ResourceManager.GetString("SettingsEnableFileDialogSyncTooltip", resourceCulture);
+            }
+        }
+
         public static string SettingsScreen {
             get {
                 return ResourceManager.GetString("SettingsScreen", resourceCulture);

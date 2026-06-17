@@ -51,6 +51,7 @@ namespace SSS.Models
             ToolbarMode = Core.Settings.Instance.ToolbarMode;
             ClickThrough = Core.Settings.Instance.ClickThrough;
             ShowTrayIcon = Core.Settings.Instance.ShowTrayIcon;
+            EnableFileDialogSync = Core.Settings.Instance.EnableFileDialogSync;
             RunAtStartup = Core.Settings.Instance.RunAtStartup;
             SidebarWidth = Core.Settings.Instance.SidebarWidth;
             SidebarMargin = Core.Settings.Instance.SidebarMargin;
@@ -185,6 +186,7 @@ namespace SSS.Models
             Core.Settings.Instance.ToolbarMode = ToolbarMode;
             Core.Settings.Instance.ClickThrough = ClickThrough;
             Core.Settings.Instance.ShowTrayIcon = ShowTrayIcon;
+            Core.Settings.Instance.EnableFileDialogSync = EnableFileDialogSync;
             Core.Settings.Instance.RunAtStartup = RunAtStartup;
             Core.Settings.Instance.SidebarWidth = SidebarWidth;
             Core.Settings.Instance.SidebarMargin = SidebarMargin;
@@ -474,6 +476,14 @@ namespace SSS.Models
         {
             get => _showTrayIcon;
             set => SetProperty(ref _showTrayIcon, value);
+        }
+
+        private bool _enableFileDialogSync;
+
+        public bool EnableFileDialogSync
+        {
+            get => _enableFileDialogSync;
+            set => SetProperty(ref _enableFileDialogSync, value);
         }
 
         private bool _runAtStartup;

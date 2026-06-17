@@ -103,6 +103,7 @@ namespace SSS.Windows
                 var hwndCapture = hwnd;
                 _sidebar?.Dispatcher.BeginInvoke(System.Windows.Threading.DispatcherPriority.Background, (Action)(() =>
                 {
+                    FileDialogExplorerSync.OnForegroundChanged(hwndCapture);
                     _sidebar?.TriggerMonitorUpdate(hwndCapture);
                 }));
             }

@@ -246,6 +246,15 @@ namespace SSS.Core
             set => SetProperty(ref _showTrayIcon, value);
         }
 
+        private bool _enableFileDialogSync = false;
+
+        [JsonProperty]
+        public bool EnableFileDialogSync
+        {
+            get => _enableFileDialogSync;
+            set => SetProperty(ref _enableFileDialogSync, value);
+        }
+
         private bool _collapseMenuBar = false;
 
         [JsonProperty]

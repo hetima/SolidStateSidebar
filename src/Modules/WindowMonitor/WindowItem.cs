@@ -86,6 +86,11 @@ namespace SSS.Module.WindowMonitor
                 return;
             }
 
+            if (FileDialogExplorerSync.TrySyncCurrentForeground())
+            {
+                return;
+            }
+
             WindowHelper.ActivateWindow(_hwnd);
         }
     }

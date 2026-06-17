@@ -1,13 +1,14 @@
 # Changelog
 
+- Sync File Dialog with Explorer
 
 ## [0.9.5] - 2026-06-07
-- Added Claude and Codex Monitor to display paid plan usage.
+- Added Claude and Codex Monitor to display paid plan usage
 - Scrolling with the mouse wheel in the sidebar switches windows when Window Monitor is active and setting to on
 
 ## [0.9.4] - 2026-06-05
-- Fixed top alignment on secondary monitors.
-- Fixed DPI scaling placement.
+- Fixed top alignment on secondary monitors
+- Fixed DPI scaling placement
 
 ## [0.9.3]
 - Added a Window Monitor to display and select specific application windows

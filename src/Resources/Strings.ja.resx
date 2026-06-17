@@ -799,6 +799,14 @@
     <value>ログイン時に起動します</value>
   </data>
 
+  <data name="SettingsEnableFileDialogSync" xml:space="preserve">
+    <value>ファイルダイアログをエクスプローラーと同期</value>
+  </data>
+
+  <data name="SettingsEnableFileDialogSyncTooltip" xml:space="preserve">
+    <value>ファイルダイアログの背後にエクスプローラーがあるとき、そのフォルダへ移動します</value>
+  </data>
+
   <data name="SettingsScreen" xml:space="preserve">
     <value>スクリーン</value>
   </data>

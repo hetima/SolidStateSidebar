@@ -18,21 +18,24 @@
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="{x:Static res:Strings.SettingsDock}" />
-        <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding Path=DockEdgeItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Value" SelectedValue="{Binding Path=DockEdge, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsDockTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="0" Content="{x:Static res:Strings.SettingsRunAtStartup}" IsChecked="{Binding Path=RunAtStartup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsRunAtStartupTooltip}" />
 
-        <Label Grid.Column="0" Grid.Row="1" Content="{x:Static res:Strings.SettingsScreen}" />
-        <ComboBox VerticalAlignment="Center" Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=ScreenItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Index" SelectedValue="{Binding Path=ScreenIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsScreenTooltip}" />
+        <Label Grid.Column="0" Grid.Row="1" Content="{x:Static res:Strings.SettingsDock}" />
+        <ComboBox Grid.Column="1" Grid.Row="1" ItemsSource="{Binding Path=DockEdgeItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Value" SelectedValue="{Binding Path=DockEdge, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsDockTooltip}" />
 
-        <Label Grid.Column="0" Grid.Row="2" Content="{x:Static res:Strings.SettingsLanguage}" />
-        <ComboBox VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=CultureItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Value" SelectedValue="{Binding Path=Culture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsLanguageTooltip}" />
+        <Label Grid.Column="0" Grid.Row="2" Content="{x:Static res:Strings.SettingsScreen}" />
+        <ComboBox VerticalAlignment="Center" Grid.Column="1" Grid.Row="2" ItemsSource="{Binding Path=ScreenItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Index" SelectedValue="{Binding Path=ScreenIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsScreenTooltip}" />
 
-        <CheckBox Grid.Column="1" Grid.Row="3" Content="{x:Static res:Strings.SettingsReserveSpace}" IsChecked="{Binding Path=UseAppBar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsReserveSpaceTooltip}" />
+        <Label Grid.Column="0" Grid.Row="3" Content="{x:Static res:Strings.SettingsLanguage}" />
+        <ComboBox VerticalAlignment="Center" Grid.Column="1" Grid.Row="3" ItemsSource="{Binding Path=CultureItems, Mode=OneWay}" DisplayMemberPath="Text" SelectedValuePath="Value" SelectedValue="{Binding Path=Culture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsLanguageTooltip}" />
 
-        <CheckBox Grid.Column="1" Grid.Row="4" Content="{x:Static res:Strings.SettingsAlwaysOnTop}" IsChecked="{Binding Path=AlwaysTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlwaysOnTopTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="4" Content="{x:Static res:Strings.SettingsReserveSpace}" IsChecked="{Binding Path=UseAppBar, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsReserveSpaceTooltip}" />
 
-        <CheckBox Grid.Column="1" Grid.Row="6" Content="{x:Static res:Strings.SettingsRunAtStartup}" IsChecked="{Binding Path=RunAtStartup, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsRunAtStartupTooltip}" />
+        <CheckBox Grid.Column="1" Grid.Row="5" Content="{x:Static res:Strings.SettingsAlwaysOnTop}" IsChecked="{Binding Path=AlwaysTop, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsAlwaysOnTopTooltip}" />
+
+        <CheckBox Grid.Column="1" Grid.Row="6" Content="{x:Static res:Strings.SettingsEnableFileDialogSync}" IsChecked="{Binding Path=EnableFileDialogSync, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" ToolTip="{x:Static res:Strings.SettingsEnableFileDialogSyncTooltip}" />
     </Grid>
 </UserControl>
