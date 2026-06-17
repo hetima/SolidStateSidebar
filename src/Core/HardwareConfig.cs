@@ -1,22 +1,11 @@
 using System;
-using System.ComponentModel;
 using Newtonsoft.Json;
 
 namespace SSS.Core
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class HardwareConfig : INotifyPropertyChanged, ICloneable
+    public class HardwareConfig : ObservableObject, ICloneable
     {
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
-
         public HardwareConfig Clone()
         {
             return (HardwareConfig)MemberwiseClone();
@@ -32,16 +21,8 @@ namespace SSS.Core
         [JsonProperty]
         public string? ID
         {
-            get
-            {
-                return _id;
-            }
-            set
-            {
-                _id = value;
-
-                NotifyPropertyChanged(nameof(ID));
-            }
+            get => _id;
+            set => SetProperty(ref _id, value);
         }
 
         private string? _name;
@@ -49,16 +30,8 @@ namespace SSS.Core
         [JsonProperty]
         public string? Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-
-                NotifyPropertyChanged(nameof(Name));
-            }
+            get => _name;
+            set => SetProperty(ref _name, value);
         }
 
         private string? _actualName;
@@ -66,16 +39,8 @@ namespace SSS.Core
         [JsonProperty]
         public string? ActualName
         {
-            get
-            {
-                return _actualName;
-            }
-            set
-            {
-                _actualName = value;
-
-                NotifyPropertyChanged(nameof(ActualName));
-            }
+            get => _actualName;
+            set => SetProperty(ref _actualName, value);
         }
 
         private bool _enabled = true;
@@ -83,16 +48,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool Enabled
         {
-            get
-            {
-                return _enabled;
-            }
-            set
-            {
-                _enabled = value;
-
-                NotifyPropertyChanged(nameof(Enabled));
-            }
+            get => _enabled;
+            set => SetProperty(ref _enabled, value);
         }
 
         private byte _order = 0;
@@ -100,16 +57,8 @@ namespace SSS.Core
         [JsonProperty]
         public byte Order
         {
-            get
-            {
-                return _order;
-            }
-            set
-            {
-                _order = value;
-
-                NotifyPropertyChanged(nameof(Order));
-            }
+            get => _order;
+            set => SetProperty(ref _order, value);
         }
     }
 }

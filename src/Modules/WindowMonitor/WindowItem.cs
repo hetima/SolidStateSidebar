@@ -1,35 +1,20 @@
 using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Input;
 using SSS.Windows;
 using System.Windows.Media;
+using SSS.Core;
 
 namespace SSS.Module.WindowMonitor
 {
-    public class WindowItem : INotifyPropertyChanged
+    public class WindowItem : ObservableObject
     {
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        private void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
         private string _title = "";
 
         public string Title
         {
             get => _title;
-            set
-            {
-                if (_title != value)
-                {
-                    _title = value;
-                    NotifyPropertyChanged(nameof(Title));
-                }
-            }
+            set => SetProperty(ref _title, value);
         }
 
         private string _processName = "";
@@ -37,14 +22,7 @@ namespace SSS.Module.WindowMonitor
         public string ProcessName
         {
             get => _processName;
-            set
-            {
-                if (_processName != value)
-                {
-                    _processName = value;
-                    NotifyPropertyChanged(nameof(ProcessName));
-                }
-            }
+            set => SetProperty(ref _processName, value);
         }
 
         private ImageSource? _processIcon;
@@ -52,30 +30,16 @@ namespace SSS.Module.WindowMonitor
         public ImageSource? ProcessIcon
         {
             get => _processIcon;
-            set
-            {
-                if (_processIcon != value)
-                {
-                    _processIcon = value;
-                    NotifyPropertyChanged(nameof(ProcessIcon));
-                }
-            }
+            set => SetProperty(ref _processIcon, value);
         }
-        
+
 
         private IntPtr _hwnd;
 
         public IntPtr Hwnd
         {
             get => _hwnd;
-            set
-            {
-                if (_hwnd != value)
-                {
-                    _hwnd = value;
-                    NotifyPropertyChanged(nameof(Hwnd));
-                }
-            }
+            set => SetProperty(ref _hwnd, value);
         }
 
         private bool _isMinimized;
@@ -83,14 +47,7 @@ namespace SSS.Module.WindowMonitor
         public bool IsMinimized
         {
             get => _isMinimized;
-            set
-            {
-                if (_isMinimized != value)
-                {
-                    _isMinimized = value;
-                    NotifyPropertyChanged(nameof(IsMinimized));
-                }
-            }
+            set => SetProperty(ref _isMinimized, value);
         }
 
         private Visibility _visibility = Visibility.Collapsed;
@@ -98,14 +55,7 @@ namespace SSS.Module.WindowMonitor
         public Visibility Visibility
         {
             get => _visibility;
-            set
-            {
-                if (_visibility != value)
-                {
-                    _visibility = value;
-                    NotifyPropertyChanged(nameof(Visibility));
-                }
-            }
+            set => SetProperty(ref _visibility, value);
         }
 
         private bool _isSwitchHighlighted;
@@ -113,14 +63,7 @@ namespace SSS.Module.WindowMonitor
         public bool IsSwitchHighlighted
         {
             get => _isSwitchHighlighted;
-            set
-            {
-                if (_isSwitchHighlighted != value)
-                {
-                    _isSwitchHighlighted = value;
-                    NotifyPropertyChanged(nameof(IsSwitchHighlighted));
-                }
-            }
+            set => SetProperty(ref _isSwitchHighlighted, value);
         }
 
         private ICommand? _activateCommand;
@@ -128,14 +71,7 @@ namespace SSS.Module.WindowMonitor
         public ICommand? ActivateCommand
         {
             get => _activateCommand;
-            set
-            {
-                if (_activateCommand != value)
-                {
-                    _activateCommand = value;
-                    NotifyPropertyChanged(nameof(ActivateCommand));
-                }
-            }
+            set => SetProperty(ref _activateCommand, value);
         }
 
         public WindowItem()

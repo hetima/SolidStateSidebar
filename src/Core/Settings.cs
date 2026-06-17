@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
 using Newtonsoft.Json;
@@ -13,7 +12,7 @@ using SSS.Styling.IconTheme;
 namespace SSS.Core
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public sealed class Settings : INotifyPropertyChanged
+    public sealed class Settings : ObservableObject
     {
         private Settings() { }
 
@@ -119,31 +118,14 @@ namespace SSS.Core
             return _return ?? new Settings();
         }
 
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         private bool _initialSetup = true;
 
         [JsonProperty]
         public bool InitialSetup
         {
-            get
-            {
-                return _initialSetup;
-            }
-            set
-            {
-                _initialSetup = value;
-
-                NotifyPropertyChanged(nameof(InitialSetup));
-            }
+            get => _initialSetup;
+            set => SetProperty(ref _initialSetup, value);
         }
 
         private DockEdge _dockEdge = DockEdge.Right;
@@ -151,16 +133,8 @@ namespace SSS.Core
         [JsonProperty]
         public DockEdge DockEdge
         {
-            get
-            {
-                return _dockEdge;
-            }
-            set
-            {
-                _dockEdge = value;
-
-                NotifyPropertyChanged(nameof(DockEdge));
-            }
+            get => _dockEdge;
+            set => SetProperty(ref _dockEdge, value);
         }
 
         private int _screenIndex = 0;
@@ -168,16 +142,8 @@ namespace SSS.Core
         [JsonProperty]
         public int ScreenIndex
         {
-            get
-            {
-                return _screenIndex;
-            }
-            set
-            {
-                _screenIndex = value;
-
-                NotifyPropertyChanged(nameof(ScreenIndex));
-            }
+            get => _screenIndex;
+            set => SetProperty(ref _screenIndex, value);
         }
 
         private string _culture = Utilities.Culture.DEFAULT;
@@ -185,16 +151,8 @@ namespace SSS.Core
         [JsonProperty]
         public string Culture
         {
-            get
-            {
-                return _culture;
-            }
-            set
-            {
-                _culture = value;
-
-                NotifyPropertyChanged(nameof(Culture));
-            }
+            get => _culture;
+            set => SetProperty(ref _culture, value);
         }
 
         private bool _useAppBar = true;
@@ -202,16 +160,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool UseAppBar
         {
-            get
-            {
-                return _useAppBar;
-            }
-            set
-            {
-                _useAppBar = value;
-
-                NotifyPropertyChanged(nameof(UseAppBar));
-            }
+            get => _useAppBar;
+            set => SetProperty(ref _useAppBar, value);
         }
 
         private bool _alwaysTop = true;
@@ -219,16 +169,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool AlwaysTop
         {
-            get
-            {
-                return _alwaysTop;
-            }
-            set
-            {
-                _alwaysTop = value;
-
-                NotifyPropertyChanged(nameof(AlwaysTop));
-            }
+            get => _alwaysTop;
+            set => SetProperty(ref _alwaysTop, value);
         }
 
 
@@ -237,16 +179,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool RunAtStartup
         {
-            get
-            {
-                return _runAtStartup;
-            }
-            set
-            {
-                _runAtStartup = value;
-
-                NotifyPropertyChanged(nameof(RunAtStartup));
-            }
+            get => _runAtStartup;
+            set => SetProperty(ref _runAtStartup, value);
         }
 
         private double _uiScale = 1d;
@@ -254,16 +188,8 @@ namespace SSS.Core
         [JsonProperty]
         public double UIScale
         {
-            get
-            {
-                return _uiScale;
-            }
-            set
-            {
-                _uiScale = value;
-
-                NotifyPropertyChanged(nameof(UIScale));
-            }
+            get => _uiScale;
+            set => SetProperty(ref _uiScale, value);
         }
 
         private int _xOffset = 0;
@@ -271,16 +197,8 @@ namespace SSS.Core
         [JsonProperty]
         public int XOffset
         {
-            get
-            {
-                return _xOffset;
-            }
-            set
-            {
-                _xOffset = value;
-
-                NotifyPropertyChanged(nameof(XOffset));
-            }
+            get => _xOffset;
+            set => SetProperty(ref _xOffset, value);
         }
 
         private int _yOffset = 0;
@@ -288,16 +206,8 @@ namespace SSS.Core
         [JsonProperty]
         public int YOffset
         {
-            get
-            {
-                return _yOffset;
-            }
-            set
-            {
-                _yOffset = value;
-
-                NotifyPropertyChanged(nameof(YOffset));
-            }
+            get => _yOffset;
+            set => SetProperty(ref _yOffset, value);
         }
 
         private int _pollingInterval = 1000;
@@ -305,16 +215,8 @@ namespace SSS.Core
         [JsonProperty]
         public int PollingInterval
         {
-            get
-            {
-                return _pollingInterval;
-            }
-            set
-            {
-                _pollingInterval = value;
-
-                NotifyPropertyChanged(nameof(PollingInterval));
-            }
+            get => _pollingInterval;
+            set => SetProperty(ref _pollingInterval, value);
         }
 
         private bool _toolbarMode = true;
@@ -322,16 +224,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool ToolbarMode
         {
-            get
-            {
-                return _toolbarMode;
-            }
-            set
-            {
-                _toolbarMode = value;
-
-                NotifyPropertyChanged(nameof(ToolbarMode));
-            }
+            get => _toolbarMode;
+            set => SetProperty(ref _toolbarMode, value);
         }
 
         private bool _clickThrough = false;
@@ -339,16 +233,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool ClickThrough
         {
-            get
-            {
-                return _clickThrough;
-            }
-            set
-            {
-                _clickThrough = value;
-
-                NotifyPropertyChanged(nameof(ClickThrough));
-            }
+            get => _clickThrough;
+            set => SetProperty(ref _clickThrough, value);
         }
 
         private bool _showTrayIcon = true;
@@ -356,16 +242,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool ShowTrayIcon
         {
-            get
-            {
-                return _showTrayIcon;
-            }
-            set
-            {
-                _showTrayIcon = value;
-
-                NotifyPropertyChanged(nameof(ShowTrayIcon));
-            }
+            get => _showTrayIcon;
+            set => SetProperty(ref _showTrayIcon, value);
         }
 
         private bool _collapseMenuBar = false;
@@ -373,16 +251,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool CollapseMenuBar
         {
-            get
-            {
-                return _collapseMenuBar;
-            }
-            set
-            {
-                _collapseMenuBar = value;
-
-                NotifyPropertyChanged(nameof(CollapseMenuBar));
-            }
+            get => _collapseMenuBar;
+            set => SetProperty(ref _collapseMenuBar, value);
         }
 
         private bool _initiallyHidden = false;
@@ -390,16 +260,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool InitiallyHidden
         {
-            get
-            {
-                return _initiallyHidden;
-            }
-            set
-            {
-                _initiallyHidden = value;
-                
-                NotifyPropertyChanged(nameof(InitiallyHidden));
-            }
+            get => _initiallyHidden;
+            set => SetProperty(ref _initiallyHidden, value);
         }
 
         private int _sidebarMargin = 15;
@@ -407,16 +269,8 @@ namespace SSS.Core
         [JsonProperty]
         public int SidebarMargin
         {
-            get
-            {
-                return _sidebarMargin;
-            }
-            set
-            {
-                _sidebarMargin = value;
-
-                NotifyPropertyChanged(nameof(SidebarMargin));
-            }
+            get => _sidebarMargin;
+            set => SetProperty(ref _sidebarMargin, value);
         }
 
         private int _sidebarWidth = 180;
@@ -424,16 +278,8 @@ namespace SSS.Core
         [JsonProperty]
         public int SidebarWidth
         {
-            get
-            {
-                return _sidebarWidth;
-            }
-            set
-            {
-                _sidebarWidth = value;
-
-                NotifyPropertyChanged(nameof(SidebarWidth));
-            }
+            get => _sidebarWidth;
+            set => SetProperty(ref _sidebarWidth, value);
         }
 
         private string _bgColor = "#1F1F1F";
@@ -441,16 +287,8 @@ namespace SSS.Core
         [JsonProperty]
         public string BGColor
         {
-            get
-            {
-                return _bgColor;
-            }
-            set
-            {
-                _bgColor = value;
-
-                NotifyPropertyChanged(nameof(BGColor));
-            }
+            get => _bgColor;
+            set => SetProperty(ref _bgColor, value);
         }
 
         private double _bgOpacity = 0.85d;
@@ -458,16 +296,8 @@ namespace SSS.Core
         [JsonProperty]
         public double BGOpacity
         {
-            get
-            {
-                return _bgOpacity;
-            }
-            set
-            {
-                _bgOpacity = value;
-
-                NotifyPropertyChanged(nameof(BGOpacity));
-            }
+            get => _bgOpacity;
+            set => SetProperty(ref _bgOpacity, value);
         }
 
         private TextAlign _textAlign = TextAlign.Left;
@@ -475,16 +305,8 @@ namespace SSS.Core
         [JsonProperty]
         public TextAlign TextAlign
         {
-            get
-            {
-                return _textAlign;
-            }
-            set
-            {
-                _textAlign = value;
-
-                NotifyPropertyChanged(nameof(TextAlign));
-            }
+            get => _textAlign;
+            set => SetProperty(ref _textAlign, value);
         }
 
         private int _fontSize = 14;
@@ -535,16 +357,8 @@ namespace SSS.Core
         [JsonProperty]
         public string FontName
         {
-            get
-            {
-                return _fontName;
-            }
-            set
-            {
-                _fontName = value;
-
-                NotifyPropertyChanged(nameof(FontName));
-            }
+            get => _fontName;
+            set => SetProperty(ref _fontName, value);
         }
 
 
@@ -583,16 +397,8 @@ namespace SSS.Core
         [JsonProperty]
         public string AlertFontColor
         {
-            get
-            {
-                return _alertFontColor;
-            }
-            set
-            {
-                _alertFontColor = value;
-
-                NotifyPropertyChanged(nameof(AlertFontColor));
-            }
+            get => _alertFontColor;
+            set => SetProperty(ref _alertFontColor, value);
         }
 
         private bool _alertBlink = true;
@@ -600,16 +406,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool AlertBlink
         {
-            get
-            {
-                return _alertBlink;
-            }
-            set
-            {
-                _alertBlink = value;
-
-                NotifyPropertyChanged(nameof(AlertBlink));
-            }
+            get => _alertBlink;
+            set => SetProperty(ref _alertBlink, value);
         }
 
         private bool _metricsNoWrap = false;
@@ -617,16 +415,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool MetricsNoWrap
         {
-            get
-            {
-                return _metricsNoWrap;
-            }
-            set
-            {
-                _metricsNoWrap = value;
-
-                NotifyPropertyChanged(nameof(MetricsNoWrap));
-            }
+            get => _metricsNoWrap;
+            set => SetProperty(ref _metricsNoWrap, value);
         }
 
         private string _iconTheme = "Default";
@@ -634,16 +424,8 @@ namespace SSS.Core
         [JsonProperty]
         public string IconTheme
         {
-            get
-            {
-                return _iconTheme;
-            }
-            set
-            {
-                _iconTheme = value;
-
-                NotifyPropertyChanged(nameof(IconTheme));
-            }
+            get => _iconTheme;
+            set => SetProperty(ref _iconTheme, value);
         }
 
         public string? GetIconSvgPath(string iconName)
@@ -657,16 +439,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool ShowMachineName
         {
-            get
-            {
-                return _showMachineName;
-            }
-            set
-            {
-                _showMachineName = value;
-
-                NotifyPropertyChanged(nameof(ShowMachineName));
-            }
+            get => _showMachineName;
+            set => SetProperty(ref _showMachineName, value);
         }
 
         private Dictionary<string, IModuleData>? _modules = null;
@@ -675,16 +449,8 @@ namespace SSS.Core
         [JsonConverter(typeof(ModuleDataConverter))]
         public Dictionary<string, IModuleData>? Modules
         {
-            get
-            {
-                return _modules;
-            }
-            set
-            {
-                _modules = value;
-
-                NotifyPropertyChanged(nameof(Modules));
-            }
+            get => _modules;
+            set => SetProperty(ref _modules, value);
         }
 
         public static Dictionary<string, IModuleData> CheckModules(Dictionary<string, IModuleData>? modules)
@@ -735,16 +501,8 @@ namespace SSS.Core
         [JsonProperty]
         public Hotkey[] Hotkeys
         {
-            get
-            {
-                return _hotkeys;
-            }
-            set
-            {
-                _hotkeys = value;
-
-                NotifyPropertyChanged(nameof(Hotkeys));
-            }
+            get => _hotkeys;
+            set => SetProperty(ref _hotkeys, value);
         }
 
         private static Settings? _instance = null;

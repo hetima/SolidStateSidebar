@@ -1,11 +1,10 @@
 using System;
-using System.ComponentModel;
 using Newtonsoft.Json;
 
 namespace SSS.Core
 {
     [JsonObject(MemberSerialization.OptIn)]
-    public class MetricConfig : INotifyPropertyChanged, ICloneable
+    public class MetricConfig : ObservableObject, ICloneable
     {
         public MetricConfig() { }
 
@@ -14,16 +13,6 @@ namespace SSS.Core
             Key = key;
             Enabled = enabled;
         }
-
-        public void NotifyPropertyChanged(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-
-        public event PropertyChangedEventHandler? PropertyChanged;
 
         public MetricConfig Clone()
         {
@@ -40,16 +29,8 @@ namespace SSS.Core
         [JsonProperty]
         public MetricKey Key
         {
-            get
-            {
-                return _key;
-            }
-            set
-            {
-                _key = value;
-
-                NotifyPropertyChanged(nameof(Key));
-            }
+            get => _key;
+            set => SetProperty(ref _key, value);
         }
 
         private bool _enabled;
@@ -57,21 +38,8 @@ namespace SSS.Core
         [JsonProperty]
         public bool Enabled
         {
-            get
-            {
-                return _enabled;
-            }
-            set
-            {
-                if (_enabled == value)
-                {
-                    return;
-                }
-
-                _enabled = value;
-
-                NotifyPropertyChanged(nameof(Enabled));
-            }
+            get => _enabled;
+            set => SetProperty(ref _enabled, value);
         }
 
         public string Name
@@ -95,16 +63,8 @@ namespace SSS.Core
         [JsonProperty(NullValueHandling = NullValueHandling.Ignore)]
         public string? Label
         {
-            get
-            {
-                return _label;
-            }
-            set
-            {
-                _label = value;
-
-                NotifyPropertyChanged(nameof(Label));
-            }
+            get => _label;
+            set => SetProperty(ref _label, value);
         }
 
         private byte _order;
@@ -112,16 +72,8 @@ namespace SSS.Core
         [JsonProperty]
         public byte Order
         {
-            get
-            {
-                return _order;
-            }
-            set
-            {
-                _order = value;
-
-                NotifyPropertyChanged(nameof(Order));
-            }
+            get => _order;
+            set => SetProperty(ref _order, value);
         }
     }
 }

@@ -16,7 +16,7 @@ namespace SSS.Core
         /// <summary>
         /// プロパティ変更を通知する。propertyName を省略すると呼び出し元のメンバー名が使われる。
         /// </summary>
-        public void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
+        public virtual void NotifyPropertyChanged([CallerMemberName] string? propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
