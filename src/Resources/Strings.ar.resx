@@ -1252,4 +1252,8 @@
     <value></value>
   </data>
 
+  <data name="SettingsCodexResetCredit" xml:space="preserve">
+    <value>Display the expiration date of the reset credit.</value>
+  </data>
+
 </root>

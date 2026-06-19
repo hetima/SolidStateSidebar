@@ -70,6 +70,15 @@ namespace SSS.Module.CodexMonitor
             set => SetProperty(ref _autoRefresh, value);
         }
 
+        private bool _showResetCredits = false;
+
+        [JsonProperty("showResetCredits")]
+        public bool ShowResetCredits
+        {
+            get => _showResetCredits;
+            set => SetProperty(ref _showResetCredits, value);
+        }
+
         private ResetTimeDisplay _shortResetDisplay = ResetTimeDisplay.Absolute;
 
         [JsonProperty("shortResetDisplay")]

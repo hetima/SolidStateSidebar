@@ -60,7 +60,8 @@ namespace SSS.Core
         Claude5h = 31,
         Claude1w = 32,
         Codex5h  = 33,
-        Codex1w  = 34
+        Codex1w  = 34,
+        CodexCredits = 35
     }
 
     public enum ResetTimeDisplay : byte

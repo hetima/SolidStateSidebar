@@ -17,12 +17,17 @@ namespace SSS.Module.CodexMonitor
             Text = "-";
         }
 
-
         public override bool IsNumeric => false;
 
         public override void Update() { }
 
         public void SetText(string? value) => Text = value;
+
+        /// <summary>ラベル（左側テキスト）を動的に変更する</summary>
+        public void SetLabel(string value)
+        {
+            CustomLabel = value;
+        }
     }
 
     public class CodexMonitor : BaseMonitor
@@ -32,20 +37,25 @@ namespace SSS.Module.CodexMonitor
             ".codex", "auth.json");
 
         private const string UsageEndpoint = "https://chatgpt.com/backend-api/wham/usage";
+        private const string CreditsEndpoint = "https://chatgpt.com/backend-api/wham/rate-limit-reset-credits";
 
         private static readonly HttpClient _http = new() { Timeout = TimeSpan.FromSeconds(10) };
 
         private Timer? _timer;
         private ResetTimeDisplay _shortDisplay = ResetTimeDisplay.Countdown;
         private ResetTimeDisplay _longDisplay  = ResetTimeDisplay.Countdown;
-
-        public CodexMonitor() : base("codex", "Codex", false)
+        public CodexMonitor(bool showResetCredits) : base("codex", "Codex", false)
         {
-            Metrics =
-            [
+
+            var metrics = new System.Collections.Generic.List<iMetric>
+            {
                 new CodexUsageMetric(MetricKey.Codex5h, "5h"),
                 new CodexUsageMetric(MetricKey.Codex1w, "1w"),
-            ];
+            };
+            if (showResetCredits)
+                metrics.Add(new CodexUsageMetric(MetricKey.CodexCredits, "-"));
+
+            Metrics = [.. metrics];
         }
 
 
@@ -87,31 +97,36 @@ namespace SSS.Module.CodexMonitor
             if (Metrics is not { Length: >= 2 }) return;
             if (Metrics[0] is not CodexUsageMetric metric5h) return;
             if (Metrics[1] is not CodexUsageMetric metric1w) return;
+            var metricCredits = (Metrics.Length >= 3) ? Metrics[2] as CodexUsageMetric : null;
 
             metric5h.SetText("Loading...");
             metric1w.SetText("Loading...");
+            metricCredits?.SetText("Loading...");
 
             Task.Run(async () =>
             {
                 try
                 {
                     var token = TryGetAccessToken();
-                    if (string.IsNullOrEmpty(token)) { metric5h.SetText("Error"); metric1w.SetText("Error"); return; }
+                    if (string.IsNullOrEmpty(token)) { metric5h.SetText("Error"); metric1w.SetText("Error"); metricCredits?.SetText("Error"); return; }
 
                     var request = new HttpRequestMessage(HttpMethod.Get, UsageEndpoint);
                     request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
 
                     var response = await _http.SendAsync(request);
-                    if (!response.IsSuccessStatusCode) { metric5h.SetText("Error"); metric1w.SetText("Error"); return; }
+                    if (!response.IsSuccessStatusCode) { metric5h.SetText("Error"); metric1w.SetText("Error"); metricCredits?.SetText("Error"); return; }
 
                     var json = await response.Content.ReadAsStringAsync();
                     using var doc = JsonDocument.Parse(json);
                     var root = doc.RootElement;
 
-                    if (!root.TryGetProperty("rate_limit", out var rl)) { metric5h.SetText("Error"); metric1w.SetText("Error"); return; }
+                    if (!root.TryGetProperty("rate_limit", out var rl)) { metric5h.SetText("Error"); metric1w.SetText("Error"); metricCredits?.SetText("Error"); return; }
 
                     metric5h.SetText(FormatWindow(rl, "primary_window",   isWeekly: false, shortDisplay));
                     metric1w.SetText(FormatWindow(rl, "secondary_window", isWeekly: true,  longDisplay));
+
+                    if (metricCredits != null)
+                        await RefreshResetCreditsAsync(token, metricCredits);
                 }
                 catch
                 {
@@ -160,6 +175,65 @@ namespace SSS.Module.CodexMonitor
             return $"{(int)remaining.TotalHours}:{remaining.Minutes:00}";
         }
 
+        /// <summary>クレジット有効期限の残り時間を表示する。24h以上は日数、未満は時:分</summary>
+        private static string FormatCreditsExpiry(DateTime expiresAt)
+        {
+            var remaining = expiresAt - DateTime.Now;
+            if (remaining <= TimeSpan.Zero) return "0:00";
+            if (remaining.TotalHours >= 24)
+                return $"{(int)remaining.TotalDays}d";
+            return $"{(int)remaining.TotalHours}:{remaining.Minutes:00}";
+        }
+
+        /// <summary>
+        /// rate-limit-reset-credits API を叩き、available な codex_rate_limits クレジットの件数と
+        /// 直近の expires_at をメトリクスに反映する。
+        /// </summary>
+        private static async Task RefreshResetCreditsAsync(string token, CodexUsageMetric metric)
+        {
+            try
+            {
+                var request = new HttpRequestMessage(HttpMethod.Get, CreditsEndpoint);
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                var response = await _http.SendAsync(request);
+                if (!response.IsSuccessStatusCode) { metric.SetLabel("-"); metric.SetText("Error"); return; }
+
+                var json = await response.Content.ReadAsStringAsync();
+                using var doc = JsonDocument.Parse(json);
+                var root = doc.RootElement;
+
+                if (!root.TryGetProperty("credits", out var credits)) { metric.SetLabel("-"); metric.SetText("-"); return; }
+
+                // status:available かつ reset_type:codex_rate_limits のものを抽出
+                DateTimeOffset? nearest = null;
+                int count = 0;
+                foreach (var c in credits.EnumerateArray())
+                {
+                    if (c.TryGetProperty("status", out var s) && s.GetString() != "available") continue;
+                    if (c.TryGetProperty("reset_type", out var r) && r.GetString() != "codex_rate_limits") continue;
+
+                    count++;
+                    if (c.TryGetProperty("expires_at", out var exp) && exp.ValueKind == JsonValueKind.String)
+                    {
+                        if (DateTimeOffset.TryParse(exp.GetString(), out var dto))
+                        {
+                            if (nearest == null || dto < nearest)
+                                nearest = dto;
+                        }
+                    }
+                }
+
+                metric.SetLabel("x" + count.ToString());
+                metric.SetText(nearest.HasValue ? FormatCreditsExpiry(nearest.Value.LocalDateTime) : "-");
+            }
+            catch
+            {
+                metric.SetLabel("-");
+                metric.SetText("Error");
+            }
+        }
+
         private static string? TryGetAccessToken()
         {
             try
@@ -176,7 +250,7 @@ namespace SSS.Module.CodexMonitor
             catch { return null; }
         }
 
-        public static iMonitor[] GetInstances()
-            => [new CodexMonitor()];
+        public static iMonitor[] GetInstances(bool showResetCredits = false)
+            => [new CodexMonitor(showResetCredits)];
     }
 }

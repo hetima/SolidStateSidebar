@@ -84,6 +84,8 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
             </StackPanel>
+            <CheckBox IsChecked="{Binding Path=ShowResetCredits, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      Content="{x:Static res:Strings.SettingsCodexResetCredit}" />
         </StackPanel>
     </Border>
 </UserControl>

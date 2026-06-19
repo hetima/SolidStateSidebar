@@ -294,7 +294,7 @@ namespace SSS.Core
                 MonitorType.Codex,
                 "Codex",
                 null,
-                SSS.Module.CodexMonitor.CodexMonitor.GetInstances()
+                SSS.Module.CodexMonitor.CodexMonitor.GetInstances(d.ShowResetCredits)
                 );
             panel.SectionHeaderStyle = d.SectionHeaderStyle;
             panel.ShortResetDisplay   = d.ShortResetDisplay;

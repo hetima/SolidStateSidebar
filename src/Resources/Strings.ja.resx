@@ -1256,4 +1256,8 @@
     <value>リセット時刻</value>
   </data>
 
+  <data name="SettingsCodexResetCredit" xml:space="preserve">
+    <value>リセットクレジットの期限を表示</value>
+  </data>
+
 </root>

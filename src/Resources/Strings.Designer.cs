@@ -1,6 +1,6 @@
 namespace SSS {
     using System;
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("hetima.resx-designer", "0.3.1")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("hetima.resx-designer", "0.3.2")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -826,6 +826,12 @@ namespace SSS {
             }
         }
 
+        public static string SettingsCodexResetCredit {
+            get {
+                return ResourceManager.GetString("SettingsCodexResetCredit", resourceCulture);
+            }
+        }
+
         public static string SettingsCollapseMenuBar {
             get {
                 return ResourceManager.GetString("SettingsCollapseMenuBar", resourceCulture);
@@ -925,6 +931,18 @@ namespace SSS {
         public static string SettingsDriveDetailsTooltip {
             get {
                 return ResourceManager.GetString("SettingsDriveDetailsTooltip", resourceCulture);
+            }
+        }
+
+        public static string SettingsEnableFileDialogSync {
+            get {
+                return ResourceManager.GetString("SettingsEnableFileDialogSync", resourceCulture);
+            }
+        }
+
+        public static string SettingsEnableFileDialogSyncTooltip {
+            get {
+                return ResourceManager.GetString("SettingsEnableFileDialogSyncTooltip", resourceCulture);
             }
         }
 
@@ -1285,18 +1303,6 @@ namespace SSS {
         public static string SettingsRunAtStartupTooltip {
             get {
                 return ResourceManager.GetString("SettingsRunAtStartupTooltip", resourceCulture);
-            }
-        }
-
-        public static string SettingsEnableFileDialogSync {
-            get {
-                return ResourceManager.GetString("SettingsEnableFileDialogSync", resourceCulture);
-            }
-        }
-
-        public static string SettingsEnableFileDialogSyncTooltip {
-            get {
-                return ResourceManager.GetString("SettingsEnableFileDialogSyncTooltip", resourceCulture);
             }
         }
 

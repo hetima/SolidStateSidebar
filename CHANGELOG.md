@@ -1,6 +1,7 @@
 # Changelog
 
 - Sync File Dialog with Explorer
+- Codex Monitor: Display the expiration date of the reset credit
 
 ## [0.9.5] - 2026-06-07
 - Added Claude and Codex Monitor to display paid plan usage
