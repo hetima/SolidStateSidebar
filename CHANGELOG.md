@@ -1,5 +1,7 @@
 # Changelog
 
+
+## [0.9.6] - 2026-06-19
 - Sync File Dialog with Explorer
 - Codex Monitor: Display the expiration date of the reset credit
 
