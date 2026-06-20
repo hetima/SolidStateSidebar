@@ -146,6 +146,17 @@ namespace SSS.Module.CodexMonitor
 
             double pct = win.TryGetProperty("used_percent", out var u) ? u.GetDouble() : 0;
             string reset = "";
+
+            // 5h枠が未使用の場合も1% 5時間後の時刻が返ってくるので別のプロパティを調べる
+            if (!isWeekly &&
+                win.TryGetProperty("limit_window_seconds", out var lws) &&
+                win.TryGetProperty("reset_after_seconds", out var ras) &&
+                lws.TryGetInt64(out var lwsVal) && ras.TryGetInt64(out var rasVal) &&
+                lwsVal == rasVal)
+            {
+                return $"{0}%";
+            }
+
             if (win.TryGetProperty("reset_at", out var ra) && ra.TryGetInt64(out var epoch))
             {
                 var dt = DateTimeOffset.FromUnixTimeSeconds(epoch).LocalDateTime;
