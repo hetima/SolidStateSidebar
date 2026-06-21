@@ -1024,6 +1024,14 @@
     <value>表示スペースを確保する</value>
   </data>
 
+  <data name="SettingsHotkeyWindowCycle" xml:space="preserve">
+    <value>Window Cycle</value>
+  </data>
+
+  <data name="SettingsHotkeyWindowCycleTooltip" xml:space="preserve">
+    <value>WindowMonitor がオンのときのみ使用できます。</value>
+  </data>
+
   <data name="EditShortcutKeyNone" xml:space="preserve">
     <value>なし</value>
   </data>

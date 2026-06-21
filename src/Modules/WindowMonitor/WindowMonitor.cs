@@ -77,6 +77,43 @@ namespace SSS.Module.WindowMonitor
             ];
         }
 
+        private const uint SWP_NOSIZE = 0x0001;
+        private const uint SWP_NOMOVE = 0x0002;
+        private const uint SWP_NOACTIVATE = 0x0010;
+        private static readonly IntPtr HWND_BOTTOM = new IntPtr(1);
+
+        /// <summary>
+        /// ホットキーで先頭ウィンドウをサイクル切替する。
+        /// 先頭が最前面でなければ最前面に。最前面なら最背面に送り2番目を最前面にする。
+        /// </summary>
+        public bool TryCycleSwitch()
+        {
+            WindowItem[] visibleWindows = _windows
+                .Where(w => w.Visibility == Visibility.Visible && w.Hwnd != IntPtr.Zero)
+                .ToArray();
+            if (visibleWindows.Length == 0)
+            {
+                return false;
+            }
+
+            IntPtr first = visibleWindows[0].Hwnd;
+            IntPtr foreground = NativeMethods.GetForegroundWindow();
+
+            if (foreground != first)
+            {
+                // 先頭が最前面でない → 先頭を最前面に
+                WindowHelper.ActivateWindow(first);
+            }
+            else if (visibleWindows.Length >= 2)
+            {
+                // 先頭が最前面 → 最背面に送り2番目を最前面に
+                NativeMethods.SetWindowPos(first, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOSIZE | SWP_NOMOVE | SWP_NOACTIVATE);
+                WindowHelper.ActivateWindow(visibleWindows[1].Hwnd);
+            }
+
+            return true;
+        }
+
         /// <summary>
         /// マウスホイール操作で対象ウィンドウを順送りする。
         /// </summary>

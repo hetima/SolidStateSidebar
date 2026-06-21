@@ -31,7 +31,8 @@ namespace SSS.Windows
             Close,
             CycleEdge,
             CycleScreen,
-            ReserveSpace
+            ReserveSpace,
+            WindowCycle
         }
 
         public Hotkey() { }
@@ -252,6 +253,10 @@ namespace SSS.Windows
                             Core.Settings.Instance.Save();
 
                             _ = _sidebar.Reposition();
+                            break;
+
+                        case KeyAction.WindowCycle:
+                            _sidebar.Model?.TryHandleWindowCycleSwitch();
                             break;
                     }
 

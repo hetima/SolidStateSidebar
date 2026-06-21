@@ -97,6 +97,11 @@ namespace SSS.Models
             return MonitorManager?.TryHandleWindowScrollSwitch(delta) == true;
         }
 
+        public void TryHandleWindowCycleSwitch()
+        {
+            MonitorManager?.TryHandleWindowCycleSwitch();
+        }
+
         private void PauseMonitors()
         {
             _monitorTimer?.Stop();

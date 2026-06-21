@@ -1210,6 +1210,16 @@
     <comment>Settings hotkey reserve space</comment>
   </data>
 
+  <data name="SettingsHotkeyWindowCycle" xml:space="preserve">
+    <value>Window Cycle</value>
+    <comment>Settings hotkey window cycle</comment>
+  </data>
+
+  <data name="SettingsHotkeyWindowCycleTooltip" xml:space="preserve">
+    <value>Only available when Window Monitor is enabled.</value>
+    <comment>Settings hotkey window cycle tooltip</comment>
+  </data>
+
   <data name="EditShortcutKeyNone" xml:space="preserve">
     <value>None</value>
     <comment>EditShortcutKey dialog: placeholder when no key is assigned</comment>

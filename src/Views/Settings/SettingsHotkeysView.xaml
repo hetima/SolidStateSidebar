@@ -23,6 +23,7 @@
             <RowDefinition Height="38px" />
             <RowDefinition Height="38px" />
             <RowDefinition Height="38px" />
+            <RowDefinition Height="38px" />
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" Content="{x:Static res:Strings.SettingsHotkeyToggle}" />
@@ -56,5 +57,11 @@
         <Label Grid.Column="0" Grid.Row="7" Content="{x:Static res:Strings.SettingsHotkeyClose}" />
         <Button Grid.Column="1" Grid.Row="7" Tag="Close" Click="EditKey_Click"
                 Content="{Binding CloseKey, Mode=OneWay, Converter={StaticResource ShortcutKeyConverter}}" />
+
+        <Label Grid.Column="0" Grid.Row="8" Content="{x:Static res:Strings.SettingsHotkeyWindowCycle}"
+               ToolTip="{x:Static res:Strings.SettingsHotkeyWindowCycleTooltip}" />
+        <Button Grid.Column="1" Grid.Row="8" Tag="WindowCycle" Click="EditKey_Click"
+                Content="{Binding WindowCycleKey, Mode=OneWay, Converter={StaticResource ShortcutKeyConverter}}"
+                ToolTip="{x:Static res:Strings.SettingsHotkeyWindowCycleTooltip}" />
     </Grid>
 </UserControl>

@@ -157,6 +157,27 @@ namespace SSS.Core
             return false;
         }
 
+        /// <summary>
+        /// ホットキーで WindowMonitor の先頭ウィンドウをサイクル切替する。
+        /// </summary>
+        public bool TryHandleWindowCycleSwitch()
+        {
+            if (MonitorPanels == null) return false;
+
+            foreach (WindowMonitor monitor in MonitorPanels
+                .Where(p => p.Type == MonitorType.Window)
+                .SelectMany(p => p.Monitors)
+                .Cast<WindowMonitor>())
+            {
+                if (monitor.TryCycleSwitch())
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         public void UpdateTime()
         {
             if (MonitorPanels == null) return;

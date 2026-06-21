@@ -58,6 +58,7 @@ namespace SSS
                 Hotkey.KeyAction.CycleEdge => Strings.SettingsHotkeyCycleEdge,
                 Hotkey.KeyAction.CycleScreen => Strings.SettingsHotkeyCycleScreen,
                 Hotkey.KeyAction.ReserveSpace => Strings.SettingsHotkeyReserveSpace,
+                Hotkey.KeyAction.WindowCycle => Strings.SettingsHotkeyWindowCycle,
                 _ => action.ToString()
             };
         }

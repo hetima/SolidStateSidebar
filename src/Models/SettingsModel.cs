@@ -162,6 +162,7 @@ namespace SSS.Models
                 CycleEdgeKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.CycleEdge);
                 CycleScreenKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.CycleScreen);
                 ReserveSpaceKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.ReserveSpace);
+                WindowCycleKey = Core.Settings.Instance.Hotkeys.FirstOrDefault(k => k.Action == Hotkey.KeyAction.WindowCycle);
             }
 
             IsChanged = false;
@@ -310,6 +311,11 @@ namespace SSS.Models
             if (ReserveSpaceKey != null)
             {
                 _hotkeys.Add(ReserveSpaceKey);
+            }
+
+            if (WindowCycleKey != null)
+            {
+                _hotkeys.Add(WindowCycleKey);
             }
 
             Core.Settings.Instance.Hotkeys = _hotkeys.ToArray();
@@ -751,6 +757,14 @@ namespace SSS.Models
             set => SetProperty(ref _reserveSpaceKey, value);
         }
 
+        private Hotkey? _windowCycleKey;
+
+        public Hotkey? WindowCycleKey
+        {
+            get => _windowCycleKey;
+            set => SetProperty(ref _windowCycleKey, value);
+        }
+
         /// <summary>
         /// アクションに対応する Hotkey を返す
         /// </summary>
@@ -766,6 +780,7 @@ namespace SSS.Models
                 Hotkey.KeyAction.CycleEdge => CycleEdgeKey,
                 Hotkey.KeyAction.CycleScreen => CycleScreenKey,
                 Hotkey.KeyAction.ReserveSpace => ReserveSpaceKey,
+                Hotkey.KeyAction.WindowCycle => WindowCycleKey,
                 _ => null
             };
         }
@@ -791,6 +806,7 @@ namespace SSS.Models
                 case Hotkey.KeyAction.CycleEdge: CycleEdgeKey = newHotkey; break;
                 case Hotkey.KeyAction.CycleScreen: CycleScreenKey = newHotkey; break;
                 case Hotkey.KeyAction.ReserveSpace: ReserveSpaceKey = newHotkey; break;
+                case Hotkey.KeyAction.WindowCycle: WindowCycleKey = newHotkey; break;
             }
         }
 
@@ -807,6 +823,7 @@ namespace SSS.Models
             yield return CycleEdgeKey;
             yield return CycleScreenKey;
             yield return ReserveSpaceKey;
+            yield return WindowCycleKey;
         }
     }
 

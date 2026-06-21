@@ -1138,6 +1138,18 @@ namespace SSS {
             }
         }
 
+        public static string SettingsHotkeyWindowCycle {
+            get {
+                return ResourceManager.GetString("SettingsHotkeyWindowCycle", resourceCulture);
+            }
+        }
+
+        public static string SettingsHotkeyWindowCycleTooltip {
+            get {
+                return ResourceManager.GetString("SettingsHotkeyWindowCycleTooltip", resourceCulture);
+            }
+        }
+
         public static string SettingsHotkeysTab {
             get {
                 return ResourceManager.GetString("SettingsHotkeysTab", resourceCulture);
