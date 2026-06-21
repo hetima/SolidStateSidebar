@@ -352,6 +352,42 @@ namespace SSS {
             }
         }
 
+        public static string EditShortcutKeyCancel {
+            get {
+                return ResourceManager.GetString("EditShortcutKeyCancel", resourceCulture);
+            }
+        }
+
+        public static string EditShortcutKeyClear {
+            get {
+                return ResourceManager.GetString("EditShortcutKeyClear", resourceCulture);
+            }
+        }
+
+        public static string EditShortcutKeyDuplicate {
+            get {
+                return ResourceManager.GetString("EditShortcutKeyDuplicate", resourceCulture);
+            }
+        }
+
+        public static string EditShortcutKeyNone {
+            get {
+                return ResourceManager.GetString("EditShortcutKeyNone", resourceCulture);
+            }
+        }
+
+        public static string EditShortcutKeyRemoveConflict {
+            get {
+                return ResourceManager.GetString("EditShortcutKeyRemoveConflict", resourceCulture);
+            }
+        }
+
+        public static string EditShortcutKeySet {
+            get {
+                return ResourceManager.GetString("EditShortcutKeySet", resourceCulture);
+            }
+        }
+
         public static string ErrorPerformanceCounter {
             get {
                 return ResourceManager.GetString("ErrorPerformanceCounter", resourceCulture);

@@ -1,17 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Threading;
-using System.Windows.Media;
 using Newtonsoft.Json;
+using SSS.Converters;
 
 namespace SSS.Windows
 {
@@ -43,46 +36,12 @@ namespace SSS.Windows
 
         public Hotkey() { }
 
-        public Hotkey(int index, KeyAction action, uint virtualKey, bool altMod = false, bool ctrlMod = false, bool shiftMod = false, bool winMod = false)
-        {
-            Index = index;
-            Action = action;
-            VirtualKey = virtualKey;
-            AltMod = altMod;
-            CtrlMod = ctrlMod;
-            ShiftMod = shiftMod;
-            WinMod = winMod;
-        }
-
         [JsonProperty]
         public KeyAction Action { get; set; }
 
         [JsonProperty]
-        public uint VirtualKey { get; set; }
-
-        [JsonProperty]
-        public bool AltMod { get; set; }
-
-        [JsonProperty]
-        public bool CtrlMod { get; set; }
-
-        [JsonProperty]
-        public bool ShiftMod { get; set; }
-
-        [JsonProperty]
-        public bool WinMod { get; set; }
-
-        public Key WinKey
-        {
-            get
-            {
-                return KeyInterop.KeyFromVirtualKey((int)VirtualKey);
-            }
-            set
-            {
-                VirtualKey = (uint)KeyInterop.VirtualKeyFromKey(value);
-            }
-        }
+        [JsonConverter(typeof(ShortcutKeyJsonConverter))]
+        public ShortcutKey? Key { get; set; }
 
         private int Index { get; set; }
 
@@ -156,38 +115,40 @@ namespace SSS.Windows
 
         private static void Register(Hotkey hotkey)
         {
-            if (_sidebar == null)
+            if (_sidebar == null || hotkey.Key == null || hotkey.Key.IsEmpty)
             {
                 return;
             }
 
             uint _mods = MODIFIERS.MOD_NOREPEAT;
 
-            if (hotkey.AltMod)
+            if (hotkey.Key.Modifiers.HasFlag(ModifierKeys.Alt))
             {
                 _mods |= MODIFIERS.MOD_ALT;
             }
 
-            if (hotkey.CtrlMod)
+            if (hotkey.Key.Modifiers.HasFlag(ModifierKeys.Control))
             {
                 _mods |= MODIFIERS.MOD_CONTROL;
             }
 
-            if (hotkey.ShiftMod)
+            if (hotkey.Key.Modifiers.HasFlag(ModifierKeys.Shift))
             {
                 _mods |= MODIFIERS.MOD_SHIFT;
             }
 
-            if (hotkey.WinMod)
+            if (hotkey.Key.Modifiers.HasFlag(ModifierKeys.Windows))
             {
                 _mods |= MODIFIERS.MOD_WIN;
             }
+
+            uint vk = (uint)KeyInterop.VirtualKeyFromKey(hotkey.Key.Key);
 
             NativeMethods.RegisterHotKey(
                 new WindowInteropHelper(_sidebar).Handle,
                 hotkey.Index,
                 _mods,
-                hotkey.VirtualKey
+                vk
                 );
         }
 

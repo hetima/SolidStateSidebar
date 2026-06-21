@@ -36,23 +36,33 @@ namespace SSS.Converters
         }
     }
 
+    public class ShortcutKeyToStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            ShortcutKey? sk = value switch
+            {
+                ShortcutKey s => s,
+                Hotkey h => h.Key,
+                _ => null
+            };
+            return sk == null || sk.IsEmpty ? Strings.EditShortcutKeyNone : sk.ToDisplayString();
+        }
+
+        public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return null;
+        }
+    }
+
+    [Obsolete("HotkeyToStringConverter は廃止。ShortcutKeyToStringConverter を使用すること。")]
     public class HotkeyToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Hotkey _hotkey = (Hotkey)value;
-
-            if (_hotkey == null)
-            {
-                return "None";
-            }
-
-            return
-                (_hotkey.AltMod ? "Alt + " : "") +
-                (_hotkey.CtrlMod ? "Ctrl + " : "") +
-                (_hotkey.ShiftMod ? "Shift + " : "") +
-                (_hotkey.WinMod ? "Win + " : "") +
-                new KeyConverter().ConvertToString(_hotkey.WinKey);
+            if (value is Hotkey hk)
+                return hk.Key?.IsEmpty == false ? hk.Key.ToDisplayString() : "None";
+            return "None";
         }
 
         public object? ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

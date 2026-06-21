@@ -1210,6 +1210,36 @@
     <comment>Settings hotkey reserve space</comment>
   </data>
 
+  <data name="EditShortcutKeyNone" xml:space="preserve">
+    <value>None</value>
+    <comment>EditShortcutKey dialog: placeholder when no key is assigned</comment>
+  </data>
+
+  <data name="EditShortcutKeyDuplicate" xml:space="preserve">
+    <value>This shortcut is already assigned to another action.</value>
+    <comment>EditShortcutKey dialog: duplicate shortcut warning</comment>
+  </data>
+
+  <data name="EditShortcutKeyClear" xml:space="preserve">
+    <value>Clear</value>
+    <comment>EditShortcutKey dialog: clear button</comment>
+  </data>
+
+  <data name="EditShortcutKeyCancel" xml:space="preserve">
+    <value>Cancel</value>
+    <comment>EditShortcutKey dialog: cancel button</comment>
+  </data>
+
+  <data name="EditShortcutKeySet" xml:space="preserve">
+    <value>Set</value>
+    <comment>EditShortcutKey dialog: set/save button</comment>
+  </data>
+
+  <data name="EditShortcutKeyRemoveConflict" xml:space="preserve">
+    <value>Remove conflicting shortcut</value>
+    <comment>EditShortcutKey dialog: remove conflicting shortcut button</comment>
+  </data>
+
   <data name="NetworkExtIP" xml:space="preserve">
     <value>External IP Address</value>
     <comment>Full name for the network ext IP address metric</comment>

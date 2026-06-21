@@ -1,150 +1,65 @@
+using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using SSS.Core;
+using SSS.Features.EditShortcutKey;
 using SSS.Models;
 using SSS.Windows;
 
 namespace SSS
 {
-    /// <summary>
-    /// Interaction logic for SettingsHotkeysView.xaml
-    /// </summary>
     public partial class SettingsHotkeysView : UserControl
     {
-        private HotkeyBindingService? _hotkeyService;
-
         public SettingsHotkeysView()
         {
             InitializeComponent();
-
-            Loaded += SettingsHotkeysView_Loaded;
         }
 
-        private void SettingsHotkeysView_Loaded(object sender, RoutedEventArgs e)
+        private void EditKey_Click(object sender, RoutedEventArgs e)
         {
-            // Get the SettingsModel from DataContext
-            if (DataContext is SettingsModel model && Window.GetWindow(this) is Window window)
-            {
-                _hotkeyService = new HotkeyBindingService(model, window);
-            }
+            if (DataContext is not SettingsModel model) return;
+
+            var tag = ((Button)sender).Tag?.ToString();
+            if (!Enum.TryParse<Hotkey.KeyAction>(tag, out var action)) return;
+
+            var currentKey = model.GetHotkeyByAction(action)?.Key;
+            var otherKeys = model.GetAllHotkeys()
+                                 .Where(h => h?.Action != action)
+                                 .Select(h => h?.Key);
+            var actionName = GetActionName(action);
+
+            var vm = new EditShortcutKeyViewModel(
+                actionName,
+                currentKey,
+                otherKeys,
+                saved => model.SetHotkeyByAction(action, saved),
+                () =>
+                {
+                    // 競合する他のホットキーを削除する
+                    var conflict = model.GetAllHotkeys()
+                                       .FirstOrDefault(h => h?.Action != action && h?.Key != null && h.Key.Equals(currentKey));
+                    if (conflict != null)
+                        model.SetHotkeyByAction(conflict.Action, null);
+                });
+
+            var dialog = new EditShortcutKeyView(vm) { Owner = Window.GetWindow(this) };
+            dialog.ShowDialog();
         }
 
-        private void BindButton_LostFocus(object sender, RoutedEventArgs e)
+        private static string GetActionName(Hotkey.KeyAction action)
         {
-            _hotkeyService?.OnButtonLostFocus(sender, e);
-        }
-
-        private void BindToggle_Click(object sender, RoutedEventArgs e)
-        {
-            var keybinder = (ToggleButton)sender;
-
-            if (keybinder.IsChecked == true)
+            return action switch
             {
-                _hotkeyService?.BeginBind(Hotkey.KeyAction.Toggle, keybinder);
-            }
-            else
-            {
-                _hotkeyService?.EndBind();
-            }
-        }
-
-        private void BindShow_Click(object sender, RoutedEventArgs e)
-        {
-            var keybinder = (ToggleButton)sender;
-
-            if (keybinder.IsChecked == true)
-            {
-                _hotkeyService?.BeginBind(Hotkey.KeyAction.Show, keybinder);
-            }
-            else
-            {
-                _hotkeyService?.EndBind();
-            }
-        }
-
-        private void BindHide_Click(object sender, RoutedEventArgs e)
-        {
-            var keybinder = (ToggleButton)sender;
-
-            if (keybinder.IsChecked == true)
-            {
-                _hotkeyService?.BeginBind(Hotkey.KeyAction.Hide, keybinder);
-            }
-            else
-            {
-                _hotkeyService?.EndBind();
-            }
-        }
-
-        private void BindReload_Click(object sender, RoutedEventArgs e)
-        {
-            var keybinder = (ToggleButton)sender;
-
-            if (keybinder.IsChecked == true)
-            {
-                _hotkeyService?.BeginBind(Hotkey.KeyAction.Reload, keybinder);
-            }
-            else
-            {
-                _hotkeyService?.EndBind();
-            }
-        }
-
-        private void BindClose_Click(object sender, RoutedEventArgs e)
-        {
-            var keybinder = (ToggleButton)sender;
-
-            if (keybinder.IsChecked == true)
-            {
-                _hotkeyService?.BeginBind(Hotkey.KeyAction.Close, keybinder);
-            }
-            else
-            {
-                _hotkeyService?.EndBind();
-            }
-        }
-
-        private void BindCycleEdge_Click(object sender, RoutedEventArgs e)
-        {
-            var keybinder = (ToggleButton)sender;
-
-            if (keybinder.IsChecked == true)
-            {
-                _hotkeyService?.BeginBind(Hotkey.KeyAction.CycleEdge, keybinder);
-            }
-            else
-            {
-                _hotkeyService?.EndBind();
-            }
-        }
-
-        private void BindCycleScreen_Click(object sender, RoutedEventArgs e)
-        {
-            var keybinder = (ToggleButton)sender;
-
-            if (keybinder.IsChecked == true)
-            {
-                _hotkeyService?.BeginBind(Hotkey.KeyAction.CycleScreen, keybinder);
-            }
-            else
-            {
-                _hotkeyService?.EndBind();
-            }
-        }
-
-        private void BindReserveSpace_Click(object sender, RoutedEventArgs e)
-        {
-            var keybinder = (ToggleButton)sender;
-
-            if (keybinder.IsChecked == true)
-            {
-                _hotkeyService?.BeginBind(Hotkey.KeyAction.ReserveSpace, keybinder);
-            }
-            else
-            {
-                _hotkeyService?.EndBind();
-            }
+                Hotkey.KeyAction.Toggle => Strings.SettingsHotkeyToggle,
+                Hotkey.KeyAction.Show => Strings.SettingsHotkeyShow,
+                Hotkey.KeyAction.Hide => Strings.SettingsHotkeyHide,
+                Hotkey.KeyAction.Reload => Strings.SettingsHotkeyReload,
+                Hotkey.KeyAction.Close => Strings.SettingsHotkeyClose,
+                Hotkey.KeyAction.CycleEdge => Strings.SettingsHotkeyCycleEdge,
+                Hotkey.KeyAction.CycleScreen => Strings.SettingsHotkeyCycleScreen,
+                Hotkey.KeyAction.ReserveSpace => Strings.SettingsHotkeyReserveSpace,
+                _ => action.ToString()
+            };
         }
     }
 }

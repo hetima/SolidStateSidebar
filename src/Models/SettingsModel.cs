@@ -750,6 +750,64 @@ namespace SSS.Models
             get => _reserveSpaceKey;
             set => SetProperty(ref _reserveSpaceKey, value);
         }
+
+        /// <summary>
+        /// アクションに対応する Hotkey を返す
+        /// </summary>
+        public Hotkey? GetHotkeyByAction(Hotkey.KeyAction action)
+        {
+            return action switch
+            {
+                Hotkey.KeyAction.Toggle => ToggleKey,
+                Hotkey.KeyAction.Show => ShowKey,
+                Hotkey.KeyAction.Hide => HideKey,
+                Hotkey.KeyAction.Reload => ReloadKey,
+                Hotkey.KeyAction.Close => CloseKey,
+                Hotkey.KeyAction.CycleEdge => CycleEdgeKey,
+                Hotkey.KeyAction.CycleScreen => CycleScreenKey,
+                Hotkey.KeyAction.ReserveSpace => ReserveSpaceKey,
+                _ => null
+            };
+        }
+
+        /// <summary>
+        /// アクションに対応する Hotkey の ShortcutKey を更新する。null の場合は Hotkey ごと null にする
+        /// </summary>
+        public void SetHotkeyByAction(Hotkey.KeyAction action, ShortcutKey? shortcutKey)
+        {
+            Hotkey? newHotkey = null;
+            if (shortcutKey != null && !shortcutKey.IsEmpty)
+            {
+                newHotkey = new Hotkey { Action = action, Key = shortcutKey };
+            }
+
+            switch (action)
+            {
+                case Hotkey.KeyAction.Toggle: ToggleKey = newHotkey; break;
+                case Hotkey.KeyAction.Show: ShowKey = newHotkey; break;
+                case Hotkey.KeyAction.Hide: HideKey = newHotkey; break;
+                case Hotkey.KeyAction.Reload: ReloadKey = newHotkey; break;
+                case Hotkey.KeyAction.Close: CloseKey = newHotkey; break;
+                case Hotkey.KeyAction.CycleEdge: CycleEdgeKey = newHotkey; break;
+                case Hotkey.KeyAction.CycleScreen: CycleScreenKey = newHotkey; break;
+                case Hotkey.KeyAction.ReserveSpace: ReserveSpaceKey = newHotkey; break;
+            }
+        }
+
+        /// <summary>
+        /// 全ホットキーを列挙する
+        /// </summary>
+        public IEnumerable<Hotkey?> GetAllHotkeys()
+        {
+            yield return ToggleKey;
+            yield return ShowKey;
+            yield return HideKey;
+            yield return ReloadKey;
+            yield return CloseKey;
+            yield return CycleEdgeKey;
+            yield return CycleScreenKey;
+            yield return ReserveSpaceKey;
+        }
     }
 
 }

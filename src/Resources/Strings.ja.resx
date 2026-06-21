@@ -1024,6 +1024,30 @@
     <value>表示スペースを確保する</value>
   </data>
 
+  <data name="EditShortcutKeyNone" xml:space="preserve">
+    <value>なし</value>
+  </data>
+
+  <data name="EditShortcutKeyDuplicate" xml:space="preserve">
+    <value>このショートカットは既に他のアクションに割り当てられています。</value>
+  </data>
+
+  <data name="EditShortcutKeyClear" xml:space="preserve">
+    <value>クリア</value>
+  </data>
+
+  <data name="EditShortcutKeyCancel" xml:space="preserve">
+    <value>キャンセル</value>
+  </data>
+
+  <data name="EditShortcutKeySet" xml:space="preserve">
+    <value>設定</value>
+  </data>
+
+  <data name="EditShortcutKeyRemoveConflict" xml:space="preserve">
+    <value>競合するショートカットを削除</value>
+  </data>
+
   <data name="NetworkExtIP" xml:space="preserve">
     <value>グローバル IP アドレス</value>
   </data>

@@ -57,11 +57,11 @@ namespace SSS.Windows
         [LibraryImport("user32.dll")]
         internal static partial IntPtr MonitorFromWindow(IntPtr hwnd, uint dwFlags);
 
-        [LibraryImport("user32.dll", EntryPoint = "RegisterHotKeyW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool RegisterHotKey(IntPtr hwnd, int id, uint modifiers, uint vk);
 
-        [LibraryImport("user32.dll", EntryPoint = "UnregisterHotKeyW", StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport("user32.dll")]
         [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool UnregisterHotKey(IntPtr hwnd, int id);
 

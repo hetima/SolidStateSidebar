@@ -1,5 +1,6 @@
 # Changelog
 
+- Hotkeys have been revamped
 
 ## [0.9.6] - 2026-06-19
 - Sync File Dialog with Explorer
