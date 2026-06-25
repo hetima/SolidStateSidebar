@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Windows.Automation;
 
@@ -210,6 +212,50 @@ namespace SSS.Windows
 
         private static string? GetExplorerFolderPath(IntPtr explorerHwnd)
         {
+            string? selectedTabName = GetSelectedExplorerTabName(explorerHwnd);
+            return GetExplorerFolderPathFromShellWindows(explorerHwnd, selectedTabName);
+        }
+
+        /// <summary>
+        /// Explorer のタブ一覧から選択中タブの表示名を取得する。
+        /// </summary>
+        private static string? GetSelectedExplorerTabName(IntPtr explorerHwnd)
+        {
+            try
+            {
+                AutomationElement explorer = AutomationElement.FromHandle(explorerHwnd);
+                AutomationElementCollection tabs = explorer.FindAll(TreeScope.Descendants,
+                    new PropertyCondition(AutomationElement.ControlTypeProperty, ControlType.TabItem)
+                );
+
+                for (int i = 0; i < tabs.Count; i++)
+                {
+                    AutomationElement tab = tabs[i];
+                    if (!tab.TryGetCurrentPattern(SelectionItemPattern.Pattern, out object pattern))
+                    {
+                        continue;
+                    }
+
+                    if (((SelectionItemPattern)pattern).Current.IsSelected)
+                    {
+                        return string.IsNullOrWhiteSpace(tab.Current.Name) ? null : tab.Current.Name.Trim();
+                    }
+                }
+            }
+            catch (ElementNotAvailableException)
+            {
+                return null;
+            }
+            catch (InvalidOperationException)
+            {
+                return null;
+            }
+
+            return null;
+        }
+
+        private static string? GetExplorerFolderPathFromShellWindows(IntPtr explorerHwnd, string? selectedTabName)
+        {
             Type? shellType = Type.GetTypeFromProgID("Shell.Application");
             if (shellType == null)
             {
@@ -227,6 +273,7 @@ namespace SSS.Windows
                     return null;
                 }
 
+                List<(string Path, string Name)> candidates = [];
                 int count = (int)windows.GetType().InvokeMember("Count", System.Reflection.BindingFlags.GetProperty, null, windows, null)!;
                 for (int i = 0; i < count; i++)
                 {
@@ -241,6 +288,7 @@ namespace SSS.Windows
                         object hwndValue = window.GetType().InvokeMember("HWND", System.Reflection.BindingFlags.GetProperty, null, window, null)!;
                         IntPtr shellHwnd = new(Convert.ToInt64(hwndValue));
                         string? locationUrl = window.GetType().InvokeMember("LocationURL", System.Reflection.BindingFlags.GetProperty, null, window, null) as string;
+                        string? locationName = window.GetType().InvokeMember("LocationName", System.Reflection.BindingFlags.GetProperty, null, window, null) as string;
 
                         if (shellHwnd != explorerHwnd)
                         {
@@ -249,16 +297,35 @@ namespace SSS.Windows
 
                         if (string.IsNullOrWhiteSpace(locationUrl))
                         {
-                            return null;
+                            continue;
                         }
 
-                        return new Uri(locationUrl).LocalPath;
+                        string localPath = new Uri(locationUrl).LocalPath;
+                        candidates.Add((localPath, locationName ?? ""));
                     }
                     finally
                     {
                         Marshal.FinalReleaseComObject(window);
                     }
                 }
+
+                if (candidates.Count == 0)
+                {
+                    return null;
+                }
+
+                if (!string.IsNullOrWhiteSpace(selectedTabName))
+                {
+                    foreach ((string path, string name) in candidates)
+                    {
+                        if (IsExplorerTabMatch(selectedTabName, name, path))
+                        {
+                            return path;
+                        }
+                    }
+                }
+
+                return candidates[0].Path;
             }
             catch (Exception)
             {
@@ -277,7 +344,28 @@ namespace SSS.Windows
                 }
             }
 
-            return null;
+        }
+
+        private static bool IsExplorerTabMatch(string selectedTabName, string locationName, string path)
+        {
+            string normalizedSelectedTabName = selectedTabName.Trim().Trim('"');
+            string normalizedPath = Path.GetFullPath(path).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+            if (Path.IsPathFullyQualified(normalizedSelectedTabName))
+            {
+                string selectedTabPath = Path.GetFullPath(normalizedSelectedTabName).TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+                if (string.Equals(selectedTabPath, normalizedPath, StringComparison.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+            }
+
+            if (string.Equals(selectedTabName, locationName, StringComparison.CurrentCultureIgnoreCase))
+            {
+                return true;
+            }
+
+            string folderName = Path.GetFileName(normalizedPath);
+            return string.Equals(selectedTabName, folderName, StringComparison.CurrentCultureIgnoreCase);
         }
 
         private static bool TryInjectPath(IntPtr dialogHwnd, string folderPath)
