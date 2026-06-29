@@ -130,6 +130,11 @@ namespace SSS.Windows
             try
             {
                 AutomationElement element = AutomationElement.FromHandle(hwnd);
+                if (!HasFileDialogChrome(element))
+                {
+                    return false;
+                }
+
                 AutomationElement? pathInput = FindFileDialogInputElement(element);
                 return pathInput != null;
             }
@@ -449,6 +454,50 @@ namespace SSS.Windows
             return hasValuePattern ? element : null;
         }
 
+        /// <summary>
+        /// 共通ファイルダイアログ固有の周辺 UI があるかを返す。
+        /// </summary>
+        private static bool HasFileDialogChrome(AutomationElement dialog)
+        {
+            // LogAutomationChildren(dialog);
+
+            AutomationElement? explorerView = dialog.FindFirst(TreeScope.Descendants,
+                new PropertyCondition(AutomationElement.ClassNameProperty, "DUIViewWndClassName")
+                // new OrCondition(
+                //     new PropertyCondition(AutomationElement.ClassNameProperty, "DUIViewWndClassName"),
+                //     new PropertyCondition(AutomationElement.ClassNameProperty, "DUIListView")
+                // )
+            );
+            return explorerView != null;
+        }
+
+        /// <summary>
+        /// ファイルダイアログ判定用に UI Automation 要素の一覧を出力する。
+        /// </summary>
+        private static void LogAutomationChildren(AutomationElement dialog)
+        {
+            try
+            {
+                AutomationElementCollection elements = dialog.FindAll(TreeScope.Descendants, Condition.TrueCondition);
+                Log($"Automation descendants count={elements.Count}");
+
+                for (int i = 0; i < elements.Count; i++)
+                {
+                    AutomationElement element = elements[i];
+                    AutomationElement.AutomationElementInformation current = element.Current;
+                    Log($"Automation[{i}] name={current.Name} automationId={current.AutomationId} class={current.ClassName} controlType={current.ControlType.ProgrammaticName}");
+                }
+            }
+            catch (ElementNotAvailableException)
+            {
+                Log("LogAutomationChildren ElementNotAvailable");
+            }
+            catch (InvalidOperationException ex)
+            {
+                Log($"LogAutomationChildren InvalidOperation message={ex.Message}");
+            }
+        }
+
         private static string GetClassNameSafe(IntPtr hwnd)
         {
             return hwnd == IntPtr.Zero ? "" : ShowDesktop.GetWindowClass(hwnd);
@@ -461,7 +510,7 @@ namespace SSS.Windows
 
         private static void Log(string message)
         {
-            // Debug.WriteLine($"[FileDialogExplorerSync] {message}");
+            Debug.WriteLine($"[FileDialogExplorerSync] {message}");
         }
     }
 }
