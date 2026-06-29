@@ -1,5 +1,6 @@
 # Changelog
 
+## [0.9.7] - 2026-06-29
 - Hotkeys have been revamped (The previous settings have been reset)
 - Window Cycle hotkey (Only available when Window Monitor is enabled)
 - Sync File Dialog supports Explorer tabs
